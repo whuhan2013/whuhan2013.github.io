@@ -1,0 +1,298 @@
+
+html, body {
+    height: 100%;
+}
+body {
+    background: #111111 none repeat scroll 0 0;
+    color: #fff;
+    font-size: 12pt;
+    font-weight: 200;
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+}
+p, ol, ul {
+    margin-top: 0;
+}
+ol, ul {
+    list-style: outside none none;
+    padding: 0;
+}
+p {
+    line-height: 180%;
+}
+strong {
+}
+a {
+    color: #ee0000;
+}
+a:hover {
+    text-decoration: none;
+}
+.container {
+    margin: 0 auto;
+    overflow: hidden;
+    width: 1200px;
+}
+.image {
+    display: inline-block;
+}
+.image img {
+    display: block;
+    width: 100%;
+}
+.image-full {
+    display: block;
+    margin: 0 0 2em;
+    width: 100%;
+}
+.image-left {
+    float: left;
+    margin: 0 2em 2em 0;
+}
+.image-centered {
+    display: block;
+    margin: 0 0 2em;
+}
+.image-centered img {
+    margin: 0 auto;
+    width: auto;
+}
+ul.style1 {
+}
+ul.contact {
+    list-style: outside none none;
+    margin: 0;
+    padding: 2em 0 0;
+}
+ul.contact li {
+    display: inline-block;
+    font-size: 1em;
+    padding: 0 0.3em;
+}
+ul.contact li span {
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+ul.contact li a {
+    color: #fff;
+}
+ul.contact li a::before {
+    background: #3f3f3f none repeat scroll 0 0;
+    border-radius: 20px;
+    color: #ffffff;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
+}
+ul.contact li a.icon-twitter::before {
+    background: #2daae4 none repeat scroll 0 0;
+}
+ul.contact li a.icon-facebook::before {
+    background: #39599f none repeat scroll 0 0;
+}
+ul.contact li a.icon-dribbble::before {
+    background: #c4376b none repeat scroll 0 0;
+}
+ul.contact li a.icon-tumblr::before {
+    background: #31516a none repeat scroll 0 0;
+}
+ul.contact li a.icon-rss::before {
+    background: #f2600b none repeat scroll 0 0;
+}
+.button {
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    color: #fff;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    margin-top: 2em;
+    padding: 1.4em 3em;
+    text-decoration: none;
+}
+.button-alt {
+    border-color: rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.8);
+    padding: 1em 2em;
+}
+.box1, .box2, .box3, .box4 {
+    width: 235px;
+}
+.box4 {
+    float: right;
+}
+.boxA, .boxB, .boxC {
+    width: 384px;
+}
+.boxA, .boxB {
+    float: left;
+    margin-right: 20px;
+}
+.boxC {
+    float: right;
+}
+.tbox1, .tbox2 {
+    width: 575px;
+}
+.tbox1 {
+    float: left;
+}
+.tbox2 {
+    float: right;
+}
+.title {
+    margin-bottom: 3em;
+}
+.title h2 {
+    font-size: 2.7em;
+}
+.title .byline {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.3em;
+}
+#wrapper {
+    background: #fff none repeat scroll 0 0;
+    padding: 5em 0 7em;
+    position: relative;
+}
+#header-wrapper {
+    background: #111111 url("images/header-bg.jpg") no-repeat scroll center center / cover ;
+    padding: 0.5em 0 7em;
+    position: relative;
+}
+#header {
+    padding: 5em 0;
+    position: relative;
+}
+#logo {
+    left: 0;
+    position: absolute;
+    top: 3.6em;
+}
+#logo h1 {
+    color: #79c255;
+    font-size: 2.6em;
+}
+#logo a {
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+}
+#menu {
+    position: absolute;
+    right: 0;
+    top: 4.5em;
+}
+#menu ul {
+    display: inline-block;
+}
+#menu li {
+    display: block;
+    float: left;
+    text-align: center;
+}
+#menu li a, #menu li span {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    padding: 1em 1.5em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+#menu li:hover a, #menu li.active a, #menu li.active span {
+}
+#menu .active a {
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 1);
+}
+#menu .icon {
+}
+#banner {
+    padding-top: 10em;
+    text-align: center;
+}
+#banner .title h2 {
+    font-size: 4em;
+}
+#banner .title .byline {
+    font-size: 2em;
+}
+#banner .button {
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 700;
+    margin-top: 2em;
+    padding: 1.4em 3em;
+}
+#page {
+}
+#content {
+}
+#sidebar {
+}
+#footer {
+}
+#copyright {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    padding: 5em 0;
+}
+#copyright p {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1em;
+    text-align: center;
+}
+#copyright a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+}
+#welcome {
+    background: #111111 url("images/header-bg.png") no-repeat scroll center center / cover ;
+    padding: 7em 0;
+    position: relative;
+    text-align: center;
+}
+#welcome .container {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0 100px;
+    width: 1000px;
+}
+#welcome a {
+    color: rgba(255, 255, 255, 1);
+}
+#three-column {
+    color: rgba(0, 0, 0, 0.6);
+    font-family: inherit;
+    text-align: center;
+}
+#three-column .fa {
+    color: rgba(0, 0, 0, 1);
+    display: block;
+    font-size: 2em;
+    padding: 1em 0;
+}
+#three-column .title h2 {
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+}
+#three-column .title .byline {
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+#three-column a {
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+#three-column h3 {
+    padding-bottom: 10px;
+}
