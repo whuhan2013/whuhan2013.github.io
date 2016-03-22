@@ -3,7 +3,7 @@ layout: post
 title: HttpClient实现客户端与服务器的通信
 date: 2016-3-01
 categories: blog
-tags: [linux,网络开发]
+tags: [总结,linux]
 description: 通告一下，我准备开始了.
 ---
 ###本篇主要讲解了利用HttpClient实现 windows主机与linux服务器的通信与传递数据
@@ -137,8 +137,10 @@ cgi-bin目录  /usr/lib/cgi-bin
 ###服务器端配置完成
 
 ###客户端发送数据代码实现
+
+<br>
 ```
-//send http request ,send total score and score to server
+//发送请求send http request ,send total score and score to server
 int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
  int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
  int userid=CCRANDOM_0_1()*100;
