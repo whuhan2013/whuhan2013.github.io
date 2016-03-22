@@ -1,85 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--
-Design by TEMPLATED
-Used by Zhuofan Tang
--->
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Zhuofan's Web</title>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
-    <link href="default.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+---
+layout: page
+description: "陈素封"
+---
 
-<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+{% for post in paginator.posts %}
+<div class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+        <h2 class="post-title">            
+            {{ post.title }}
+        </h2>
+        {% if post.subtitle %}
+        <h3 class="post-subtitle">
+            {{ post.subtitle }}
+        </h3>
+        {% endif %}
+        <div class="post-content-preview">
+            {{ post.content | strip_html | truncate:150 }}
+        </div>
+    </a>
+    <p class="post-meta">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}</p>
+</div>
 
-</head>
-<body>
-<div id="header-wrapper">
-	<div id="header" class="container">
-		<div id="logo">
-			<h1><a href="http://www.tangzhuofan.com">Silence</a></h1>
-		</div>
-		<div id="menu">
-			<ul>
-				<li class="active"><a href="http://www.tangzhuofan.com" accesskey="1" title="">Home</a></li>
-				<li><a href="http://www.tangzhuofan.com/blog/" accesskey="2" title="">Blogs</a></li>
-				<li><a href="http://www.tangzhuofan.com/photography/" accesskey="3" title="">Photography</a></li>
-				<li><a href="http://www.tangzhuofan.com/resume/" accesskey="4" title="">Resume</a></li>
-			</ul>
-		</div>
-	</div>
-	<div id="banner" class="container">
-		<div class="title">
-			<h2>Hi, This is Zhuofan</h2>
-			<span class="byline">Deep into the dust, clever as a fox</span>
-		</div>
-		<ul class="actions">
-			<li><a href="http://www.tangzhuofan.com/resume/" class="button">Take A Look At My Resume</a></li>
-		</ul>
-	</div>
-</div>
-<div id="wrapper">
-	<div id="three-column" class="container">
-		<div class="title">
-			<h2>Three Aspects Of My life</h2>
-			<span class="byline"></span>
-		</div>
-		<div class="boxA">
-			<span class="fa"><img src="images/blogs.png" style="width:120px;height:120x;"></span>
-            <h3><a href="http://www.tangzhuofan.com/blog/">Blogs</a></h3>
-			<p>A record of my orgnized thoughs. It is the final place to rest my freedom of speeach. I will say if I have to.</p>
-			<a href="http://www.tangzhuofan.com/blog/" class="button button-alt">More Info</a>
-		</div>
-		<div class="boxB">
-			<span class="fa"><img src="images/photography.jpg" style="width:115px;height115px;"></span>
-            <h3><a href="http://www.tangzhuofan.com/photography/">Photography</a></h3>
-			<p>A showcase of my inspirations. It is the place to how photograph show me the wonder of the world.</p>
-			<a href="http://www.tangzhuofan.com/photography/" class="button button-alt">More Info</a>
-		</div>
-		<div class="boxC">
-			<span class="fa"><img src="images/resume.jpg" style="width:72px;"></span>
-            <h3><a href="http://www.tangzhuofan.com/resume/">Resume</a></h3>
-			<p> A updating resume. It is not only a place to show who I am but also a place to encourage me. </p>
-			<a href="http://www.tangzhuofan.com/resume/" class="button button-alt">More Info</a>
-		</div>
-	</div>
-</div>
-<!--<div id="welcome">
-	<div class="container">
-		<div class="title">
-			<h2></h2>
-			<span class="byline"></span>
-		</div>
-		<p></p>
-		<ul class="actions">
-		</ul>
-	</div>
-</div> -->
-<div id="copyright" class="container">
-	<p>&copy; Zhuofan. All rights reserved. | Photos by <a href="http://fotogrph.com/">Fotogrph</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
-</div>
-</body>
-</html>
+<hr>
+{% endfor %}
+
+<!-- Pager -->
+{% if paginator.total_pages > 1 %}
+<ul class="pager">
+    {% if paginator.previous_page %}
+    <li class="previous">
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+    </li>
+    {% endif %}
+    {% if paginator.next_page %}
+    <li class="next">
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+    </li>
+    {% endif %}
+</ul>
+{% endif %}
