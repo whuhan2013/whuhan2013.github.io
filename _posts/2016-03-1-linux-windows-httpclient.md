@@ -1,14 +1,14 @@
 ﻿---
 layout: post
 title: HttpClient实现服务器与客户端通信
-date: 2016-3-01
+date: 2016-3-S1
 categories: blog
-tags: [linux]
+tags: [总结，linux]
 description: 通告一下，我准备开始了,开始了.
 ---
 
 
-###本篇主要讲解了利用HttpClient实现 windows主机与linux服务器的通信与传递数据
+###123本篇主要讲解了利用HttpClient实现 windows主机与linux服务器的通信与传递数据
 HttpClient代码，服务器端配置
 
 系统和安装软件
