@@ -1,4 +1,4 @@
----
+﻿---
 layout: post
 title: HttpClient实现客户端与服务器的通信
 date: 2016-3-01
@@ -138,61 +138,60 @@ cgi-bin目录  /usr/lib/cgi-bin
 
 ###客户端发送数据代码实现
 ```
-        //send http request ,send total score and score to server
-                int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
-                int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
-                int userid=CCRANDOM_0_1()*100;
-                char url[2048];
-                sprintf(url,"http://192.168.226.129/cgi-bin/setScore.cgi?totalscore=%d&score=%d&user=user%d",totalScore,score,userid);
-                CCHttpClient *client=CCHttpClient::getInstance();
-                CCHttpRequest *request=new CCHttpRequest;
-                request->setUrl(url);
-                request->setRequestType(CCHttpRequest::kHttpGet);
-                request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
-                client->send(request);
-                request->release();
+//send http request ,send total score and score to server
+int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
+ int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
+ int userid=CCRANDOM_0_1()*100;
+ char url[2048];
+sprintf(url,"http://192.168.226.129/cgi-bin/setScore.cgi?totalscore=%d&score=%d&user=user%d",totalScore,score,userid);
+CCHttpClient *client=CCHttpClient::getInstance();
+CCHttpRequest *request=new CCHttpRequest;
+request->setUrl(url);
+request->setRequestType(CCHttpRequest::kHttpGet);
+request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
+client->send(request);
+request->release();
 ```
                 
                 
 ###客户端接收数据
 ```
-        //receive data from server
-                //json data is most common
-                if (!response->isSucceed())
-                {
-                        CCLOG("request error:%s",response->getErrorBuffer());
-                        return;
-                }
+//receive data from server
+//json data is most common
+ if (!response->isSucceed())
+ {
+CCLOG("request error:%s",response->getErrorBuffer());
+return;
+}
         
-                std::vector<char>* data=response->getResponseData();
-                std::vector<char>::iterator it;
-                std::string str;
-                for(it=data->begin();it!=data->end();it++)
-                {
-                        str.push_back(*it); 
-                }
-        
-                char *p=new char[str.size()+1];
-                strcpy(p,str.c_str());
-                p[strlen(p)-1]=0;
-                int index=0;
-                char *username=strtok(p,"&"); 
-                char *totalScore;
-                char *score;
-                char buf[1024];
-                while (username)
-                {
-                        totalScore=strtok(NULL,"&");
-                        score=strtok(NULL,"&");
-                        CCLOG("********%s,%s,%s********\n",username,totalScore,score);
-                        //put data into labels
-                        CCLabelTTF *label=(CCLabelTTF*)getChildByTag(1000+index++);
-                        sprintf(buf,"%s:%s:%s",username,totalScore,score);
-                        label->setString(buf);
-                        username=strtok(NULL,"&");
-        
-                }
-                delete []p;
+std::vector<char>* data=response->getResponseData();
+std::vector<char>::iterator it;
+std::string str;
+for(it=data->begin();it!=data->end();it++)
+{
+        str.push_back(*it); 
+}
+
+char *p=new char[str.size()+1];
+strcpy(p,str.c_str());
+p[strlen(p)-1]=0;
+int index=0;
+char *username=strtok(p,"&"); 
+char *totalScore;
+char *score;
+char buf[1024];
+while (username)
+{
+        totalScore=strtok(NULL,"&");
+        score=strtok(NULL,"&");
+        CCLOG("********%s,%s,%s********\n",username,totalScore,score);
+ //put data into labels
+CCLabelTTF *label=(CCLabelTTF*)getChildByTag(1000+index++);
+sprintf(buf,"%s:%s:%s",username,totalScore,score);
+label->setString(buf);
+username=strtok(NULL,"&");
+}
+delete []p;
 ```
 ###HttpClient实现windwos主机与linux服务器通信并传递信息
 
@@ -221,13 +220,13 @@ CCHttpClient* client = CCHttpClient::getInstance();
 
         return true;
 ```
-服务器端接收代码
+
+服务器端接收代码123
 ```
 #include <stdio.h>
 #include <sqlite3.h>
 #include <string.h>
 #include <stdlib.h>
-
 int main()
 {
         printf("Content-type:text/html\n\n");
