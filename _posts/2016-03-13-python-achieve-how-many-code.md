@@ -3,7 +3,7 @@ layout: post
 title: python实现统计你一共写了多少行代码
 date: 2016-3-22
 categories: blog
-tags: [总结,python]
+tags: [python]
 description: 通告一下，我准备开始了.
 ---
 ###程序员要保证一定的代码量就必须勤奋的敲代码，但怎么知道自己一共写了多少代码呢，笔者用python写了个简单的脚本，遍历所有的.java,.cpp,.c文件的行数，但是正如大家所知，java生成了许多代码，所以有许多水分，准确性并不太高，只具有一定的参考价值。
