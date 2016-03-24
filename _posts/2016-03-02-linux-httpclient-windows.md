@@ -145,12 +145,11 @@ cgi-bin目录  /usr/lib/cgi-bin
 ### 服务器端配置完成
 
 
-
 ### 客户端发送数据代码实现
 
 
+<blockquote>
 ```
-
    //发送请求
    send http request ,send total score and score to server
    int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
@@ -165,8 +164,8 @@ cgi-bin目录  /usr/lib/cgi-bin
    request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
    client->send(request);
    request->release();
-
 ```
+</blockquote>
                 
                 
 ### 客户端接收数据
