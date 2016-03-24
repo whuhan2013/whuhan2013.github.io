@@ -7,9 +7,9 @@ tags: [android]
 description: 通告一下，我已不再每天写千字文，准备采用以下的方法进行练习，由于文章篇幅较长，链接较多，建议到简书或博客进行阅读。
 ---
 
-###利用phoneGap可以利用HTML开发安卓应用，是web app的一种，可以有效的提高开发效率，降低开发成本 。
+### 利用phoneGap可以利用HTML开发安卓应用，是web app的一种，可以有效的提高开发效率，降低开发成本 。
 
-##第一步：
+# 第一步：
 ###开发环境配置以及基本操作请参考其它文档.
 ###新增一个名为 phoneGap 的android项目,将主activity命名为:PhoneGapActivity.java
 ###从下载好的 phonegap 找到 lib\android,(下载地址记不太清了,google callback-phonegap-0d1f305)
