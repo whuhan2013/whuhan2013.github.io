@@ -9,20 +9,20 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 
 ### 利用phoneGap可以利用HTML开发安卓应用，是web app的一种，可以有效的提高开发效率，降低开发成本 。
 
-# 第一步：
-###开发环境配置以及基本操作请参考其它文档.
-###新增一个名为 phoneGap 的android项目,将主activity命名为:PhoneGapActivity.java
-###从下载好的 phonegap 找到 lib\android,(下载地址记不太清了,google callback-phonegap-0d1f305)
-###按照以下目录分别复制到android 项目 
-###assets\www\phonegap-1.4.1.js
-###res\xml\phonegap.xml
-###res\xml\plugins.xml
-###libs\phonegap-1.4.1.jar
+## 第一步：
+### 开发环境配置以及基本操作请参考其它文档.
+### 新增一个名为 phoneGap 的android项目,将主activity命名为:PhoneGapActivity.java
+### 从下载好的 phonegap 找到 lib\android,(下载地址记不太清了,google callback-phonegap-0d1f305)
+### 按照以下目录分别复制到android 项目 
+### assets\www\phonegap-1.4.1.js
+### res\xml\phonegap.xml
+### res\xml\plugins.xml
+### libs\phonegap-1.4.1.jar
  
-###以上路径除了www外,其它都是必须路径,不能更改名字,没有文件夹就创建一个
+### 以上路径除了www外,其它都是必须路径,不能更改名字,没有文件夹就创建一个
 
 
-##第二步：创建完成后复制以下代码到AndroidManifest.xml ,这些代码为程序提供权限,当然我们现在用不了这么多权限,但是加进去总没错.
+## 第二步：创建完成后复制以下代码到AndroidManifest.xml ,这些代码为程序提供权限,当然我们现在用不了这么多权限,但是加进去总没错.
 
 ```
 <supports-screens
@@ -47,13 +47,13 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
-##修改MainActivity
-###添加完成后,找到我们的主activity PhoneGapActivity.java 找到onCreate方法,
-###替换setContentView(R.layout.main);super.loadUrl("http://baidu.com");或者super.loadUrl("file:///android_asset/www/index.html");
+## 修改MainActivity
+### 添加完成后,找到我们的主activity PhoneGapActivity.java 找到onCreate方法,
+### 替换setContentView(R.layout.main);super.loadUrl("http://baidu.com");或者super.loadUrl("file:///android_asset/www/index.html");
 
-##第四步：写index.html文件
-###其中包括要调用的方法，和调用成功之后返回的方法，分为成功方法与失败方法
-```
+## 第四步：写index.html文件
+### 其中包括要调用的方法，和调用成功之后返回的方法，分为成功方法与失败方法
+```html
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -103,7 +103,7 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
      </body>
  </html>
 ```
-##第五步：写js文件
+## 第五步：写js文件
 ```
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
@@ -152,14 +152,14 @@ PhoneGap.addConstructor(function() {
 }
 ```
 
-##第六步：配置XML文件
-###在plungs.xml中添加
+## 第六步：配置XML文件
+### 在plungs.xml中添加
 ```
  <plugin name="HM_service" value="com.zj.phonegaptest.HMTest"/>
 ```
-###注意，第五步中对象必须与XML中配置的相同，value即为要调用的类，这样才知道要调用哪一个类
+### 注意，第五步中对象必须与XML中配置的相同，value即为要调用的类，这样才知道要调用哪一个类
 
-##第七步：写实现类
+## 第七步：写实现类
 ```
 package com.zj.phonegaptest;
 import org.json.JSONArray;
@@ -221,13 +221,13 @@ public class HMTest extends Plugin {
 }
 ```
 
-##参考链接：
+## 参考链接：
 phoneGap 基于android 实例 一 - china-orange - ITeye技术网站
 http://lvjj.iteye.com/blog/1484479
 PhoneGap开发环境搭建 - 随机 - 博客园
 http://www.cnblogs.com/Random/archive/2011/12/28/2305398.html
 
-##运行结果：
+## 运行结果：
 ![完成](http://img.blog.csdn.net/20160323185004391)
 
 
