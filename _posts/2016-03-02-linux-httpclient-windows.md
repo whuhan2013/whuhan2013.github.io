@@ -7,7 +7,7 @@ tags: [linux]
 description: 通告一下，我已不再每天写千字文，准备采用以下的方法进行练习，由于文章篇幅较长，链接较多，建议到简书或博客进行阅读。
 ---
 
-###本篇主要讲解了利用HttpClient实现 windows主机与linux服务器的通信与传递数据
+### 本篇主要讲解了利用HttpClient实现 windows主机与linux服务器的通信与传递数据
 HttpClient代码，服务器端配置
 
 系统和安装软件
@@ -21,24 +21,24 @@ html页面目录 /var/www/html
 cgi-bin目录  /usr/lib/cgi-bin
 日志文件   /var/log/apache2
 
-1）/etc/apache2/mods-enable里增加支持cgi的mod
+- 1）/etc/apache2/mods-enable里增加支持cgi的mod
    
-   cd /etc/apache2/mods-enabled
+      cd /etc/apache2/mods-enabled
    sudo ln -s ../mods-available/cgid.conf
    sudo ln -s ../mods-available/cgid.load
    sudo ln -s ../mods-available/cgi.load
 
-2) 编辑cgi代码: /usr/lib/cgi-bin/setScore.c
+- 2) 编辑cgi代码: /usr/lib/cgi-bin/setScore.c
    sudo gcc /usr/lib/cgi-bin/setScore.c -o /usr/lib/cgi-bin/setScore.cgi
    
-3) 建立数据库
+- 3) 建立数据库
    sudo sqlite3 /var/tank/tank.db
    create table tscore (id integer primary key autoincrement, username varchar(32) unique not null, totalscore integer not null, score integer not null);
 
-4) 修改数据库文件的权限
+- 4) 修改数据库文件的权限
    sudo chmod 777 /var/tank -R
    sudo chmod www-data:www-data /var/tank -R
-###CGI代码如下，写数据库与读数据库并且向网页打印返回
+### CGI代码如下，写数据库与读数据库并且向网页打印返回
 ```
         #include <stdio.h>
         #include <sqlite3.h>
