@@ -36,14 +36,17 @@ cgi-bin目录  /usr/lib/cgi-bin
    
 - 3) 建立数据库
 ```
-   sudo sqlite3 /var/tank/tank.db
+
+   sudo sqlite3 /var/tank/tank.db  
    create table tscore (id integer primary key autoincrement, username varchar(32) unique not null, totalscore integer not null, score integer not null);
+   
 ```
 - 4) 修改数据库文件的权限
    sudo chmod 777 /var/tank -R
    sudo chmod www-data:www-data /var/tank -R
 ### CGI代码如下，写数据库与读数据库并且向网页打印返回
 ```
+
         #include <stdio.h>
         #include <sqlite3.h>
         #include <string.h>
@@ -137,6 +140,7 @@ cgi-bin目录  /usr/lib/cgi-bin
         
             return 0;
         }
+        
 ```
 
 ###服务器端配置完成
