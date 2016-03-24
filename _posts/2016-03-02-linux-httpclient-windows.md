@@ -23,7 +23,7 @@ html页面目录 /var/www/html
 cgi-bin目录  /usr/lib/cgi-bin
 日志文件   /var/log/apache2
 
-- 1）/etc/apache2/mods-enable里增加支持cgi的mod
+1. /etc/apache2/mods-enable里增加支持cgi的mod
 <blockquote>
    cd /etc/apache2/mods-enabled
    sudo ln -s ../mods-available/cgid.conf
@@ -31,19 +31,19 @@ cgi-bin目录  /usr/lib/cgi-bin
    sudo ln -s ../mods-available/cgi.load
 </blockquote>
 
-- 2) 编辑cgi代码: /usr/lib/cgi-bin/setScore.c
+2. 编辑cgi代码: /usr/lib/cgi-bin/setScore.c
    sudo gcc /usr/lib/cgi-bin/setScore.c -o /usr/lib/cgi-bin/setScore.cgi
    
-- 3) 建立数据库
+3. 建立数据库
 ```
 
    sudo sqlite3 /var/tank/tank.db  
    create table tscore (id integer primary key autoincrement, username varchar(32) unique not null, totalscore integer not null, score integer not null);
    
 ```
-- 4) 修改数据库文件的权限
+4. 修改数据库文件的权限
    sudo chmod 777 /var/tank -R
-   sudo chmod www-data:www-data /var/tank -R
+   sudo chmod www-data:www-data /var/tank -R  
 ### CGI代码如下，写数据库与读数据库并且向网页打印返回
 ```
 
@@ -143,13 +143,15 @@ cgi-bin目录  /usr/lib/cgi-bin
         
 ```
 
-###服务器端配置完成
+### 服务器端配置完成
 
-###客户端发送数据代码实现
+### 客户端发送数据代码实现
 
 <br>
 ```
-//发送请求send http request ,send total score and score to server
+
+//发送请求
+send http request ,send total score and score to server
 int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
  int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
  int userid=CCRANDOM_0_1()*100;
@@ -162,11 +164,13 @@ request->setRequestType(CCHttpRequest::kHttpGet);
 request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
 client->send(request);
 request->release();
+
 ```
                 
                 
-###客户端接收数据
+### 客户端接收数据
 ```
+
 //receive data from server
 //json data is most common
  if (!response->isSucceed())
@@ -203,12 +207,14 @@ label->setString(buf);
 username=strtok(NULL,"&");
 }
 delete []p;
-```
-###HttpClient实现windwos主机与linux服务器通信并传递信息
 
-###以上是以DOGet方法，将参数设置在URL中以到达传递参数的作用，下面使用DOPost方法向服务器端上传图片
-###客户端上传代码
 ```
+### HttpClient实现windwos主机与linux服务器通信并传递信息
+
+### 以上是以DOGet方法，将参数设置在URL中以到达传递参数的作用，下面使用DOPost方法向服务器端上传图片
+### 客户端上传代码
+```
+
 CCHttpClient* client = CCHttpClient::getInstance();
 
         CCHttpRequest* req = new CCHttpRequest;
@@ -230,10 +236,12 @@ CCHttpClient* client = CCHttpClient::getInstance();
 
 
         return true;
+        
 ```
 
-服务器端接收代码123
+### 服务器端接收代码
 ```
+
 #include <stdio.h>
 #include <sqlite3.h>
 #include <string.h>
@@ -254,9 +262,10 @@ int main()
         printf("%s\n<br>",buf);
         return 0;
 }
+
 ```
 
-###上传结束，可以在相应文件路径下看到图片
+### 上传结束，可以在相应文件路径下看到图片
 
 
 
