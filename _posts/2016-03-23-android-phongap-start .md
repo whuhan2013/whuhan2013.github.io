@@ -53,56 +53,52 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 
 ## 第四步：写index.html文件
 ### 其中包括要调用的方法，和调用成功之后返回的方法，分为成功方法与失败方法
-```html
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <meta http-equiv="Content-type" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
-    <title></title>
 
-         <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"> </script>
-         <script type="text/javascript" charset="utf-8" src="test.js"> </script>
-         <script type="text/javascript">
-         function test1()
-         {
-            alert("HelloWorld");
-            navigator.hmCommen.test(successCallback,errorCallback,{});
-            
-         }
-         
-         function testlogin(name,age)
-         {
-            //navigator.hmCommen.testLogin(successCallback,errorCallback,{});
-            navigator.hmCommen.testLogin(successCallback,errorCallback,{"name":name,"age":age});
-         }
-         
-         function successCallback()
-         {
-            alert("Success");
-         }
-         
-         function errorCallback()
-         {
-            alert("failed");
-         }
-         function test2()
-         {
-            alert("hello world");
-         }
-         
-         
-                      
- 
-         </script>
-     </head>
-     <body>
-         <h1>Hello World</h1>
-         <button type="button" onclick="test2()">Hello Worold</button>
-         <button type="button" onclick="test1()">call me</button>
-         <button type="button" onclick="testlogin('abc',12)">login test</button>
-     </body>
- </html>
-```
+  <!DOCTYPE HTML>
+  <html>
+    <head>
+      <meta http-equiv="Content-type" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+      <title></title>
+  
+           <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"> </script>
+           <script type="text/javascript" charset="utf-8" src="test.js"> </script>
+           <script type="text/javascript">
+           function test1()
+           {
+              alert("HelloWorld");
+              navigator.hmCommen.test(successCallback,errorCallback,{});
+              
+           }
+           
+           function testlogin(name,age)
+           {
+              //navigator.hmCommen.testLogin(successCallback,errorCallback,{});
+              navigator.hmCommen.testLogin(successCallback,errorCallback,{"name":name,"age":age});
+           }
+           
+           function successCallback()
+           {
+              alert("Success");
+           }
+           
+           function errorCallback()
+           {
+              alert("failed");
+           }
+           function test2()
+           {
+              alert("hello world");
+           }
+           </script>
+       </head>
+       <body>
+           <h1>Hello World</h1>
+           <button type="button" onclick="test2()">Hello Worold</button>
+           <button type="button" onclick="test1()">call me</button>
+           <button type="button" onclick="testlogin('abc',12)">login test</button>
+       </body>
+   </html>
+
 ## 第五步：写js文件
 ```
 /*
@@ -154,9 +150,8 @@ PhoneGap.addConstructor(function() {
 
 ## 第六步：配置XML文件
 ### 在plungs.xml中添加
-```
- <plugin name="HM_service" value="com.zj.phonegaptest.HMTest"/>
-```
+  <plugin name="HM_service" value="com.zj.phonegaptest.HMTest"/>
+
 ### 注意，第五步中对象必须与XML中配置的相同，value即为要调用的类，这样才知道要调用哪一个类
 
 ## 第七步：写实现类
