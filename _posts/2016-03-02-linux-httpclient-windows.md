@@ -11,8 +11,10 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 HttpClient代码，服务器端配置
 
 系统和安装软件
-- 1）ubuntu 14.04 64位系统
-- 2）sudo apt-get install apache2 sqlite3 libsqlite3-dev
+- 1）ubuntu 14.04 64位系统  
+
+- 2）sudo apt-get install apache2 sqlite3 libsqlite3-dev  
+
 
 配置apache 支持cgi
 
@@ -22,12 +24,12 @@ cgi-bin目录  /usr/lib/cgi-bin
 日志文件   /var/log/apache2
 
 - 1）/etc/apache2/mods-enable里增加支持cgi的mod
-```
+<blockquote>
    cd /etc/apache2/mods-enabled
    sudo ln -s ../mods-available/cgid.conf
    sudo ln -s ../mods-available/cgid.load
    sudo ln -s ../mods-available/cgi.load
-```
+</blockquote>
 
 - 2) 编辑cgi代码: /usr/lib/cgi-bin/setScore.c
    sudo gcc /usr/lib/cgi-bin/setScore.c -o /usr/lib/cgi-bin/setScore.cgi
