@@ -152,19 +152,19 @@ cgi-bin目录  /usr/lib/cgi-bin
 ```
 
 //发送请求
-send http request ,send total score and score to server
-int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
- int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
- int userid=CCRANDOM_0_1()*100;
- char url[2048];
-sprintf(url,"http://192.168.226.129/cgi-bin/setScore.cgi?totalscore=%d&score=%d&user=user%d",totalScore,score,userid);
-CCHttpClient *client=CCHttpClient::getInstance();
-CCHttpRequest *request=new CCHttpRequest;
-request->setUrl(url);
-request->setRequestType(CCHttpRequest::kHttpGet);
-request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
-client->send(request);
-request->release();
+   send http request ,send total score and score to server
+   int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
+    int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
+    int userid=CCRANDOM_0_1()*100;
+    char url[2048];
+   sprintf(url,"http://192.168.226.129/cgi-bin/setScore.cgi?totalscore=%d&score=%d&user=user%d",totalScore,score,userid);
+   CCHttpClient *client=CCHttpClient::getInstance();
+   CCHttpRequest *request=new CCHttpRequest;
+   request->setUrl(url);
+   request->setRequestType(CCHttpRequest::kHttpGet);
+   request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
+   client->send(request);
+   request->release();
 
 ```
                 
