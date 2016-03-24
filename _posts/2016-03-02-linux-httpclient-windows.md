@@ -151,7 +151,7 @@ cgi-bin目录  /usr/lib/cgi-bin
 
 ```
 
-//发送请求
+   //发送请求
    send http request ,send total score and score to server
    int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
     int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
@@ -172,7 +172,7 @@ cgi-bin目录  /usr/lib/cgi-bin
 ### 客户端接收数据
 ```
 
-//receive data from server
+   //receive data from server
 //json data is most common
  if (!response->isSucceed())
  {
@@ -216,7 +216,7 @@ delete []p;
 ### 客户端上传代码
 ```
 
-CCHttpClient* client = CCHttpClient::getInstance();
+      CCHttpClient* client = CCHttpClient::getInstance();
 
         CCHttpRequest* req = new CCHttpRequest;
         req->setUrl("http://192.168.226.129/cgi-bin/posttest.cgi");
