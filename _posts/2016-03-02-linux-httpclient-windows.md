@@ -35,12 +35,12 @@ cgi-bin目录  /usr/lib/cgi-bin
    sudo gcc /usr/lib/cgi-bin/setScore.c -o /usr/lib/cgi-bin/setScore.cgi
    
 3. 建立数据库
-```
+<blockquote>
 
    sudo sqlite3 /var/tank/tank.db  
    create table tscore (id integer primary key autoincrement, username varchar(32) unique not null, totalscore integer not null, score integer not null);
    
-```
+</blockquote>
 4. 修改数据库文件的权限
    sudo chmod 777 /var/tank -R
    sudo chmod www-data:www-data /var/tank -R  
