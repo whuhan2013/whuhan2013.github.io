@@ -11,6 +11,7 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 
 ## 定义Activity工具类
 ```
+/**
  *      应用程序Activity管理类：用于Activity管理和应用程序退出
  * 修订历史 ：
  * 
