@@ -228,11 +228,13 @@ while (username)
 }
 delete []p;
 ```  
+
 ### HttpClient实现windwos主机与linux服务器通信并传递信息
 
 ### 以上是以DOGet方法，将参数设置在URL中以到达传递参数的作用，下面使用DOPost方法向服务器端上传图片
 ### 客户端上传代码
 ```  
+
 /**
  * 
 * <p>Title: doPost</p>
@@ -263,12 +265,14 @@ delete []p;
 
         return true;
         
-```  
+```   
+
 
 ### 服务器端接收代码  
 
 
-```  
+```    
+
 #include <stdio.h>
 #include <sqlite3.h>
 #include <string.h>
@@ -288,8 +292,9 @@ int main()
 
         printf("%s\n<br>",buf);
         return 0;
-}
-```  
+}1
+```    
+
 
 ### 上传结束，可以在相应文件路径下看到图片
 
