@@ -150,7 +150,9 @@ PhoneGap.addConstructor(function() {
 
 ## 第六步：配置XML文件
 ### 在plungs.xml中添加
-  <plugin name="HM_service" value="com.zj.phonegaptest.HMTest"/>
+```  
+  <plugin name="HM_service" value="com.zj.phonegaptest.HMTest"/>  
+```  
 
 ### 注意，第五步中对象必须与XML中配置的相同，value即为要调用的类，这样才知道要调用哪一个类
 
