@@ -28,7 +28,7 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 - 日志文件   /var/log/apache2  
 
 
-1. /etc/apache2/mods-enable里增加支持cgi的mod
+1. /etc/apache2/mods-enable里增加支持cgi的mod  
       cd /etc/apache2/mods-enabled  
 
       sudo ln -s ../mods-available/cgid.conf  
@@ -56,7 +56,14 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
    sudo chmod www-data:www-data /var/tank -R    
 ### CGI代码如下，写数据库与读数据库并且向网页打印返回
 ```
-
+/**
+ * 
+* <p>Title: CGI代码</p>
+* <p>Description: </p>
+* <p>Company: whu</p> 
+* @author 江军祥
+* @date 2016-3-25上午9:09:01
+ */
         #include <stdio.h>
         #include <sqlite3.h>
         #include <string.h>
@@ -164,6 +171,14 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 
 
 ```
+/**
+ * 
+* <p>Title: 客户端发送数据</p>
+* <p>Description: </p>
+* <p>Company: whu</p> 
+* @author 江军祥
+* @date 2016-3-25上午9:09:01
+ */
 	//send http request ,send total score and score to server
 	int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
 	int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
@@ -225,7 +240,14 @@ delete []p;
 ### 以上是以DOGet方法，将参数设置在URL中以到达传递参数的作用，下面使用DOPost方法向服务器端上传图片
 ### 客户端上传代码
 ```
-
+/**
+ * 
+* <p>Title: doPost</p>
+* <p>Description: </p>
+* <p>Company: whu</p> 
+* @author 江军祥
+* @date 2016-3-25上午9:09:01
+ */
       CCHttpClient* client = CCHttpClient::getInstance();
 
         CCHttpRequest* req = new CCHttpRequest;
