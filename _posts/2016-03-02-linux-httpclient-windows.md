@@ -57,107 +57,105 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 ### CGI代码如下，写数据库与读数据库并且向网页打印返回
 ```
 /**
- * 
 * <p>Title: CGI代码</p>
 * <p>Description: </p>
 * <p>Company: whu</p> 
 * @author 江军祥
 * @date 2016-3-25上午9:09:01
  */
-        #include <stdio.h>
-        #include <sqlite3.h>
-        #include <string.h>
-        #include <stdlib.h>
-        int selectCallback(void* arg,int argc,char** argv,char** argvv)
-        {
-            //argv[0] id
-            //argv[1] username
-            //argv[2] totalscore
-            //argv[3] score
-        
-            // username&totalscore&score&....
-            printf("%s&%s&%s&", argv[1], argv[2], argv[3]);
-            return 0;
-        }
-        
-        int main()
-        {
-            printf("Content-type:text/html\n\n");
-        #if 0
-            printf("This is cocos cgi-test\n");
-            // 打印环境变量
-            extern char** environ;
-            int i;
-            for(i=0; ;++i)
-            {
-                if(environ[i])
-                    printf("%s\n<br>", environ[i]);
-                else
-                    break;
-            }
-        #endif
-        
-            // set Score to Database
-            char* queryString = getenv("QUERY_STRING");
-            if(queryString == NULL)
-            {
-                printf("Err: queryString is NULL");
-                return 0;
-            }
-        
-            // totalscore=%d&score=%d&user=user%d
-            // 获取参数
-            char* totalScore = strtok(queryString, "&");
-            char* score = strtok(NULL, "&");
-            char* username = strtok(NULL, "&");
-        
-            strtok(totalScore, "=");
-            totalScore = strtok(NULL, "=");
-        
-            strtok(score, "=");
-            score = strtok(NULL, "=");
-        
-            strtok(username, "=");
-            username = strtok(NULL, "=");
-        
-            // 写数据库
-            sqlite3* db;
-            int ret = sqlite3_open("/home/jjx/tank.db", &db);
-            if(ret != SQLITE_OK)
-            {
-                printf("open database error: %s", sqlite3_errstr(sqlite3_errcode(db)));
-                return 0;
-            }
-        
-            char sql[2048];
-            sprintf(sql, "insert into tscore (username, totalscore, score) values ('%s', %s, %s)", 
-                    username, totalScore, score);
-            ret = sqlite3_exec(db, sql, NULL, NULL, NULL);
-        #if 0
-            printf("%s<br>", sql);
-            return 0;
-        #endif
-            if(ret != SQLITE_OK)
-            {
-                printf("insert data error: %s", sqlite3_errstr(sqlite3_errcode(db)));
-                sqlite3_close(db);
-                return 0;
-            }
-        
-            sprintf(sql, "select * from tscore order by totalscore desc limit 10");
-            ret = sqlite3_exec(db, sql, selectCallback, NULL, NULL);
-            if(ret != SQLITE_OK)
-            {
-                printf("select data error: %s", sqlite3_errstr(sqlite3_errcode(db)));
-                sqlite3_close(db);
-                return 0;
-            }
-        
-            sqlite3_close(db);
-        
-            return 0;
-        }
-        
+#include <stdio.h>
+#include <sqlite3.h>
+#include <string.h>
+#include <stdlib.h>
+int selectCallback(void* arg,int argc,char** argv,char** argvv)
+{
+	//argv[0] id
+	//argv[1] username
+	//argv[2] totalscore
+	//argv[3] score
+
+	// username&totalscore&score&....
+	printf("%s&%s&%s&", argv[1], argv[2], argv[3]);
+	return 0;
+}
+
+int main()
+{
+	printf("Content-type:text/html\n\n");
+#if 0
+	printf("This is cocos cgi-test\n");
+	// 打印环境变量
+	extern char** environ;
+	int i;
+	for(i=0; ;++i)
+	{
+		if(environ[i])
+			printf("%s\n<br>", environ[i]);
+		else
+			break;
+	}
+#endif
+
+	// set Score to Database
+	char* queryString = getenv("QUERY_STRING");
+	if(queryString == NULL)
+	{
+		printf("Err: queryString is NULL");
+		return 0;
+	}
+
+	// totalscore=%d&score=%d&user=user%d
+	// 获取参数
+	char* totalScore = strtok(queryString, "&");
+	char* score = strtok(NULL, "&");
+	char* username = strtok(NULL, "&");
+
+	strtok(totalScore, "=");
+	totalScore = strtok(NULL, "=");
+
+	strtok(score, "=");
+	score = strtok(NULL, "=");
+
+	strtok(username, "=");
+	username = strtok(NULL, "=");
+
+	// 写数据库
+	sqlite3* db;
+	int ret = sqlite3_open("/home/jjx/tank.db", &db);
+	if(ret != SQLITE_OK)
+	{
+		printf("open database error: %s", sqlite3_errstr(sqlite3_errcode(db)));
+		return 0;
+	}
+
+	char sql[2048];
+	sprintf(sql, "insert into tscore (username, totalscore, score) values ('%s', %s, %s)", 
+		username, totalScore, score);
+	ret = sqlite3_exec(db, sql, NULL, NULL, NULL);
+#if 0
+	printf("%s<br>", sql);
+	return 0;
+#endif
+	if(ret != SQLITE_OK)
+	{
+		printf("insert data error: %s", sqlite3_errstr(sqlite3_errcode(db)));
+		sqlite3_close(db);
+		return 0;
+	}
+
+	sprintf(sql, "select * from tscore order by totalscore desc limit 10");
+	ret = sqlite3_exec(db, sql, selectCallback, NULL, NULL);
+	if(ret != SQLITE_OK)
+	{
+		printf("select data error: %s", sqlite3_errstr(sqlite3_errcode(db)));
+		sqlite3_close(db);
+		return 0;
+	}
+
+	sqlite3_close(db);
+
+	return 0;
+}
 ```
 
 
