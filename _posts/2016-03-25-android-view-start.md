@@ -9,7 +9,7 @@ description: 安卓。
 
 ### 本文主要讲述了实现安卓button点击变色与利用ViewPager实现图片自动轮播效果  
 
-### 我伞可以看到在很多应用中，安卓按钮按下时与正常时状态是不同的，这种效果也很容易达到。    
+### 我们可以看到在很多应用中，安卓按钮按下时与正常时状态是不同的，这种效果也很容易达到。    
 
 ### 第一步：创建XML文件定义不同事件的不同效果    
 ```
@@ -24,7 +24,9 @@ description: 安卓。
   
     <item android:drawable="@drawable/function_greenbutton_normal" /> <!-- default -->
 </selector>
-```     
+```   
+
+
 ### 在上面就定义了在pressed与normal情况下，安卓的图片会自动替换的效果。    
 
 ###  第二步：在布局文件中加入定义好的按钮就可以了     
@@ -77,7 +79,8 @@ description: 安卓。
     </LinearLayout>
 
 </RelativeLayout>
-```   
+```  
+
 ### 注意viewPager引入时要用全类名，上面还定义了图片介绍与图片切换时小圆点也会切换    
 
 ### viewPager的主要方法   
@@ -92,8 +95,10 @@ viewPager.setOnPageChangeListener(new OnPageChangeListener()
 ```   
 
 ### 实现  
-### 适配器   
-```  
+
+### 适配器  
+
+```
 private class MyPagerAdapter extends PagerAdapter {
 
     @Override
@@ -200,12 +205,15 @@ viewPager.setOnPageChangeListener(new OnPageChangeListener() {
  4、 用handler 发送延时信息，实现循环        
 
 ### 这里采用第四种     
-### 在onCreate方法中    
-```     
+### 在onCreate方法中  
+
+```
      isRunning = true;
    handler.sendEmptyMessageDelayed(0, 2000);
-```              
-### 定义handler         
+```   
+
+### 定义handler  
+      
 ```    
 /**
    * 判断是否自动滚动
