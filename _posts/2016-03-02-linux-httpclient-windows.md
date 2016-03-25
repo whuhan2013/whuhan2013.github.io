@@ -29,10 +29,14 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 
 
 1. /etc/apache2/mods-enable里增加支持cgi的mod
-      cd /etc/apache2/mods-enabled
-      sudo ln -s ../mods-available/cgid.conf
-      sudo ln -s ../mods-available/cgid.load
-      sudo ln -s ../mods-available/cgi.load
+      cd /etc/apache2/mods-enabled  
+
+      sudo ln -s ../mods-available/cgid.conf  
+      
+      sudo ln -s ../mods-available/cgid.load  
+      
+      sudo ln -s ../mods-available/cgi.load  
+      
 
 
 2. 编辑cgi代码:   
@@ -160,20 +164,19 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 
 
 ```
-//发送请求
-//send http request ,send total score and score to server
-int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
-int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
-int userid=CCRANDOM_0_1()*100;
-char url[2048];
-sprintf(url,"http://192.168.226.129/cgi-bin/setScore.cgi?totalscore=%d&score=%d&user=user%d",totalScore,score,userid);
-CCHttpClient *client=CCHttpClient::getInstance();
-CCHttpRequest *request=new CCHttpRequest;
-request->setUrl(url);
-request->setRequestType(CCHttpRequest::kHttpGet);
-request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
-client->send(request);
-request->release();
+	//send http request ,send total score and score to server
+	int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
+	int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
+	int userid=CCRANDOM_0_1()*100;
+	char url[2048];
+	sprintf(url,"http://192.168.226.129/cgi-bin/setScore.cgi?totalscore=%d&score=%d&user=user%d",totalScore,score,userid);
+	CCHttpClient *client=CCHttpClient::getInstance();
+	CCHttpRequest *request=new CCHttpRequest;
+	request->setUrl(url);
+	request->setRequestType(CCHttpRequest::kHttpGet);
+	request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
+	client->send(request);
+	request->release();
 ```
 
                 
