@@ -5,7 +5,7 @@ date: 2016-3-23
 categories: blog
 tags: [android]
 description: 通告一下，我已不再每天写千字文，准备采用以下的方法进行练习，由于文章篇幅较长，链接较多，建议到简书或博客进行阅读。
----
+---  
 
 ### 利用phoneGap可以利用HTML开发安卓应用，是web app的一种，可以有效的提高开发效率，降低开发成本 。
 
@@ -24,7 +24,7 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 
 ## 第二步：创建完成后复制以下代码到AndroidManifest.xml ,这些代码为程序提供权限,当然我们现在用不了这么多权限,但是加进去总没错.
 
-```
+```  
 <supports-screens
  android:largeScreens="true"
  android:normalScreens="true"
@@ -45,7 +45,7 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
  <uses-permission android:name="android.permission.READ_CONTACTS" />
  <uses-permission android:name="android.permission.WRITE_CONTACTS" />
  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-```
+```  
 
 ## 修改MainActivity
 ### 添加完成后,找到我们的主activity PhoneGapActivity.java 找到onCreate方法,
@@ -53,7 +53,7 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 
 ## 第四步：写index.html文件
 ### 其中包括要调用的方法，和调用成功之后返回的方法，分为成功方法与失败方法
-
+``` 
   <!DOCTYPE HTML>
   <html>
     <head>
@@ -98,9 +98,9 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
            <button type="button" onclick="testlogin('abc',12)">login test</button>
        </body>
    </html>
-
+``` 
 ## 第五步：写js文件
-```
+```  
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -146,7 +146,7 @@ PhoneGap.addConstructor(function() {
    
 });
 }
-```
+```  
 
 ## 第六步：配置XML文件
 ### 在plungs.xml中添加
@@ -155,7 +155,7 @@ PhoneGap.addConstructor(function() {
 ### 注意，第五步中对象必须与XML中配置的相同，value即为要调用的类，这样才知道要调用哪一个类
 
 ## 第七步：写实现类
-```
+```  
 package com.zj.phonegaptest;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -213,8 +213,8 @@ public class HMTest extends Plugin {
         return pluginResult;
     }
 
-}
-```
+}2
+```  
 
 ## 参考链接：
 phoneGap 基于android 实例 一 - china-orange - ITeye技术网站
