@@ -52,7 +52,8 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 ### 替换setContentView(R.layout.main);super.loadUrl("http://baidu.com");或者super.loadUrl("file:///android_asset/www/index.html");
 
 ## 第四步：写index.html文件
-### 其中包括要调用的方法，和调用成功之后返回的方法，分为成功方法与失败方法
+### 其中包括要调用的方法，和调用成功之后返回的方法，分为成功方法与失败方法  
+
 ``` 
   <!DOCTYPE HTML>
   <html>
@@ -99,7 +100,8 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
        </body>
    </html>
 ``` 
-## 第五步：写js文件
+## 第五步：写js文件  
+
 ```  
 /*
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
@@ -149,14 +151,16 @@ PhoneGap.addConstructor(function() {
 ```  
 
 ## 第六步：配置XML文件
-### 在plungs.xml中添加
+### 在plungs.xml中添加  
+
 ```  
   <plugin name="HM_service" value="com.zj.phonegaptest.HMTest"/>  
 ```  
 
 ### 注意，第五步中对象必须与XML中配置的相同，value即为要调用的类，这样才知道要调用哪一个类
 
-## 第七步：写实现类
+## 第七步：写实现类  
+
 ```  
 package com.zj.phonegaptest;
 import org.json.JSONArray;
