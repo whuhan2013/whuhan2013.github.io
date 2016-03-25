@@ -11,17 +11,22 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 HttpClient代码，服务器端配置
 
 系统和安装软件
-1. ubuntu 14.04 64位系统  
+1. ubuntu 14.04 64位系统     
 
 2. sudo apt-get install apache2 sqlite3 libsqlite3-dev  
 
 
-配置apache 支持cgi
 
-配置目录 /etc/apache2
-html页面目录 /var/www/html
-cgi-bin目录  /usr/lib/cgi-bin
-日志文件   /var/log/apache2
+### 配置apache 支持cgi
+
+- 配置目录 /etc/apache2  
+
+- html页面目录 /var/www/html  
+
+- cgi-bin目录  /usr/lib/cgi-bin  
+
+- 日志文件   /var/log/apache2  
+
 
 1. /etc/apache2/mods-enable里增加支持cgi的mod
 <blockquote>
@@ -31,7 +36,9 @@ cgi-bin目录  /usr/lib/cgi-bin
    sudo ln -s ../mods-available/cgi.load
 </blockquote>
 
-2. 编辑cgi代码: /usr/lib/cgi-bin/setScore.c
+2. 编辑cgi代码:   
+   /usr/lib/cgi-bin/setScore.c  
+
    sudo gcc /usr/lib/cgi-bin/setScore.c -o /usr/lib/cgi-bin/setScore.cgi
    
 3. 建立数据库
@@ -41,9 +48,9 @@ cgi-bin目录  /usr/lib/cgi-bin
    create table tscore (id integer primary key autoincrement, username varchar(32) unique not null, totalscore integer not null, score integer not null);
    
 </blockquote>
-4. 修改数据库文件的权限
-   sudo chmod 777 /var/tank -R
-   sudo chmod www-data:www-data /var/tank -R  
+4. 修改数据库文件的权限  
+   sudo chmod 777 /var/tank -R  
+   sudo chmod www-data:www-data /var/tank -R    
 ### CGI代码如下，写数据库与读数据库并且向网页打印返回
 ```
 
@@ -141,9 +148,6 @@ cgi-bin目录  /usr/lib/cgi-bin
             return 0;
         }
         
-```
-```
-123
 ```
 
 
