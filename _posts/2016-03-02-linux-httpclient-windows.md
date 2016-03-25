@@ -7,13 +7,13 @@ tags: [linux]
 description: 通告一下，我已不再每天写千字文，准备采用以下的方法进行练习，由于文章篇幅较长，链接较多，建议到简书或博客进行阅读。
 ---
 
-### 本篇主要讲解了利用HttpClient实现 windows主机与linux服务器的通信与传递数据
-HttpClient代码，服务器端配置
+### 本篇主要讲解了利用HttpClient实现 windows主机与linux服务器的通信与传递数据,HttpClient代码，服务器端配置
 
-系统和安装软件
-1. ubuntu 14.04 64位系统     
-
+### 系统和安装软件
+1. ubuntu 14.04 64位系统  
 2. sudo apt-get install apache2 sqlite3 libsqlite3-dev  
+
+
 
 
 
@@ -29,25 +29,24 @@ HttpClient代码，服务器端配置
 
 
 1. /etc/apache2/mods-enable里增加支持cgi的mod
-<blockquote>
-   cd /etc/apache2/mods-enabled
-   sudo ln -s ../mods-available/cgid.conf
-   sudo ln -s ../mods-available/cgid.load
-   sudo ln -s ../mods-available/cgi.load
-</blockquote>
+      cd /etc/apache2/mods-enabled
+      sudo ln -s ../mods-available/cgid.conf
+      sudo ln -s ../mods-available/cgid.load
+      sudo ln -s ../mods-available/cgi.load
+
 
 2. 编辑cgi代码:   
-   /usr/lib/cgi-bin/setScore.c  
-
-   sudo gcc /usr/lib/cgi-bin/setScore.c -o /usr/lib/cgi-bin/setScore.cgi
+      /usr/lib/cgi-bin/setScore.c  
+   
+      sudo gcc /usr/lib/cgi-bin/setScore.c -o /usr/lib/cgi-bin/setScore.cgi
    
 3. 建立数据库
-<blockquote>
+
 
    sudo sqlite3 /var/tank/tank.db  
    create table tscore (id integer primary key autoincrement, username varchar(32) unique not null, totalscore integer not null, score integer not null);
    
-</blockquote>
+
 4. 修改数据库文件的权限  
    sudo chmod 777 /var/tank -R  
    sudo chmod www-data:www-data /var/tank -R    
@@ -161,41 +160,40 @@ HttpClient代码，服务器端配置
 
 
 ```
-   //发送请求
-   send http request ,send total score and score to server
-   int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
-    int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
-    int userid=CCRANDOM_0_1()*100;
-    char url[2048];
-   sprintf(url,"http://192.168.226.129/cgi-bin/setScore.cgi?totalscore=%d&score=%d&user=user%d",totalScore,score,userid);
-   CCHttpClient *client=CCHttpClient::getInstance();
-   CCHttpRequest *request=new CCHttpRequest;
-   request->setUrl(url);
-   request->setRequestType(CCHttpRequest::kHttpGet);
-   request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
-   client->send(request);
-   request->release();
+//发送请求
+//send http request ,send total score and score to server
+int totalScore=CCUserDefault::sharedUserDefault()->getIntegerForKey("TotalScore");
+int score=CCUserDefault::sharedUserDefault()->getIntegerForKey("Score");
+int userid=CCRANDOM_0_1()*100;
+char url[2048];
+sprintf(url,"http://192.168.226.129/cgi-bin/setScore.cgi?totalscore=%d&score=%d&user=user%d",totalScore,score,userid);
+CCHttpClient *client=CCHttpClient::getInstance();
+CCHttpRequest *request=new CCHttpRequest;
+request->setUrl(url);
+request->setRequestType(CCHttpRequest::kHttpGet);
+request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
+client->send(request);
+request->release();
 ```
 
                 
                 
 ### 客户端接收数据
 ```
-
-   //receive data from server
+//receive data from server
 //json data is most common
- if (!response->isSucceed())
- {
-CCLOG("request error:%s",response->getErrorBuffer());
-return;
+if (!response->isSucceed())
+{
+	CCLOG("request error:%s",response->getErrorBuffer());
+	return;
 }
-        
+
 std::vector<char>* data=response->getResponseData();
 std::vector<char>::iterator it;
 std::string str;
 for(it=data->begin();it!=data->end();it++)
 {
-        str.push_back(*it); 
+	str.push_back(*it); 
 }
 
 char *p=new char[str.size()+1];
@@ -208,17 +206,16 @@ char *score;
 char buf[1024];
 while (username)
 {
-        totalScore=strtok(NULL,"&");
-        score=strtok(NULL,"&");
-        CCLOG("********%s,%s,%s********\n",username,totalScore,score);
- //put data into labels
-CCLabelTTF *label=(CCLabelTTF*)getChildByTag(1000+index++);
-sprintf(buf,"%s:%s:%s",username,totalScore,score);
-label->setString(buf);
-username=strtok(NULL,"&");
+	totalScore=strtok(NULL,"&");
+	score=strtok(NULL,"&");
+	CCLOG("********%s,%s,%s********\n",username,totalScore,score);
+	//put data into labels
+	CCLabelTTF *label=(CCLabelTTF*)getChildByTag(1000+index++);
+	sprintf(buf,"%s:%s:%s",username,totalScore,score);
+	label->setString(buf);
+	username=strtok(NULL,"&");
 }
 delete []p;
-
 ```
 ### HttpClient实现windwos主机与linux服务器通信并传递信息
 
@@ -252,7 +249,6 @@ delete []p;
 
 ### 服务器端接收代码
 ```
-
 #include <stdio.h>
 #include <sqlite3.h>
 #include <string.h>
@@ -273,7 +269,6 @@ int main()
         printf("%s\n<br>",buf);
         return 0;
 }
-
 ```
 
 ### 上传结束，可以在相应文件路径下看到图片
