@@ -53,8 +53,9 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 
 4. 修改数据库文件的权限  
    sudo chmod 777 /var/tank -R  
-   sudo chmod www-data:www-data /var/tank -R    
-### CGI代码如下，写数据库与读数据库并且向网页打印返回  
+   sudo chmod www-data:www-data /var/tank -R  
+
+### CGI代码如下，写数据库与读数据库并且向网页打印返回   
 
 ```
 #include <stdio.h>
@@ -184,12 +185,12 @@ int main()
 	request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
 	client->send(request);
 	request->release();
+```   
+  
+                
+                
+### 客户端接收数据    
 ```  
-
-                
-                
-### 客户端接收数据  
-```
 //receive data from server
 //json data is most common
 if (!response->isSucceed())
@@ -226,12 +227,12 @@ while (username)
 	username=strtok(NULL,"&");
 }
 delete []p;
-```
+```  
 ### HttpClient实现windwos主机与linux服务器通信并传递信息
 
 ### 以上是以DOGet方法，将参数设置在URL中以到达传递参数的作用，下面使用DOPost方法向服务器端上传图片
 ### 客户端上传代码
-```
+```  
 /**
  * 
 * <p>Title: doPost</p>
@@ -262,12 +263,12 @@ delete []p;
 
         return true;
         
-```
+```  
 
 ### 服务器端接收代码  
 
 
-```
+```  
 #include <stdio.h>
 #include <sqlite3.h>
 #include <string.h>
@@ -288,7 +289,7 @@ int main()
         printf("%s\n<br>",buf);
         return 0;
 }
-```
+```  
 
 ### 上传结束，可以在相应文件路径下看到图片
 
