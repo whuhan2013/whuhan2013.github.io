@@ -55,14 +55,7 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
    sudo chmod 777 /var/tank -R  
    sudo chmod www-data:www-data /var/tank -R    
 ### CGI代码如下，写数据库与读数据库并且向网页打印返回
-```
-/**
-* <p>Title: CGI代码</p>
-* <p>Description: </p>
-* <p>Company: whu</p> 
-* @author 江军祥
-* @date 2016-3-25上午9:09:01
- */
+```C++
 #include <stdio.h>
 #include <sqlite3.h>
 #include <string.h>
