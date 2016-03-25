@@ -47,10 +47,13 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 ```  
 
 ## 修改MainActivity  
-#### 添加完成后,找到我们的主activity PhoneGapActivity.java 找到onCreate方法,
-#### 替换setContentView(R.layout.main);super.loadUrl("http://baidu.com");或者super.loadUrl("file:///android_asset/www/index.html");   
 
-## 第四步：写index.html文件
+  添加完成后,找到我们的主activityPhoneGapActivity.java找到onCreate方法,      
+  替换setContentView(R.layout.main);super.loadUrl("http://baidu.com");  
+  或者super.loadUrl("file:///android_asset/www/index.html");   
+
+## 第四步：写index.html文件  
+
 ### 其中包括要调用的方法，和调用成功之后返回的方法，分为成功方法与失败方法  
 
 ``` 
