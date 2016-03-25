@@ -54,8 +54,9 @@ description: 通告一下，我已不再每天写千字文，准备采用以下�
 4. 修改数据库文件的权限  
    sudo chmod 777 /var/tank -R  
    sudo chmod www-data:www-data /var/tank -R    
-### CGI代码如下，写数据库与读数据库并且向网页打印返回
-```C++
+### CGI代码如下，写数据库与读数据库并且向网页打印返回  
+
+```
 #include <stdio.h>
 #include <sqlite3.h>
 #include <string.h>
@@ -149,19 +150,19 @@ int main()
 
 	return 0;
 }
-```
+```  
 
 
 
 
-### 服务器端配置完成
+### 服务器端配置完成  
 
 
-### 客户端发送数据代码实现
+### 客户端发送数据代码实现  
 
 
 
-```
+```  
 /**
  * 
 * <p>Title: 客户端发送数据</p>
@@ -183,11 +184,11 @@ int main()
 	request->setResponseCallback(this,httpresponse_selector(LayerScore::HttpResponse));
 	client->send(request);
 	request->release();
-```
+```  
 
                 
                 
-### 客户端接收数据
+### 客户端接收数据  
 ```
 //receive data from server
 //json data is most common
@@ -263,7 +264,9 @@ delete []p;
         
 ```
 
-### 服务器端接收代码
+### 服务器端接收代码  
+
+
 ```
 #include <stdio.h>
 #include <sqlite3.h>
