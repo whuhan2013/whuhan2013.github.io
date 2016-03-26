@@ -198,7 +198,7 @@ public MyTrouggleButton(Context context, AttributeSet attrs) {
 </LinearLayout>
 ```  
 
-### 解析属性并且改变属性  
+### 解析属性并且改变属性      
 
 ```
 /**
