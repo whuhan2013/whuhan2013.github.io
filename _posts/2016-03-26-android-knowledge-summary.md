@@ -26,7 +26,8 @@ description: 安卓。
 4.在主类中实现OncickListener接口,并在主类中实现未实现的方法  
 
 
-1.内部类  
+1.内部类    
+
 ```
 btnButton.setOnClickListener(new MyListener());  
   
@@ -50,8 +51,9 @@ btnButton.setOnClickListener(new OnClickListener() {
             }  
         });  
 ```
-3.布局文件夹定义Onclick属性,并在activity中声明方法
-定义Onclick属性  
+3.布局文件夹定义Onclick属性,并在activity中声明方法  
+定义Onclick属性   
+
 ```
 <Button  
     android:id="@+id/loginButton"  
@@ -66,23 +68,27 @@ public void btnOnClick(View v) {
     System.out.println("定义属性响应按钮点击事件");  
 }  
 ```  
-4.在主类中实现OncickListener接口,并在主类中实现未实现的方法  
+4.在主类中实现OncickListener接口,并在主类中实现未实现的方法   
+
 ```
 btnButton.setOnClickListener(this);  
-```
-```
+```    
+
+```   
 public class MainActivity extends Activity implements OnClickListener  
-```
-```
+```    
+
+```   
 @Override  
 public void onClick(View v) {  
     // TODO Auto-generated method stub  
       
 }  
-```  
+```       
 
 ### 动态刷新界面实现  
-第一步：定义一个LinearLayout作为将来加载的条目的容器  
+第一步：定义一个LinearLayout作为将来加载的条目的容器   
+
 ```  
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -111,7 +117,9 @@ public void onClick(View v) {
 
 </LinearLayout>
 ```  
-###第二步：定义textView并加入到容器中  
+
+###第二步：定义textView并加入到容器中    
+
 ```  
 public class MainActivity extends Activity {
 
@@ -139,8 +147,9 @@ public class MainActivity extends Activity {
 }
 ```  
 
-### listView实现  
-listView是安卓中一种常用的控件，有以下三种实现方法  
+### listView实现    
+
+listView是安卓中一种常用的控件，有以下三种实现方法   
 
 1. simpeAdapter  
 ```
