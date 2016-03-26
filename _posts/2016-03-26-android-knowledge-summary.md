@@ -118,7 +118,7 @@ public void onClick(View v) {
 </LinearLayout>
 ```  
 
-###第二步：定义textView并加入到容器中    
+### 第二步：定义textView并加入到容器中    
 
 ```  
 public class MainActivity extends Activity {
@@ -152,6 +152,7 @@ public class MainActivity extends Activity {
 listView是安卓中一种常用的控件，有以下三种实现方法   
 
 1. simpeAdapter  
+
 ```
 SimpleAdapter adapter = new SimpleAdapter(
         this, // 上下文
@@ -171,8 +172,10 @@ map = new HashMap<String, Object>();
     map.put("name", "张三5");
     map.put("icon", R.drawable.f007);
     data.add(map);
-```  
-2. arrayAdapter  
+```   
+
+2. arrayAdapter   
+
 ```  
 ListView mListView = (ListView) findViewById(R.id.listview);
     String[] textArray = {"功能1","功能2","功能3","功能4","功能5","功能6","功能7","功能8"};
@@ -186,9 +189,11 @@ ListView mListView = (ListView) findViewById(R.id.listview);
         textArray);
     
     mListView.setAdapter(adapter);
-```  
+```   
+
 3. 最常见的继承baseAdapter  
-在oncreate方法中  
+在oncreate方法中   
+
 ```  
  ListView mListView = (ListView) findViewById(R.id.listview);
         
@@ -198,7 +203,9 @@ ListView mListView = (ListView) findViewById(R.id.listview);
         // 把view层对象ListView和控制器BaseAdapter关联起来
         mListView.setAdapter(new MyAdapter());
   ```       
-  ### anapter实现    
+
+  ### anapter实现   
+
   ```     
    /**
      * @author andong
@@ -261,7 +268,8 @@ ListView mListView = (ListView) findViewById(R.id.listview);
     
 ```   
    
-### 在listView中展示的控件也可以是自定义的   
+### 在listView中展示的控件也可以是自定义的    
+
 ```  
 /**
      * 此方法返回的是ListView的列表中某一行的View对象
@@ -294,7 +302,8 @@ ListView mListView = (ListView) findViewById(R.id.listview);
 ```   
 
 ### handler实现  
-1. 定义一个消息接收器  
+1. 定义一个消息接收器   
+
 ```  
 /**
        * 接收消息
@@ -319,8 +328,10 @@ ListView mListView = (ListView) findViewById(R.id.listview);
     }
     };
      
-```   
-2.  定义一个子线程发送消息   
+```    
+
+2.  定义一个子线程发送消息    
+
 ```   
 private void init() {
     lvNews = (ListView) findViewById(R.id.lv_news);
