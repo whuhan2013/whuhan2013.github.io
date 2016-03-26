@@ -162,8 +162,10 @@ SimpleAdapter adapter = new SimpleAdapter(
         new int[]{R.id.tv_name, R.id.iv_icon}); // resource 中的id
     
     mListView.setAdapter(adapter);
-```   
-其中data是ArrayList类型的数据，里面存储了map类型的数据，有两个键name,incon
+```    
+
+其中data是ArrayList类型的数据，里面存储了map类型的数据，有两个键name,incon  
+
 ```
 List<Map<String, Object>> data =ArrayList<Map<String,Object>>();
 Map<String, Object> map = new HashMap<String, Object>();
