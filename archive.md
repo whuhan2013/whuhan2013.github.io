@@ -13,6 +13,11 @@ header-img: "img/4.jpg"
     {% assign year = y %}
     <li class="listing-seperator">{{ y }}</li>
   {% endif %}
+  {% capture m %}{{post.date | date:"%M"}}{% endcapture %}
+  {% if month != m %}
+    {% assign month = m %}
+    <li class="listing-seperator">{{ m }}</li>
+  {% endif %}
   <li class="listing-item">
     <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
     <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
