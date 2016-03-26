@@ -11,12 +11,12 @@ header-img: "img/4.jpg"
   {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
   {% if year != y %}
     {% assign year = y %}
-    <li class="listing-seperator">{{ y }}</li>
+    <h1 class="listing-seperator">{{ y }}</h1>
   {% endif %}
-  {% capture m1 %}{{post.date | date:"%m"}}{% endcapture %}
-  {% if month != m1 %}
-    {% assign month = m1 %}
-    <li class="listing-seperator">{{ m1 }}</li>
+  {% capture mon %}{{post.date | date:"%m"}}{% endcapture %}
+  {% if month != mon %}
+    {% assign month = mon %}
+    <h3 class="listing-seperator">{{ mon }}</h3>
   {% endif %}
   <li class="listing-item">
     <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
