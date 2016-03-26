@@ -303,6 +303,58 @@ ListView mListView = (ListView) findViewById(R.id.listview);
     }
 ```   
 
+### 当listView中Item较多时，ViewHolder通常出现在适配器里，为的是listview滚动的时候快速设置值，而不必每次都重新创建很多对象，从而提升性能  
+
+```
+@Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+      ViewHolder holder;
+      if(convertView == null){
+        convertView = View.inflate(getApplicationContext(), R.layout.list_item, null);
+        holder = new ViewHolder();
+        
+        holder.delete = (ImageView) convertView.findViewById(R.id.delete);
+        holder.tv_msg =(TextView) convertView.findViewById(R.id.tv_list_item);
+        convertView.setTag(holder);
+      }else{
+        holder = (ViewHolder) convertView.getTag();
+      }
+      
+      holder.tv_msg.setText(msgList.get(position));
+      
+      holder.delete.setOnClickListener(new OnClickListener() {
+        
+        @Override
+        public void onClick(View v) {
+        //删除对应的条目
+          msgList.remove(position);
+          
+          //刷新listView
+          MyListAdapter.this.notifyDataSetChanged();
+        }
+      });
+      convertView.setOnClickListener(new OnClickListener() {
+        
+        @Override
+        public void onClick(View v) {
+          //设置输入框 
+          input.setText(msgList.get(position));
+          
+          popWin.dismiss();
+        }
+      });
+      
+      return convertView;
+    }
+    }
+
+  private class ViewHolder{
+    TextView tv_msg;
+    ImageView delete;
+  }
+```  
+
+
 ### handler实现  
 1. 定义一个消息接收器   
 
