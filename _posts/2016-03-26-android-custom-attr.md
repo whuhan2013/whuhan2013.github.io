@@ -9,7 +9,7 @@ description: 安卓。
 
 ### 安卓自定义属性主要有3个步骤    
 
-1. 在values文件夹新建attrs.xml文件中声明属性，包括属性名和格式，format常用属性有string ,integer,reference等     
+### 1.在values文件夹新建attrs.xml文件中声明属性，包括属性名和格式，format常用属性有string ,integer,reference等     
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -25,7 +25,7 @@ description: 安卓。
 </resources>
 ```     
 
-2. 在布局文件中使用，使用之前必须先声明命名空间，前面是固定不变的内容，后面是包名.       
+### 2.在布局文件中使用，使用之前必须先声明命名空间，前面是固定不变的内容，后面是包名.       
 
 ```
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -46,7 +46,7 @@ description: 安卓。
 </RelativeLayout>
 ```     
 
-3. 在自定义view的构造方法中，通过解析AttributeSet方法，获得所需要的属性值,解析AttributeSet主要有两种方法  
+### 3.在自定义view的构造方法中，通过解析AttributeSet方法，获得所需要的属性值,解析AttributeSet主要有两种方法  
 
 ### 第一种:通过attrs.getAttributeValue获得    
 
@@ -198,7 +198,7 @@ public MyTrouggleButton(Context context, AttributeSet attrs) {
 </LinearLayout>
 ```  
 
-###解析属性并且改变属性  
+### 解析属性并且改变属性  
 
 ```
 /**
