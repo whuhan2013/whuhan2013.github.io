@@ -1,7 +1,7 @@
 ---
 layout: post
 title: C语言实现大数据除法
-date: 2016-2-3
+date: 2016-3-7
 categories: blog
 tags: [数据结构]
 description: C语言实现大数据除法
