@@ -3,7 +3,7 @@ layout: post
 title: 自定义控件之瀑布流与水波纹实现
 date: 2016-3-28
 categories: blog
-tags: [Android]
+tags: [android]
 description: 自定义控件之瀑布流与水波纹实现
 ---
 
