@@ -119,7 +119,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 ### 不能子线程中改变主线程页面，故需要使用Handler
 
-### 上面的方法较为烦琐，使用github上的开源库，android-smart-image-view可以有效的实现相同的功能，同时简化操作，使用方法是将开源库src文件夹下的内容复制一份到工程中即可.
+### 上面的方法较为烦琐，使用github上的开源库，android-smart-image-view可以有效的实现相同的功能，同时简化操作，使用方法是将开源库src文件夹下的内容复制一份到工程中，同时在布局文件中，使用全类名使用自定义控件SmartImageView即可.
 
 ### android-smart-image-view实现  
 
