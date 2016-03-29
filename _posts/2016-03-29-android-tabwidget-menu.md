@@ -9,7 +9,12 @@ description: 利用TabWidget实现底部菜单
 ### TabWidget类似于通话记录的界面，通过切换多个标签从而显示出多个不同内容，能够展示内容丰富的页面信息，而且彼此之间不会干扰，有利于展示。下面，通过一个例子来学习用法  
 
 ### 首先用一个类来继承TabActivity
- 在开发之前，我们要首先了解，TabHost是整个Tab的容器，包括两部分，TabWidget和FrameLayout。TabWidget就是每个tab的标签，FrameLayout则是tab内容。接着我们开始初始化main.xml。
+ 在开发之前，我们要首先了解，TabHost是整个Tab的容器，包括两部分，TabWidget和FrameLayout。
+
+TabWidget就是每个tab的标签，FrameLayout则是tab内容。
+
+接着我们开始初始化main.xml
+
 首先声明TabHost，包含TabWidget，FrameLayout元素。
 
 ```    
@@ -31,9 +36,13 @@ description: 利用TabWidget实现底部菜单
 
  
 注意下：
-如果我们使用extends TabAcitivty，如同ListActivity，TabHost必须设置为@android:id/tabhost       
-TabWidget必须设置android:id为@android:id/tabs 
-FrameLayout需要设置android:id为@android:id/tabcontent
+如果我们使用extends TabAcitivty，如同ListActivity，TabHost必须设置为@android:id/tabhost  
+
+TabWidget必须设置android:id为@android:id/tabs        
+
+FrameLayout需要设置android:id为@android:id/tabcontent  
+
+如果不设置正确就会报错，笔者就在这里出错了
 
 
 #### 布局文件 
