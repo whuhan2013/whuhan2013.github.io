@@ -923,12 +923,12 @@ footer .owner p a {
 .highlight .gp { color: #555555 } /* Generic.Prompt */
 .highlight .gs { font-weight: bold } /* Generic.Strong */
 .highlight .gu { color: #800080; font-weight: bold; } /* Generic.Subheading */
-.highlight .gt { color: #aa0000 } /* Generic.Traceback */
-.highlight .kc { font-weight: bold } /* Keyword.Constant */
-.highlight .kd { font-weight: bold } /* Keyword.Declaration */
-.highlight .kn { font-weight: bold } /* Keyword.Namespace */
-.highlight .kp { font-weight: bold } /* Keyword.Pseudo */
-.highlight .kr { font-weight: bold } /* Keyword.Reserved */
+.highlight .gt { color: #008;color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #008;font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008;font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008;font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008;font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { color: #008;font-weight: bold } /* Keyword.Reserved */
 .highlight .kt { color: #008; font-weight: bold } /* Keyword.Type */
 .highlight .m { color: #009999 } /* Literal.Number */
 .highlight .s { color: #d14 } /* Literal.String */
