@@ -270,6 +270,172 @@ point.setBackgroundResource(R.drawable.point_bg);
 
 ### 当元素是在LinearLayout中时，就要用LinearLayout.LayoutParams,在relativeLayout中时，就要用relativeLayout.LayoutParams        
 
+
+### 总体代码如下   
+
+```
+public class MainActivity extends Activity {
+  
+  private ViewPager viewPager;
+  private LinearLayout pointGroup;
+  private TextView imageDesc;
+  private int lastPointPosition;
+  
+  // 图片资源ID
+    private final int[] imageIds = { R.drawable.a, R.drawable.b, R.drawable.c,
+        R.drawable.d, R.drawable.e };
+    
+    private ArrayList<ImageView> imageList;
+    
+     //图片标题集合
+    private final String[] imageDescriptions = {
+        "巩俐不低俗，我就不能低俗",
+        "扑树又回来啦！再唱经典老歌引万人大合唱",
+        "揭秘北京电影如何升级",
+        "乐视网TV版大派送",
+        "热血屌丝的反杀"
+    };
+    private boolean isRunning;
+    
+    
+    
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+  
+    
+    viewPager=(ViewPager)findViewById(R.id.viewpager);
+    pointGroup=(LinearLayout)findViewById(R.id.point_group);
+    imageDesc=(TextView)findViewById(R.id.image_des);
+    imageDesc.setText(imageDescriptions[0]);
+    //初始化图片资源
+    imageList=new ArrayList<ImageView>();
+    for(int i=0;i<imageIds.length;i++)
+    {
+      ImageView image=new ImageView(this);
+      image.setBackgroundResource(imageIds[i]);
+      
+      imageList.add(image);
+      
+      //添加指示点
+      ImageView point=new ImageView(this);
+      LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(5,5);
+      params.rightMargin=20;
+      
+      point.setLayoutParams(params);
+      //point
+      point.setBackgroundResource(R.drawable.point_bg);
+      if(i==0)
+      {
+        point.setEnabled(true);
+      }else
+      {
+        point.setEnabled(false);
+      }
+      
+      pointGroup.addView(point);
+    }
+    
+    viewPager.setAdapter(new MyPageAdapter());
+    viewPager.setCurrentItem(5000);
+    viewPager.setOnPageChangeListener(new OnPageChangeListener() {
+      
+      
+
+      @Override
+      public void onPageSelected(int arg0) {
+        // TODO Auto-generated method stub
+        arg0=arg0%imageList.size();
+        imageDesc.setText(imageDescriptions[arg0]);
+        
+        
+        pointGroup.getChildAt(arg0).setEnabled(true);
+        pointGroup.getChildAt(lastPointPosition).setEnabled(false);
+
+        lastPointPosition=arg0;
+      }
+      
+      @Override
+      public void onPageScrolled(int arg0, float arg1, int arg2) {
+        // TODO Auto-generated method stub
+        
+      }
+      
+      @Override
+      public void onPageScrollStateChanged(int arg0) {
+        // TODO Auto-generated method stub
+        
+      }
+      
+      
+    });
+    
+    
+    isRunning=true;
+    handler.sendEmptyMessageDelayed(0, 2000);
+  
+  }
+  
+  private Handler handler=new Handler()
+  {
+    public void handleMessage(Message msg) {
+      viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+      if(isRunning)
+      handler.sendEmptyMessageDelayed(0, 2000);
+    };
+  };
+  
+  protected void onDestroy() {
+    isRunning=false;
+  };
+  
+  private class MyPageAdapter extends PagerAdapter
+  {
+
+    @Override
+    public int getCount() {
+      // TODO Auto-generated method stub
+      return 10000;
+    }
+
+    @Override
+    public boolean isViewFromObject(View arg0, Object arg1) {
+      // TODO Auto-generated method stub
+      return arg0==arg1;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+      // TODO Auto-generated method stub
+      
+      
+      container.removeView((View)object);
+      object=null;
+    }
+
+    /**
+     * 给相应位置添加image
+     */
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+      // TODO Auto-generated method stub
+      
+      container.addView(imageList.get(position%imageList.size()));
+      return imageList.get(position%imageList.size());
+    }
+    
+    
+    
+    
+    
+  }
+}
+```   
+
+
+
 ### 实现效果         
 ![完成](http://img.blog.csdn.net/20160325201153660)
 
