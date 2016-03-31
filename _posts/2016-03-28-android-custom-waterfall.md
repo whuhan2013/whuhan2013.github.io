@@ -117,7 +117,18 @@ public class MainActivity extends Activity {
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-</com.example.pinterestlistview.MyLinearLayout>
+</com.example.pinterestlistview.MyLinearLayout>    
+```     
+
+### listView布局文件，注意要设置图片adjustViewBounds=true
+
+```
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/iv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true"
+    android:src="@drawable/lvfood1" />
 ```
 
 ### 自定义类截取事件分发
