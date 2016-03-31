@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
 </com.example.pinterestlistview.MyLinearLayout>    
 ```     
 
-### listView布局文件，注意要设置图片adjustViewBounds=true
+### listView布局文件，注意要设置图片adjustViewBounds=true,并且图片应该放大drawable文件夹下，而不是drawable-hdpi下，不然的话会参差不齐
 
 ```
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
