@@ -4,12 +4,12 @@ header-img: "img/1.jpg"
 tagline: "cn"  
 description: "江军祥|读而立·写而生"  
 baseurl: ""
-url: "http://cnfeat"  
+url: "http://jjx"  
 
 # About/contact
 owner: 
-  name: " CnFeat"
-  email: CnFeat@gmail.com
+  name: " jjx"
+  email: whuhan2013@163.com
   bio: "写就是写的报酬"
 
 # Data
@@ -18,7 +18,7 @@ favicon: img/favicon.png
 
 douban_username:  
 twitter_username: 
-github_username: 
+github_username: whuhan2013
 facebook_username: 
 weibo_username: 
 zhihu_username: 
