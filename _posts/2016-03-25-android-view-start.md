@@ -86,17 +86,58 @@ description: 安卓。
 ```
 //dot_normal.xml
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+<shape
+ 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+ 
+    android:shape="oval"
+ 
+    android:useLevel="false">
+ 
+ 
+ 
     <solid android:color="#ffffff"/>
-    <corners android:radius="8dip"/>
-
+ 
+    <size android:width="5dp"
+ 
+          android:height="5dp"/>
+ 
 </shape>
 
 //dot_focus.xml
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+<shape
+ 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+ 
+    android:shape="oval"
+ 
+    android:useLevel="false">
+ 
+ 
+ 
     <solid android:color="#ff0000"/>
-    <corners android:radius="8dip"/>
+ 
+    <size android:width="5dp"
+ 
+          android:height="5dp"/>
+ 
+</shape>
+
+
+//dot_bg.xml
+    <?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:drawable="@drawable/dot_normal" android:state_enabled="false">
+        
+    </item>
+    
+    <item android:drawable="@drawable/dot_focus" android:state_enabled="true">
+        
+    </item>
+
+</selector>
+
 
 </shape>
 
