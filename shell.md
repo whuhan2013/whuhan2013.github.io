@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "shell"
+title: "Shell"
 description: "而真理的海洋才刚刚展现在我面前 "
 header-img: "img/3.jpg"
 ---
