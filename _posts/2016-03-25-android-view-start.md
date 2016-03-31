@@ -79,7 +79,28 @@ description: 安卓。
     </LinearLayout>
 
 </RelativeLayout>
-```  
+```   
+
+### 小圆点分为点击状态与正常状态，定义如下   
+
+```
+//dot_normal.xml
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="#ffffff"/>
+    <corners android:radius="8dip"/>
+
+</shape>
+
+//dot_focus.xml
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="#ff0000"/>
+    <corners android:radius="8dip"/>
+
+</shape>
+
+```
 
 ### 注意viewPager引入时要用全类名，上面还定义了图片介绍与图片切换时小圆点也会切换    
 
