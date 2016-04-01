@@ -354,6 +354,31 @@ ListView mListView = (ListView) findViewById(R.id.listview);
   }
 ```  
 
+### listView常用属性    
+
+```
+android:transcriptMode="alwaysScroll"   
+ 
+android:cacheColorHint="#00000000"
+ 
+android:listSelector="@color/pink" listView item 选中时的颜色。默认为橙黄底色。
+ 
+ 
+ 
+android:divider="#f9b68b"  //分割线颜色
+ 
+android:dividerHeight="1dp"  //分割线边距
+ 
+android:scrollbars="none"  //不显示滚动条
+ 
+android:fadingEdge="none"   去掉上边和下边黑色的阴影    
+
+//也可以用
+showList.setDivider(null);
+showList.setDividerHeight(20);
+设置listView之间的分隔距离
+```
+
 
 ### handler实现  
 1. 定义一个消息接收器   
