@@ -11,7 +11,6 @@ description: ImageLoader实现图片异步加载
 ### 一、功能特性：
 
 1. 多线程异步加载和显示图片（图片来源于网络、sd卡、assets文件夹，drawable文件夹（不能加载9patch），新增加载视频缩略图）   
-
 ```
 "http://site.com/image.png" // from Web
   "file:///mnt/sdcard/image.png" // from SD card
@@ -35,7 +34,8 @@ description: ImageLoader实现图片异步加载
 ### 二 配置详解  
 
 1. 载jar包放在libs文件夹中    
-2.  AndroidManifest.xml       
+2.  AndroidManifest.xml     
+   
 ```
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
