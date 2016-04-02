@@ -317,19 +317,19 @@ c、GrideView实现加载图片
 
 ### 三、提示和技巧    
 
-1、只有在你需要让Image的尺寸比当前设备的尺寸大的时候，你才需要配置maxImageWidthForMemoryCach(...)和      
+1. 只有在你需要让Image的尺寸比当前设备的尺寸大的时候，你才需要配置maxImageWidthForMemoryCach(...)和      
 
 maxImageHeightForMemoryCache(...)这两个参数，比如放大图片的时候。其他情况下，不需要做这些配置，因为默认的配置会根据屏幕尺寸以最节约内存的方式处理Bitmap。         
 
-2、在设置中配置线程池的大小是非常明智的。一个大的线程池会允许多条线程同时工作，但是也会显著的影响到UI线程的速度。但是可以通过设置一个较低的优先级来解决：当ImageLoader在使用的时候，可以降低它的优先级，这样UI线程会更加流畅。在使用List的时候，UI 线程经常会不太流畅，所以在你的程序中最好设置threadPoolSize(...)和threadPriority(...)这两个参数来优化你的应用。
+2. 在设置中配置线程池的大小是非常明智的。一个大的线程池会允许多条线程同时工作，但是也会显著的影响到UI线程的速度。但是可以通过设置一个较低的优先级来解决：当ImageLoader在使用的时候，可以降低它的优先级，这样UI线程会更加流畅。在使用List的时候，UI 线程经常会不太流畅，所以在你的程序中最好设置threadPoolSize(...)和threadPriority(...)这两个参数来优化你的应用。
 
-3、memoryCache(...)和memoryCacheSize(...)这两个参数会互相覆盖，所以在ImageLoaderConfiguration中使用一个就好了
+3. memoryCache(...)和memoryCacheSize(...)这两个参数会互相覆盖，所以在ImageLoaderConfiguration中使用一个就好了
 
-4、diskCacheSize(...)、diskCache(...)和diskCacheFileCount(...)这三个参数会互相覆盖，只使用一个
+4. diskCacheSize(...)、diskCache(...)和diskCacheFileCount(...)这三个参数会互相覆盖，只使用一个
 
 注：不要使用discCacheSize(...)、discCache(...)和discCacheFileCount(...)这三个参数已经弃用
 
-5、如果你的程序中使用displayImage（）方法时传入的参数经常是一样的，那么一个合理的解决方法是，把这些选项
+5. 如果你的程序中使用displayImage（）方法时传入的参数经常是一样的，那么一个合理的解决方法是，把这些选项
 
 配置在ImageLoader的设置中作为默认的选项（通过调用defaultDisplayImageOptions(...)方法）。之后调用
 
@@ -341,7 +341,7 @@ defaultDisplayImageOptions(...)方法，那调用的时候将会调用UIL的默�
 
 ### 四、注意事项
 
-1、如果你经常出现oom，你可以尝试:
+1. 如果你经常出现oom，你可以尝试:
 
   1)禁用在内存中缓存cacheInMemory(false)，如果oom仍然发生那么似乎你的应用程序有内存泄漏，使用MemoryAnalyzer来检测它。否则尝试以下步骤(尝试所有或几个)
 
@@ -357,17 +357,17 @@ defaultDisplayImageOptions(...)方法，那调用的时候将会调用UIL的默�
 
   7)避免使用 RoundedBitmapDisplayer. 调用的时候它使用ARGB-8888模式创建了一个新的Bitmap对象来显示，对于内存缓存模式 (ImageLoaderConfiguration.memoryCache(...)) 你可以使用已经实现好的方法.
 
-2、ImageLoader是根据ImageView的height，width确定图片的宽高
+2. ImageLoader是根据ImageView的height，width确定图片的宽高
 
-3、一定要对ImageLoaderConfiguration进行初始化,否则会报错
+3. 一定要对ImageLoaderConfiguration进行初始化,否则会报错
 
-4、开启缓存后默认会缓存到外置SD卡如下地址(/sdcard/Android/data/[package_name]/cache).如果外置SD卡不存在，会缓存到手机. 缓存到Sd卡需要在AndroidManifest.xml文件中进行如下配置
+4. 开启缓存后默认会缓存到外置SD卡如下地址(/sdcard/Android/data/[package_name]/cache).如果外置SD卡不存在，会缓存到手机. 缓存到Sd卡需要在AndroidManifest.xml文件中进行如下配置
 
 ```
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ``` 
 
-5、内存缓存模式可以使用以下已实现的方法 (ImageLoaderConfiguration.memoryCache(...))
+5. 内存缓存模式可以使用以下已实现的方法 (ImageLoaderConfiguration.memoryCache(...))
 
 1)缓存只使用强引用
 
@@ -375,22 +375,25 @@ LruMemoryCache (缓存大小超过指定值时，删除最近最少使用的bitm
 
 2)缓存使用弱引用和强引用
 
-
-UsingFreqLimitedMemoryCache (缓存大小超过指定值时,删除最少使的bitmap)
-LRULimitedMemoryCache (缓存大小超过指定值时,删除最近最少使用的<span style="font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;">bitmap) --默认值</span>
+```
+UsingFreqLimitedMemoryCache (缓存大小超过指定值时,删除最少使的bitmap)
+LRULimitedMemoryCache (缓存大小超过指定值时,删除最近最少使用的<span style="font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;">bitmap) --默认值</span>
 FIFOLimitedMemoryCache (缓存大小超过指定值时,按先进先出规则删除的<span style="font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;">bitmap)</span>
 LargestLimitedMemoryCache (缓存大小超过指定值时,删除最大的bitmap)
 LimitedAgeMemoryCache (缓存对象超过定义的时间后删除)
+```
 3)缓存使用弱引用
 
+```
 WeakMemoryCache（没有限制缓存）
+```  
 
-6、本地缓存模式可以使用以下已实现的方法 (ImageLoaderConfiguration.diskCache(...)) 
+6. 本地缓存模式可以使用以下已实现的方法 (ImageLoaderConfiguration.diskCache(...)) 
 
-UnlimitedDiskCache   不限制缓存大小（默认）
-TotalSizeLimitedDiskCache (设置总缓存大小，超过时删除最久之前的缓存)
-FileCountLimitedDiskCache (设置总缓存文件数量，当到达警戒值时，删除最久之前的缓存。如果文件的大小都一样的时候，可以使用该模式)
-LimitedAgeDiskCache (不限制缓存大小，但是设置缓存时间，到期后删除)  
+UnlimitedDiskCache   不限制缓存大小（默认）  
+TotalSizeLimitedDiskCache (设置总缓存大小，超过时删除最久之前的缓存)  
+FileCountLimitedDiskCache (设置总缓存文件数量，当到达警戒值时，删除最久之前的缓存。如果文件的大小都一样的时候，可以使用该模式)     
+LimitedAgeDiskCache (不限制缓存大小，但是设置缓存时间，到期后删除)           
 
 ### 注意，使用ImageLoader之间一定要初始化，最简单的方式就是在Application中加入  
 
