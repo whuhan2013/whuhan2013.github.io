@@ -22,6 +22,11 @@ header-img: "img/3.jpg"
 
 - [leetcode](https://leetcode.com/)
 
+- [Quora](https://www.quora.com/)
+
+- [Android官网](https://developer.android.com/develop/index.html) 
+
+
 
 
 

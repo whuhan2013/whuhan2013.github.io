@@ -22,6 +22,7 @@ description: Android Studio安装与配置
 与我们的版本不一致的话，则会去下载，但国内下载gradle巨慢，所以我们可以\gradle\wrapper文件夹下的gradle-wrapper.properties文件中的指定的gradle指定为我们自己的。
 
 ### 由于真机的SDK版本有限，我们也可以使用号称最快模拟器的Genymotion来开发
+
 ### 参考链接:  
 [安卓模拟器Genymotion安装使用教程详解_百度经验](http://jingyan.baidu.com/article/3ea51489e7d8bd52e61bba36.html)  
 [使用Android Studio搭建Android集成开发环境（图文教程） - 生命壹号 - 博客园](http://www.cnblogs.com/smyhvae/p/4022844.html)
