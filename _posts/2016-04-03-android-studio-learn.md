@@ -15,7 +15,7 @@ description: Android Studio安装与配置
   参考链接：
   [android studio安装使用教程（详细图文教程）_百度经验](http://jingyan.baidu.com/article/ad310e80a9328a1849f49e30.html)
 
-### 注意，因为笔者先前已经安装了SDK,所以不用再下载安装SDK了，省却了不少时间，不然的话，可以在[inferjay/AndroidDevTools: 收集整理Android开发所需的Android SDK、开发中用到的工具、Android开发教程、Android设计规范，免费的设计素材等。](https://github.com/inferjay/AndroidDevTools),下载相关资源，也可以使用代理，使用sdk manager下载
+注意，因为笔者先前已经安装了SDK,所以不用再下载安装SDK了，省却了不少时间，不然的话，可以在[inferjay/AndroidDevTools: 收集整理Android开发所需的Android SDK、开发中用到的工具、Android开发教程、Android设计规范，免费的设计素材等。](https://github.com/inferjay/AndroidDevTools),下载相关资源，也可以使用代理，使用sdk manager下载
 
 
 ### 笔者在导入已经存在的项目的时候，总是会卡在gradle这里，这是因为在build.grandle里面指定了gradle的版本，如果
