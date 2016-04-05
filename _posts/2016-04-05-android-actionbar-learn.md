@@ -7,7 +7,7 @@ tags: [android]
 description: Android之ActionBar
 ---
 
- ### 本文主要包括以下内容  
+### 本文主要包括以下内容  
 
 1. ActionBar的显示及隐藏，添加图标，返回主页      
 2.  ActionBar添加ActionView,添加ActionProvider    
@@ -326,7 +326,7 @@ Tabs的应用可以算是非常广泛了，它可以使得用户非常轻松地�
         <item>Fragment2</item>
         <item>Fragment3</item>
     </string-array>
- ```  
+```  
 
 主界面代码  
 
