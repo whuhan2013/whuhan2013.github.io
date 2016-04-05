@@ -138,7 +138,9 @@ setOnMenuItemClickListener
 ### 设置图标与图标响应事件
 1. 并且在onCreateOptionsMenu方法中绑定，     
 2. 然后用OnMenuItemClickListener 设置监听       
-3. toolbar.setOnMenuItemClickListener(onMenuItemClick)，将监听赋给toolbar
+3. toolbar.setOnMenuItemClickListener(onMenuItemClick)，将监听赋给toolbar  
+
+
 ```
  private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
         @Override
