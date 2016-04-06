@@ -452,7 +452,8 @@ public class MainActivity extends AppCompatActivity {
 </RelativeLayout>
 ```  
 
-### 效果如下：实现了瀑布流，添加，删除时的动画      
+### 效果如下：实现了瀑布流，添加，删除时的动画    
+  
 ### 注意，实现瀑布流时一定要将item布局文件的高度设置为wrap content，而不是定长，不然无法改变高度，
 导致所有节点一样高，无法达到瀑布流效果     
 ![这里写图片描述](http://img.blog.csdn.net/20160406171619047)
