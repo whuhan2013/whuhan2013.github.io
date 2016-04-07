@@ -40,6 +40,11 @@ git pull --rebase origin master
 6. git push origin master   
 7. input your name    
 8. input your password    
+
+### 参考链接:    
+[Github上传代码菜鸟超详细教程【转】 - 若风之觞 - 博客园](http://www.cnblogs.com/ruofengzhishang/p/3842587.html)    
+[在GitHub上分享和展示你的代码 - teresa502的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/teresa502/article/details/7620127)       
+[【Github教程】史上最全github使用方法：github入门到精通 - 水果君の日常 - 博客频道 - CSDN.NET](http://blog.csdn.net/hcbbt/article/details/11651229/)
  
 
 
