@@ -7,7 +7,7 @@ tags: [android]
 description: Material Design入门(二）
 ---
 
-  ### 本文主要包括以下内容
+### 本文主要包括以下内容
 
 1. 侧滑菜单DrawerLayout实现  
 
@@ -92,6 +92,7 @@ drawerLayout是Support Library包中实现了侧滑菜单效果的控件，可�
 
 </LinearLayout>
 ```    
+
 ### 注意，由于使用了CircleImageView，要在depencyies中加入   
 
 ```
