@@ -7,7 +7,7 @@ tags: [github]
 description: github常用操作
 ---
 
- ### 上传项目到github   
+### 上传项目到github   
 
  1. 验证公钥是否正确ssh -T git@github.com   
  正确结果会显示：
