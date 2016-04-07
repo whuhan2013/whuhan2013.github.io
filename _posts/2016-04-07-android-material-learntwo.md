@@ -9,7 +9,8 @@ description: Material Design入门(二）
 
 ### 本文主要包括以下内容
 
-1. 侧滑菜单DrawerLayout实现  
+1. 侧滑菜单DrawerLayout实现    
+2. CardView实现
 
 ### DrawerLayout介绍    
 drawerLayout是Support Library包中实现了侧滑菜单效果的控件，可以说drawerLayout是因为第三方控件如MenuDrawer等的出现之后，google借鉴而出现的产物。drawerLayout分为侧边菜单和主内容区两部分，侧边菜单可以根据手势展开与隐藏（drawerLayout自身特性），主内容区的内容可以随着菜单的点击而变化（这需要使用者自己实现）
@@ -290,7 +291,254 @@ public class MainActivity extends AppCompatActivity {
 
 ### 效果如下：
 
-![这里写图片描述](http://img.blog.csdn.net/20160407125741283)
+![这里写图片描述](http://img.blog.csdn.net/20160407125741283)     
+
+### CardView实现  
+
+### 首先加入依赖库  
+
+```
+dependencies {
+    ....
+    compile 'com.android.support:cardview-v7:22.2.0'
+}
+```
+
+### layout布局  
+
+```
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        >
+    </android.support.v7.widget.Toolbar>
+
+
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    android:layout_marginBottom="@dimen/card_margin"
+    android:layout_marginLeft="@dimen/card_margin"
+    android:layout_marginRight="@dimen/card_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        style="@style/CardView.Content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/book1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_title_1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/primary_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/book_description_1"
+                android:textColor="@color/secondary_text" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/card_margin"
+        android:layout_marginLeft="@dimen/card_margin"
+        android:layout_marginRight="@dimen/card_margin"
+        android:layout_marginTop="@dimen/card_margin"
+        android:onClick="goDetail"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            style="@style/CardView.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/book2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_title_2"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/primary_text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/book_description_2"
+                    android:textColor="@color/secondary_text" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/card_margin"
+        android:layout_marginLeft="@dimen/card_margin"
+        android:layout_marginRight="@dimen/card_margin"
+        android:layout_marginTop="@dimen/card_margin"
+        android:onClick="goDetail"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            style="@style/CardView.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/book3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_title_3"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/primary_text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/book_description_3"
+                    android:textColor="@color/secondary_text" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+```      
+
+- app:cardBackgroundColor 设置CardView背景颜色      
+- app:cardCornerRadius 设置CardView圆角大小     
+- app:cardElevation 设置CardView阴影高度      
+
+### 添加波纹点击效果       
+默认情况，CardView是不可点击的，并且没有任何的触摸反馈效果。触摸反馈动画在用户点击CardView时可以给用户以视觉上的反馈。为了实现这种行为，你必须提供一下属性：  
+
+```
+<android.support.v7.widget.CardView
+  ...
+  android:clickable="true"
+  android:foreground="?android:attr/selectableItemBackground">
+  ...
+</android.support.v7.widget.CardView>
+```  
+
+
+### 在加载图片时可能会遇到图上尺寸的问题  
+
+
+(1)drawable-hdpi里面存放高分辨率的图片,如WVGA (480x800),FWVGA (480x854)   
+ 
+(2)drawable-mdpi里面存放中等分辨率的图片,如HVGA (320x480)   
+ 
+(3)drawable-ldpi里面存放低分辨率的图片,如QVGA (240x320)   
+ 
+ldpi:240x320     
+ 
+mdpi：320x480    
+ 
+hdpi：480x800、480x854     
+ 
+xhdpi：至少960*720     
+ 
+xxhdpi：1280×720     
+
+![这里写图片描述](http://img.blog.csdn.net/20160407152913798)
+
+从上表可以得出如下结论
+
+1.  图片放在drawable中，等同于放在drawable-mdpi中，原因为：drawable目录不具有屏幕密度特性，所以采用基准值，即mdpi    
+
+2.  图片放在某个特定drawable中，比如drawable-hdpi，如果设备的屏幕密度高于当前drawable目录所代表的密度，则图片会被放大，否则会被缩小      
+
+　　放大或缩小比例 = 设备屏幕密度 / drawable目录所代表的屏幕密度
+
+3.  为了更全面的适配所有设备，我们应该提供一套针对主流屏幕密度的图片（目前为hdpi或xhdpi），其他密度通过系统自动缩放得到图片   
+
+### 参考链接:
+[Android开发--CardView使用-爱编程](http://www.w2bc.com/Article/36229)       
+[Android中屏幕密度和图片大小的关系分析 - Android移动开发技术文章_手机开发 - 红黑联盟](http://www.2cto.com/kf/201402/278132.html)      
+[res里面的drawable(ldpi、mdpi、hdpi、xhdpi、xxhdpi) - xfyn - 博客园](http://www.cnblogs.com/weiqt/articles/3642569.html)     
+
+### 效果如下
+![这里写图片描述](http://img.blog.csdn.net/20160407153132908)
 
 
 
