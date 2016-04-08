@@ -7,7 +7,7 @@ tags: [android]
 description: Material Design入门（三）
 ---
 
- ### 本文主要包括  
+### 本文主要包括  
 
 1. CollapsingToolbarLayout实现滚动动画效果  
 2.  ViewPager+tabLayout实现左右类Tab效果   
@@ -131,31 +131,31 @@ CollapsingToolbarLayout作用是提供了一个可以折叠的Toolbar，它继�
 
 我们设置了layout_scrollFlags:关于它的值我这里再说一下：
 
-scroll - 想滚动就必须设置这个。
+- scroll - 想滚动就必须设置这个。
 
-enterAlways - 实现quick return效果, 当向下移动时，立即显示View（比如Toolbar)。
+- enterAlways - 实现quick return效果, 当向下移动时，立即显示View（比如Toolbar)。
 
-exitUntilCollapsed - 向上滚动时收缩View，但可以固定Toolbar一直在上面。
+- exitUntilCollapsed - 向上滚动时收缩View，但可以固定Toolbar一直在上面。
 
-enterAlwaysCollapsed - 当你的View已经设置minHeight属性又使用此标志时，你的View只能以最小高度进入，只有当滚动视图到达顶部时才扩大到完整高度。
+- enterAlwaysCollapsed - 当你的View已经设置minHeight属性又使用此标志时，你的View只能以最小高度进入，只有当滚动视图到达顶部时才扩大到完整高度。
 
 其中还设置了一些属性，简要说明一下：
 
-contentScrim - 设置当完全CollapsingToolbarLayout折叠(收缩)后的背景颜色。
+- contentScrim - 设置当完全CollapsingToolbarLayout折叠(收缩)后的背景颜色。
 
-expandedTitleMarginStart - 设置扩张时候(还没有收缩时)title向左填充的距离。
+- expandedTitleMarginStart - 设置扩张时候(还没有收缩时)title向左填充的距离。
 
 2. 在ImageView控件中：
 
 我们设置了：
 
-layout_collapseMode (折叠模式) - 有两个值:
+- layout_collapseMode (折叠模式) - 有两个值:
 
-pin -  设置为这个模式时，当CollapsingToolbarLayout完全收缩后，Toolbar还可以保留在屏幕上。
+- pin -  设置为这个模式时，当CollapsingToolbarLayout完全收缩后，Toolbar还可以保留在屏幕上。
 
-parallax - 设置为这个模式时，在内容滚动时，CollapsingToolbarLayout中的View（比如ImageView)也可以同时滚动，实现视差滚动效果，通常和layout_collapseParallaxMultiplier(设置视差因子)搭配使用。
+- parallax - 设置为这个模式时，在内容滚动时，CollapsingToolbarLayout中的View（比如ImageView)也可以同时滚动，实现视差滚动效果，通常和layout_collapseParallaxMultiplier(设置视差因子)搭配使用。
 
-layout_collapseParallaxMultiplier(视差因子) - 设置视差滚动因子，值为：0~1。 
+- layout_collapseParallaxMultiplier(视差因子) - 设置视差滚动因子，值为：0~1。 
 
 3. 在Toolbar控件中：
 
