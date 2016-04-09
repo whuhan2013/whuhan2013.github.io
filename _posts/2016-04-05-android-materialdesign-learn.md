@@ -177,7 +177,9 @@ setOnMenuItemClickListener
 [android：ToolBar详解（手把手教程） - 泡在网上的日子](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/1118/2006.html)
 
 
-### RecycleView的使用 
+### RecycleView的使用   
+
+### 注意：RecycleView的使用要在dependencies中加入compile 'com.android.support:design:23.2.1'，不然会报找不到的错误
 
 RecyclerView出现已经有一段时间了，相信大家肯定不陌生了，大家可以通过导入support-v7对其进行使用。 
 据官方的介绍，该控件用于在有限的窗口中展示大量数据集，其实这样功能的控件我们并不陌生，例如：ListView、GridView。
