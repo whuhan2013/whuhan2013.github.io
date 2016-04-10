@@ -7,7 +7,7 @@ tags: [android]
 description: Material Design综合实例
 ---
 
- ### 背景知识  
+### 背景知识  
 
 1. drawlayout的使用     
 2.  recycleView的使用   
