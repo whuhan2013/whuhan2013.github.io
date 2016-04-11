@@ -7,9 +7,7 @@ tags: [数据结构]
 description: C++实现大数据乘法
 ---
 
- 1. 
-
-结构体定义与封装    
+ 1. 结构体定义与封装        
 
 
 ```
@@ -72,7 +70,7 @@ public :
 };
 ```       
 
-2 main函数    
+2. main函数    
 
  
 
@@ -92,7 +90,7 @@ void main()
 
  3. 运行结果
    结果后面会多出一个-号，可能是因为栈溢出或者某个地方初始化错误，利用了C++的substr方法处理了，在其中遇到一个问题，就是已经引入了
-   #include <string>
+   #include <string>       
 String仍旧显示未定义的标识符，原因是没有写using namespace std;
 
 
