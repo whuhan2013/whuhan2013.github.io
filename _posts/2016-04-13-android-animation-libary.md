@@ -10,7 +10,8 @@ description: 安卓开源库之动画篇
 ### 本文主要介绍收集了笔者所用过的开源动画库，达到一些比较好看的效果。
 
 ### 一个富有动感的 Sheet  
-### 链接：
+
+### 链接：         
 [zzz40500/AndroidSweetSheet: 一个富有动感的Sheet(选择器)](https://github.com/zzz40500/AndroidSweetSheet)
 
 ### 效果如下 
@@ -166,12 +167,14 @@ private void animateParallel() {
 
 ### 示例代码  
 
+
 ```
- recyclerView= (RecyclerView) findViewById(R.id.id_recyclerview);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        mAdapter=new HomeAdapter();
-        slideInBottomAnimatorAdapter=new SlideInBottomAnimatorAdapter(mAdapter,recyclerView);
+recyclerView= (RecyclerView) findViewById(R.id.id_recyclerview);
+recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+mAdapter=new HomeAdapter();
+slideInBottomAnimatorAdapter=new SlideInBottomAnimatorAdapter(mAdapter,recyclerView);
  recyclerView.setAdapter(slideInBottomAnimatorAdapter);
+
  ```
 
 
