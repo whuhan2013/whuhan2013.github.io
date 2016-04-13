@@ -174,9 +174,9 @@ recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 mAdapter=new HomeAdapter();
 slideInBottomAnimatorAdapter=new SlideInBottomAnimatorAdapter(mAdapter,recyclerView);
  recyclerView.setAdapter(slideInBottomAnimatorAdapter);        
- ```
+```
 
- ### 完成
+### 完成
 
 
 
