@@ -168,14 +168,15 @@ private void animateParallel() {
 ### 示例代码  
 
 
-```            
+```                  
 recyclerView= (RecyclerView) findViewById(R.id.id_recyclerview);
 recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 mAdapter=new HomeAdapter();
 slideInBottomAnimatorAdapter=new SlideInBottomAnimatorAdapter(mAdapter,recyclerView);
- recyclerView.setAdapter(slideInBottomAnimatorAdapter);      
-
+ recyclerView.setAdapter(slideInBottomAnimatorAdapter);        
  ```
+
+ ### 完成
 
 
 
