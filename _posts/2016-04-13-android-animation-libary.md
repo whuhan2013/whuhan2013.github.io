@@ -167,8 +167,8 @@ private void animateParallel() {
 
 ### 示例代码  
 
-
 ```
+
 recyclerView= (RecyclerView) findViewById(R.id.id_recyclerview);
 recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 mAdapter=new HomeAdapter();
