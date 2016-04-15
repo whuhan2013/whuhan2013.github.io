@@ -201,6 +201,8 @@ public class MainActivity extends AppCompatActivity {
 
 ### 注意，音乐文件应该放在webapp/root文件下，而不能直接放在根目录下，否则读不到。 
 
+### 更新，增加上一首，下一首功能，并且添加了作者介绍与音乐介绍，代码见github.
+
 
 ### 效果如下  
 
