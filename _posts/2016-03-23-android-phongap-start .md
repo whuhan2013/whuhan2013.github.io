@@ -150,9 +150,10 @@ PhoneGap.addConstructor(function() {
    
 });
 }
-```  
+```     
 
-## 第六步：配置XML文件
+### 第六步：配置XML文件 
+
 ### 在plungs.xml中添加  
 
 ```  
@@ -225,10 +226,8 @@ public class HMTest extends Plugin {
 ```  
 
 ## 参考链接：
-phoneGap 基于android 实例 一 - china-orange - ITeye技术网站
-http://lvjj.iteye.com/blog/1484479
-PhoneGap开发环境搭建 - 随机 - 博客园
-http://www.cnblogs.com/Random/archive/2011/12/28/2305398.html
+[phoneGap 基于android 实例 一 - china-orange - ITeye技术网站](http://lvjj.iteye.com/blog/1484479)
+[PhoneGap开发环境搭建 - 随机 - 博客园](http://www.cnblogs.com/Random/archive/2011/12/28/2305398.html)
 
 ## 运行结果：
 ![完成](http://img.blog.csdn.net/20160323185004391)
