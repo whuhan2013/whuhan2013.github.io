@@ -596,6 +596,21 @@ public class MainActivity extends Activity {
 ![这里写图片描述](http://img.blog.csdn.net/20160416213354361)
 
 
+### 更新，为当前位置加上图标
+
+```
+// 构建Marker图标
+            BitmapDescriptor bitmap = null;
+            
+                bitmap = BitmapDescriptorFactory.fromResource(R.drawable.navi_map_gps_locked); // 非推算结果
+        
+            // 构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions option = new MarkerOptions().position(cenpt).icon(bitmap);
+            // 在地图上添加Marker，并显示
+            mBaiduMap.addOverlay(option);
+            mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(cenpt));
+```
+
 
 
 
