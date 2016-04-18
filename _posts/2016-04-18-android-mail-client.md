@@ -390,13 +390,15 @@ public class HttpUtil {
 
 #### HttpUtils中用到了MailInfo中一些属性，MailInfo是邮件基本信息javabean,其中配置了邮件会话属性，和其他一些属性，内容如下
 
-由于现在是SSL方法验证，似乎都要加上
+由于现在是SSL方法验证，似乎都要加上    
+
 ```
 p.put("mail.smtp.starttls.enable", "true");
         //需要加上
         p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         p.put("mail.smtp.socketFactory.port", "465");
-```
+```   
+
 
 刚开始没加就出错了
 
