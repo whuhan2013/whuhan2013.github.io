@@ -3,7 +3,7 @@ layout: post
 title: 安卓客户端向服务器发送List数据
 date: 2016-4-12
 categories: blog
-tags: [网络编程]
+tags: [网络编程,java]
 description: 安卓客户端向服务器发送List数据
 ---
 

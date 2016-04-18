@@ -3,7 +3,7 @@ layout: post
 title: 百度地图之添加覆盖物
 date: 2016-4-17
 categories: blog
-tags: [android]
+tags: [android,地图开发]
 description: 百度地图之添加覆盖物
 ---
 
