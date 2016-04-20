@@ -9,6 +9,150 @@ description: Android实现电子邮箱客户端
 
 ### 本文主要讲述了安卓平台上利用QQ邮箱SMTP协议，POP3协议发送与接收消息的实现   
 
+### 发送邮件核心代码  
+
+```
+ import java.security.Security;    
+  import java.util.Date;    
+  import java.util.Properties;    
+        
+   import javax.mail.Authenticator;    
+    import javax.mail.Message;    
+    import javax.mail.MessagingException;    
+   import javax.mail.PasswordAuthentication;    
+   import javax.mail.Session;    
+   import javax.mail.Transport;    
+    import javax.mail.internet.AddressException;    
+    import javax.mail.internet.InternetAddress;    
+   import javax.mail.internet.MimeMessage;    
+
+    /**    
+     * 使用Gmail发送邮件    
+     * @author Winter Lau    
+     */    
+    public class GmailSender {    
+         
+     public static void main(String[] args) throws AddressException, MessagingException {    
+      Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());    
+      final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";    
+      // Get a Properties object    
+      Properties props = System.getProperties();    
+      props.setProperty("mail.smtp.host", "smtp.qq.com");    
+      props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);    
+      props.setProperty("mail.smtp.socketFactory.fallback", "false");    
+     props.setProperty("mail.smtp.port", "465");    
+      props.setProperty("mail.smtp.socketFactory.port", "465");    
+      props.put("mail.smtp.auth", "true");    
+      final String username = "2868405029";    
+      final String password = "muxnyevnatfjdcda";    
+     Session session = Session.getDefaultInstance(props, new Authenticator(){    
+          protected PasswordAuthentication getPasswordAuthentication() {    
+              return new PasswordAuthentication(username, password);    
+          }});    
+         
+           // -- Create a new message --    
+     Message msg = new MimeMessage(session);    
+        
+     // -- Set the FROM and TO fields --    
+     msg.setFrom(new InternetAddress(username + "@qq.com"));    
+      msg.setRecipients(Message.RecipientType.TO,    
+       InternetAddress.parse("2868405029@qq.com",false));    
+      msg.setSubject("Hello");    
+      msg.setText("How are you");    
+     msg.setSentDate(new Date());    
+      Transport.send(msg);    
+           
+      System.out.println("Message sent.");    
+     }    
+    }
+```      
+
+### 接收邮件核心代码  
+
+```
+ import java.io.UnsupportedEncodingException;    
+    import java.security.*;    
+    import java.util.Properties;    
+    import javax.mail.*;    
+    import javax.mail.internet.InternetAddress;    
+    import javax.mail.internet.MimeUtility;    
+         
+   /**    
+    * 用于收取Gmail邮件    
+     * @author Winter Lau    
+    */    
+   public class GmailFetch {    
+         
+    public static void main(String argv[]) throws Exception {    
+        
+      Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());    
+     final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";    
+        
+      // Get a Properties object    
+      Properties props = System.getProperties();    
+      props.setProperty("mail.pop3.socketFactory.class", SSL_FACTORY);    
+     props.setProperty("mail.pop3.socketFactory.fallback", "false");    
+      props.setProperty("mail.pop3.port", "995");    
+      props.setProperty("mail.pop3.socketFactory.port", "995");    
+         
+      //以下步骤跟一般的JavaMail操作相同    
+      Session session = Session.getDefaultInstance(props,null);    
+         
+     //请将红色部分对应替换成你的邮箱帐号和密码    
+     URLName urln = new URLName("pop3","pop.qq.com",995,null,    
+       "2868405029@qq.com", "muxnyevnatfjdcda");    
+    Store store = session.getStore(urln);    
+      Folder inbox = null;    
+      try {    
+       store.connect();    
+       inbox = store.getFolder("INBOX");    
+       inbox.open(Folder.READ_ONLY);    
+       FetchProfile profile = new FetchProfile();    
+       profile.add(FetchProfile.Item.ENVELOPE);    
+       Message[] messages = inbox.getMessages();    
+      inbox.fetch(messages, profile);    
+       System.out.println("收件箱的邮件数：" + messages.length);    
+       for (int i = 0; i < messages.length; i++) {    
+       //邮件发送者    
+       String from = decodeText(messages[i].getFrom()[0].toString());    
+        InternetAddress ia = new InternetAddress(from);    
+       System.out.println("FROM:" + ia.getPersonal()+'('+ia.getAddress()+')');    
+        //邮件标题    
+        System.out.println("TITLE:" + messages[i].getSubject());    
+        //邮件大小    
+        System.out.println("SIZE:" + messages[i].getSize());    
+        //邮件发送时间    
+        System.out.println("DATE:" + messages[i].getSentDate());    
+       }    
+      } finally {    
+       try {    
+        inbox.close(false);    
+      } catch (Exception e) {}    
+      try {    
+        store.close();    
+       } catch (Exception e) {}    
+      }    
+     }    
+         
+    protected static String decodeText(String text)    
+       throws UnsupportedEncodingException {    
+      if (text == null)    
+       return null;    
+     if (text.startsWith("=?GB") || text.startsWith("=?gb"))    
+      text = MimeUtility.decodeText(text);    
+     else    
+      text = new String(text.getBytes("ISO8859_1"));    
+     return text;    
+    }    
+         
+   }    
+```  
+
+### 注意，接收邮件使用java客户端时可以正常得到数据，在使用安卓的时候，就会卡在store.connect(),原因不详，无法解决
+
+
+### 详细实例
+
 ### 准备过程 
 
 1. 下载jar包
