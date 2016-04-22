@@ -7,8 +7,9 @@ tags: [android]
 description: Android客户端与服务器之间传递json数据
 ---
 
-### 在服务器与客户端之间通信，json数据是一种常用格式，本文主要在服务器端构建数据，在客户端接收显示，并且在listview上显示出来
-##服务器端的构建
+### 在服务器与客户端之间通信，json数据是一种常用格式，本文主要在服务器端构建数据，在客户端接收显示，并且在listview上显示出来  
+
+### 服务器端的构建
 简单的javabean与返回结果函数与插入函数略过  
 
 ```
@@ -147,7 +148,7 @@ public class JsonParse {
 }
 ```   
 
-###在activity中开启子线程来接收服务器数据  
+### 在activity中开启子线程来接收服务器数据  
 
 ```
 new Thread(new Runnable() {
@@ -185,7 +186,7 @@ new Thread(new Runnable() {
         }).start();
 ```  
 
-##消息处理器  
+### 消息处理器  
 
 ```
  //消息处理器
@@ -226,7 +227,7 @@ new Thread(new Runnable() {
     };
 ``` 
 
-###配置适配器     
+### 配置适配器     
 
 ```
 public class NearAdapter extends BaseAdapter {
@@ -283,7 +284,7 @@ public class NearAdapter extends BaseAdapter {
     }
 ```
 
-###配置完成，效果如下    
+### 配置完成，效果如下    
 ![安卓显示](http://img.blog.csdn.net/20160303170044053)    
 
 
