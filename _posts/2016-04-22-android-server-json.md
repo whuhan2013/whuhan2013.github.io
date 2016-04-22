@@ -7,9 +7,10 @@ tags: [android]
 description: Android客户端与服务器之间传递json数据
 ---
 
-##在服务器与客户端之间通信，json数据是一种常用格式，本文主要在服务器端构建数据，在客户端接收显示，并且在listview上显示出来
+### 在服务器与客户端之间通信，json数据是一种常用格式，本文主要在服务器端构建数据，在客户端接收显示，并且在listview上显示出来
 ##服务器端的构建
-简单的javabean与返回结果函数与插入函数略过
+简单的javabean与返回结果函数与插入函数略过  
+
 ```
 public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,14 +48,16 @@ public void doGet(HttpServletRequest request, HttpServletResponse response)
 
         
     }
-```
+```  
+
 在浏览器中直接输入访问http://localhost:8080/AppServer/JsonServlet
 可得
 ![json数据](http://img.blog.csdn.net/20160303165444160)
 
 可以在服务器端直接查看json数据
 
-##客户端接收与解析json数据
+### 客户端接收与解析json数据    
+
 
 ```
 public class JsonParse {
@@ -142,9 +145,10 @@ public class JsonParse {
     }
 
 }
-```
+```   
 
-###在activity中开启子线程来接收服务器数据
+###在activity中开启子线程来接收服务器数据  
+
 ```
 new Thread(new Runnable() {
             
@@ -179,8 +183,10 @@ new Thread(new Runnable() {
                 
             }
         }).start();
-```
-##消息处理器
+```  
+
+##消息处理器  
+
 ```
  //消息处理器
     private Handler handler=new Handler(){
@@ -218,8 +224,10 @@ new Thread(new Runnable() {
         
         
     };
-```
-###配置适配器
+``` 
+
+###配置适配器     
+
 ```
 public class NearAdapter extends BaseAdapter {
 
@@ -275,7 +283,7 @@ public class NearAdapter extends BaseAdapter {
     }
 ```
 
-###配置完成，效果如下
+###配置完成，效果如下    
 ![安卓显示](http://img.blog.csdn.net/20160303170044053)    
 
 
