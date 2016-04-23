@@ -357,10 +357,11 @@ public void sendJsonToServer() {
     }
     return persons;
   }
-  ```   
+```   
 
-  ### 参考链接 
-  [Android向服务器端发送json数据 - 推酷](http://www.tuicool.com/articles/FZJR3eB)      
+### 参考链接 
+[Android向服务器端发送json数据 - 推酷](http://www.tuicool.com/articles/FZJR3eB)      
+
 
 
 ### 方法二 
