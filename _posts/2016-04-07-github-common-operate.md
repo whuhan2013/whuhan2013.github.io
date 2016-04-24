@@ -44,7 +44,44 @@ git pull - -rebase origin master
 ### 参考链接:    
 [Github上传代码菜鸟超详细教程【转】 - 若风之觞 - 博客园](http://www.cnblogs.com/ruofengzhishang/p/3842587.html)    
 [在GitHub上分享和展示你的代码 - teresa502的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/teresa502/article/details/7620127)       
-[【Github教程】史上最全github使用方法：github入门到精通 - 水果君の日常 - 博客频道 - CSDN.NET](http://blog.csdn.net/hcbbt/article/details/11651229/)
+[【Github教程】史上最全github使用方法：github入门到精通 - 水果君の日常 - 博客频道 - CSDN.NET](http://blog.csdn.net/hcbbt/article/details/11651229/)  
+
+
+### github常用操作 
+
+```  
+##设置全局用户名和email，作为每次提交的记录  
+git config --global user.name “name"  
+git config --global user.email “mail.com”  
+  
+##添加一个仓库  
+git remote add origin git@….git  
+git push -u origin master  
+  
+##当提示权限不够时，添加ssh公钥  
+##在用户的.ssh目录下找id_rsa.pub等文件，没有的话去生成  
+ssh-keygen -t rsa -C "youremail@example.com”  
+  
+##设置pull的默认地址  
+git branch --set-upstream-to=origin/master  
+##设置push的默认地址  
+git remote add origin git@….git  
+  
+##配置别名  
+git config --global alias.xx ''  
+  
+##临时保存工作区  
+git stash  
+git stash pop  
+  
+## 回滚  
+git reset —hard 版本号  
+  
+## 强行回滚远程服务器  
+git push -f  
+```  
+
+[利用Jekyll在GitHub Pages上部署博客 - Bannings的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/zhangao0086/article/details/37922607)
  
 
 
