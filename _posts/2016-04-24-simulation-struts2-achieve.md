@@ -114,7 +114,7 @@ description: 模拟Struts2实现
 5. 根据结果中的type决定是转发还是重定向，重定向的目标就是结果中的targetUri
 
 
-```
+{% highlight java %}
 package cn.itcast.framework.core;
 
 import java.io.IOException;
@@ -276,11 +276,11 @@ public class CenterFilter implements Filter {
 	}
 
 }
-```  
+{% endhighlight %} 
 
 ### javabean如下
 
-```
+{% highlight java %}
 package cn.itcast.domain;
 
 import java.io.Serializable;
@@ -308,7 +308,7 @@ public class Customer implements Serializable {
 		}
 	}
 }
-```
+{% endhighlight %}
 
 
 

@@ -887,7 +887,7 @@ footer .owner p a {
 }
 
 .markdown-body blockquote:before {
-  font-style: italic;
+  
   font-family: Georgia, serif;
   font-size: 90px;
   height: 90px;
