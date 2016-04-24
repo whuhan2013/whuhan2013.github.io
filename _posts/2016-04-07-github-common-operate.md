@@ -50,9 +50,10 @@ git pull - -rebase origin master
 ### github常用操作 
 
 ```  
-##设置全局用户名和email，作为每次提交的记录  
-git config --global user.name “name"  
-git config --global user.email “mail.com”  
+##设置全局用户名和email，作为每次提交的记录   
+git config --global user.name “name"    
+git config --global user.email “mail.com”    
+  
   
 ##添加一个仓库  
 git remote add origin git@….git  

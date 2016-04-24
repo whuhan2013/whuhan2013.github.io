@@ -1,14 +1,14 @@
 .hll { background-color: #ffffcc }
-.c { color: #FFA500; font-style: italic } /* Comment */
+.c { color: #4EEE94; font-style: italic } /* Comment */
 .err { border: 1px solid #FF0000 } /* Error */
 .k { color: #008000; font-weight: bold } /* Keyword */
 .o { color: #666666 } /* Operator */
-.ch { color: #FFA500; font-style: italic } /* Comment.Hashbang */
-.cm { color: #FFA500; font-style: italic } /* Comment.Multiline */
+.ch { color: #4EEE94; font-style: italic } /* Comment.Hashbang */
+.cm { color: #4EEE94; font-style: italic } /* Comment.Multiline */
 .cp { color: #BC7A00 } /* Comment.Preproc */
-.cpf { color: #FFA500; font-style: italic } /* Comment.PreprocFile */
-.c1 { color: #FFA500; font-style: italic } /* Comment.Single */
-.cs { color: #FFA500; font-style: italic } /* Comment.Special */
+.cpf { color: #4EEE94; font-style: italic } /* Comment.PreprocFile */
+.c1 { color: #4EEE94; font-style: italic } /* Comment.Single */
+.cs { color: #4EEE94; font-style: italic } /* Comment.Special */
 .gd { color: #A00000 } /* Generic.Deleted */
 .ge { font-style: italic } /* Generic.Emph */
 .gr { color: #FF0000 } /* Generic.Error */
