@@ -65,7 +65,8 @@ ssh-keygen -t rsa -C "youremail@example.com”
   
 - 设置pull的默认地址  
 git branch --set-upstream-to=origin/master  
-##设置push的默认地址  
+
+- 设置push的默认地址  
 git remote add origin git@….git  
   
 - 配置别名  
