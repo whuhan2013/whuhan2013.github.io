@@ -49,38 +49,38 @@ git pull - -rebase origin master
 
 ### github常用操作 
 
-```  
-##设置全局用户名和email，作为每次提交的记录   
-git config --global user.name “name"    
-git config --global user.email “mail.com”    
+
+- 设置全局用户名和email，作为每次提交的记录    
+git config --global user.name “name"      
+git config --global user.email “mail.com”      
   
-  
-##添加一个仓库  
+
+- 添加一个仓库  
 git remote add origin git@….git  
 git push -u origin master  
   
-##当提示权限不够时，添加ssh公钥  
-##在用户的.ssh目录下找id_rsa.pub等文件，没有的话去生成  
+- 当提示权限不够时，添加ssh公钥  
+在用户的.ssh目录下找id_rsa.pub等文件，没有的话去生成  
 ssh-keygen -t rsa -C "youremail@example.com”  
   
-##设置pull的默认地址  
+- 设置pull的默认地址  
 git branch --set-upstream-to=origin/master  
 ##设置push的默认地址  
 git remote add origin git@….git  
   
-##配置别名  
+- 配置别名  
 git config --global alias.xx ''  
   
-##临时保存工作区  
+- 临时保存工作区  
 git stash  
 git stash pop  
   
-## 回滚  
+- 回滚  
 git reset —hard 版本号  
   
-## 强行回滚远程服务器  
+- 强行回滚远程服务器  
 git push -f  
-```  
+
 
 [利用Jekyll在GitHub Pages上部署博客 - Bannings的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/zhangao0086/article/details/37922607)
  
