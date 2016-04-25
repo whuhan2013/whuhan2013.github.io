@@ -155,7 +155,7 @@ http://localhost:8080/struts2day01/test/a/b/c/helloworld
 			Key Type:URI                  
 			Key:http://struts.apache.org/dtds/struts-2.1.7.dtd        
 
-2、Struts配置文件中的各种默认值。    
+2、Struts配置文件中的各种默认值。       
 
 action:                        
 	class:默认值是com.opensymphony.xwork2.ActionSupport        
@@ -168,8 +168,8 @@ action:
 
 	实际开发中：自己编写的动作类一般情况下继承com.opensymphony.xwork2.ActionSupport  
 	
-result：
-	type：转到目的地的方式。默认值是转发,名称是dispatcher
+result：    
+	type：转到目的地的方式。默认值是转发,名称是dispatcher        
 		（注：type的取值是定义好的，不是瞎写的。在struts-default.xml中的package中有定义）
 		
 ```
@@ -327,7 +327,7 @@ result：
 
 ### 开发中配置文件的更改，在访问时让框架自动重新加载：
 
-struts.devMode = false（default.properties）
+struts.devMode = false（default.properties）      
 利用strutx.xml中的constant元素来覆盖掉default.properties默认行为
 
 ```
