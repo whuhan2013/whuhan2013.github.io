@@ -348,14 +348,14 @@ requestScope生存周期是一次请求
     会话范围：${sessionScope.p}<br/>
     请求范围：${requestScope.p}<br/>
   </body>
- ```
+```
 
 
  ### 常用servlet对象的获取
 
  ### 方式一：通过ServletActionContext直接获取  
 
- ```
+```
  //方式一
 	public String execute1(){
 		ServletContext sc = ServletActionContext.getServletContext();
@@ -369,7 +369,7 @@ requestScope生存周期是一次请求
 
  ### 方式二：实现指定接口，由struts框架运行时注入 
 
- ```
+```
  public class WebObjectAction extends ActionSupport implements Serializable,ServletContextAware,ServletRequestAware,ServletResponseAware {
 	private ServletContext context;
 	private HttpServletRequest request;
