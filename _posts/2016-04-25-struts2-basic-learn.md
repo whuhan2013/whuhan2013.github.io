@@ -17,7 +17,8 @@ description: Struts2基础知识
 6. 中文编码问题
 7. 自定义类型转化器
 8. 访问或添加request/session/application
-9. 常用servlet对象的获取
+9. 常用servlet对象的获取    
+10. 配置全局错误页面   
 
 ### struts2常用常量的定义与意义  
 
@@ -397,6 +398,21 @@ requestScope生存周期是一次请求
 }
 ```  
 
+
+### 配置全局错误页面  
+
+
+```
+	<package name="mypackage" extends="struts-default">
+		<!-- 配置全局错误结果 :范围只是本包-->
+		<global-results>
+			<result type="dispatcher" name="error">/customer/error.jsp</result>
+		</global-results>
+		
+	</package>
+```
+
+其他package继承mypackage即可所有错误都会转到错误页面  
 
 ### 完成
 
