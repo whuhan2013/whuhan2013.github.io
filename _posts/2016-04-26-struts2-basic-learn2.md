@@ -11,6 +11,8 @@ description: Struts2基础知识(二)
 
 1. 文件上传，多文件上传    
 2. 自定义拦截器
+3. 用户输入验证
+4. 国际化
 
 ### 文件上传   
 
@@ -288,3 +290,163 @@ public class UploadAction2 extends ActionSupport implements Serializable {
 		</action>
 	</package>
 ```
+
+### 用户输入验证  
+
+### 1、编程方式：
+
+
+		
+```
+动作类中的所有方法进行验证：
+			步骤：
+			a、动作类继承ActionSupport
+			b、覆盖调用public void validate()方法
+			c、在validate方法中，编写不符合要求的代码判断，并调用父类的addFieldError(String fieldName,String errorMessage)
+				如果fieldError（存放错误信息的Map）有任何的元素，就是验证不通过，动作方法不会执行。
+				Struts2框架会返回到name=input的result
+			d、在name=input指定的页面上使用struts2的标签显示错误信息。<s:fielderror/>
+		
+		动作类中指定的方法进行验证：
+			编写步骤与上面相同
+			
+			验证方法书写有要求：
+				public void validateXxx()   Xxx代表的是要验证的动作方法名，其中要把动作方法名的首字母变为大写。
+```  
+
+
+### 2、基于XML配置文件的方式：  
+
+```
+动作类中的所有方法进行验证：
+			在动作类的包中，建立一个名称为：动作简单类名-validation.xml ，比如要验证的动作类名是UserAction   UserAction-validation.xml
+			内容如下：
+			<?xml version="1.0" encoding="UTF-8"?>
+			<!DOCTYPE validators PUBLIC
+					"-//OpenSymphony Group//XWork Validator 1.0.3//EN"
+					"http://www.opensymphony.com/xwork/xwork-validator-1.0.3.dtd">
+			<validators>
+				<field name="username">
+					<!-- 内置验证器都是定义好的，在xwork-core.jar com.opensymphony.xwork2.validator.validators包中的default.xml文件中 -->
+					<field-validator type="requiredstring"><!-- 不能为null或者""字符串，默认会去掉前后的空格 -->
+						<message>用户名不能为空</message>
+					</field-validator>
+				</field>
+			</validators>
+		动作类中指定的方法进行验证：
+			配置文件的名称书写有一定要求。
+					动作类名-动作名（配置文件中的动作名）-validation.xml
+					UserAction-user_add-validation.xml
+``` 
+
+### 3、自定义基于XML的验证器
+
+```
+a、编写一个类，继承FieldValidatorSupport类。
+		b、在public void validate(Object object)编写你的验证逻辑
+				不符合要求的就向fieldErrors中放消息
+		c、一定注册你的验证器才能使用
+				在WEB-INF/classes目录下建立一个名称为validators.xml的配置文件，内容如下：
+				<validators>
+					<validator name="strongpassword" class="cn.itcast.validators.StrongPasswordValidator"/>
+				</validators>
+		d、日后就可以像使用Struts2提供的16个验证器方式去使用了。
+```   
+
+### 实例  
+
+```
+package cn.itcast.validators;
+
+import com.opensymphony.xwork2.validator.ValidationException;
+import com.opensymphony.xwork2.validator.validators.FieldValidatorSupport;
+
+public class StrongPasswordValidator extends FieldValidatorSupport {
+
+	public void validate(Object object) throws ValidationException {
+		String fieldName = getFieldName();//取得字段名
+		String filedValue = (String)getFieldValue(fieldName, object);//取得用户输入的当前字段的值
+		if(!isPasswordStrong(filedValue)){
+			addFieldError(fieldName, object);
+		}
+	}
+	private static final String GROUP1 = "abcdefghijklmnopqrstuvwxyz";
+	private static final String GROUP2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private static final String GROUP3 = "0123456789";
+	protected boolean isPasswordStrong(String password) {
+		boolean ok1 = false;
+		boolean ok2 = false;
+		boolean ok3 = false;
+		int length = password.length();
+		for(int i=0;i<length;i++){
+			if(ok1&&ok2&&ok3)
+				break;
+			String character = password.substring(i,i+1);
+			if(GROUP1.contains(character)){
+				ok1 = true;
+				continue;
+			}
+			if(GROUP2.contains(character)){
+				ok2 = true;
+				continue;
+			}
+			if(GROUP3.contains(character)){
+				ok3 = true;
+				continue;
+			}
+		}
+		return ok1&&ok2&&ok3;
+	}
+}
+```
+
+
+### Struts2对于i18n的支持
+
+```
+全局资源文件/包范围资源文件/动作类的资源文件
+	全局资源文件：放到WEB-INF/classes目录下
+	包范围资源文件：服务于Java类中的包下的动作类的。  
+	
+			取名：package_语言_国家.properties
+	
+	动作类的资源文件:放到与动作类相同的包中
+			取名：动作类名_语言_国家.properties
+```
+			
+jsp中如何读取国际化的消息
+
+```
+<body>
+    <s:i18n name="itcast">
+    	<s:text name="welcome">
+    		<s:param>yr</s:param>
+    		<s:param>study</s:param>
+    	</s:text>
+    </s:i18n>
+    <s:i18n name="cn/itcast/action/package">
+    	<s:text name="welcome">
+    		<s:param>wxy</s:param>
+    		<s:param>find boy friend</s:param>
+    	</s:text>
+    </s:i18n>
+  </body>
+```   
+
+
+动作类中如何读取国际化的消息  
+
+```
+public class I18nAction extends ActionSupport implements Serializable {
+	public String execute(){
+		//取出资源文件中的welcome的值
+//		String value = getText("welcome");
+		String value = getText("welcome", new String[]{"朱巧玲","学习"});
+		//封装到请求范围中
+		ActionContext.getContext().put("message", value);
+		return SUCCESS;
+	}
+}
+```
+
+### 完成
