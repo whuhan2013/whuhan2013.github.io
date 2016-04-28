@@ -235,3 +235,36 @@ boolean isLast()，返回当前被迭代元素是否是最后一个元素
     <s:url  value="%{#addr}"></s:url><!-- url标签的value中的取值，默认是当做字符串的。 如果想把当做表达式来做，请使用%{}-->
 ```
 
+### 如果value取值是字符串的话，用单引号('')表示，如果取值是值的话，用%{}
+
+
+### checkboxlist  
+
+![这里写图片描述](http://img.blog.csdn.net/20160428093301665)
+
+![这里写图片描述](http://img.blog.csdn.net/20160428093321337)
+
+### 实例   
+
+```
+ <s:checkboxlist name="hobby" list="{'吃饭','睡觉','学习'}" value="{'学习','吃饭'}"></s:checkboxlist><br/>
+         <s:checkboxlist list="hobby1" name="hh" value="hobby2"></s:checkboxlist><br/>
+          <s:checkboxlist list="#{'北京':'0','上海':'1','山东':'2'}" name="province" listKey="value" listValue="key" value="{'2'}"></s:checkboxlist>
+
+```   
+
+### radio
+
+![这里写图片描述](http://img.blog.csdn.net/20160428093415493)
+
+### select
+
+![这里写图片描述](http://img.blog.csdn.net/20160428093435806)
+
+### 实例  
+
+```
+  <s:radio list="#{'0':'女','1':'男'}" listKey="key" listValue="value"></s:radio>
+        <hr/>
+        <s:select list="#{'021':'上海','010':'北京','0531':'济南'}" listKey="key" listValue="value" value="'010'"></s:select>
+``` 
