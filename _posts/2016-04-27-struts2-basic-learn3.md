@@ -11,6 +11,7 @@ description: Struts2基础知识(三)
 
 1. OGNL表达式
 2. 标签  
+3. 防止表单重复提交
 
 
 ### OGNL表达式
@@ -268,3 +269,39 @@ boolean isLast()，返回当前被迭代元素是否是最后一个元素
         <hr/>
         <s:select list="#{'021':'上海','010':'北京','0531':'济南'}" listKey="key" listValue="value" value="'010'"></s:select>
 ``` 
+
+### 防止表单重复提交  
+
+![这里写图片描述](http://img.blog.csdn.net/20160428212546359)
+
+
+防止表单的重复提交
+1、在表单中加入<s:token/>标签
+2、在动作类中加入token的拦截器
+
+```
+        <interceptor-ref name="defaultStack"></interceptor-ref>
+        <interceptor-ref name="token"></interceptor-ref>
+```
+
+3、增加一个名称为invalid.token的结果视图
+
+```
+        <result name="invalid.token">/success.jsp</result>
+```
+
+
+### 实例如下  
+
+```
+<package name="p1" namespace="/customer" extends="struts-default">
+        <action name="addCustomer" class="cn.itcast.action.CustomerAction" method="add">
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <interceptor-ref name="token"></interceptor-ref>
+            <result name="invalid.token">/success.jsp</result>
+            <result name="success">/success.jsp</result>
+        </action>
+    </package>
+```
+
+### 完成
