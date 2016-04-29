@@ -11,7 +11,8 @@ description: Struts2基础知识(三)
 
 1. OGNL表达式
 2. 标签  
-3. 防止表单重复提交
+3. 防止表单重复提交  
+4. 使用第三方插件  
 
 
 ### OGNL表达式
@@ -303,5 +304,84 @@ boolean isLast()，返回当前被迭代元素是否是最后一个元素
         </action>
     </package>
 ```
+
+### 使用第三方插件，以jfreechart为例
+
+- 导入jar包  
+
+1. jfreechart.jar  
+2. jcommon.jar
+3. struts2-jfreechart-plugin.jar 
+
+- Action类的书写  
+
+```
+package cn.itcast.action;
+
+import java.io.Serializable;
+
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class GetChartAction extends ActionSupport implements Serializable {
+    private JFreeChart chart;
+
+    public JFreeChart getChart() {
+        return chart;
+    }
+    public String execute(){
+        ValueAxis xAxis = new NumberAxis("年度");
+        ValueAxis yAxis = new NumberAxis("产值");
+        XYSeries xySeries = new XYSeries("绿豆");
+        xySeries.add(0,300);
+        xySeries.add(1,200);
+        xySeries.add(2,400);
+        xySeries.add(3,500);
+        xySeries.add(4,600);
+        xySeries.add(5,500);
+        xySeries.add(6,800);
+        xySeries.add(7,1000);
+        xySeries.add(8,1100);
+        XYSeriesCollection xyDataset = new XYSeriesCollection(xySeries);
+        XYPlot xyPlot = new XYPlot(xyDataset,xAxis,yAxis,new StandardXYItemRenderer(StandardXYItemRenderer.SHAPES_AND_LINES));
+        chart = new JFreeChart(xyPlot);
+        return SUCCESS;
+    }
+}
+```
+
+- 配置文件
+
+```
+<package name="p2" extends="jfreechart-default">
+        <action name="chart" class="cn.itcast.action.GetChartAction">
+            <result type="chart" name="success">
+                <param name="height">400</param>
+                <param name="width">600</param>
+            </result>
+        </action>
+    </package>
+```
+
+- 访问页面  
+
+```
+<body>
+    <s:url action="chart" var="url"></s:url>
+    <img alt="hello" src='<s:property value="url"/>'>
+  </body>
+```
+
+### 效果如下   
+
+![这里写图片描述](http://img.blog.csdn.net/20160429085407028)
+
 
 ### 完成
