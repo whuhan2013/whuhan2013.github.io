@@ -17,7 +17,8 @@ description: mysql常用操作
 如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql>
 
 - 连接到远程主机上的MYSQL           
-假设远程主机的IP为：110.110.110.110，用户名为root,密码为abcd123。则键入以下命令：   
+假设远程主机的IP为：110.110.110.110，用户名为root,密码为abcd123。则键入以下命令：  
+
 ```
     mysql -h110.110.110.110 -u root -p 123;（注:u与root之间可以不用加空格，其它也一样）
 ```
@@ -29,7 +30,8 @@ description: mysql常用操作
 格式：mysqladmin -u用户名 -p旧密码 password 新密码
 
 - 给root加个密码ab12。      
-首先在DOS下进入目录mysql\bin，然后键入以下命令        
+首先在DOS下进入目录mysql\bin，然后键入以下命令   
+
 ```
     mysqladmin -u root -password ab12
 ```         
@@ -37,6 +39,7 @@ description: mysql常用操作
 注：因为开始时root没有密码，所以-p旧密码一项就可以省略了。
 
 - 再将root的密码改为djg345     
+
 ```
     mysqladmin -u root -p ab12 password djg345
 ```  
@@ -68,11 +71,13 @@ create table user(
 ### 删除数据库与表  
 
 - 删除数据库  
+
 ```
 drop database struts;
 ```
 
 - 删除表  
+
 ```
  mysql> drop table MyClass;
 ```
