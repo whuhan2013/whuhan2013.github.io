@@ -344,7 +344,7 @@ public class GeneratorTest extends HiberanteUtils{
         Transaction transaction = session.beginTransaction();
         
         Person person = new Person();
-        person.setPname("上海第一期班长");
+        person.setPname("上海");
         person.setPsex("女");
         
         /**
@@ -369,7 +369,7 @@ public class GeneratorTest extends HiberanteUtils{
         Transaction transaction = session.beginTransaction();
         
         Person person = new Person();
-        person.setPname("上海第一期班长");
+        person.setPname("上海");
         person.setPsex("女");
         
         /**
@@ -390,7 +390,7 @@ public class GeneratorTest extends HiberanteUtils{
         Transaction transaction = session.beginTransaction();
         
         Person person = new Person();
-        person.setPname("上海第一期班长");
+        person.setPname("上海");
         person.setPsex("女");
         
         /**
@@ -412,7 +412,7 @@ public class GeneratorTest extends HiberanteUtils{
         Transaction transaction = session.beginTransaction();
         
         Person person = new Person();
-        person.setPname("上海第一期班长");
+        person.setPname("上海");
         person.setPsex("女");
         
         /**
