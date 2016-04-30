@@ -13,6 +13,7 @@ description: Struts2基础知识(三)
 2. 标签  
 3. 防止表单重复提交  
 4. 使用第三方插件  
+5. 属性驱动与模型驱动    
 
 
 ### OGNL表达式
@@ -382,6 +383,101 @@ public class GetChartAction extends ActionSupport implements Serializable {
 ### 效果如下   
 
 ![这里写图片描述](http://img.blog.csdn.net/20160429085407028)
+
+
+### 属性驱动与模型驱动 
+
+### 使用模型驱动可以添加其他javabean中的属性，避免将属性全部写在一个javabean中  
+
+```
+package cn.itcast.struts2.sh;
+
+public class User {
+    private Long uid;
+    private String uname;
+    public Long getUid() {
+        return uid;
+    }
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+    public String getUname() {
+        return uname;
+    }
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+}
+```
+
+### 模型驱动实现  
+
+```
+package cn.itcast.struts2.sh;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.interceptor.ModelDrivenInterceptor;
+import com.opensymphony.xwork2.interceptor.ParametersInterceptor;
+import com.opensymphony.xwork2.util.ValueStack;
+
+public class UserAction implements ModelDriven<User>{
+    
+    private User model = new User();
+    
+    public User getModel() {
+        // TODO Auto-generated method stub
+        return this.model;
+    }
+    
+    private String ss;
+    public String getSs() {
+        return ss;
+    }
+    public void setSs(String ss) {
+        this.ss = ss;
+    }
+    public String setValue(){
+        ValueStack valueStack = ActionContext.getContext().getValueStack();
+        /**
+         * 当前请求的action在栈顶，ss是栈顶的元素，所以可以利用setValue方法赋值
+         * 如果一个属性在对象栈，在页面上可以根据name属性进行回显
+         */
+        
+        /**
+         * 属性驱动实现的条件：
+         *    1、当前请求的action在栈顶，所以action中的属性就暴漏出来了
+         *    2、获取页面上表单的元素，整合成一个map
+         *    3、调用setValue方法赋值
+         */
+        valueStack.setValue("ss", "ss");
+        List<User> userList = new ArrayList<User>();
+        List<List<User>> users = new ArrayList<List<User>>();
+        User user = new User();
+        user.setUid(1L);
+        user.setUname("aaa");
+        userList.add(user);
+        users.add(userList);
+        ActionContext.getContext().put("users", users);
+        
+        Map<String, List<User>> map = new HashMap<String, List<User>>();
+        map.put("userList", userList);
+        ActionContext.getContext().put("map", map);
+        return "index";
+    }
+    
+    public String result(){
+        return "result";
+    }
+}
+```
+
 
 
 ### 完成
