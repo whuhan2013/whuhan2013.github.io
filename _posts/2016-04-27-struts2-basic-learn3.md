@@ -14,7 +14,7 @@ description: Struts2基础知识(三)
 3. 防止表单重复提交  
 4. 使用第三方插件  
 5. 属性驱动与模型驱动    
-
+6. iterator补充
 
 ### OGNL表达式
 
@@ -45,7 +45,7 @@ Ognl有一个上下文(Context)概念，说白了上下文就是一个MAP结构�
 
 - 在root变量中处于第一位的对象叫栈顶对象。通常我们在OGNL表达式里直接写上属性的名称即可访问root变量里对象的属性，搜索顺序是从栈顶对象开始寻找，如果栈顶对象不存在该属性，就会从第二个对象寻找，如果没有找到就从第三个对象寻找，依次往下访问，直到找到为止。
 
-
+### 在对象栈中不需要加#号即可访问，在valueStack中需要用#访问
 
 ### 注意：Struts2中，OGNL表达式需要配合Struts标签才可以使用。如：
 
@@ -477,6 +477,90 @@ public class UserAction implements ModelDriven<User>{
     }
 }
 ```
+
+
+### iterator补充  
+
+- iterator当前迭代的元素在栈顶           
+- 如果迭代的是栈顶的元素，不需要加vlaue      
+
+### 实例 
+
+```
+public String setValue(){
+        ValueStack valueStack = ActionContext.getContext().getValueStack();
+        /**
+         * 当前请求的action在栈顶，ss是栈顶的元素，所以可以利用setValue方法赋值
+         * 如果一个属性在对象栈，在页面上可以根据name属性进行回显
+         */
+        
+        /**
+         * 属性驱动实现的条件：
+         *    1、当前请求的action在栈顶，所以action中的属性就暴漏出来了
+         *    2、获取页面上表单的元素，整合成一个map
+         *    3、调用setValue方法赋值
+         */
+        valueStack.setValue("ss", "ss");
+        List<User> userList = new ArrayList<User>();
+        List<List<User>> users = new ArrayList<List<User>>();
+        User user = new User();
+        user.setUid(1L);
+        user.setUname("aaa");
+        userList.add(user);
+        users.add(userList);
+        ActionContext.getContext().put("users", users);
+        
+        Map<String, List<User>> map = new HashMap<String, List<User>>();
+        map.put("userList", userList);
+        ActionContext.getContext().put("map", map);
+        return "index";
+    }
+```
+
+### 迭代  
+
+
+```
+<body>
+    This is my JSP page. <br>
+    <s:debug></s:debug>
+    <s:property value="ss"/><br/>
+    <s:textfield name="ss"></s:textfield>
+    
+    <!-- 
+        当前迭代的元素在栈顶
+        如果迭代的是栈顶的元素，不需要加vlaue
+     -->
+     <!-- 
+     <s:iterator value="#userList">
+        <s:property value="uid"/>
+        <s:property value="uname"/>
+     </s:iterator>
+      -->
+      <!-- 
+        List<List<User>>
+       -->
+       <!-- 
+      <s:iterator value="#users">
+        <s:iterator>
+            <s:property value="uid"/>
+            <s:property value="uname"/>
+        </s:iterator>  
+      </s:iterator>
+       -->
+       <!-- 
+            Map<String, List<User>>
+        -->
+        <s:iterator value="#map">
+            <s:property value="key"/>
+            <s:iterator value="value">
+                <s:property value="uid"/>
+                <s:property value="uname"/>
+            </s:iterator>
+        </s:iterator>
+  </body>
+```
+
 
 
 
