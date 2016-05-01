@@ -24,6 +24,48 @@ Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行�
 ### hibernate加载流程 
 
 
+1、hibernate的组成部分    
+- 持久化类
+    + 实现对应的序列化接口
+    + 必须有默认的构造函数
+    + 持久化类的属性不能使用关键字
+    + 标示符
+
+- 映射文件
+    + 类型:java类型和hibernate类型
+    + 主键的产生器:increment identity  assigned uuid
+    + id  prototype
+    + set
+    + cascade  对象与对象之间的关系
+    + inverse  对象与外键之间的关系
+
+- 配置文件
+    + 数据库的链接信息
+    + 存放了映射文件的信息
+    + 其他信息：hibernate内部功能的信息:<property name="show_sql">true</property>
+
+2、hibernate的流程          
+- Configuraction
+        加载了配置文件
+- SessionFactory
+        配置文件的信息、映射文件的信息、持久化类的信息
+- Session
+        1、crud的操作都是由session完成的
+        2、事务是由session开启的
+        3、两个不同的session只能用各自的事务
+        4、session决定了对象的状态
+        5、创建完一个session，相当于打开了一个数据库的链接
+- Transaction
+        1、事务默认不是自动提交的
+        2、必须由session开启
+        3、必须和当前的session绑定(两个session不可能共用一个事务)         
+
+3、对象的状态的转化       
+
+4、hibernate的原理：       
+        根据客户端的代码，参照映射文件，生成sql语句，利用jdbc技术进行数据库的操作
+
+
 - 创建对象，获得hibernate配置文件  
 
 ```
