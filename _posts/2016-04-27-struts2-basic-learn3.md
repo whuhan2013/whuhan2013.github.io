@@ -14,7 +14,8 @@ description: Struts2基础知识(三)
 3. 防止表单重复提交  
 4. 使用第三方插件  
 5. 属性驱动与模型驱动    
-6. iterator补充
+6. iterator补充    
+7. 自定义结果集
 
 ### OGNL表达式
 
@@ -562,6 +563,63 @@ public String setValue(){
 ```
 
 
+### 自定义结果集
 
+继承StrutsResultSupport,实现doExecute方法  
+
+```
+package cn.itcast.struts2.sh.result;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.dispatcher.StrutsResultSupport;
+
+import com.opensymphony.xwork2.ActionInvocation;
+
+public class ShResult extends StrutsResultSupport{
+
+    @Override
+    protected void doExecute(String condition, ActionInvocation arg1)
+            throws Exception {
+        // TODO Auto-generated method stub
+        HttpServletRequest request = ServletActionContext.getRequest();
+        System.out.println("aaaaa");
+        HttpServletResponse response = ServletActionContext.getResponse();
+        request.getRequestDispatcher(condition).forward(request, response);
+    }
+    
+}
+```
+
+### 定义struts.xml 
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="user" namespace="/" extends="struts-default">
+        <result-types>
+            <result-type name="aa" class="cn.itcast.struts2.sh.result.ShResult"></result-type>
+        </result-types>
+        <action name="userAction_*" method="{1}" class="cn.itcast.struts2.sh.UserAction">
+            <result name="index">index.jsp</result>
+            <result name="result" type="aa">result.jsp</result>
+        </action>
+    </package>
+</struts>
+```  
+
+### 使用  
+
+```
+public String result(){
+        return "result";
+    }
+```
 
 ### 完成

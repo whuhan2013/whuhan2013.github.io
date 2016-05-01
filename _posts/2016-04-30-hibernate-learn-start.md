@@ -53,14 +53,14 @@ Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行�
 - SessionFactory
         配置文件的信息、映射文件的信息、持久化类的信息
 
-- Session
+- Session           
         1、crud的操作都是由session完成的       
         2、事务是由session开启的         
         3、两个不同的session只能用各自的事务       
         4、session决定了对象的状态                         
         5、创建完一个session，相当于打开了一个数据库的链接            
 
-- Transaction
+- Transaction     
         1、事务默认不是自动提交的       
         2、必须由session开启                                     
         3、必须和当前的session绑定(两个session不可能共用一个事务)             
@@ -359,7 +359,7 @@ public class PersonTest extends HiberanteUtils{
 }
 ```  
 
-###注意
+### 注意                
 利用session.get方法产生一个对象，调用的是默认的构造函数，所以一个持久化类中必须有一个默认的构造函数
 
 
