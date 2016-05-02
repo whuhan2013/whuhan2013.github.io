@@ -83,7 +83,9 @@ git reset —hard 版本号
 git push -f  
 
 
-[利用Jekyll在GitHub Pages上部署博客 - Bannings的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/zhangao0086/article/details/37922607)
+[利用Jekyll在GitHub Pages上部署博客 - Bannings的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/zhangao0086/article/details/37922607)  
+
+### 
  
 
 
