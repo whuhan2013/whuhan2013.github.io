@@ -28,13 +28,12 @@ description: Hibernate之性能优化
         4、只针对一般属性有效，针对标示符属性是无效的          
         5、默认情况就是懒加载                 
 
-- 集合的懒加载            
-
+- 集合的懒加载              
 1.  lazy= "false"  当session.get时，集合就被加载出来了
 2.  lazy=" true"   在遍历集合的时候才加载
 3.  lazy="extra"    针对集合做count,min,max,sum等操作
      
-- 单端关联的懒加载(多对一)
+- 单端关联的懒加载(多对一)                
 
 ```
         <many-to-one lazy="false/no-proxy/proxy">  no-porxy 默认值  true
