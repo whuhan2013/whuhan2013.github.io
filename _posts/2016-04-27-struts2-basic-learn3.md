@@ -15,7 +15,8 @@ description: Struts2基础知识(三)
 4. 使用第三方插件  
 5. 属性驱动与模型驱动    
 6. iterator补充    
-7. 自定义结果集
+7. 自定义结果集   
+8. 改变action创建方式   
 
 ### OGNL表达式
 
@@ -620,6 +621,42 @@ public class ShResult extends StrutsResultSupport{
 public String result(){
         return "result";
     }
+```     
+
+### 改变action创建方式  
+
+
+
+### 在struts.xml中添加  
+
 ```
+<bean type="com.opensymphony.xwork2.ObjectFactory" name="aaa" class="cn.itcast.struts2.sh.buildaction.ShBuildAction" />
+<constant name="struts.objectFactory" value="aaa"></constant>
+```
+
+### 自定义一个继承ObjectFactory的类  
+
+```
+package cn.itcast.struts2.sh.buildaction;
+
+import java.util.Map;
+
+import com.opensymphony.xwork2.ObjectFactory;
+import com.opensymphony.xwork2.config.entities.ActionConfig;
+
+public class ShBuildAction extends ObjectFactory{
+    @Override
+    public Object buildAction(String actionName, String namespace,
+            ActionConfig config, Map<String, Object> extraContext)
+            throws Exception {
+        // TODO Auto-generated method stub
+        System.out.println("aaaaa");
+        return super.buildAction(actionName, namespace, config, extraContext);
+    }
+}
+```
+
+当tomcat启动时，struts框架做了什么
+![这里写图片描述](http://img.blog.csdn.net/20160501204848492)
 
 ### 完成
