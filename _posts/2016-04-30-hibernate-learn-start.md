@@ -490,4 +490,18 @@ public class GeneratorTest extends HiberanteUtils{
 }
 ```  
 
+### Hibernate 自动建表 更新表结构
+
+在hibernate.cfg.xml中添加：
+
+1.<property name="hibernate.hbm2ddl.auto">create</property>        
+加载hibernate.cfg.xml时，创建新表（如果原来存在，先删除）          
+2.<property name="hibernate.hbm2ddl.auto">update</property>   
+加载hibernate.cfg.xml时，更新表结构（如果原表不存在，就创建新表;如果缺少相应的字段，
+就加入;对于原来存在的多余字段，不作处理）        
+3.<property name="hibernate.hbm2ddl.auto">create-drop</property>     
+加载hibernate时创建，退出时删除表结构              
+4.<property name="hibernate.hbm2ddl.auto">validate</property>      
+ 加载hibernate时，验证创建数据库表结构             
+
 ### 完成

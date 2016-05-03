@@ -655,6 +655,212 @@ public class QueryCacheTest extends HiberanteUtils{
     }
 ```
 
+### HQL语句    
+
+### 单表查询  
+
+```
+public List<Classes> queryAllClasses(){
+    Session session = sessionFactory.openSession();
+    List<Classes> cList = session.createQuery("from Classes").list();
+    session.close();
+    return cList;
+  }
+  //条件查询
+  public List queryClasses_Properties(){
+    Session session = sessionFactory.openSession();
+    List cList = session.createQuery("select cid,cname from Classes").list();
+    session.close();
+    return cList;
+  }
+  //带构造函数的查询
+  public List<Classes> queryClasses_Constructor(){
+    Session session = sessionFactory.openSession();
+    List<Classes> cList = session.createQuery("select new cn.itcast.hiberate.sh.domain.Classes(cname,description) from Classes").list();
+    session.close();
+    return cList;
+  }
+  
+  public Classes queryClasses_Condition(){
+    Session session = sessionFactory.openSession();
+    Query query = session.createQuery("select new cn.itcast.hiberate.sh.domain.Classes(cname,description) from Classes where cid=:cid");
+    query.setLong("cid", 1L);
+    Classes classes = (Classes)query.uniqueResult();
+    System.out.println(classes.getCname());
+    session.close();
+    return classes;
+  }
+  
+  public Classes queryClasses_Condition_2(){
+    Session session = sessionFactory.openSession();
+    Query query = session.createQuery("select new cn.itcast.hiberate.sh.domain.Classes(cname,description) from Classes where cid=?");
+    query.setLong(0, 3L);
+    Classes classes = (Classes)query.uniqueResult();
+    System.out.println(classes.getCname());
+    session.close();
+    return classes;
+  }
+```
+
+### 子查询  
+
+```
+  /**
+   * order by,group by,sun,min,max,avg,having等都适用
+   * @return
+   */
+  
+  /**
+   * 子查询
+   */
+  public void queryClasses_SubSelect(){
+    Session session = sessionFactory.openSession();
+    List<Classes> cList = session.createQuery("from Classes where cid in(select cid from Classes where cid in(1,2,3))").list();
+    session.close();
+  }
+```
+
+  ### 一对多查询     
+
+
+```
+  /**
+      * 一对多
+      *    等值连接          查询出来的机构很差  
+      *    内连接       查询出来的机构很差
+      *    左外连接  
+      *    迫切左外连接
+      */
+  public List<Classes> queryClasses_Student_EQ(){
+    Session session = sessionFactory.openSession();
+    List<Classes> cList = session.createQuery("from Classes c,Student s where c.cid=s.classes.cid").list();
+    session.close();
+    return cList;
+  }
+  
+  /**
+   * 内连接
+   * @return
+   */
+  public List<Classes> queryClasses_Student_INNER(){
+    Session session = sessionFactory.openSession();
+    List<Classes> cList = session.createQuery("from Classes c inner join c.students").list();
+    session.close();
+    return cList;
+  }
+  
+  /**
+   * 迫切内连接
+   * @return
+   */
+  public List<Classes> queryClasses_Student_INNER_FETCH(){
+    Session session = sessionFactory.openSession();
+    List<Classes> cList = session.createQuery("from Classes c inner join fetch c.students").list();
+    session.close();
+    return cList;
+  }
+  
+  /**
+   * 左外连接
+   */
+  public List<Classes> queryClasses_Student_LeftJoin(){
+    Session session = sessionFactory.openSession();
+    List<Classes> cList = session.createQuery("from Classes c left outer join c.students").list();
+    session.close();
+    return cList;
+  }
+  
+  /**
+   * 迫切左外连接
+   */
+  public List<Classes> queryClasses_Student_LeftJoin_fetch(){
+    Session session = sessionFactory.openSession();
+    String hql = "from Classes c left outer join fetch c.students";
+    hql = "from Student s left outer join fetch s.classes c";
+    List<Classes> cList = session.createQuery(hql).list();
+    session.close();
+    return cList;
+  }
+  
+  /**
+   * 带select的查询
+   */
+  public List<Classes> queryClasses_Student_Select(){
+    Session session = sessionFactory.openSession();
+    String hql = "select new cn.itcast.hiberate.sh.domain.ClassesView(c.cname,s.sname) " +
+             "from Student s left outer join s.classes c";
+    List<Classes> cList = session.createQuery(hql).list();
+    session.close();
+    return cList;
+  }
+```
+
+### 多对多    
+
+```
+  /**
+   * 多对多
+   */
+  public void testQueryCourse_Student(){
+    Session session = sessionFactory.openSession();
+    List<Student> studentList = session.createQuery("from Student s inner join fetch s.courses c").list();
+    session.close();
+  }
+  ```
+
+### 一对多结合多对多  
+
+```
+/**
+   * 一对多结合多对多
+   */
+  public List<Student> queryClasses_Student_Course(){
+    Session session = sessionFactory.openSession();
+    String hql = "from Classes cs inner join fetch cs.students s inner join fetch s.courses c";
+    hql = "from Student s inner join fetch s.classes cs inner join fetch s.courses c";
+    //hql = "from Classes cs left outer join fetch cs.students s left outer join fetch s.courses c";
+    List<Student> cList = session.createQuery(hql).list();
+    
+    //迫切主外连接会产生重复，将set转化成list，去除重复的部分
+//    Set<Classes> cset = new HashSet<Classes>(cList);
+//    cList = new ArrayList<Classes>(cset);
+    System.out.println(cList.size());
+//    for(Classes classes:cList){
+//      System.out.println(classes.getCid());
+//      Set<Student> students = classes.getStudents();
+//      for(Student student:students){
+//        System.out.println(student.getSname());
+//        Set<Course> courses = student.getCourses();
+//        for(Course course:courses){
+//          System.out.println(course.getCname());
+//        }
+//      }
+//    }
+    session.close();
+    return cList;
+  }
+```
+
+### 总结   
+
+1、如果页面上要显示的数据和数据库中的数据相差甚远，利用带select的构造器进行查询是比较好的方案      
+2、如果页面上要显示的数据和数据库中的数据相差不是甚远，这个时候用迫切连接         
+3、如果采用迫切连接，from后面跟的那个对象就是结构主体         
+4、如果多张表进行查询，找核心表，找中间关联的那张表
+
+
+### 注意    
+在WEB项目中，hibernate.cf.xml中需要添加以下内容  
+
+```
+<property name="connection.driver_class">
+    com.mysql.jdbc.Driver
+  </property>
+
+<property name="hibernate.dialect">
+    org.hibernate.dialect.MySQLInnoDBDialect
+  </property>
+```
 
 
 ### 完成
