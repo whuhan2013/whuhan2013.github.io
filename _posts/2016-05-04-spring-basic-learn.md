@@ -10,6 +10,7 @@ description: Spring基础知识
 ### 本文主要包括以下内容  
 
 1. 注解  
+2. 继承
 
 ### 注解   
 
@@ -395,7 +396,34 @@ public class PersonDaoImpl implements PersonDao{
 
 ### xml与注解：        
    1、xml书写麻烦，但是效率高              
-   2、注解书写简单，但是效率低                  
+   2、注解书写简单，但是效率低         
+
+
+### 继承   
+
+1、如果一个类在spring配置文件中，但是不想让整个类创建对象，则用abstract="true"           
+2、如果让一个子类拥有父类的属性，则parent="commonDao"               
+
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <!-- 
+      abstract
+        告诉spring容器，该类不能创建对象
+     -->
+  <bean id="commonDao" class="cn.itcast.spring.extend.CommonDao" abstract="true">
+    <property name="s" value="aaaa"></property>
+  </bean>
+  
+  <bean id="personDao" class="cn.itcast.spring.extend.PersonDao" parent="commonDao"></bean>
+</beans>
+```
+
+
 
 ### 完成 
 
