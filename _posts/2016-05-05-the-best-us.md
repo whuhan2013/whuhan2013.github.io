@@ -7,7 +7,10 @@ tags: [读书笔记]
 description: 最好的我们
 ---
 
-<center><img src="https://pic4.zhimg.com/0b8f6bfc735405bf2472b1004c1ff01f_b.jpeg"></center>
+<center>
+	<img src="https://pic4.zhimg.com/0b8f6bfc735405bf2472b1004c1ff01f_b.jpeg">
+	<img src="https://pic2.zhimg.com/36c397b4343689768d239e89c8637741_b.jpg">
+</center>
 
 > Tough don't last,but people do.  
 
