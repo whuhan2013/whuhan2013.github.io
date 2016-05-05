@@ -7,7 +7,7 @@ tags: [读书笔记]
 description: 最好的我们
 ---
 
-![最好的我们](https://pic4.zhimg.com/0b8f6bfc735405bf2472b1004c1ff01f_b.jpeg)
+![最好的我们](http://upload-images.jianshu.io/upload_images/1011408-395c90a2ad5783a3.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 > Tough don't last,but people do.  
 
