@@ -86,6 +86,24 @@ Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行�
         sessionFactory = configuration.buildSessionFactory()
 ```
 
+###  HiberanteUtils
+
+```
+package cn.itcast.hibernate.sh.utils;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class HiberanteUtils {
+    public static SessionFactory sessionFactory;
+    static{
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        sessionFactory = configuration.buildSessionFactory();
+    }
+}
+```  
+
 ### 序列化类 
 
 ```
