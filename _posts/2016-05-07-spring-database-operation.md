@@ -23,10 +23,10 @@ description: Spring之数据库操作
 
 ### 总结   
 
-   1、引入dataSource的方式：               
-        1、在dataSource的设置中直接写值              
-        2、引入properties文件                
-   2、在dao的写法中有很多种，最终只需要把dataSource注入jdbcTemplate中
+1、引入dataSource的方式：               
+&emsp;1、在dataSource的设置中直接写值              
+&emsp;2、引入properties文件                
+2、在dao的写法中有很多种，最终只需要把dataSource注入jdbcTemplate中
 
 
 ### 继承JdbcDaoSupport的方法  
