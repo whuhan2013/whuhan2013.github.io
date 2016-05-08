@@ -16,26 +16,26 @@ description: SSH框架整合
 4、建立三个src folder            
      src      存放源代码                
      config   存放配置文件                
-        hibernate  存放hibernate的配置文件              
-        spring     存放spring的配置文件        
-        struts     存放struts的配置文件           
-        struts.xml       
-     test     存放单元测试         
+&emsp;hibernate  存放hibernate的配置文件              
+&emsp;spring     存放spring的配置文件        
+&emsp;struts     存放struts的配置文件           
+&emsp;struts.xml       
+&emsp;test     存放单元测试         
 5、在src下建立包          
        cn.itcast.s2sh.domain           
              持久化类和映射文件           
 6、编写dao层和service层          
 7、写spring的配置文件           
-     1、写sessionFactory             
-     2、测试           
-     3、写dao和service           
-     4、测试          
+&emsp;1、写sessionFactory             
+&emsp;2、测试           
+&emsp;3、写dao和service           
+&emsp;4、测试          
 8、写action         
 9、写spring的配置文件              
      把action注入到spring容器中        
 
 ```     
-      <bean id="personAction"              class="cn.itcast.s2sh.struts2.action.sh.PersonAction" scope="prototype">
+      <bean id="personAction"   class="cn.itcast.s2sh.struts2.action.sh.PersonAction" scope="prototype">
 ```   
    scope为"prototype"保证了action的多实例         
 10、在web.xml          
@@ -112,6 +112,7 @@ public class PersonDaoImpl extends HibernateDaoSupport implements PersonDao{
   
 }
 ```
+
 ### service  
 
 ```
@@ -471,7 +472,7 @@ public class PersonServiceImpl implements PersonService{
 
   OpenSessionInView在第一个位置，struts2的过滤器在第二个位置
 
-1、加入了OpenSessionInView模式解决了懒加载的问题
+1、加入了OpenSessionInView模式解决了懒加载的问题             
 2、因为延迟了session的关闭时间，所以在session一级缓存中的数据会长时间停留在内存中，
     增加了内存的开销
 
@@ -706,6 +707,8 @@ public class PersonAction extends ActionSupport{
   }
 }
 ```
+
+### 完整代码
 
 [错误配置的代码](https://github.com/whuhan2013/ssh/tree/master/s2sh_sh)             
 [正确配置的代码](https://github.com/whuhan2013/ssh/tree/master/s2sh)     
