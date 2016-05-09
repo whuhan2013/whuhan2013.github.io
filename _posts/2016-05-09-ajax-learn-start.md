@@ -7,9 +7,10 @@ tags: [javascript]
 description: AJAX入门
 ---   
 
-### 编写步骤                     
-    1、测试与服务器的通信            
-      a、创建XmlHttpRequest对象，固定写法：  
+### 编写步骤       
+
+1、测试与服务器的通信            
+a、创建XmlHttpRequest对象，固定写法：  
 
 ```
           function createXmlHttpRequest(){
@@ -317,7 +318,8 @@ public class ServletDemo2 extends HttpServlet {
   }
 
 }
-```           
+```      
+
 ### 问题  
 
 eclipse启动tomcat, http://localhost:8080无法访问 
@@ -331,6 +333,7 @@ AJAX问题之XMLHttpRequest status = 0
 
 
 好像是因为在本地打开与在服务器打开的HTML的路径是不一样的        
+
 ### 参考链接
 
 [AJAX问题之XMLHttpRequest status = 0 - iaiti的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/iaiti/article/details/42192659)
