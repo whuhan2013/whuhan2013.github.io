@@ -266,5 +266,8 @@ where YEAR (FROM_UNIXTIME(pudate, ' %y-%m-%d ' )) = YEAR (now()) and 
 
 ### 参考链接
 
+
+[mysql查询今天,昨天,近7天,近30天,本月,上一月数据方法 - 吕滔博客](http://www.lvtao.net/database/mysql-date-format.html)
+
 [mysql数据库要按当天、昨天、前七日、近三十天、季度、年查询_百度文库](http://wenku.baidu.com/link?url=k_5IVPh5K5f57Locung0gPMF7UvYVfXjl99GXr-Lw6b1pYTzyf7FsHHjm__Y2DruM4JoaPlS2z4-nsx5A8wfVl2IaN2PcvN0bFB8xtQvkxq)
 
