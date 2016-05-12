@@ -43,6 +43,10 @@ private Bitmap getBitmapFromUri(Uri uri)
 ### 参考链接  
 [(1)Android 通过Uri获取Bitmap对象_又吹风了_新浪博客](http://blog.sina.com.cn/s/blog_5de73d0b0100zfm8.html)
 
+### 源代码  
+
+[whuhan2013/AndroidApp: This is the summary of Android App](https://github.com/whuhan2013/AndroidApp/tree/master/DogApp)
+
 ### 整合效果如下  
 
 ![这里写图片描述](http://img.blog.csdn.net/20160505142943483)

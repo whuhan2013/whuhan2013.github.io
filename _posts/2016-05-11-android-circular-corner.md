@@ -187,6 +187,10 @@ android:shape="rectangle">
 
 [android 怎么画一个圆角矩形_百度知道](http://zhidao.baidu.com/link?url=-hDkeReRRiNi22KN2Tql2ztPYOzX1J3aek83985R4mGLXoZpyi0Jw6fDvNT6M687z9AufAef7OvYNMSEool173Dscj6sUnvEPGJTEWVCSse)
 
+### 源代码
+
+[AndroidApp/AndroidCorner at master · whuhan2013/AndroidApp](https://github.com/whuhan2013/AndroidApp/tree/master/AndroidCorner)
+
 ### 效果如下  
 
 ![这里写图片描述](http://img.blog.csdn.net/20160511195417743)
