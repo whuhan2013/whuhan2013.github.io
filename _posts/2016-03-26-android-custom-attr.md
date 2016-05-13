@@ -304,6 +304,171 @@ public class SettingItemView extends RelativeLayout {
 ![图片效果](http://img.blog.csdn.net/20160326203327699)
 
 
+### 实例二  
+
+实现一个比较简单的Google彩虹进度条
+
+![](http://upload-images.jianshu.io/upload_images/188580-10e6e15466f2d2f6.png?imageView2/2/w/1240/q/100)
+
+整个View的绘制流程我们已经介绍完了，还有一个很重要的知识，自定义控件属性，我们都知道View已经有一些基本的属性，比如layout_width，layout_height，background等，我们往往需要定义自己的属性，那么具体可以这么做。
+
+1.在values文件夹下，打开attrs.xml，其实这个文件名称可以是任意的，写在这里更规范一点，表示里面放的全是view的属性。
+2.因为我们下面的实例会用到2个长度，一个颜色值的属性，所以我们这里先创建3个属性。
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 声明属性集的名称 -->
+    <declare-styleable name="rainbowbar">
+  <attr name="rainbowbar_hspace" format="dimension"></attr>
+  <attr name="rainbowbar_vspace" format="dimension"></attr>
+  <attr name="rainbowbar_color" format="color"></attr>
+</declare-styleable>
+    
+</resources>
+```
+
+### 自定义View
+
+```
+package com.zj.secondattr;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.view.View;
+
+public class RainbowBar extends View {
+  
+  //progress bar color
+    int barColor = Color.parseColor("#1E88E5");
+    //every bar segment width
+    int hSpace = Utils.dpToPx(80, getResources());
+    //every bar segment height
+    int vSpace = Utils.dpToPx(4, getResources());
+    //space among bars
+    int space = Utils.dpToPx(10, getResources());
+    float startX = 0;
+    float delta = 10f;
+    Paint mPaint;
+
+    public RainbowBar(Context context) {
+      super(context);
+    }
+
+    public RainbowBar(Context context, AttributeSet attrs) {
+      this(context, attrs, 0);
+    }
+
+    public RainbowBar(Context context, AttributeSet attrs, int defStyleAttr) {
+      super(context, attrs, defStyleAttr);
+      //read custom attrs
+      TypedArray t = context.obtainStyledAttributes(attrs,
+              R.styleable.rainbowbar, 0, 0);
+      hSpace = t.getDimensionPixelSize(R.styleable.rainbowbar_rainbowbar_hspace, hSpace);
+      vSpace = t.getDimensionPixelOffset(R.styleable.rainbowbar_rainbowbar_vspace, vSpace);
+      barColor = t.getColor(R.styleable.rainbowbar_rainbowbar_color, barColor);
+      t.recycle();   // we should always recycle after used
+      mPaint = new Paint();
+      mPaint.setAntiAlias(true);
+      mPaint.setColor(barColor);
+      mPaint.setStrokeWidth(vSpace);
+    }
+    
+    int index = 0;
+    
+    @Override
+  protected void onDraw(Canvas canvas) {
+    // TODO Auto-generated method stub
+    super.onDraw(canvas);
+    
+    float sw = this.getMeasuredWidth();
+      if (startX >= sw + (hSpace + space) - (sw % (hSpace + space))) {
+          startX = 0;
+      } else {
+          startX += delta;
+      }
+      float start = startX;
+      // draw latter parse
+      while (start < sw) {
+          canvas.drawLine(start, 5, start + hSpace, 5, mPaint);
+          start += (hSpace + space);
+      }
+
+      start = startX - space - hSpace;
+
+      // draw front parse
+      while (start >= -hSpace) {
+          canvas.drawLine(start, 5, start + hSpace, 5, mPaint);
+          start -= (hSpace + space);
+      }
+      if (index >= 700000) {
+          index = 0;
+      }
+      invalidate();
+  }
+
+
+}
+```
+
+View有了三个构造方法需要我们重写，这里介绍下三个方法会被调用的场景，
+
+- 第一个方法，一般我们这样使用时会被调用，View view = new View(context); 
+
+- 第二个方法，当我们在xml布局文件中使用View时，会在inflate布局时被调用，
+<View layout_width="match_parent" layout_height="match_parent"/>。
+
+- 第三个方法，跟第二种类似，但是增加style属性设置，这时inflater布局时会调用第三个构造方法。
+<View style="@styles/MyCustomStyle" layout_width="match_parent" layout_height="match_parent"/>。
+
+
+上面大家可能会感觉到有点困惑的是，我把初始化读取自定义属性hspace，vspace，和barcolor的代码写在第三个构造方法里面，但是我RainbowBar在线性布局中没有加style属性（），那按照我们上面的解释，inflate布局时应该会invoke第二个构造方法啊，但是我们在第二个构造方法里面调用了第三个构造方法，this(context, attrs, 0); 所以在第三个构造方法中读取自定义属性，没有问题，这是一点小细节，避免代码冗余-，-
+
+
+### 布局文件中的使用 
+
+```
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <com.zj.secondattr.RainbowBar
+     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:rainbowbar_color="@color/abc_search_url_text_holo"
+    app:rainbowbar_hspace="80dp"
+    app:rainbowbar_vspace="10dp"
+  
+        >
+   
+    </com.zj.secondattr.RainbowBar>
+
+</RelativeLayout>
+```
+
+### 效果如下  
+
+![](http://upload-images.jianshu.io/upload_images/188580-c1fe83e12ed75041.gif?imageView2/2/w/1240/q/100)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
