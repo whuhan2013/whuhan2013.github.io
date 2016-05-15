@@ -3,7 +3,7 @@ layout: post
 title: Android之自定义控件深入
 date: 2016-3-26
 categories: blog
-tags: [android]
+tags: [自定义控件]
 description: 安卓。
 ---
 

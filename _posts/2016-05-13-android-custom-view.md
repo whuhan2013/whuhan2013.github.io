@@ -3,7 +3,7 @@ layout: post
 title: Android自定义View
 date: 2016-5-13
 categories: blog
-tags: [android]
+tags: [自定义控件]
 description: Android自定义View
 ---   
 

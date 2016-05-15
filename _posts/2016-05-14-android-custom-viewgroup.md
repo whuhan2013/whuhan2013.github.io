@@ -3,7 +3,7 @@ layout: post
 title: Android之自定义ViewGroup
 date: 2016-5-14
 categories: blog
-tags: [android]
+tags: [自定义控件]
 description: Android之自定义ViewGroup
 ---   
 

@@ -3,7 +3,7 @@ layout: post
 title: ListView滑动删除效果实现
 date: 2016-5-15
 categories: blog
-tags: [android]
+tags: [自定义控件]
 description: ListView滑动删除效果实现
 ---   
 
