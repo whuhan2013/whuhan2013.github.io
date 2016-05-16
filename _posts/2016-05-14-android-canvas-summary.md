@@ -554,4 +554,11 @@ public class CanvasDemoActivity extends Activity {
 
 [Android利用canvas画各种图形(点、直线、弧、圆、椭圆、文字、矩形、多边形、曲线、圆角矩形) - 任海丽(3G/移动开发) - 博客频道 - CSDN.NET](http://blog.csdn.net/rhljiayou/article/details/7212620)
 
+
+### Canvas之translate、scale、rotate、skew详解
+
+### 详情请参见
+
+[Canvas之translate、scale、rotate、skew方法讲解！ - Ajian_studio - 博客频道 - CSDN.NET](http://blog.csdn.net/tianjian4592/article/details/45234419)
+
 ### 完成
