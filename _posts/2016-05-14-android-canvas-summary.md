@@ -3,7 +3,7 @@ layout: post
 title: Android之canvas详解
 date: 2016-5-14
 categories: blog
-tags: [android]
+tags: [自定义控件]
 description: Android之canvas详解
 ---   
 

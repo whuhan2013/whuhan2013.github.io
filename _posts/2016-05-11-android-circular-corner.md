@@ -3,7 +3,7 @@ layout: post
 title: Android之圆角矩形
 date: 2016-5-11
 categories: blog
-tags: [android]
+tags: [自定义控件]
 description: Android之圆角矩形
 ---   
 

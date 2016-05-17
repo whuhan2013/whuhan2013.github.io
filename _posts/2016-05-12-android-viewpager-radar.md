@@ -3,7 +3,7 @@ layout: post
 title: Android实现高仿QQ附近的人搜索展示
 date: 2016-5-12
 categories: blog
-tags: [android]
+tags: [自定义控件]
 description: Android实现高仿QQ附近的人搜索展示
 ---   
 
