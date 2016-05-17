@@ -7,6 +7,9 @@ tags: [读书笔记]
 description: 月亮与六便士
 ---
 
+
+<center><img src="https://pic1.zhimg.com/054975041082e64aff650afed24f5798_b.png"></center>
+
 > “遍地是六便士，一抬头却看到月亮。”   
 
 

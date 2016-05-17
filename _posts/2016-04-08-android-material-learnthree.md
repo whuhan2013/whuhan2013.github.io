@@ -12,6 +12,9 @@ description: Material Design入门（三）
 1. CollapsingToolbarLayout实现滚动动画效果  
 2.  ViewPager+tabLayout实现左右类Tab效果   
 
+
+
+
 ### 控件介绍
 这次需要用到得新控件比较多，主要有以下几个：
 
@@ -28,6 +31,11 @@ description: Material Design入门（三）
 
 
 CollapsingToolbarLayout作用是提供了一个可以折叠的Toolbar，它继承至FrameLayout，给它设置layout_scrollFlags，它可以控制包含在CollapsingToolbarLayout中的控件(如：ImageView、Toolbar)在响应layout_behavior事件时作出相应的scrollFlags滚动事件(移除屏幕或固定在屏幕顶端)。
+
+
+### 这些控件详细介绍参见  
+
+[通过来模仿稀土掘金个人页面的布局来学习使用CoordinatorLayout](http://mp.weixin.qq.com/s?__biz=MjM5NDkxMTgyNw==&mid=2653057481&idx=1&sn=b7fe4335fb4618a87758d51420535074&scene=0#wechat_redirect)
 
 使用CollapsingToolbarLayout：
 
@@ -181,6 +189,25 @@ mCollapsingToolbarLayout.setTitle(" ");
 
 ### 参考链接：
 [Android5.0+(CollapsingToolbarLayout) - OPEN 开发经验库](http://www.open-open.com/lib/view/open1438265746378.html)
+
+
+### 问题  
+
+我在做这里的时候遇到一个问题，那就是CollapsingToolbarLayout里的Title的问题，一般默认是显示的，即使你不写，它也有会一个默认值一直显示在那里，等折叠收缩完的时候，停留在标题工具栏上。怎么消除这个默认值呢？怎么知道收缩完成了，再把这个值设置出来呢？这里我对AppBarLayout设置了一个监听，它有一个监听方法：addOnOffsetChangedListener监听折叠收缩的位移。如下：
+
+```
+app_bar_layout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset <= -head_layout.getHeight() / 2) {
+                    mCollapsingToolbarLayout.setTitle("涩郎");
+                } else {
+                    mCollapsingToolbarLayout.setTitle(" ");
+                }
+            }
+        });
+```
+
 
 
 #### ViewPager+tabLayout实现Tab效果  
