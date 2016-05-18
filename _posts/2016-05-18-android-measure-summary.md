@@ -7,9 +7,30 @@ tags: [自定义控件]
 description: Android中mesure过程详解
 ---   
 
+### 本文主要包括以下内容
+
+1. DisplayMetrics
+2. measure过程 
+
+### 利用DisplayMetrics获取屏幕信息   
+
+```
+// 获得屏幕宽度
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        mScreenWitdh = outMetrics.widthPixels;
+```
+
+### 参考链接
+
+[Android 中的DisplayMetrics类的用法 - yujian_bing的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/yujian_bing/article/details/8264780)
+
 我们在编写layout的xml文件时会碰到layout_width和layout_height两个属性，对于这两个属性我们有三种选择：赋值成具体的数值，match_parent或者wrap_content，而measure过程就是用来处理match_parent或者wrap_content，假如layout中规定所有View的layout_width和layout_height必须赋值成具体的数值，那么measure其实是没有必要的，但是google在设计Android的时候考虑加入match_parent或者wrap_content肯定是有原因的，它们会使得布局更加灵活。
  
-      首先我们来看几个关键的函数和参数：
+
+首先我们来看几个关键的函数和参数：
 
 ``` 
       1、public final void measue(int widthMeasureSpec, int heightMeasureSpec);
