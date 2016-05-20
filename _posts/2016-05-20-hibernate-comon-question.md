@@ -3,7 +3,7 @@ layout: post
 title: Hibernate常见问题
 date: 2016-5-20
 categories: blog
-tags: [android]
+tags: [java]
 description: Hibernate常见问题
 ---   
 
