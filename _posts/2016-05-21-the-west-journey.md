@@ -1,10 +1,10 @@
 ---
 layout: post
 title: 读《西行漫记》
-date: 2016-5-12
+date: 2016-5-21
 categories: blog
 tags: [读书笔记]
-description: 局外人
+description: 西行漫记
 ---
 
 
