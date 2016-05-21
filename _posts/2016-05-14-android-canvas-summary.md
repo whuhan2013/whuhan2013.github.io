@@ -561,4 +561,152 @@ public class CanvasDemoActivity extends Activity {
 
 [Canvas之translate、scale、rotate、skew方法讲解！ - Ajian_studio - 博客频道 - CSDN.NET](http://blog.csdn.net/tianjian4592/article/details/45234419)
 
+
+### 补充 
+
+- canvas.saveLayer 
+
+Canvas 在一般的情况下可以看作是一张画布，所有的绘图操作如drawBitmap, drawCircle都发生在这张画布上，这张画板还定义了一些属性比如Matrix，颜色等等。但是如果需要实现一些相对复杂的绘图操作，比如多层动画，地图（地图可以有多个地图层叠加而成，比如：政区层，道路层，兴趣点层）。Canvas提供了图层（Layer）支持，缺省情况可以看作是只有一个图层Layer。如果需要按层次来绘图，Android的Canvas可以使用SaveLayerXXX, Restore 来创建一些中间层，对于这些Layer是按照“栈结构“来管理的：  
+
+![](http://img.my.csdn.net/uploads/201212/19/1355906035_7646.png)
+
+ 创建一个新的Layer到“栈”中，可以使用saveLayer, savaLayerAlpha, 从“栈”中推出一个Layer，可以使用restore,restoreToCount。但Layer入栈时，后续的DrawXXX操作都发生在这个Layer上，而Layer退栈时，就会把本层绘制的图像“绘制”到上层或是Canvas上，在复制Layer到Canvas上时，可以指定Layer的透明度(Layer），这是在创建Layer时指定的：public int saveLayerAlpha(RectF bounds, int alpha, int saveFlags)本例Layers 介绍了图层的基本用法：Canvas可以看做是由两个图层（Layer）构成的，为了更好的说明问题，我们将代码稍微修改一下，缺省图层绘制一个红色的圆，在新的图层画一个蓝色的圆，新图层的透明度为0×88。      
+
+ ```
+ public class Layers extends Activity {  
+  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(new SampleView(this));  
+    }  
+  
+    private static class SampleView extends View {  
+        private static final int LAYER_FLAGS = Canvas.MATRIX_SAVE_FLAG | Canvas.CLIP_SAVE_FLAG  
+                | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.FULL_COLOR_LAYER_SAVE_FLAG  
+                | Canvas.CLIP_TO_LAYER_SAVE_FLAG;  
+  
+        private Paint mPaint;  
+  
+        public SampleView(Context context) {  
+            super(context);  
+            setFocusable(true);  
+  
+            mPaint = new Paint();  
+            mPaint.setAntiAlias(true);  
+        }  
+  
+        @Override  
+        protected void onDraw(Canvas canvas) {  
+            canvas.drawColor(Color.WHITE);    
+            canvas.translate(10, 10);    
+            mPaint.setColor(Color.RED);    
+            canvas.drawCircle(75, 75, 75, mPaint);    
+            canvas.saveLayerAlpha(0, 0, 200, 200, 0x88, LAYER_FLAGS);    
+            mPaint.setColor(Color.BLUE);    
+            canvas.drawCircle(125, 125, 75, mPaint);    
+            canvas.restore();   
+         }  
+    }  
+}  
+```
+
+### 参考链接
+
+参考链接 [Android中的canvas介绍 - linghu_java的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/linghu_java/article/details/8939952)
+
+
+- android中Canvas使用drawBitmap绘制图片
+
+1、基本的绘制图片方法
+     
+```
+   //Bitmap：图片对象，left:偏移左边的位置，top： 偏移顶部的位置
+    drawBitmap(Bitmap bitmap, float left, float top, Paint paint)
+```
+
+ 
+2、对图片剪接和限定显示区域
+   
+```   
+drawBitmap(Bitmap bitmap, Rect src, RectF dst, Paint paint)；
+Rect src: 是对图片进行裁截，若是空null则显示整个图片
+RectF dst：是图片在Canvas画布中显示的区域，
+           大于src则把src的裁截区放大，
+           小于src则把src的裁截区缩小。
+```
+
+### 参考链接  
+
+[android中Canvas使用drawBitmap绘制图片 - longyi_java的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/longyi_java/article/details/6930480)
+
+
+- canvas.setXfermode属性
+
+1. AvoidXfermode  指定了一个颜色和容差，强制Paint避免在它上面绘图(或者只在它上面绘图)。
+2. PixelXorXfermode  当覆盖已有的颜色时，应用一个简单的像素XOR操作。
+3. PorterDuffXfermode  这是一个非常强大的转换模式，使用它，可以使用图像合成的16条Porter-Duff规则的任意一条来控制Paint如何与已有的Canvas图像进行交互。
+
+要应用转换模式，可以使用setXferMode方法，如下所示：
+
+```
+AvoidXfermode avoid = new AvoidXfermode(Color.BLUE, 10, AvoidXfermode.Mode. AVOID);    
+borderPen.setXfermode(avoid);
+```
+
+Porter-Duff 效果图：
+
+![](http://hi.csdn.net/attachment/201111/22/0_13219433774KaR.gif)
+
+### 16条Porter-Duff规则 
+
+1.PorterDuff.Mode.CLEAR
+   所绘制不会提交到画布上。     
+
+2.PorterDuff.Mode.SRC
+   显示上层绘制图片
+
+3.PorterDuff.Mode.DST
+  显示下层绘制图片
+
+4.PorterDuff.Mode.SRC_OVER
+  正常绘制显示，上下层绘制叠盖。
+
+5.PorterDuff.Mode.DST_OVER
+  上下层都显示。下层居上显示。
+
+6.PorterDuff.Mode.SRC_IN
+   取两层绘制交集。显示上层。
+7.PorterDuff.Mode.DST_IN
+  取两层绘制交集。显示下层。
+
+8.PorterDuff.Mode.SRC_OUT
+ 取上层绘制非交集部分。
+
+9.PorterDuff.Mode.DST_OUT
+ 取下层绘制非交集部分。
+
+10.PorterDuff.Mode.SRC_ATOP
+ 取下层非交集部分与上层交集部分
+
+11.PorterDuff.Mode.DST_ATOP
+  取上层非交集部分与下层交集部分
+
+12.PorterDuff.Mode.XOR
+  
+13.PorterDuff.Mode.DARKEN
+
+14.PorterDuff.Mode.LIGHTEN
+
+15.PorterDuff.Mode.MULTIPLY
+
+16.PorterDuff.Mode.SCREEN
+
+
+### 参考链接:
+
+[setXfermode属性 - xSTARx - ITeye技术网站](http://407827531.iteye.com/blog/1470519)
+
+
+
 ### 完成
