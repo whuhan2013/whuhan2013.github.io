@@ -458,12 +458,15 @@ public class PorterDuffXfermodeView extends View {
 ### 一些知识点
 
 - canvas.saveLayer
+
 参考链接 [Android中的canvas介绍 - linghu_java的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/linghu_java/article/details/8939952)
 
 - android中Canvas使用drawBitmap绘制图片
+
 参考链接  [android中Canvas使用drawBitmap绘制图片 - longyi_java的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/longyi_java/article/details/6930480)
 
 - canvas.setXfermode属性
+
 参考链接:[setXfermode属性 - xSTARx - ITeye技术网站](http://407827531.iteye.com/blog/1470519)
 
 
