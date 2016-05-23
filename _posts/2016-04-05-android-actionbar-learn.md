@@ -433,6 +433,69 @@ public class ListActivity extends Activity {
 [github代码地址](https://github.com/YeXiaoChao/Yc_ui_actionbar)
 
 
+### 补充 
+
+### Overflow按钮不显示的情况
+
+有人总结了一下，overflow按钮的显示情况和手机的硬件情况是有关系的，如果手机没有物理Menu键的话，overflow按钮就可以显示，如果有物理Menu键的话，overflow按钮就不会显示出来。比如我们启动一个有Menu键的模拟器，然后将代码运行到该模拟器上
+ 
+实际上，在ViewConfiguration这个类中有一个叫做sHasPermanentMenuKey的静态变量，系统就是根据这个变量的值来判断手机有没有物理Menu键的。当然这是一个内部变量，我们无法直接访问它，但是可以通过反射的方式修改它的值，让它永远为false就可以了，代码如下所示：
+
+
+```
+@Override 
+protected void onCreate(Bundle savedInstanceState) {  
+    ......  
+    setOverflowShowingAlways();  
+}  
+ 
+private void setOverflowShowingAlways() {  
+    try {  
+        ViewConfiguration config = ViewConfiguration.get(this);  
+        Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");  
+        menuKeyField.setAccessible(true);  
+        menuKeyField.setBoolean(config, false);  
+    } catch (Exception e) {  
+        e.printStackTrace();  
+    }  
+}
+```
+
+
+
+### 让Overflow中的选项显示图标
+
+如果你点击一下overflow按钮去查看隐藏的Action按钮，你会发现这部分Action按钮都是只显示文字不显示图标的，如下图所示：
+
+![](http://images.cnitblog.com/blog/359646/201502/262349120808172.png)
+
+
+这是官方的默认效果，Google认为隐藏在overflow中的Action按钮都应该只显示文字。当然，如果你认为这样不够美观，希望在overflow中的Action按钮也可以显示图标，我们仍然可以想办法来改变这一默认行为。
+ 
+其实，overflow中的Action按钮应不应该显示图标，是由MenuBuilder这个类的setOptionalIconsVisible变量来决定的，如果我们在overflow被展开的时候将这个变量赋值为true，那么里面的每一个Action按钮对应的图标就都会显示出来了。赋值的方法当然仍然是用反射了，代码如下所示：
+
+
+```
+@Override 
+public boolean onMenuOpened(int featureId, Menu menu) {  
+    if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {  
+        if (menu.getClass().getSimpleName().equals("MenuBuilder")) {  
+            try {  
+                Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);  
+                m.setAccessible(true);  
+                m.invoke(menu, true);  
+            } catch (Exception e) {  
+            }  
+        }  
+    }  
+    return super.onMenuOpened(featureId, menu);  
+}
+```
+
+
+
+
+
 
 
 
