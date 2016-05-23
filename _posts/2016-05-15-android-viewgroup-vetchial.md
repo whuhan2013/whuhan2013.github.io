@@ -7,23 +7,8 @@ tags: [自定义控件]
 description: Andoird自定义ViewGroup实现竖向引导界面
 ---   
 
-通过继承ListView然后结合PopupWindow实现
 
-首先是布局文件：
-delete_btn.xml：这里只需要一个Button
-
-
-```
-<?xml version="1.0" encoding="utf-8"?>  
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  
-    android:layout_width="wrap_content"  
-    android:layout_height="wrap_content"  
-    android:orientation="vertical" >  
-      <Button   
-        android:id="@+id/id_item_btn"  
-        android:layout_width="60dp"  
-        android:singleLine="true"  
-        android:layou一般进入APP都有欢迎界面，基本都是水平滚动的，今天和大家分享一个垂直滚动的例子。
+一般进入APP都有欢迎界面，基本都是水平滚动的，今天和大家分享一个垂直滚动的例子。
 先来看看效果把：
 
 
