@@ -99,3 +99,13 @@ description: 推荐！手把手教你使用Git
 ### 详情请参见 
 
 [推荐！手把手教你使用Git - 文章 - 伯乐在线](http://blog.jobbole.com/78960/)
+
+
+### 补充 
+
+[git干货系列：（二）深入学习之前先理解git暂存区 - 简书](http://www.jianshu.com/p/4416c3c61dba)
+
+[git干货系列：（五）多人协同工作之分支管理 - 简书](http://www.jianshu.com/p/e7ddad179c9d)
+
+[git干货系列：（六）公司内部搭建git服务器 - 简书](http://www.jianshu.com/p/ee8c379ef888)
+
