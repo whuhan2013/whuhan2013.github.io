@@ -310,6 +310,8 @@ github上也有例子，[android-percent-support-lib-sample](https://github.com/
 
 [Android 百分比布局库(percent-support-lib) 解析与扩展 - Hongyang - 博客频道 - CSDN.NET](http://blog.csdn.net/lmj623565791/article/details/46695347)
 
+[Android 增强版百分比布局库 为了适配而扩展 - Hongyang - 博客频道 - CSDN.NET](http://blog.csdn.net/lmj623565791/article/details/46767825)
+
 
 ###  Android AutoLayout全新的适配方式 堪称适配终结者
 
