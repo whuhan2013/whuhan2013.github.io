@@ -88,11 +88,12 @@ try{
   }catch(Exception e){
 
  }
- ```
+```
 
-业务很简答，根据用户想买的披萨，生成不同的披萨。               
+业务很简单，根据用户想买的披萨，生成不同的披萨。               
 传统的设置这样也没错，如果业务发展，会造成什么问题呢？                           
 现在如果多了一种口味 qiaokeliPizza，正常办法是生成一个QiaokeliPizza类，继承于Pizza，然后在OrderPizza中，添加
+
 
 ```
 if("qiaokeli".equal(orderType)) pizza = new QiaokeliPizza();
@@ -144,7 +145,7 @@ public class SimplePizzaFactory {
  }catch(Exception e){
  ...
  }
- ```
+```
 
 这样设计后，店长就轻松多了，只要负责告诉工厂类（厨师）需要什么类型的披萨就可以，终于不要担心搞错了而负责任。
 
@@ -334,7 +335,7 @@ public class OrderPizza {
 public interface Pizza {
     public void create();
 }
-``
+```
 
 下面是具体产品的角色SinglePizza的源代码：
 
