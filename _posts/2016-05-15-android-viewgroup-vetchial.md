@@ -457,6 +457,19 @@ Scroller这个辅助类还是相当好用的，原理我简单说一下：每次
 
 Android里Scroller类是为了实现View平滑滚动的一个Helper类。通常在自定义的View时使用，在View中定义一个私有成员mScroller = new Scroller(context)。设置mScroller滚动的位置时，并不会导致View的滚动，通常是用mScroller记录/计算View滚动的位置，再重写View的computeScroll()，完成实际的滚动。 
 
+
+
+### Scroller常用于自定义控件，移动自己View里面的内容，而不是在父控件中移动
+
+1. 在滑动的过程中，mScrollX和mScrollY的值会改变，其他的值（x，y，top，left等）不会改变。     
+2. mScrollX = view.getScrollX(),mScrollY同理。           
+3. 在滑动过程中，mScrollX的值总等于view左边边缘和view内容左边缘在水平方向的距离。mScrollY同理。       
+4. mScrollX 和 mScrollY 的单位为像素。        
+5. scrollTo和scrollBy只能改变view内容的位置而不能改变view在布局中的位置。             
+6. 当view左边缘在view内容左边缘的右边时，mScrollX为正值；反之为负值。如图，实现为view的坐标系，虚线为内容平移后的位置。其中A图： scrollX=view左边缘-view内容左边缘，由坐标系关系可知scrollX的值为正。也就是说如果从右向左滑动时，scrollX的值为正值，也就是说此时scrollTo的第一个参数x为正。   
+
+
+
 ### API介绍
 
 ```
@@ -531,5 +544,17 @@ public class CustomView extends LinearLayout {
 ### 参考链接
 
 [Android Scroller简单用法 - - ITeye技术网站](http://ipjmc.iteye.com/blog/1615828)
+
+
+### 其他关于Scroller的参考 
+
+[Android开发艺术探索--View的滑动 - 简书](http://www.jianshu.com/p/2b48551d5319)
+
+[Android scrollTo() scrollBy() Scroller讲解及应用 - 推酷](http://www.tuicool.com/articles/z6rmim)
+
+
+
+
+
 
 ### 完成
