@@ -3,7 +3,7 @@ layout: post
 title: Material Design入门(二）
 date: 2016-4-7
 categories: blog
-tags: [android]
+tags: [Material Design]
 description: Material Design入门(二）
 ---
 
