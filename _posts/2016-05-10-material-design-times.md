@@ -3,7 +3,7 @@ layout: post
 title: 进入Material Design时代
 date: 2016-5-10
 categories: blog
-tags: [android]
+tags: [Material Design]
 description: 进入Material Design时代
 ---   
 

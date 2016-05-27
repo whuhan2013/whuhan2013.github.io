@@ -3,7 +3,7 @@ layout: post
 title: Material Design风格登录注册
 date: 2016-5-18
 categories: blog
-tags: [android]
+tags: [Material Design]
 description: Material Design风格登录注册
 ---   
 

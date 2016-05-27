@@ -3,7 +3,7 @@ layout: post
 title: Material Design资料梳理
 date: 2016-4-24
 categories: blog
-tags: [收藏]
+tags: [Material Design]
 description: Material Design资料梳理
 ---   
 
