@@ -3,7 +3,7 @@ layout: post
 title: Android客户端与服务器之间传递json数据
 date: 2016-4-22
 categories: blog
-tags: [android]
+tags: [网络编程]
 description: Android客户端与服务器之间传递json数据
 ---
 

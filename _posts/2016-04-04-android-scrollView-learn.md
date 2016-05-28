@@ -7,7 +7,7 @@ tags: [android]
 description: Android之ScrollView
 ---
 
-  1、ScrollView和HorizontalScrollView是为控件或者布局添加滚动条  
+1、ScrollView和HorizontalScrollView是为控件或者布局添加滚动条  
 
 2、上述两个控件只能有一个孩子，但是它并不是传统意义上的容器
 

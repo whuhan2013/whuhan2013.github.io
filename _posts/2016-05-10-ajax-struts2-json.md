@@ -3,7 +3,7 @@ layout: post
 title: struts2+ajax+json使用实例
 date: 2016-5-10
 categories: blog
-tags: [javascript]
+tags: [javascript,网络编程]
 description: struts2+ajax+json使用实例
 ---   
 

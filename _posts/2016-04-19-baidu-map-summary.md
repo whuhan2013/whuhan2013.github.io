@@ -3,7 +3,7 @@ layout: post
 title: 百度地图综合
 date: 2016-4-19
 categories: blog
-tags: [android,地图开发]
+tags: [地图开发]
 description: 百度地图综合
 ---
 

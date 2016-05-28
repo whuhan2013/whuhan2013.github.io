@@ -3,7 +3,7 @@ layout: post
 title: Android之多线程断点下载
 date: 2016-3-30
 categories: blog
-tags: [android]
+tags: [网络编程]
 description: Android之多线程断点下载
 ---
 ### 本文主要包含多线程下载的一些简单demo,包括三部分  

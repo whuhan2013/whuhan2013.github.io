@@ -3,7 +3,7 @@ layout: post
 title: ImageLoader实现图片异步加载
 date: 2016-4-2
 categories: blog
-tags: [android]
+tags: [网络编程]
 description: ImageLoader实现图片异步加载
 ---
 ### ImageLoader是一个广泛使用的图片库,在向网络请求图片时，使用imageView和smartView常会产生outofmemory错误，这时ImageLoader可以起到很大的作用，主要有如下功能   

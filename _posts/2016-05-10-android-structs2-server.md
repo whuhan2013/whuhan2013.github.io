@@ -3,7 +3,7 @@ layout: post
 title: struts2服务端与android交互
 date: 2016-5-10
 categories: blog
-tags: [android]
+tags: [网络编程]
 description: struts2服务端与android交互
 ---   
 

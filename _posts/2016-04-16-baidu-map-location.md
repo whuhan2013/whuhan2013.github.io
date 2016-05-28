@@ -3,7 +3,7 @@ layout: post
 title: 百度地图开发之定位
 date: 2016-4-16
 categories: blog
-tags: [android,地图开发]
+tags: [地图开发]
 description: 百度地图开发之定位
 ---
 

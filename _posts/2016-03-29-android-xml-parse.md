@@ -3,7 +3,7 @@ layout: post
 title: Android之XML序列化和解析与网易新闻实例
 date: 2016-3-29
 categories: blog
-tags: [android]
+tags: [网络编程]
 description: Android之XML序列化和解析
 ---
 ### 本文主要包括两个知识点，XML序列化和解析与一个组合XML，网络编程等多个知识点的网易新闻实例
