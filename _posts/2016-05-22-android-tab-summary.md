@@ -13,6 +13,7 @@ description: Android之Tab类总结
 3. FragmentManager+Fragment实现
 4.  ViewPager+FragmentPagerAdapter实现
 5. TabPageIndicator+ViewPager+FragmentPagerAdapter
+6. Android底部导航栏开源库的使用    
 
 
 
@@ -173,6 +174,95 @@ public class MainActivity extends FragmentActivity {
 
 [Android项目Tab类型主界面大总结 Fragment+TabPageIndicator+ViewPager - Hongyang - 博客频道 - CSDN.NET](http://blog.csdn.net/lmj623565791/article/details/24740977)
 
+
+### Android底部导航栏开源库的使用
+
+传送门：[IconTabPageIndicator](https://github.com/msdx/IconTabPageIndicator)
+
+
+先按照它README.md说明的配置好，接下来就要按照自己的需要修改。
+布局文件按照demo里来：
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"    android:layout_width="match_parent"    android:layout_height="match_parent" >    
+<com.githang.viewpagerindicator.IconTabPageIndicator   
+     android:id="@+id/indicator"        
+     android:layout_alignParentBottom="true"           
+     android:layout_width="match_parent"      
+     android:layout_height="wrap_content"/>    
+<View android:layout_width="match_parent"        
+      android:id="@+id/divider"      
+      android:layout_above="@id/indicator"       
+      android:layout_height="1px"       
+      android:background="#ababab"/>    
+<android.support.v4.view.ViewPager        
+    android:layout_above="@id/divider"        
+    android:id="@+id/view_pager"        
+    android:layout_width="match_parent"        
+    android:layout_height="match_parent"/>
+</RelativeLayout>
+```
+
+Activity和BaseFragment也直接用demo中的即可，在这里就不放出来了。
+需要更改的地方主要在fragment上。我根据需要新建fg1.java、fg2.java、fg3.java、fg4.java,继承BaseFragment。
+
+```
+public class Fg1 extends BaseFragment {    
+@Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fg1,container,false);  
+      return view; 
+   }
+}
+```
+
+在MainActivity中对initFragments()进行修改，将fragment修改成自己创建的。控件中导航栏的名称直接在userFragment.setTitle()修改即可。
+
+```
+private List<BaseFragment> initFragments() {   
+ List<BaseFragment> fragments = new ArrayList<BaseFragment>();    
+BaseFragment userFragment = new Fg1();    
+userFragment.setTitle("主页");    
+userFragment.setIconId(R.drawable.tab_index_selector);    
+fragments.add(userFragment);    
+BaseFragment noteFragment = new Fg2();    
+noteFragment.setTitle("我的商品");    
+noteFragment.setIconId(R.drawable.tab_record_selector);    
+fragments.add(noteFragment);    
+......
+   }
+```
+
+图标通过userFragment.setIconId()控制。在drawable中新建selector.xml文件：
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">  
+  <item android:drawable="@drawable/icon_index_pressed" android:state_selected="true" />   
+ <item android:drawable="@drawable/icon_index_pressed" android:state_pressed="true" />   
+ <item android:drawable="@drawable/icon_index_pressed" android:state_checked="true" />    
+<item android:drawable="@drawable/icon_index_normal" />
+</selector>
+```
+
+选中、点击、check都使用了区别于普通样式的图片，在demo中有示例的png格式图片，根据其大小直接修改成自己需要的即可。在MainActivity中修改initFragments()，在noteFragment.setIconId()中控制导航栏图标。
+
+最后有人可能需要对图标下的文字颜色进行修改。打开library中的color.xml直接在里面修改即可。
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    
+   <color name="tab_text_normal">#696969</color> 
+   <color name="tab_text_selected">#E8860A</color>
+</resources>
+```
+
+![](http://upload-images.jianshu.io/upload_images/2013918-2c865a18e5ff90b8.gif?imageMogr2/auto-orient/strip)
+
+### 参考链接
+
+[Android底部导航栏控件的使用 - 简书](http://www.jianshu.com/p/9683e3112159)
 
 ### 完成
 
