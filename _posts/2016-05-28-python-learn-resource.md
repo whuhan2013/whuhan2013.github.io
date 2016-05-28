@@ -7,6 +7,10 @@ tags: [python]
 description: python学习资源.
 ---
 
+### python爬虫入门 
+
+[如何入门 Python 爬虫?-知乎](https://www.zhihu.com/question/20899988)
+
 ### Python爬虫学习系列教程
 
 **Python版本：2.7**
@@ -74,7 +78,7 @@ description: python学习资源.
 
 ### 链接地址
 
-[Python爬虫学习系列教程 | 静觅](http://cuiqingcai.com/1052.html)
+[Python爬虫学习系列教程](http://cuiqingcai.com/1052.html)
 
 
 ### python3网络爬虫教程  
