@@ -90,43 +90,43 @@ description: 面纱
 > Que je m'y suis baigné 我依水而浴           
 > Il y a longtemps que je t'aime 我爱你已久           
 > Jamais je ne t'oublierai 永不能忘           
->          
+         
 > Sous les feuilles d'un chêne 躺在树荫下           
 > Je me suis fait sécher 我晾干身体           
 > Sur la plus haute branche 高高的树叶上           
 > Un rossignol chantait 黄莺在歌唱           
 > Il y a longtemps que je t'aime 我爱你已久           
-> Jamais je ne t'oublierai 永不能忘 
-> 
-> Chante rossignol chante 唱吧，黄莺 
-> Toi qui as le c?ur gai 唱吧，你如此欢畅 
-> Tu as le c?ur à rire 你满心欢喜 
-> Moi je l'ai à pleurer 我却想哭泣 
-> Il y a longtemps que je t'aime 我爱你已久 
-> Jamais je ne t'oublierai 永不能忘 
-> 
-> J'ai perdu mon amie 我已失去了朋友 
-> Sans l'avoir mérité 不知何处寻找 
-> Pour un bouton de roses 为了一束玫瑰花 
-> Que je lui refusai 我拒绝了他 
-> Il y a longtemps que je t'aime 我爱你已久 
-> Jamais je ne t'oublierai 永不能忘 
-> 
-> Je voudrais que la rose 我希望那支玫瑰 
-> Fut encore au rosier 仍在绽放 
-> Et moi et ma ma?tresse 而我的朋友 
-> Dans les mêmes amitiés 依然爱我 
-> Il y a longtemps que je t'aime 我爱你已久 
-> Jamais je ne t'oublierai 永不能忘 
-> 
-> à la claire fontaine 在清澈的泉水边 
-> M'en allant promener 我漫步 
-> J'ai trouvé l'eau si belle 泉水如此美丽 
-> Que je m'y suis baigné 我依水而浴 
-> Il y a longtemps que je t'aime 我爱你已久 
-> Jamais je ne t'oublierai 永不能忘 
+> Jamais je ne t'oublierai 永不能忘            
 
-<center><img src="http://img2.mtime.com/mg/2008/6/99545add-96ee-4d35-977a-15c992141e90.jpg"></center>
+> Chante rossignol chante 唱吧，黄莺           
+> Toi qui as le c?ur gai 唱吧，你如此欢畅        
+> Tu as le c?ur à rire 你满心欢喜          
+> Moi je l'ai à pleurer 我却想哭泣          
+> Il y a longtemps que je t'aime 我爱你已久            
+> Jamais je ne t'oublierai 永不能忘              
+   
+> J'ai perdu mon amie 我已失去了朋友           
+> Sans l'avoir mérité 不知何处寻找                
+> Pour un bouton de roses 为了一束玫瑰花          
+> Que je lui refusai 我拒绝了他             
+> Il y a longtemps que je t'aime 我爱你已久              
+> Jamais je ne t'oublierai 永不能忘            
+
+> Je voudrais que la rose 我希望那支玫瑰         
+> Fut encore au rosier 仍在绽放             
+> Et moi et ma ma?tresse 而我的朋友             
+> Dans les mêmes amitiés 依然爱我                  
+> Il y a longtemps que je t'aime 我爱你已久               
+> Jamais je ne t'oublierai 永不能忘                  
+
+> à la claire fontaine 在清澈的泉水边                 
+> M'en allant promener 我漫步               
+> J'ai trouvé l'eau si belle 泉水如此美丽              
+> Que je m'y suis baigné 我依水而浴               
+> Il y a longtemps que je t'aime 我爱你已久             
+> Jamais je ne t'oublierai 永不能忘               
+
+<center><img src="https://img3.doubanio.com/view/photo/photo/public/p1193472964.jpg"></center>
 
 		
 
