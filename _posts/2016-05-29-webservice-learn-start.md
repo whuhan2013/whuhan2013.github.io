@@ -15,10 +15,10 @@ webservice 就是一个应用程序，它提供一种通过web 方式访问的ap
 webservice 最基本的组成部分就是客户端，服务端...        
 
 **webservice 中的一些概念**                     
-服务端：(作为服务端，怎么将自己的应用程序发布成一个webservice，让别人调用)                      
-xml （webservice的客户端与服务端进行交互的时候传递的数据格式）     
-webservice description language（web 服务描述语言.. api）xml,简称wsdl                         
-soap（简单对象访问协议） webservice 的客户端与服务端进行交互的时候走的协议                  
+1.服务端：(作为服务端，怎么将自己的应用程序发布成一个webservice，让别人调用)                      
+2. xml （webservice的客户端与服务端进行交互的时候传递的数据格式）     
+3. webservice description language（web 服务描述语言.. api）xml,简称wsdl                         
+4. soap（简单对象访问协议） webservice 的客户端与服务端进行交互的时候走的协议                  
 (soap 分两个版本（soap 1.1 与soap1.2）),现在的本是soap1.1,因为java jdk 只支持soap1.1版本的协议发布                
 ***** soap 协议=在http 的基础之上传送xml 格式的数据..   
 
@@ -80,9 +80,9 @@ public class HelloService {
 
 ```
 
-**注意：**1,endpoint是java jdk 提供的类，用来发布webservice，所以你的jdk 版本必须在1.6.0_21之上..
-      2,被发布的类当中必须包含一个有效（方法必须为publish的非静态的，非final的方法）的方法
-      3,被发布的类上面必须有注解...
+**注意：**1,endpoint是java jdk 提供的类，用来发布webservice，所以你的jdk 版本必须在1.6.0_21之上..       
+      2,被发布的类当中必须包含一个有效（方法必须为publish的非静态的，非final的方法）的方法         
+      3,被发布的类上面必须有注解...              
 
 
 ### 客户端：
@@ -193,7 +193,7 @@ public class URLConnectionInvoke {
 
 
 
-**第三种方式调用：通过客户端编程的方式调用 webservice **
+**第三种方式调用:通过客户端编程的方式调用webservice**
 
 我们需要通过java jdk 自带的类 Service ，
 同时，我们需要依赖一个接口，这个接口我们可以通过wsimport 生成的本地代码当中获取
@@ -232,11 +232,11 @@ public class ServiceInvoke {
 ```
 
 
-/**
-  互联网上有很多免费的服务,http://www.webxml.com.cn 可以在这个网站上面找到。       
-**/       
+
+**互联网上有很多免费的服务,http://www.webxml.com.cn 可以在这个网站上面找到。**       
+     
          
-**1,调用互联网上手机号码归属地查询的服务 **                             
+**1,调用互联网上手机号码归属地查询的服务**                             
 使用第一种：wsimport 生成本地代码调用                
 使用第二种：使用urlConnect 调用天气预报..              
 
