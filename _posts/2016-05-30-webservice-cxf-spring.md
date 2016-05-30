@@ -518,7 +518,7 @@ System.out.println(basePath);
 
 ### 总结 
 
-分布与接收webService的方法 
+发布与接收webService的方法 
 
 
 ![这里写图片描述](http://img.blog.csdn.net/20160530133219202)
