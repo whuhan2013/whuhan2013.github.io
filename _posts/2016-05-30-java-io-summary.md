@@ -1076,8 +1076,7 @@ public class Test {
 
 [java中的IO操作总结（一） - Nerxious - 博客园](http://www.cnblogs.com/nerxious/archive/2012/12/15/2818848.html)
 
-
-[java中的IO操作|皂荚花](http://www.zaojiahua.com/1453.html)
+[java中的IO操作--皂荚花](http://www.zaojiahua.com/1453.html)
 
 
 [Java之美[从菜鸟到高手演变]之Java中的IO - 智慧演绎，无处不在 - 博客频道 - CSDN.NET](http://blog.csdn.net/zhangerqing/article/details/8466532)
