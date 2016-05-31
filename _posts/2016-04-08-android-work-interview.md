@@ -3,7 +3,7 @@ layout: post
 title: Android面试经验（转）
 date: 2016-4-8
 categories: blog
-tags: [面试]
+tags: [求职]
 description: Android面试经验（转）
 ---
 

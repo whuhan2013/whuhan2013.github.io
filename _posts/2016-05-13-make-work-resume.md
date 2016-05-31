@@ -3,7 +3,7 @@ layout: post
 title: 为什么你的简历石沉大海？（转）
 date: 2016-5-13
 categories: blog
-tags: [面试]
+tags: [求职]
 description: 为什么你的简历石沉大海？（转）
 ---
 
