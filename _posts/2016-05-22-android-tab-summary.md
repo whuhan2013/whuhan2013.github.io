@@ -14,6 +14,7 @@ description: Android之Tab类总结
 4.  ViewPager+FragmentPagerAdapter实现
 5. TabPageIndicator+ViewPager+FragmentPagerAdapter
 6. Android底部导航栏开源库的使用    
+7. ViewPager+Fragment+FragmentTabHost实现底部菜单
 
 
 
@@ -263,6 +264,13 @@ fragments.add(noteFragment);
 ### 参考链接
 
 [Android底部导航栏控件的使用 - 简书](http://www.jianshu.com/p/9683e3112159)
+
+
+### ViewPager+Fragment+FragmentTabHost实现底部菜单
+
+
+**参考链接**     
+[Android开发之ViewPager+Fragment+FragmentTabHost实现底部菜单 - 简书](http://www.jianshu.com/p/f7351d4ee903)
 
 ### 完成
 

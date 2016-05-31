@@ -3,7 +3,7 @@ layout: post
 title: Android下利用Bitmap切割图片
 date: 2016-5-19
 categories: blog
-tags: [android]
+tags: [图像处理]
 description: Android下利用Bitmap切割图片
 ---   
 
