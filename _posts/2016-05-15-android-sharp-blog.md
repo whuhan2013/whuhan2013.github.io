@@ -50,3 +50,8 @@ description: Android开发相关的Blog推荐
 - Android代码查找：[https://www.codota.com/](https://www.codota.com/) 
 
 如果你有非常好的Blog推荐，欢迎补充！感谢这些人的分享精神！
+
+### 我添加的 
+
+- 王辰龙的博客(ReactNative与安卓动效等):[http://www.wangchenlong.org/](http://www.wangchenlong.org/)
+- 干货集中营[http://gank.io/](http://gank.io/)
