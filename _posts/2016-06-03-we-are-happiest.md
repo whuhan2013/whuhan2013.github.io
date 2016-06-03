@@ -4,7 +4,7 @@ title: 读《我们最幸福》
 date: 2016-6-3
 categories: blog
 tags: [读书笔记]
-description: Nothing to Envy: Ordinary Lives in North Korea
+description: Nothing to Envy，Ordinary Lives in North Korea
 ---
 
 > the life isn't supposed to be like this. It's not supposed to be this hard. 
