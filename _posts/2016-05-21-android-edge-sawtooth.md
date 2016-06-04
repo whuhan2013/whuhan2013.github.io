@@ -66,6 +66,121 @@ circleNum = (int) ((w-gap)/(2*radius+gap));
 
 ### 参考链接
 
-[一起来学习android自定义控件—边缘凹凸的View](http://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&mid=2650820217&idx=1&sn=69380a847716dc4c3caca4a702df6f0d&scene=0#wechat_redirect)
+[一起来学习android自定义控件—边缘凹凸的View](http://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&mid=2650820217&idx=1&sn=69380a847716dc4c3caca4a702df6f0d&scene=0#wechat_redirect)凹凸
+
+
+### 更新
+
+**利用边缘凹凸的View来实现比较好看的editText**
+
+**效果如下**
+
+![这里写图片描述](http://img.blog.csdn.net/20160604213217847)
+
+
+### 布局文件 
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="0dp"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/backcircle"
+    tools:context="com.zj.second.MainActivity">
+
+
+    <com.zj.second.CouponDisplayView
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="0dp">
+
+        <EditText
+            android:padding="20dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="姓 名"
+            android:background="@null"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="#FF909090" />
+
+        <EditText
+            android:padding="20dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="电 话"
+            android:background="@null"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="#FF909090" />
+
+        <EditText
+            android:padding="20dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="地 址"
+            android:background="@null"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="#FF909090" />
+
+    <EditText
+
+        android:gravity="top|left"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="案情描述"
+        android:minLines="8"
+        android:background="@null"
+
+        />
+    </com.zj.second.CouponDisplayView>
+
+    <ImageView
+
+        android:id="@+id/imageView_send"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:padding="0dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="168dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:src="@drawable/inline_reply_dialog_send"
+
+        android:layout_alignParentRight="true"
+
+        />
+
+</RelativeLayout>
+```
+
+
+
+### 参考链接
+
+[文本框 - Material Design 中文版 - 极客学院Wiki](http://wiki.jikexueyuan.com/project/material-design/components/text-fields.html) 
+
+
 
 
