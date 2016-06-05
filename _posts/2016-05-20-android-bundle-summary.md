@@ -122,3 +122,45 @@ private TextView etName;
 [Android Bundle类 - randyjiawenjie的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/randyjiawenjie/article/details/6651437)
 
 
+### 补充 
+
+### Bundle传递类对象  
+
+Android中Intent传递类对象提供了两种方式一种是 通过实现Serializable接口传递对象，一种是通过实现Parcelable接口传递对象。
+ 
+要求被传递的对象必须实现上述2种接口中的一种才能通过Intent直接传递。
+ 
+Intent中传递这2种对象的方法：
+ 
+```
+Bundle.putSerializable(Key,Object);  //实现Serializable接口的对象
+
+Bundle.putParcelable(Key, Object); //实现Parcelable接口的对象
+```
+
+**实例**  
+
+
+```
+ Intent intent=new Intent(ReportActivity.this,SendPoliceActivity.class);
+ Bundle bundle=new Bundle();
+ bundle.putParcelable("location",mapPoi.getPosition());
+ bundle.putString("address", mapPoi.getName());
+ intent.putExtra("mybundle",bundle);
+ startActivity(intent);
+```
+
+
+**接收** 
+
+```
+Intent intent=getIntent();
+bundle=intent.getBundleExtra("mybundle");
+sendpoliceaddress.setText(bundle.getString("address"));
+latLng=bundle.getParcelable("location");
+```
+
+### 参考链接
+
+[Android 开发笔记——通过 Intent 传递类对象 - Merray - 博客园](http://www.cnblogs.com/shaocm/archive/2013/01/08/2851248.html)
+
