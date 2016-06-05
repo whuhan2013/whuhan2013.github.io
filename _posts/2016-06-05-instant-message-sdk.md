@@ -22,7 +22,7 @@ description: 环信SDK集成
 
 **参考链接**  
 
-[关于新版AndroidStudio导入环信Demo的一些注意事项 | 穿裤衩闯天下](http://melove.net/Develop/Android/android-easemob-demo-import/2015-11-10013.html)
+[关于新版AndroidStudio导入环信Demo的一些注意事项](http://melove.net/Develop/Android/android-easemob-demo-import/2015-11-10013.html)
 
 
 
@@ -42,7 +42,7 @@ description: 环信SDK集成
 
 ### 参考链接
 
-[AndroidStudio导入环信新版EaseUI库问题 | 穿裤衩闯天下](http://melove.net/Develop/Android/android-androidstudio-import-easeui/2015-11-10006.html)
+[AndroidStudio导入环信新版EaseUI库问题](http://melove.net/Develop/Android/android-androidstudio-import-easeui/2015-11-10006.html)
 
 
 
