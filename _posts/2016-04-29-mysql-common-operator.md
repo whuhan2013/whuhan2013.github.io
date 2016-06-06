@@ -271,3 +271,7 @@ where YEAR (FROM_UNIXTIME(pudate, ' %y-%m-%d ' )) = YEAR (now()) and 
 
 [mysql数据库要按当天、昨天、前七日、近三十天、季度、年查询_百度文库](http://wenku.baidu.com/link?url=k_5IVPh5K5f57Locung0gPMF7UvYVfXjl99GXr-Lw6b1pYTzyf7FsHHjm__Y2DruM4JoaPlS2z4-nsx5A8wfVl2IaN2PcvN0bFB8xtQvkxq)
 
+
+**清空表内数据** 
+
+TRUNCATE TABLE teacher  其中teacher为表名
