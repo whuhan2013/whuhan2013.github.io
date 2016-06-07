@@ -58,3 +58,8 @@ description: 最舒服的色彩搭配RGB值
 ### RGB转16进制的网站  
 
 [RGB颜色值与十六进制颜色码转换工具](http://www.sioe.cn/yingyong/yanse-rgb-16/)
+
+
+### font-image列表
+
+[Font Awesome 图标字体的代码列表](http://www.bootcss.com/p/font-awesome/design.html)
