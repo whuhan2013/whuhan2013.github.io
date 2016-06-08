@@ -133,3 +133,18 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 ### 参考链接
 
 [FragmentPagerAdapter刷新fragment最完美解决方案 - z13759561330的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/z13759561330/article/details/40737381)
+
+
+### 更新
+
+上面的方法会产生一个BUG，当要被替换的fragment没有被加载进去的时候，直接用新fragment替换时会报错Fragment already added,采用以下方法回避解决
+
+**设置viewpage缓存页面的数量，使fragment一开始便加入** 
+
+mViewPager.setOffscreenPageLimit(2);//设置缓存view 的个数（实际有3个，缓存2个+正在显示的1个）
+
+
+**参考链接**
+
+[ViewPager设置 缓存个数、页卡间距、数据更新](http://blog.csdn.net/jia4525036/article/details/18982197)
+
