@@ -275,3 +275,27 @@ where YEAR (FROM_UNIXTIME(pudate, ' %y-%m-%d ' )) = YEAR (now()) and 
 **清空表内数据** 
 
 TRUNCATE TABLE teacher  其中teacher为表名
+
+**数据库备份与恢复**  
+
+**备份**
+
+mysqldump -u 用户名 -p 数据库名 > 文件名.sql
+
+**恢复**
+
+mysqldump -u 用户名 -p 数据库名 > 文件名.sql
+
+**注意**   
+
+以上均在CMD中操作  
+
+**实例**
+
+```
+mysqldump -u root -p test > test.sql
+
+mysql -u root -p test < abc.sql
+```
+
+
