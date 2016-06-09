@@ -141,3 +141,5 @@ public GirlPresenter(GirlContract.View baseView) {
 
 [Android官方MVP架构项目解析 - 简书](http://www.jianshu.com/p/389c9ae1a82c)
 
+[选择恐惧症的福音！教你认清MVC，MVP和MVVM - 安卓 - 伯乐在线](http://android.jobbole.com/82942/)
+
