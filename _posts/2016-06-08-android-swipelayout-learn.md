@@ -614,3 +614,5 @@ public class PullToRefreshView  extends LinearLayout implements OnTouchListener 
 [Google自己的下拉刷新组件SwipeRefreshLayout - 李金尧 - 博客园](http://www.cnblogs.com/JinyaoLi/p/3852424.html)
 
 [你还在用开源控件的下拉刷新吗？你out了，试一试官方的下拉刷新SwipeRefreshLayout - 推酷](http://www.tuicool.com/articles/UrQzUv3)
+
+[Android View 下拉刷新之头部效果自定义 [水] - bfbx5173的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/bfbx5173/article/details/49814551)
