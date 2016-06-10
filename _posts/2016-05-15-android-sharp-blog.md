@@ -56,3 +56,4 @@ description: Android开发相关的Blog推荐
 - 王辰龙的博客(ReactNative与安卓动效等):[http://www.wangchenlong.org/](http://www.wangchenlong.org/)
 - 干货集中营[http://gank.io/](http://gank.io/)
 - 极客导航-程序员自己的导航[http://jikedaohang.com/](http://jikedaohang.com/)
+- codekk-开源项目，源码解析等[http://p.codekk.com/](http://p.codekk.com/)
