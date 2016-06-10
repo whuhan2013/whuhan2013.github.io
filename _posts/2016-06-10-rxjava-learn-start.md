@@ -219,7 +219,7 @@ Observable observable = Observable.just("Hello", "Hi", "Aloha");
 
  将传入的数组或 Iterable 拆分成具体对象后，依次发送出来。
 
- ```
+```
 String[] words = {"Hello", "Hi", "Aloha"};
 Observable observable = Observable.from(words);
 // 将会依次调用：
