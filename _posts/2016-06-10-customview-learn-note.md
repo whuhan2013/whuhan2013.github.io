@@ -9,7 +9,7 @@ description: 自定义View学习笔记
 
 ### 转载  
 
-<img src="http://ww2.sinaimg.cn/large/005Xtdi2jw1f2jtcc1bpsj30740740sy.jpg" width=32 /> AndroidNote
+![](http://ww2.sinaimg.cn/large/005Xtdi2jw1f2jtcc1bpsj30740740sy.jpg)AndroidNote
 
 ### 作者微博: [@GcsSloop](http://weibo.com/GcsSloop)
 
@@ -60,8 +60,12 @@ description: 自定义View学习笔记
 
 ### 作者微博: [@GcsSloop](http://weibo.com/GcsSloop)
 
-<a href="https://github.com/GcsSloop/README/blob/master/README.md" target="_blank"><img src="http://ww4.sinaimg.cn/large/005Xtdi2gw1f1qn89ihu3j315o0dwwjc.jpg" width=300 height=100 /></a>
+![](http://ww4.sinaimg.cn/large/005Xtdi2gw1f1qn89ihu3j315o0dwwjc.jpg)
 
+
+**原文链接**
+
+[GcsSloop/AndroidNote: 安卓学习笔记](https://github.com/GcsSloop/AndroidNote)
 
 
 
