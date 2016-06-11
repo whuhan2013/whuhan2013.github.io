@@ -233,7 +233,7 @@ e.printStackTrace();
 
 [快速Android开发系列网络篇之Retrofit - AngelDevil - 博客园](http://www.cnblogs.com/angeldevil/p/3757335.html)
 
-[Retrofit分析-经典设计模式案例 - 简书](http://www.jianshu.com/p/fb8d21978e38)
+
 
 [Retrofit 解析 JSON 数据 - 简书](http://www.jianshu.com/p/87c36d8dabce)
 
@@ -247,5 +247,12 @@ e.printStackTrace();
 [JW大神的文章](https://realm.io/cn/news/droidcon-jake-wharton-simple-http-retrofit-2/)
 
 [吴小龙Android Retrofit 2.0使用](http://wuxiaolong.me/2016/01/15/retrofit/)
+
+
+**源码解析**
+
+[Retrofit分析-经典设计模式案例 - 简书](http://www.jianshu.com/p/fb8d21978e38)
+
+
 
 

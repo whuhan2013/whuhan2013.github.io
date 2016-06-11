@@ -583,3 +583,12 @@ ProgressDialog progress = ...;
 [给 Android 开发者的 RxJava 详解](http://gank.io/post/560e15be2dca930e00da1083#toc_23)
 
 [RxJava快速入门 - 简书](http://www.jianshu.com/p/6a6f7a4be38d)
+
+
+**源码解析**
+
+[彻底搞懂 RxJava — 基础篇 | android blog](http://diordna.sinaapp.com/?p=896)
+
+[彻底搞懂 RxJava — 中级篇 | android blog](http://diordna.sinaapp.com/?p=910)
+
+[彻底搞懂 RxJava — 高级篇 | android blog](http://diordna.sinaapp.com/?p=912)
