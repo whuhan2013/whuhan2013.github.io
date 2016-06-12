@@ -63,3 +63,9 @@ description: 最舒服的色彩搭配RGB值
 ### font-image列表
 
 [Font Awesome 图标字体的代码列表](http://www.bootcss.com/p/font-awesome/design.html)
+
+![](https://raw.githubusercontent.com/mikepenz/Android-Iconics/develop/DEV/github/screenshots1.jpg)
+
+[Icon Font --Android图标也能轻松换肤 - 简书](http://www.jianshu.com/p/dd01072998c5)
+
+[Android-Icons](https://github.com/mikepenz/Android-Iconics)
