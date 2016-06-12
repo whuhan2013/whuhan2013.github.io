@@ -177,7 +177,7 @@ imageLoader.get("http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg",
 
 
 
-** NetworkImageView的用法**  
+**NetworkImageView的用法**  
 
 
 除了以上两种方式之外，Volley还提供了第三种方式来加载网络图片，即使用NetworkImageView。不同于以上两种方式，NetworkImageView是一个自定义控制，它是继承自ImageView的，具备ImageView控件的所有功能，并且在原生的基础之上加入了加载网络图片的功能。NetworkImageView控件的用法要比前两种方式更加简单，大致可以分为以下五步：
@@ -235,6 +235,8 @@ networkImageView.setImageUrl("http://img.my.csdn.net/uploads/201404/13/139739329
 ### volly源码分析
 
 **参见**   [Android Volley完全解析(四)，带你从源码的角度理解Volley - 郭霖的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/guolin_blog/article/details/17656437)
+
+[快速Android开发系列网络篇之Volley - AngelDevil - 博客园](http://www.cnblogs.com/angeldevil/p/3735051.html)
 
 
 

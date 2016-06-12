@@ -7,7 +7,13 @@ tags: [android]
 description: 安卓开源库之动画篇
 ---
 
-### 本文主要介绍收集了笔者所用过的开源动画库，达到一些比较好看的效果。
+### 本文主要介绍收集了笔者所用过的开源动画库，以及动画学习。
+
+
+**动画学习资源** 
+
+[如何高效学习Android动画？ - 知乎](https://www.zhihu.com/question/27718787)
+
 
 **LoadingDrawable**
 
