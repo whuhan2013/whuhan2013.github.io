@@ -111,5 +111,22 @@ description: python学习资源.
 [voidsky_很有趣儿 - 简书](http://www.jianshu.com/users/30f737ee0051/latest_articles)
 
 
+**三天搞定python**  
+
+[三天搞定Python基础功，Day 1基础篇](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzIxMjM4MjkwMw%3D%3D%26mid%3D2247483789%26idx%3D1%26sn%3D4c8fd2e76970a5d86c7b7a13c3046a30%23rd)
+
+
+[三天搞定Python基本功，Day 2科学计算篇](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzIxMjM4MjkwMw%3D%3D%26mid%3D2247483920%26idx%3D1%26sn%3D96b11616cf48c83f54ac76c6687a20af%23rd)
+
+[三天搞定Python基础功，Day 3统计入门篇](https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzIxMjM4MjkwMw%3D%3D%26mid%3D2247483970%26idx%3D1%26sn%3D8028f7582597e0023f0fa02f84db57f1%23rd)
+
+作者：Yupeng
+链接：http://zhuanlan.zhihu.com/p/21332075
+
+
+
+
+
+
 
 
