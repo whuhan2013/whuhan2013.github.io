@@ -258,6 +258,9 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements OnScrollLi
 }
 ```
 
+其中getView方法中的getItem方法是获取当前位置的数据的  
+
+[android中Baseadapter的 getItem 跟 getItemId 的作用](http://www.csdn123.com/html/exception/667/667664_667666_667660.htm)
 
 
 PhotoWallAdapter是整个照片墙程序中最关键的一个类了，这里我来重点给大家讲解一下。首先在PhotoWallAdapter的构造函数中，我们初始化了LruCache类，并设置了最大缓存容量为程序最大可用内存的1/8，接下来又为GridView注册了一个滚动监听器。然后在getView()方法中，我们为每个ImageView设置了一个唯一的Tag，这个Tag的作用是为了后面能够准确地找回这个ImageView，不然异步加载图片会出现乱序的情况。之后调用了setImageView()方法为ImageView设置一张图片，这个方法首先会从LruCache缓存中查找是否已经缓存了这张图片，如果成功找到则将缓存中的图片显示在ImageView上，否则就显示一张默认的空图片。
@@ -270,10 +273,10 @@ PhotoWallAdapter是整个照片墙程序中最关键的一个类了，这里我�
 
 **主要包括以下几步**  
 
-1. 下载DiskLruCache的源码。下载好了源码之后，只需要在项目中新建一个libcore.io包，然后将DiskLruCache.java文件复制到这个包中即可。
+1、 下载DiskLruCache的源码。下载好了源码之后，只需要在项目中新建一个libcore.io包，然后将DiskLruCache.java文件复制到这个包中即可。
 
 
-2. 打开缓存   
+2、 打开缓存   
 
 ```
 DiskLruCache mDiskLruCache = null;
@@ -289,7 +292,7 @@ try {
 ```
 
 
-3. 写入缓存  
+3、写入缓存  
 
 ```
 new Thread(new Runnable() {
@@ -354,7 +357,7 @@ private boolean downloadUrlToStream(String urlString, OutputStream outputStream)
 ```
 
 
-4. 读取缓存
+4、读取缓存
 
 ```
 try {
