@@ -190,6 +190,11 @@ public class NetUtils {
 ### HttpClient实现提交数据到服务器  
 
 
+**android6.0之后HttpClient已经废弃掉了，需要自己导包** 
+
+[android sdk源码中怎么没有httpclient的源码了_百度知道](http://zhidao.baidu.com/link?url=WSdGo6GpOMi1hUNwBBWc2mqkLmblBLtrXFP3zciAoT7tjsdWExlYgz84K2sxA8f7OJ7dhs_k8m2mLDYyFSIEdzHkJwYs09hMXT1Lkt0GRZW)
+
+
 ```
 public class NetUtils2 {
 
