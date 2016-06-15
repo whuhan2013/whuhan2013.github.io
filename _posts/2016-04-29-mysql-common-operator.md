@@ -299,3 +299,22 @@ mysql -u root -p test < abc.sql
 ```
 
 
+**表不存在则创建** 
+
+```
+创建数据库：
+
+Create Database If Not Exists MyDB Character Set UTF8
+
+创建数据表：
+
+Create Table If Not Exists MyDB.MyTable(
+
+ID Bigint(8) unsigned Primary key Auto_Increment,
+
+thTime DateTime,
+
+name  VarChar(128)
+
+)Engine MyISAM
+```
