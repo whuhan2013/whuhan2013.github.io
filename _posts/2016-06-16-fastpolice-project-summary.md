@@ -45,16 +45,11 @@ This 3D Menu is pretty cool to me,it can change skin for your application too,an
 [一款优雅的干货集中营Android客户端，实现了沉浸式状态栏，无缝换肤，带3D感觉的侧滑菜单](http://www.jianshu.com/p/3a78ea86b571)
 
 
-<figure class="half">
-    <img src="http://img.blog.csdn.net/20160616124648761" alt="screenshot" title="screenshot" width="250" height="436" >   
-    <img src="http://img.blog.csdn.net/20160616124703043" alt="screenshot" title="screenshot" width="250" height="436" >
-</figure>
 
 
-<figure class="half"><img src="http://dreamofbook.qiniudn.com/Zero.png"><img src="http://dreamofbook.qiniudn.com/Zero.png"></figure>
 
-<div style="float:left;border:solid 1px 000;"><img src="http://img.baidu.com/img/iknow/avarta/110/r6s1g5.gif"/></div>
-<div style="float:left;border:solid 1px 000;"><img src="http://img.baidu.com/img/iknow/avarta/110/r6s1g5.gif"/></div><br>
+<div style="float:left;border:solid 1px 000;"><img src="http://img.blog.csdn.net/20160616124648761" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="float:left;border:solid 1px 000;"><img src="http://img.blog.csdn.net/20160616124703043" alt="screenshot" title="screenshot" width="250" height="436" ></div><br>
 
 
 **Police Fragment** 
