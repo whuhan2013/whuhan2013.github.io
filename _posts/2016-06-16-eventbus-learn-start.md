@@ -153,7 +153,7 @@ public void onMessage(MessageEvent event){
 
 ### References  
 
-[Delivery Threads (ThreadMode) | Open Source by greenrobot](http://greenrobot.org/eventbus/documentation/delivery-threads-threadmode/)
+[Delivery Threads (ThreadMode)Open Source by greenrobot](http://greenrobot.org/eventbus/documentation/delivery-threads-threadmode/)
 
 [Android EventBus实战 没听过你就out了 - Hongyang - 博客频道 - CSDN.NET](http://blog.csdn.net/lmj623565791/article/details/40794879)
 
