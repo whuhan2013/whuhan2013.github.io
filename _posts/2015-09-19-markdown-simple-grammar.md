@@ -554,6 +554,15 @@ Tips: 关于 jpg/png 都是常用文件格式，jpg 格式压缩效率高，相�
         <a href="{{ site.url }}/images/xxx.jpg"><img src="{{ site.url }}/images/ xxx.jpg"></a>
         <a href="{{ site.url }}/images/yyy.jpg"><img src="{{ site.url }}/images/ yyy.jpg"></a>
     </figure>
+
+**上面的方法在github中可以，在jekelly中显示不出来，正确方法如下** 
+
+```
+
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="http://img.blog.csdn.net/20160616131539493" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="http://img.blog.csdn.net/20160616131603337" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="clear:both;"></div>
+```
     
 ### 添加图片代码分享
 

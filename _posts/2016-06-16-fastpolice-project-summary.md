@@ -18,8 +18,7 @@ I used a openlibary to do it ,when you first launch your application,the prompt 
 
 [AppIntro](https://github.com/PaoloRotolo/AppIntro)
 
-![这里写图片描述](http://img.blog.csdn.net/20160616122958232)
-
+<img src="http://img.blog.csdn.net/20160616122958232" alt="screenshot" title="screenshot" width="250" height="436" >
 
 **Main Interface**
 
