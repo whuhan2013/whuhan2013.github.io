@@ -51,10 +51,8 @@ This 3D Menu is pretty cool to me,it can change skin for your application too,an
 </figure>
 
 
-<figure class="half">
-    <img src="http://dreamofbook.qiniudn.com/Zero.png">
-    <img src="http://dreamofbook.qiniudn.com/Zero.png">
-</figure>
+<figure class="half"><img src="http://dreamofbook.qiniudn.com/Zero.png"><img src="http://dreamofbook.qiniudn.com/Zero.png"></figure>
+
 
 
 **Police Fragment** 

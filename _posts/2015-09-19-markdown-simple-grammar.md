@@ -575,7 +575,8 @@ dropbox -  [Dl from Dropbox](https://dl.dropboxusercontent.com/u/64524965/AddPic
 3. [Markdown 语法说明（详解版）_图灵社区](http://www.ituring.com.cn/article/504)  
 4. [Mastering Markdown · GitHub Guides](https://guides.github.com/features/mastering-markdown/)
 5. [Markdown - Wikiwand](https://www.wikiwand.com/zh/Markdown)
-6. [Markdown 写作浅谈 - 阳志平的网志](http://www.yangzhiping.com/tech/r-markdown-knitr.html)
+6. [Markdown 写作浅谈 - 阳志平的网志](http://www.yangzhiping.com/tech/r-markdown-knitr.html).
+7. [原文链接](http://azeril.me/blog/Markdown-Syntax.html)
 
 
 
