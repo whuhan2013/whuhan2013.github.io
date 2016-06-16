@@ -27,7 +27,7 @@ I used a openlibary to do it ,when you first launch your application,the prompt 
 I used viewpage and tablayout to achive tab effect,and achived Immersive status bar. 
 
 
-![这里写图片描述](http://img.blog.csdn.net/20160616123711991)
+<img src="http://img.blog.csdn.net/20160616123711991" alt="screenshot" title="screenshot" width="250" height="436" >
 
 
 **3D Menu** 
@@ -48,8 +48,8 @@ This 3D Menu is pretty cool to me,it can change skin for your application too,an
 
 
 
-<div style="float:left;border:solid 1px 000;"><img src="http://img.blog.csdn.net/20160616124648761" alt="screenshot" title="screenshot" width="250" height="436" ></div>
-<div style="float:left;border:solid 1px 000;"><img src="http://img.blog.csdn.net/20160616124703043" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="http://img.blog.csdn.net/20160616124648761" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="http://img.blog.csdn.net/20160616124703043" alt="screenshot" title="screenshot" width="250" height="436" ></div>
 <div style="clear:both;"></div>
 
 
@@ -63,12 +63,10 @@ I also did a little wave at the botom of this fragmet,it is just a sine and a co
 and if you clicke the recyllerview item you will enter a detail pages about police and it used a turn over card animation,you can learn more form [实现翻转卡片的动画效果 - 良有以也](http://whuhan2013.github.io/blog/2016/06/04/card-turnover-effect/)
 
 
-![这里写图片描述](http://img.blog.csdn.net/20160616125921413)
 
-
-
-![这里写图片描述](http://img.blog.csdn.net/20160616125930773)
-
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="http://img.blog.csdn.net/20160616125921413" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="http://img.blog.csdn.net/20160616125930773" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="clear:both;"></div>
 
 
 **girl fragment** 
@@ -81,9 +79,7 @@ This fragment is pretty little and beautiful,I use MVP design pattern to constru
 - [dbflow](http://whuhan2013.github.io/blog/2016/06/12/android-dbflow-learn/)
 
 
-![这里写图片描述](http://img.blog.csdn.net/20160616130630187)
-
-
+<img src="http://img.blog.csdn.net/20160616130630187" alt="screenshot" title="screenshot" width="250" height="436" >
 
 **MangeFragment**
 
@@ -92,10 +88,10 @@ In this Fragmet you can distribute cases to polices and the case had been deald 
 - [SwipeRefreshLayout ](http://whuhan2013.github.io/blog/2016/06/08/android-swipelayout-learn/)
 - [sawtooth effect](http://whuhan2013.github.io/blog/2016/05/21/android-edge-sawtooth/)
 
-![这里写图片描述](http://img.blog.csdn.net/20160616131539493)
 
-![这里写图片描述](http://img.blog.csdn.net/20160616131603337)
-
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="http://img.blog.csdn.net/20160616131539493" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="http://img.blog.csdn.net/20160616131603337" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="clear:both;"></div>
 
 **Search Effect** 
 
@@ -104,8 +100,9 @@ I used a custom view to achieve a search effect that look like radar what can se
 
 [Radar efect](http://whuhan2013.github.io/blog/2016/05/12/android-viewpager-radar/)
 
-![这里写图片描述](http://img.blog.csdn.net/20160616131838079).
 
+
+<img src="http://img.blog.csdn.net/20160616131838079" alt="screenshot" title="screenshot" width="250" height="436" >
 
 **source code**
 
