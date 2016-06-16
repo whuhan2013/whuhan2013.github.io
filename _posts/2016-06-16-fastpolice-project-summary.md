@@ -45,11 +45,8 @@ This 3D Menu is pretty cool to me,it can change skin for your application too,an
 [一款优雅的干货集中营Android客户端，实现了沉浸式状态栏，无缝换肤，带3D感觉的侧滑菜单](http://www.jianshu.com/p/3a78ea86b571)
 
 
-![这里写图片描述](http://img.blog.csdn.net/20160616124648761)
 
-
-![这里写图片描述](http://img.blog.csdn.net/20160616124703043)
-
+<img src="http://img.blog.csdn.net/20160616124648761" alt="screenshot" title="screenshot" width="250" height="436" />   <img src="http://img.blog.csdn.net/20160616124703043" alt="screenshot" title="screenshot" width="250" height="436" />
 
 
 **Police Fragment** 
@@ -59,7 +56,7 @@ I used a sliding folding recyllerview to achieve this effect.if you want to know
 I also did a little wave at the botom of this fragmet,it is just a sine and a cosine function that make paint look like waves,if you would like to know more can read [自定义view实现水波纹效果](http://whuhan2013.github.io/blog/2016/05/21/android-water-ripple/)
 
 
-and if you clike the recyllerview item you will enter a detail pages about police and it used a turn over card animation,you can learn more form [实现翻转卡片的动画效果 - 良有以也](http://whuhan2013.github.io/blog/2016/06/04/card-turnover-effect/)
+and if you clicke the recyllerview item you will enter a detail pages about police and it used a turn over card animation,you can learn more form [实现翻转卡片的动画效果 - 良有以也](http://whuhan2013.github.io/blog/2016/06/04/card-turnover-effect/)
 
 
 ![这里写图片描述](http://img.blog.csdn.net/20160616125921413)
