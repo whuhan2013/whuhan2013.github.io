@@ -59,3 +59,4 @@ description: Android开发相关的Blog推荐
 - codekk-开源项目，源码解析等[http://p.codekk.com/](http://p.codekk.com/)
 - 鸿洋大神的网站，详细全面[wan android](http://wanandroid.com/index)
 - 一些大牛的博客集合[开发者酷站 - DiyCode](http://diycode.cc/sites)
+- 比尔盖茨的博客[Home Bill Gates](https://www.gatesnotes.com/)
