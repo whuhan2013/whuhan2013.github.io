@@ -16,3 +16,6 @@ description: 自定义View专题博客
 - 没什么东西，看完可删除：[android 开发进阶 - Hankkin的博客小园 - 博客频道 - CSDN.NET](http://blog.csdn.net/lyhhj/article/category/5726061)     
 - android面试一天一题：[goeasyway - 简书](http://www.jianshu.com/users/f9fbc7a39b36/latest_articles)
 - 自定义控件相关：[Young_Kai - 博客频道 - CSDN.NET](http://blog.csdn.net/tyk0910?viewmode=contents)
+- 自定义控件相关，讲得很深详细：[AigeStudio - 博客频道 - CSDN.NET](http://blog.csdn.net/aigestudio?viewmode=contents)
+- python与LeetCode相关：[voidsky_很有趣儿 - 简书](http://www.jianshu.com/users/30f737ee0051/latest_articles)
+- 内容比较杂，看完可以删除：[huachao1001的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/huachao1001)
