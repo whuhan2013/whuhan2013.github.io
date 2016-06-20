@@ -19,3 +19,5 @@ description: 自定义View专题博客
 - 自定义控件相关，讲得很深详细：[AigeStudio - 博客频道 - CSDN.NET](http://blog.csdn.net/aigestudio?viewmode=contents)
 - python与LeetCode相关：[voidsky_很有趣儿 - 简书](http://www.jianshu.com/users/30f737ee0051/latest_articles)
 - 内容比较杂，看完可以删除：[huachao1001的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/huachao1001)
+- ReactNative开发文集[ReactNative开发 - 文集 - 简书](http://www.jianshu.com/notebooks/2315713/latest)
+- 数据结构与算法详细[数据结构与算法系列 目录 - 如果天空不死 - 博客园](http://www.cnblogs.com/skywang12345/p/3603935.html)
