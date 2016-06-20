@@ -37,7 +37,8 @@ This 3D Menu is pretty cool to me,it can change skin for your application too,an
 -  [Icon Font](http://www.jianshu.com/p/dd01072998c5)
 - [multipletheme](https://github.com/dersoncheng/MultipleTheme)
 - [residelayout](https://github.com/dongjunkun/ResideLayout)
-- [material dialog](https://github.com/afollestad/material-dialogs) - [swipetoloadlayout](https://github.com/Aspsine/SwipeToLoadLayout). 
+- [material dialog](https://github.com/afollestad/material-dialogs)     
+- [swipetoloadlayout](https://github.com/Aspsine/SwipeToLoadLayout). 
 
 **References** 
 
