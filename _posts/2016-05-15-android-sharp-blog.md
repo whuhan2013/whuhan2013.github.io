@@ -60,3 +60,4 @@ description: Android开发相关的Blog推荐
 - 鸿洋大神的网站，详细全面[wan android](http://wanandroid.com/index)
 - 一些大牛的博客集合[开发者酷站 - DiyCode](http://diycode.cc/sites)
 - 比尔盖茨的博客[Home Bill Gates](https://www.gatesnotes.com/)
+- 资源：[Android开发所需的Android SDK、开发中用到的工具、Android开发教程、Android设计规范，免费的设计素材等。](https://github.com/inferjay/AndroidDevTools)
