@@ -20,8 +20,28 @@ description: ReactNative环境配置
 
 - react-native可能在cmd窗口提示不是内部或外部命令            
 解决方法：在nodeJS command prompt下可以运行 
-- 运行时卡在最后，程序是白屏 
+- 运行时卡在最后，程序是白屏              
 解决方法：为应用程序添加悬浮窗权限  
-- 下载时卡住了 
+- 下载时卡住了                 
 解决方法: 更换rpm的数据源，用国内代理  
+
+
+### IDE的使用 
+
+**atom** 
+
+atom安装插件会很慢，因为GFW的缘故，所以使用国内镜像 
+
+apm config set strict-ssl false
+修改registry到淘宝npm镜像:[为Atom配置前端开发环境](http://leftstick.github.io/tech/2015/07/01/setup-frontend-env-with-atom)
+
+```
+apm config set registry https://registry.npm.taobao.org
+apm config set registry https://registry.npm.taobao.org
+```
+
+- 安装显示HTML控件Atom HTML Preview, apm install atom-html-preview
+- 安装实现震撼编辑效果的插件: amp install activate-power-mode 
+
+
 

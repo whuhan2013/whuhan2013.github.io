@@ -546,6 +546,12 @@ public class CustomView extends LinearLayout {
 [Android Scroller简单用法 - - ITeye技术网站](http://ipjmc.iteye.com/blog/1615828)
 
 
+**补充** 
+
+scrollBy(x,0); x>0时向左滑，x<0时向右滑       
+[关于Scroller的使用以及自己实现一个侧滑菜单](http://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&mid=2650820484&idx=1&sn=636272135033909ce8c7aedbece2dc23&scene=0&ptlang=2052&ADUIN=2868405029&ADSESSION=1466552500&ADTAG=CLIENT.QQ.5437_.0&ADPUBNO=26517)
+
+
 ### 其他关于Scroller的参考 
 
 [Android开发艺术探索--View的滑动 - 简书](http://www.jianshu.com/p/2b48551d5319)
