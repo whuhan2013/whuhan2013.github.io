@@ -23,7 +23,7 @@ React.createElement("h3",null,"输入") 返回一个ReactElement对象
 5.执行JavaScript表达式
 
 var msg="我是东方耀";           
-<h1>{msg}</h1>        
+'<h1>{msg}</h1>'       
 React.createElement("h1",null,msg)             
 
 6.注释 单行：// 多行：/注释文本/          
@@ -271,7 +271,8 @@ keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg
 2.找到路径/android/app/src/main，并在该目录下新建assets文件夹        
 
 3.在工程目录下将index.android.bundle下载并保存到assets资源文件夹中            
-curl -k "http://localhost:8081/index.android.bundle" > android/app/src/main/assets/index.android.bundle   
+  
+curl -k "http://localhost:8081/index.android.bundle" > android/app/src/main/assets/index.android.bundle
 
 这句命令是重点，如果assets目录中不存在该文件，则打包的apk在执行时显示空白。   
 
@@ -284,7 +285,17 @@ Windows下安装使用curl命令:http://jingyan.baidu.com/article/a681b0dec4c67a
 
 ```
 //签名
-signingConfigs{ release { storeFile file("/my-release-key.keystore") storePassword "密码" keyAlias "keyAlias的名字" keyPassword "密码" } } buildTypes { release { minifyEnabled false proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' signingConfig signingConfigs.release //添加这句话引用签名配置 } }
+  signingConfigs{
+     release { 
+     storeFile file("D://my-release-key.keystore")
+      storePassword "286840jjx" 
+      keyAlias "my-key-alias" 
+      keyPassword "286840jjx" 
+      } 
+      } 
+
+    //此外还要在BuildTypes中添加以下内容
+    signingConfig signingConfigs.release
 ```
 
 
