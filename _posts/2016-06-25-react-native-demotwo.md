@@ -17,7 +17,7 @@ description: React Native实例
 
 主要讲述了从通过网络获取数据，并且加载到listView中的实例
 
-**ListView的介绍 
+**ListView的介绍**
 
 Let's now modify this application to render all of this data in a ListView component, rather than just rendering the first movie.
 
