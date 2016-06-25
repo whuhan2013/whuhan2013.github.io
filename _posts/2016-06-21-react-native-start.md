@@ -60,4 +60,10 @@ apm config set registry https://registry.npm.taobao.org
 - 安装实现震撼编辑效果的插件: amp install activate-power-mode 
 
 
+**错误&问题** 
+
+- reload JS变成reload，并且不能动态更新   
+解决方法：升级npm即可，这个卡了好久啊，竟然是这里出了问题。 
+- npm install出错  
+解决方法：同上，升级npm解决
 
