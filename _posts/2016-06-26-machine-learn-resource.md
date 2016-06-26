@@ -11,9 +11,9 @@ description: 机器学习资源
 ### 转载 
 
 作者：林洲汉
-链接：https://www.zhihu.com/question/44864396/answer/106563622
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+链接：https://www.zhihu.com/question/44864396/answer/106563622      
+来源：知乎              
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。           
 
 **阶段一：初学乍练** 
 
@@ -32,9 +32,9 @@ description: 机器学习资源
 
 - Andrew Ng的coursera 招牌菜《machine learning》。基础不太好的同学可以看这门课的[coursera](https://link.zhihu.com/?target=https%3A//www.coursera.org/learn/machine-learning)版，基础好的请移步这门课的[youtube](https://link.zhihu.com/?target=https%3A//www.youtube.com/watch%3Fv%3DUzxYlbK2c7E)版本。Andrew在斯坦福教的版本（即youtube版，CS229）比coursera上的难多了。虽然自学不会有人来批作业，可是课程的assignments，projects也不要落下哦：[CS 229: Machine Learning](https://link.zhihu.com/?target=http%3A//cs229.stanford.edu/)
 
--《[Pattern Classification](https://link.zhihu.com/?target=http%3A//cns-classes.bu.edu/cn550/Readings/duda-etal-00.pdf)》。 这本书几乎把所有模型放到一起挨个讲了一遍，虽然不如每个方法对应的专著那样深入，但是讲得还是挺透彻，啃完之后面对别人提到的任何机器学习算法都可以做到心中有数无压力。
--《[Pattern Recognition and Machine Learning](https://link.zhihu.com/?target=http%3A//users.isr.ist.utl.pt/%7Ewurmd/Livros/school/Bishop%2520-%2520Pattern%2520Recognition%2520And%2520Machine%2520Learning%2520-%2520Springer%2520%25202006.pdf)》。这本书对贝叶斯方法的阐述个人觉得最佳。SVM那部分感觉讲的不太好，看不下去可以略过。看完之后搞generative model无压力。
--《[统计机器学习](https://link.zhihu.com/?target=http%3A//pan.baidu.com/share/link%3Fuk%3D3208094820%26shareid%3D3392885063%26third%3D1%26adapt%3Dpc%26fr%3Dftw)》。不多说，中国人用中文写的好书。李航大神的良心大作。关键中文书的好处是轻便，不像英文书的大部头，走到哪里都能带着，简直居家旅行必备。
+- 《[Pattern Classification](https://link.zhihu.com/?target=http%3A//cns-classes.bu.edu/cn550/Readings/duda-etal-00.pdf)》。 这本书几乎把所有模型放到一起挨个讲了一遍，虽然不如每个方法对应的专著那样深入，但是讲得还是挺透彻，啃完之后面对别人提到的任何机器学习算法都可以做到心中有数无压力。
+- 《[Pattern Recognition and Machine Learning](https://link.zhihu.com/?target=http%3A//users.isr.ist.utl.pt/%7Ewurmd/Livros/school/Bishop%2520-%2520Pattern%2520Recognition%2520And%2520Machine%2520Learning%2520-%2520Springer%2520%25202006.pdf)》。这本书对贝叶斯方法的阐述个人觉得最佳。SVM那部分感觉讲的不太好，看不下去可以略过。看完之后搞generative model无压力。
+- 《[统计机器学习](https://link.zhihu.com/?target=http%3A//pan.baidu.com/share/link%3Fuk%3D3208094820%26shareid%3D3392885063%26third%3D1%26adapt%3Dpc%26fr%3Dftw)》。不多说，中国人用中文写的好书。李航大神的良心大作。关键中文书的好处是轻便，不像英文书的大部头，走到哪里都能带着，简直居家旅行必备。
 入门的书这几本感觉应该够了，看完了你就会自己发现想看的新的书了。很重要的一点是看的过程中，尤其是跟课的过程中，作业不要落下。要动手编程，自己实现几个模型。
 
 
@@ -57,12 +57,12 @@ description: 机器学习资源
 **阶段四：心领神会**  
 
 继续看书，看深入地讲某一方面的书。把之前过程中遇到的问题打破砂锅问到底。由于每本书都可以是迷死你几个月没商量的主，所以这一部分会花很长的时间，基本得和前一个或者后一个阶段同时进行。而且必须明白的一点是，这些书不可能全部看完，从跟自己最相关最想看的开始看吧，能啃一本是一本。推荐的书：
--《Statistical Learning Theory》
--《All of Statistics》
--《Convex Optimization》
--《Reinforcement Learning: An Introduction》
--《Deep Learning》
--《An Introduction to Information Retrieval》   
+- 《Statistical Learning Theory》
+- 《All of Statistics》
+- 《Convex Optimization》
+- 《Reinforcement Learning: An Introduction》
+- 《Deep Learning》
+- 《An Introduction to Information Retrieval》   
 
 。。。。。。
 推荐一个github repo，上面搜集了很多这方面的书：[GitHub: awesome machine learning](https://link.zhihu.com/?target=https%3A//github.com/josephmisiti/awesome-machine-learning/blob/master/books.md)
@@ -80,6 +80,7 @@ description: 机器学习资源
 **阶段五：融会贯通**  
 
 到这里你会发现这时候你需要的东西那么多。而且不同的子方向深入之后所需要的东西都变得很不一样，不可能一一列出表来。然而有几件事情还是都一样的：
+
 - **阅读文献**。主要就是arXiv。保证每周细读两篇paper，并且对arxiv上几个相关主题下每周放出来的新paper有个大概的了解（即看过标题或者abstract）。另外还可以在google scholar上关注几个领域内主要的大牛，然后设置新paper提醒。男神出新的paper了？让google贴心地推送到你的邮箱。
 
 - **独立地思考问题**。尽信paper不如无paper。哪些paper你觉得有问题？哪些paper里面的主张跟你的想法不一样？如果要搞明白，怎样设计实验来分辨出谁对谁错？怎样在别人的paper里面找到破绽驳倒他们的主张？在这个过程中，自己的嘴会变得越发“刁钻刻薄”，当然也使得你写的paper更能挡住别人刁钻刻薄的追问。
