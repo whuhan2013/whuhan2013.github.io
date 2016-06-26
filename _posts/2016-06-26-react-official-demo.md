@@ -50,7 +50,7 @@ cd react-native以及npm install(这里发生错误，是因为npm需要升级�
 - AccessibilityAndroidExample
 - AlertExample
 - AppStateExample
-- BorderExample
+- BorderExample等
 
 
 ### 官方Movie实例  
