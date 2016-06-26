@@ -123,6 +123,10 @@ description: python学习资源.
 作者：Yupeng
 链接：http://zhuanlan.zhihu.com/p/21332075
 
+**python微信公众号开发** 
+
+- [从零开始 Python 微信公众号开发 - 小段同学的杂记 - 知乎专栏](https://zhuanlan.zhihu.com/p/21354943?refer=666666)
+- [Python 微信公众号开发(2)——听得懂语音消息的聊天机器人 - 小段同学的杂记 - 知乎专栏](https://zhuanlan.zhihu.com/p/21390250?refer=666666)
 
 
 
