@@ -1,0 +1,718 @@
+---
+layout: post
+title: 数据结构之DFS与BFS实现
+date: 2016-6-26
+categories: blog
+tags: [数据结构]
+description: 数据结构之DFS与BFS实现
+---
+
+
+**本文主要包括以下内容** 
+
+1. 邻接矩阵实现无向图的BFS与DFS 
+2. 邻接表实现无向图的BFS与DFS
+
+
+### 理论介绍  
+
+**深度优先搜索介绍**
+ 
+图的深度优先搜索(Depth First Search)，和树的先序遍历比较类似。 
+
+它的思想：假设初始状态是图中所有顶点均未被访问，则从某个顶点v出发，首先访问该顶点，然后依次从它的各个未被访问的邻接点出发深度优先搜索遍历图，直至图中所有和v有路径相通的顶点都被访问到。 若此时尚有其他顶点未被访问到，则另选一个未被访问的顶点作起始点，重复上述过程，直至图中所有顶点都被访问到为止。 
+
+显然，深度优先搜索是一个递归的过程。
+
+![](https://github.com/wangkuiwu/datastructs_and_algorithm/blob/master/pictures/graph/iterator/02.jpg?raw=true)
+
+**广度优先搜索介绍**
+ 
+广度优先搜索算法(Breadth First Search)，又称为"宽度优先搜索"或"横向优先搜索"，简称BFS。 
+
+它的思想是：从图中某顶点v出发，在访问了v之后依次访问v的各个未曾访问过的邻接点，然后分别从这些邻接点出发依次访问它们的邻接点，并使得“先被访问的顶点的邻接点先于后被访问的顶点的邻接点被访问，直至图中所有已被访问的顶点的邻接点都被访问到。如果此时图中尚有顶点未被访问，则需要另选一个未曾被访问过的顶点作为新的起始点，重复上述过程，直至图中所有顶点都被访问到为止。 
+
+换句话说，广度优先搜索遍历图的过程是以v为起点，由近至远，依次访问和v有路径相通且路径长度为1,2...的顶点。
+
+
+![](https://github.com/wangkuiwu/datastructs_and_algorithm/blob/master/pictures/graph/iterator/05.jpg?raw=true)
+
+
+
+### 邻接矩阵实现无向图的BFS与DFS
+
+```
+/**
+ * C++: 邻接矩阵表示的"无向图(Matrix Undirected Graph)"
+ *
+ * @author skywang
+ * @date 2014/04/19
+ */
+
+#include <iomanip>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+#define MAX 100
+class MatrixUDG {
+    private:
+        char mVexs[MAX];    // 顶点集合
+        int mVexNum;             // 顶点数
+        int mEdgNum;             // 边数
+        int mMatrix[MAX][MAX];   // 邻接矩阵
+
+    public:
+        // 创建图(自己输入数据)
+        MatrixUDG();
+        // 创建图(用已提供的矩阵)
+        MatrixUDG(char vexs[], int vlen, char edges[][2], int elen);
+        ~MatrixUDG();
+
+        // 深度优先搜索遍历图
+        void DFS();
+        // 广度优先搜索（类似于树的层次遍历）
+        void BFS();
+        // 打印矩阵队列图
+        void print();
+
+    private:
+        // 读取一个输入字符
+        char readChar();
+        // 返回ch在mMatrix矩阵中的位置
+        int getPosition(char ch);
+        // 返回顶点v的第一个邻接顶点的索引，失败则返回-1
+        int firstVertex(int v);
+        // 返回顶点v相对于w的下一个邻接顶点的索引，失败则返回-1
+        int nextVertex(int v, int w);
+        // 深度优先搜索遍历图的递归实现
+        void DFS(int i, int *visited);
+
+};
+
+/* 
+ * 创建图(自己输入数据)
+ */
+MatrixUDG::MatrixUDG()
+{
+    char c1, c2;
+    int i, p1, p2;
+    
+    // 输入"顶点数"和"边数"
+    cout << "input vertex number: ";
+    cin >> mVexNum;
+    cout << "input edge number: ";
+    cin >> mEdgNum;
+    if ( mVexNum < 1 || mEdgNum < 1 || (mEdgNum > (mVexNum * (mVexNum-1))))
+    {
+        cout << "input error: invalid parameters!" << endl;
+        return ;
+    }
+    
+    // 初始化"顶点"
+    for (i = 0; i < mVexNum; i++)
+    {
+        cout << "vertex(" << i << "): ";
+        mVexs[i] = readChar();
+    }
+
+    // 初始化"边"
+    for (i = 0; i < mEdgNum; i++)
+    {
+        // 读取边的起始顶点和结束顶点
+        cout << "edge(" << i << "): ";
+        c1 = readChar();
+        c2 = readChar();
+
+        p1 = getPosition(c1);
+        p2 = getPosition(c2);
+        if (p1==-1 || p2==-1)
+        {
+            cout << "input error: invalid edge!" << endl;
+            return ;
+        }
+
+        mMatrix[p1][p2] = 1;
+        mMatrix[p2][p1] = 1;
+    }
+}
+
+/*
+ * 创建图(用已提供的矩阵)
+ *
+ * 参数说明：
+ *     vexs  -- 顶点数组
+ *     vlen  -- 顶点数组的长度
+ *     edges -- 边数组
+ *     elen  -- 边数组的长度
+ */
+MatrixUDG::MatrixUDG(char vexs[], int vlen, char edges[][2], int elen)
+{
+    int i, p1, p2;
+    
+    // 初始化"顶点数"和"边数"
+    mVexNum = vlen;
+    mEdgNum = elen;
+    // 初始化"顶点"
+    for (i = 0; i < mVexNum; i++)
+        mVexs[i] = vexs[i];
+
+    // 初始化"边"
+    for (i = 0; i < mEdgNum; i++)
+    {
+        // 读取边的起始顶点和结束顶点
+        p1 = getPosition(edges[i][0]);
+        p2 = getPosition(edges[i][1]);
+
+        mMatrix[p1][p2] = 1;
+        mMatrix[p2][p1] = 1;
+    }
+}
+
+/* 
+ * 析构函数
+ */
+MatrixUDG::~MatrixUDG() 
+{
+}
+
+/*
+ * 返回ch在mMatrix矩阵中的位置
+ */
+int MatrixUDG::getPosition(char ch)
+{
+    int i;
+    for(i=0; i<mVexNum; i++)
+        if(mVexs[i]==ch)
+            return i;
+    return -1;
+}
+
+/*
+ * 读取一个输入字符
+ */
+char MatrixUDG::readChar()
+{
+    char ch;
+
+    do {
+        cin >> ch;
+    } while(!((ch>='a'&&ch<='z') || (ch>='A'&&ch<='Z')));
+
+    return ch;
+}
+
+
+/*
+ * 返回顶点v的第一个邻接顶点的索引，失败则返回-1
+ */
+int MatrixUDG::firstVertex(int v)
+{
+    int i;
+
+    if (v<0 || v>(mVexNum-1))
+        return -1;
+
+    for (i = 0; i < mVexNum; i++)
+        if (mMatrix[v][i] == 1)
+            return i;
+
+    return -1;
+}
+
+/*
+ * 返回顶点v相对于w的下一个邻接顶点的索引，失败则返回-1
+ */
+int MatrixUDG::nextVertex(int v, int w)
+{
+    int i;
+
+    if (v<0 || v>(mVexNum-1) || w<0 || w>(mVexNum-1))
+        return -1;
+
+    for (i = w + 1; i < mVexNum; i++)
+        if (mMatrix[v][i] == 1)
+            return i;
+
+    return -1;
+}
+
+/*
+ * 深度优先搜索遍历图的递归实现
+ */
+void MatrixUDG::DFS(int i, int *visited)
+{
+    int w;
+
+    visited[i] = 1;
+    cout << mVexs[i] << " ";
+    // 遍历该顶点的所有邻接顶点。若是没有访问过，那么继续往下走
+    for (w = firstVertex(i); w >= 0; w = nextVertex(i, w))
+    {
+        if (!visited[w])
+            DFS(w, visited);
+    }
+       
+}
+
+/*
+ * 深度优先搜索遍历图
+ */
+void MatrixUDG::DFS()
+{
+    int i;
+    int visited[MAX];       // 顶点访问标记
+
+    // 初始化所有顶点都没有被访问
+    for (i = 0; i < mVexNum; i++)
+        visited[i] = 0;
+
+    cout << "DFS: ";
+    for (i = 0; i < mVexNum; i++)
+    {
+        //printf("\n== LOOP(%d)\n", i);
+        if (!visited[i])
+            DFS(i, visited);
+    }
+    cout << endl;
+}
+
+/*
+ * 广度优先搜索（类似于树的层次遍历）
+ */
+void MatrixUDG::BFS()
+{
+    int head = 0;
+    int rear = 0;
+    int queue[MAX];     // 辅组队列
+    int visited[MAX];   // 顶点访问标记
+    int i, j, k;
+
+    for (i = 0; i < mVexNum; i++)
+        visited[i] = 0;
+
+    cout << "BFS: ";
+    for (i = 0; i < mVexNum; i++)
+    {
+        if (!visited[i])
+        {
+            visited[i] = 1;
+            cout << mVexs[i] << " ";
+            queue[rear++] = i;  // 入队列
+        }
+        while (head != rear) 
+        {
+            j = queue[head++];  // 出队列
+            for (k = firstVertex(j); k >= 0; k = nextVertex(j, k)) //k是为访问的邻接顶点
+            {
+                if (!visited[k])
+                {
+                    visited[k] = 1;
+                    cout << mVexs[k] << " ";
+                    queue[rear++] = k;
+                }
+            }
+        }
+    }
+    cout << endl;
+}
+
+/*
+ * 打印矩阵队列图
+ */
+void MatrixUDG::print()
+{
+    int i,j;
+
+    cout << "Martix Graph:" << endl;
+    for (i = 0; i < mVexNum; i++)
+    {
+        for (j = 0; j < mVexNum; j++)
+            cout << mMatrix[i][j] << " ";
+        cout << endl;
+    }
+}
+
+
+int main()
+{
+    char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+    char edges[][2] = {
+        {'A', 'C'}, 
+        {'A', 'D'}, 
+        {'A', 'F'}, 
+        {'B', 'C'}, 
+        {'C', 'D'}, 
+        {'E', 'G'}, 
+        {'F', 'G'}};
+    int vlen = sizeof(vexs)/sizeof(vexs[0]);
+    int elen = sizeof(edges)/sizeof(edges[0]);
+    MatrixUDG* pG;
+
+    // 自定义"图"(输入矩阵队列)
+    //pG = new MatrixUDG();
+    // 采用已有的"图"
+    pG = new MatrixUDG(vexs, vlen, edges, elen);
+
+    pG->print();   // 打印图
+    pG->DFS();     // 深度优先遍历
+    pG->BFS();     // 广度优先遍历
+
+    return 0;
+}
+```
+
+
+### 邻接表实现无向图的BFS与DFS
+
+```
+/**
+ * C++: 邻接表表示的"无向图(List Undirected Graph)"
+ *
+ * @author skywang
+ * @date 2014/04/19
+ */
+
+#include <iomanip>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+#define MAX 100
+// 邻接表
+class ListUDG
+{
+    private: // 内部类
+        // 邻接表中表对应的链表的顶点
+        class ENode
+        {
+            public:
+                int ivex;           // 该边所指向的顶点的位置
+                ENode *nextEdge;    // 指向下一条弧的指针
+        };
+
+        // 邻接表中表的顶点
+        class VNode
+        {
+            public:
+                char data;          // 顶点信息
+                ENode *firstEdge;   // 指向第一条依附该顶点的弧
+        };
+
+    private: // 私有成员
+        int mVexNum;             // 图的顶点的数目
+        int mEdgNum;             // 图的边的数目
+        VNode mVexs[MAX];
+
+    public:
+        // 创建邻接表对应的图(自己输入)
+        ListUDG();
+        // 创建邻接表对应的图(用已提供的数据)
+        ListUDG(char vexs[], int vlen, char edges[][2], int elen);
+        ~ListUDG();
+
+        // 深度优先搜索遍历图
+        void DFS();
+        // 广度优先搜索（类似于树的层次遍历）
+        void BFS();
+        // 打印邻接表图
+        void print();
+
+    private:
+        // 读取一个输入字符
+        char readChar();
+        // 返回ch的位置
+        int getPosition(char ch);
+        // 深度优先搜索遍历图的递归实现
+        void DFS(int i, int *visited);
+        // 将node节点链接到list的最后
+        void linkLast(ENode *list, ENode *node);
+};
+
+/*
+ * 创建邻接表对应的图(自己输入)
+ */
+ListUDG::ListUDG()
+{
+    char c1, c2;
+    int v, e;
+    int i, p1, p2;
+    ENode *node1, *node2;
+
+    // 输入"顶点数"和"边数"
+    cout << "input vertex number: ";
+    cin >> mVexNum;
+    cout << "input edge number: ";
+    cin >> mEdgNum;
+    if ( mVexNum < 1 || mEdgNum < 1 || (mEdgNum > (mVexNum * (mVexNum-1))))
+    {
+        cout << "input error: invalid parameters!" << endl;
+        return ;
+    }
+ 
+    // 初始化"邻接表"的顶点
+    for(i=0; i<mVexNum; i++)
+    {
+        cout << "vertex(" << i << "): ";
+        mVexs[i].data = readChar();
+        mVexs[i].firstEdge = NULL;
+    }
+
+    // 初始化"邻接表"的边
+    for(i=0; i<mEdgNum; i++)
+    {
+        // 读取边的起始顶点和结束顶点
+        cout << "edge(" << i << "): ";
+        c1 = readChar();
+        c2 = readChar();
+
+        p1 = getPosition(c1);
+        p2 = getPosition(c2);
+        // 初始化node1
+        node1 = new ENode();
+        node1->ivex = p2;
+        // 将node1链接到"p1所在链表的末尾"
+        if(mVexs[p1].firstEdge == NULL)
+          mVexs[p1].firstEdge = node1;
+        else
+            linkLast(mVexs[p1].firstEdge, node1);
+        // 初始化node2
+        node2 = new ENode();
+        node2->ivex = p1;
+        // 将node2链接到"p2所在链表的末尾"
+        if(mVexs[p2].firstEdge == NULL)
+          mVexs[p2].firstEdge = node2;
+        else
+            linkLast(mVexs[p2].firstEdge, node2);
+    }
+}
+
+/*
+ * 创建邻接表对应的图(用已提供的数据)
+ */
+ListUDG::ListUDG(char vexs[], int vlen, char edges[][2], int elen)
+{
+    char c1, c2;
+    int i, p1, p2;
+    ENode *node1, *node2;
+
+    // 初始化"顶点数"和"边数"
+    mVexNum = vlen;
+    mEdgNum = elen;
+    // 初始化"邻接表"的顶点
+    for(i=0; i<mVexNum; i++)
+    {
+        mVexs[i].data = vexs[i];
+        mVexs[i].firstEdge = NULL;
+    }
+
+    // 初始化"邻接表"的边
+    for(i=0; i<mEdgNum; i++)
+    {
+        // 读取边的起始顶点和结束顶点
+        c1 = edges[i][0];
+        c2 = edges[i][1];
+
+        p1 = getPosition(c1);
+        p2 = getPosition(c2);
+        // 初始化node1
+        node1 = new ENode();
+        node1->ivex = p2;
+        // 将node1链接到"p1所在链表的末尾"
+        if(mVexs[p1].firstEdge == NULL)
+          mVexs[p1].firstEdge = node1;
+        else
+            linkLast(mVexs[p1].firstEdge, node1);
+        // 初始化node2
+        node2 = new ENode();
+        node2->ivex = p1;
+        // 将node2链接到"p2所在链表的末尾"
+        if(mVexs[p2].firstEdge == NULL)
+          mVexs[p2].firstEdge = node2;
+        else
+            linkLast(mVexs[p2].firstEdge, node2);
+    }
+}
+
+/* 
+ * 析构函数
+ */
+ListUDG::~ListUDG() 
+{
+}
+
+/*
+ * 将node节点链接到list的最后
+ */
+void ListUDG::linkLast(ENode *list, ENode *node)
+{
+    ENode *p = list;
+
+    while(p->nextEdge)
+        p = p->nextEdge;
+    p->nextEdge = node;
+}
+
+/*
+ * 返回ch的位置
+ */
+int ListUDG::getPosition(char ch)
+{
+    int i;
+    for(i=0; i<mVexNum; i++)
+        if(mVexs[i].data==ch)
+            return i;
+    return -1;
+}
+
+/*
+ * 读取一个输入字符
+ */
+char ListUDG::readChar()
+{
+    char ch;
+
+    do {
+        cin >> ch;
+    } while(!((ch>='a'&&ch<='z') || (ch>='A'&&ch<='Z')));
+
+    return ch;
+}
+
+
+/*
+ * 深度优先搜索遍历图的递归实现
+ */
+void ListUDG::DFS(int i, int *visited)
+{
+    ENode *node;
+
+    visited[i] = 1;
+    cout << mVexs[i].data << " ";
+    node = mVexs[i].firstEdge;
+    while (node != NULL)
+    {
+        if (!visited[node->ivex])
+            DFS(node->ivex, visited);
+        node = node->nextEdge;
+    }
+}
+
+/*
+ * 深度优先搜索遍历图
+ */
+void ListUDG::DFS()
+{
+    int i;
+    int visited[MAX];       // 顶点访问标记
+
+    // 初始化所有顶点都没有被访问
+    for (i = 0; i < mVexNum; i++)
+        visited[i] = 0;
+
+    cout << "DFS: ";
+    for (i = 0; i < mVexNum; i++)
+    {
+        if (!visited[i])
+            DFS(i, visited);
+    }
+    cout << endl;
+}
+
+/*
+ * 广度优先搜索（类似于树的层次遍历）
+ */
+void ListUDG::BFS()
+{
+    int head = 0;
+    int rear = 0;
+    int queue[MAX];     // 辅组队列
+    int visited[MAX];   // 顶点访问标记
+    int i, j, k;
+    ENode *node;
+
+    for (i = 0; i < mVexNum; i++)
+        visited[i] = 0;
+
+    cout << "BFS: ";
+    for (i = 0; i < mVexNum; i++)
+    {
+        if (!visited[i])
+        {
+            visited[i] = 1;
+            cout << mVexs[i].data << " ";
+            queue[rear++] = i;  // 入队列
+        }
+        while (head != rear) 
+        {
+            j = queue[head++];  // 出队列
+            node = mVexs[j].firstEdge;
+            while (node != NULL)
+            {
+                k = node->ivex;
+                if (!visited[k])
+                {
+                    visited[k] = 1;
+                    cout << mVexs[k].data << " ";
+                    queue[rear++] = k;
+                }
+                node = node->nextEdge;
+            }
+        }
+    }
+    cout << endl;
+}
+
+/*
+ * 打印邻接表图
+ */
+void ListUDG::print()
+{
+    int i,j;
+    ENode *node;
+
+    cout << "List Graph:" << endl;
+    for (i = 0; i < mVexNum; i++)
+    {
+        cout << i << "(" << mVexs[i].data << "): ";
+        node = mVexs[i].firstEdge;
+        while (node != NULL)
+        {
+            cout << node->ivex << "(" << mVexs[node->ivex].data << ") ";
+            node = node->nextEdge;
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+    char edges[][2] = {
+        {'A', 'C'}, 
+        {'A', 'D'}, 
+        {'A', 'F'}, 
+        {'B', 'C'}, 
+        {'C', 'D'}, 
+        {'E', 'G'}, 
+        {'F', 'G'}};
+    int vlen = sizeof(vexs)/sizeof(vexs[0]);
+    int elen = sizeof(edges)/sizeof(edges[0]);
+    ListUDG* pG;
+
+    // 自定义"图"(输入矩阵队列)
+    //pG = new ListUDG();
+    // 采用已有的"图"
+    pG = new ListUDG(vexs, vlen, edges, elen);
+
+    pG->print();   // 打印图
+    pG->DFS();     // 深度优先遍历
+    pG->BFS();     // 广度优先遍历
+
+    return 0;
+}
+```
+
+### References 
+
+[图的遍历之 深度优先搜索和广度优先搜索 - 如果天空不死 - 博客园](http://www.cnblogs.com/skywang12345/p/3711483.html)

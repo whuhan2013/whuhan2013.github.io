@@ -7,6 +7,10 @@ tags: [python]
 description: python学习资源.
 ---
 
+### python入门
+
+[Runestone Interactive](http://interactivepython.org/runestone/default/user/login)
+
 ### python爬虫入门 
 
 [如何入门 Python 爬虫?-知乎](https://www.zhihu.com/question/20899988)

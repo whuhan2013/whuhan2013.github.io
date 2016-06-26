@@ -1,6 +1,6 @@
 ---
 layout: post
-title: React Native实例(二)
+title: React Native常用组件(二)
 date: 2016-6-25
 categories: blog
 tags: [React Native]
