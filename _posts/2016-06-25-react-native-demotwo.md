@@ -11,6 +11,7 @@ description: React Native实例
 **本文主要包括以下内容** 
 
 1. listView实例            
+2. Image组件实例
 
 
 ### listView实例 
@@ -163,3 +164,121 @@ AppRegistry.registerComponent('Abc', () => Abc);
 
 ![](https://facebook.github.io/react-native/img/TutorialFinal.png)
 
+
+
+### Image组件实例
+
+
+**访问本地图片** 
+
+```
+<View  style={{marginLeft:10,marginTop:10}}>
+      <Text style={{fontSize:16}}>'测试本地图片'</Text>
+      <Image source={require('./img/my_icon.png')} />
+ </View>
+```
+
+**加载使用APP中的图片** 
+
+```
+<Image source={{uri:'ic_launcher'}} style={{width: 40, height: 40}} />
+```
+
+不过如果要显示效果：希望大家做如下修改，因为现在android项目采用gradle，现在不会默认生成drawable文件夹中了，所以大家如果要演示效果，需要在res下面新建一个drawable文件夹，然后放一个图片进入，接着在重新打包运行即可(这边测试的是把ic_launcher.png图片放入到res/drawable文件夹中)。不过经测试drawable-hdpi这类的不同分辨率格式文件夹也可以运行。
+
+该适用于调试版本，如果采用发布版本就需要例如'image!xx.png'格式的访问方式了
+
+
+**加载网络图片**   
+
+```
+<Image source={{uri:'http://mta.zttit.com:8080/images/ZTT_1404756641470_image.jpg'}}  style={{width:100,height:100}}/>
+```
+
+**Image实现某些控件的背景图效果**
+
+React Native中支持嵌套的方式，例如我们现在有一个Text组件，假如要实现背景图的效果，那么可以使用Image嵌套的Text的方式，然后Image加载图片方式实现,例如代码如下:
+
+```
+<Image source={require('./img/my_icon.png')} >
+           <Text style={{color:'red'}}>下面是背景图</Text>
+</Image>
+```
+
+**Image实例仿美团头部**
+
+```
+/**
+ * 模仿美团首页顶部分类效果
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ */
+'use strict';
+import React, {
+  AppRegistry,
+  Component,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from 'react-native';
+class TestImage extends Component {
+  render() {
+    return (
+      <View style={{marginLeft:5,marginTop:10,marginRight:5}}>
+ 
+         <View style={{flexDirection:'row'}}>
+             <View style={{width:70}}>
+                 <Image source={require('./img/one.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,textAlign:'center',fontSize:11,color:'#555555'}}>美食</Text>
+             </View>
+              <View style={{width:70}}>
+                 <Image source={require('./img/two.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,alignSelf:'center',fontSize:11,color:'#555555',textAlign:'center'}}>电影</Text>
+             </View>
+             <View style={{width:70}}>
+                 <Image source={require('./img/three.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,alignSelf:'center',fontSize:11,color:'#555555',textAlign:'center'}}>酒店</Text>
+             </View>
+             <View style={{width:70}}>
+                 <Image source={require('./img/four.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,alignSelf:'center',fontSize:11,color:'#555555',textAlign:'center'}}>KTV</Text>
+             </View>
+             <View style={{width:70}}>
+                 <Image source={require('./img/five.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,alignSelf:'center',fontSize:11,color:'#555555',textAlign:'center'}}>外卖</Text>
+             </View>
+          </View>
+          <View style={{flexDirection:'row',marginTop:10}}>
+             <View style={{width:70}}>
+                 <Image source={require('./img/six.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,textAlign:'center',fontSize:11,color:'#555555'}}>优惠买单</Text>
+             </View>
+              <View style={{width:70}}>
+                 <Image source={require('./img/seven.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,alignSelf:'center',fontSize:11,color:'#555555',textAlign:'center'}}>周边游</Text>
+             </View>
+             <View style={{width:70}}>
+                 <Image source={require('./img/eight.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,alignSelf:'center',fontSize:11,color:'#555555',textAlign:'center'}}>休闲娱乐</Text>
+             </View>
+             <View style={{width:70}}>
+                 <Image source={require('./img/nine.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,alignSelf:'center',fontSize:11,color:'#555555',textAlign:'center'}}>今日新单</Text>
+             </View>
+             <View style={{width:70}}>
+                 <Image source={require('./img/ten.png')} style={{alignSelf:'center',width:45,height:45}} />
+                 <Text style={{marginTop:5,alignSelf:'center',fontSize:11,color:'#555555',textAlign:'center'}}>丽人</Text>
+             </View>
+          </View>
+      </View>
+    );
+  }
+}
+
+AppRegistry.registerComponent('TestImage', () => TestImage);
+```
+
+
+
+![](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/64.jpg)
