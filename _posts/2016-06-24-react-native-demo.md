@@ -523,104 +523,131 @@ AppRegistry.registerComponent('Abc', () => Abc);
 
 ### TextInput组件实例
 
+TextInput组件和前面讲的Image或者Text组件差不多，用起来都非常简单。我们直接在应用中添加一个TextInput组件，然后给该组件添加相关属性(例:边框颜色,粗细,背景,默认值)以及监听方法(例如:输入信息,焦点变化等事件)。我们首先看一下官方提供的一个简单例子:
+
+```
+<TextInput
+    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+    onChangeText={(text) => this.setState({text})}
+    value={this.state.text}
+  />
+```
+
+textinput的属性方法详情参见[textinput组件讲解](http://www.lcode.org/%E3%80%90react-native%E5%BC%80%E5%8F%91%E3%80%91react-native%E6%8E%A7%E4%BB%B6%E4%B9%8Btextinput%E7%BB%84%E4%BB%B6%E8%AE%B2%E8%A7%A3%E4%B8%8Eqq%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2%E5%AE%9E%E7%8E%B011/)
+
+
+**QQ登录界面的效果**
+
 ```
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
- * @flow
  */
-
-import React, { Component } from 'react';
-import {
+'use strict';
+import React, {
   AppRegistry,
+  Component,
   StyleSheet,
-   Navigator,
-   ScrollView,
-   TextInput,
   Text,
-    PixelRatio,
-  View
+  Image,
+  View,
+  TextInput,
 } from 'react-native';
-
-
-class Abc extends Component {
-  render() {
-     
-           return (
-
-            <View style={[styles.flex,styles.topStatus]}>
-
-                <Search></Search>
-
-            </View>
-
-        );
-       }
-}
-
-
-class Search extends Component {
-    render(){
-        return(
-            <View style={[styles.flex,styles.flexDirection]}>
-                <View style={[styles.flex,styles.input]}>
-
-                    <TextInput  returnKeyType="search" />
-
-                </View>
-
-
-                <View style={styles.btn}>
-                    <Text style={styles.search}>搜索</Text>
-                </View>
-            </View>
-
-        );
-    }
-}
-
-
-
-const styles = StyleSheet.create({
  
-    flex:{
-        flex:1,
-
-    },
-    flexDirection:{
-        flexDirection:'row',
-    },
-    topStatus:{
-        marginTop:25,
-    },
-    input:{
-        height:45,
-        borderColor:'red',
-        borderWidth:1,
-        marginLeft:10,
-        paddingLeft:10,
-        borderRadius:5,
-
-    },
-    btn:{
-        width:45,
-        marginLeft:-5,
-        marginRight:5,
-        backgroundColor:'#23BEFF',
-        height:45,
-        justifyContent:'center',
-        alignItems:'center',
-    },
-    search:{
-        color:'#fff',
-        fontSize:15,
-        fontWeight:'bold',
-    },
+class TestInput extends Component {
+  render() {
+    return (
+      <View style={{backgroundColor:'#f4f4f4',flex:1}}>
+          <Image
+              style={styles.style_image} 
+              source={require('./img/app_icon.png')}/>
+          <TextInput 
+              style={styles.style_user_input}
+              placeholder='QQ号/手机号/邮箱'
+              numberOfLines={1}
+              autoFocus={true}
+              underlineColorAndroid={'transparent'} 
+              textAlign='center'
+          />
+          <View
+              style={{height:1,backgroundColor:'#f4f4f4'}}
+          />
+          <TextInput 
+              style={styles.style_pwd_input}
+              placeholder='密码'
+              numberOfLines={1}
+              underlineColorAndroid={'transparent'} 
+              secureTextEntry={true}
+              textAlign='center'
+          />
+          <View 
+              style={styles.style_view_commit}
+           >
+            <Text style={{color:'#fff'}}>
+               登录
+            </Text>
+ 
+          </View>
+ 
+          <View style={{flex:1,flexDirection:'row',alignItems: 'flex-end',bottom:10}}>
+             <Text style={styles.style_view_unlogin}>
+                 无法登录?
+            </Text>
+            <Text style={styles.style_view_register}>
+                 新用户
+            </Text>
+          </View>
+      </View>
+    );
+  }
+}
+const styles = StyleSheet.create({
+  style_image:{
+    borderRadius:35,
+    height:70,
+    width:70,
+    marginTop:40,
+    alignSelf:'center',
+  },
+  style_user_input:{  
+      backgroundColor:'#fff',
+      marginTop:10,
+      height:35,
+  },
+   style_pwd_input:{  
+      backgroundColor:'#fff',
+      height:35,
+  },
+   style_view_commit:{  
+      marginTop:15,
+      marginLeft:10,
+      marginRight:10,
+      backgroundColor:'#63B8FF',
+      height:35,
+      borderRadius:5,
+      justifyContent: 'center',
+      alignItems: 'center',
+  },
+  style_view_unlogin:{
+    fontSize:12,
+    color:'#63B8FF',
+    marginLeft:10,
+  },
+  style_view_register:{
+    fontSize:12,
+    color:'#63B8FF',
+    marginRight:10,
+    alignItems:'flex-end',
+    flex:1,
+    flexDirection:'row',
+    textAlign:'right',
+  }
 });
-
-AppRegistry.registerComponent('Abc', () => Abc);
+ 
+AppRegistry.registerComponent('TestInput', () => TestInput);
 ```
+
 
 **效果如下** 
 
-![这里写图片描述](http://img.blog.csdn.net/20160624205238566)
+![这里写图片描述](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/211.jpg)
