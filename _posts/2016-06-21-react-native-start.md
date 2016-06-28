@@ -67,3 +67,15 @@ apm config set registry https://registry.npm.taobao.org
 - npm install出错  
 解决方法：同上，升级npm解决
 
+
+**init时指定特定版本** 
+
+```
+mkdir  [Project Name] && cd $_
+npm i react-native@version --save
+react-native upgrade
+```
+
+**References**
+
+[创建 React-Native 工程时，如何指定特定的 React-Native 版本 - 简书](http://www.jianshu.com/p/646c5fbd9659)
