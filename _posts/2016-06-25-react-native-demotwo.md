@@ -12,7 +12,9 @@ description: React Native实例
 
 1. listView实例            
 2. Image组件实例
-3. ProgressBarAndroid组件
+3. ProgressBarAndroid组件  
+4. DrawerLayoutAndroid组件 
+5. ScrollView组件
 
 ### listView实例 
 
@@ -342,3 +344,158 @@ AppRegistry.registerComponent('ProgressBarDemo', () => ProgressBarDemo);
 **效果如下** 
 
 ![](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/212.jpg)
+
+### DrawerLayoutAndroid组件
+
+具体基本使用实例代码如下:
+
+
+```
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ */
+'use strict';
+import React, {
+  AppRegistry,
+  Component,
+  StyleSheet,
+  Text,
+  View,
+  DrawerLayoutAndroid,
+} from 'react-native';
+ 
+class DrawerLayoutDemo extends Component {
+ statics: {
+    title: '<ScrollView>',
+    description: 'Component that enables scrolling through child components.'
+  },
+ makeItems: function(nItems: number, styles): Array<any> {
+    var items = [];
+    for (var i = 0; i < nItems; i++) {
+       items[i] = (
+         <TouchableOpacity key={i} style={styles}>
+           <Text>{'Item ' + i}</Text>
+         </TouchableOpacity>
+       );
+    }
+    return items;
+  },
+  render() {
+   // One of the items is a horizontal scroll view
+    var items = this.makeItems(NUM_ITEMS, styles.itemWrapper);
+    items[4] = (
+      <ScrollView key={'scrollView'} horizontal={true}>
+        {this.makeItems(NUM_ITEMS, [styles.itemWrapper, styles.horizontalItemWrapper])}
+      </ScrollView>
+    );
+ 
+    var verticalScrollView = (
+      <ScrollView style={styles.verticalScrollView}>
+        {items}
+      </ScrollView>
+    );
+ 
+    return verticalScrollView;
+  }
+}
+const styles = StyleSheet.create({
+});
+AppRegistry.registerComponent('DrawerLayoutDemo', () => DrawerLayoutDemo);
+```
+
+
+**效果如下** 
+
+![](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/213.jpg)
+
+
+
+### ScrollView组件 
+
+
+```
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Image,
+  Text,
+  TextInput,
+   ScrollView,
+    TouchableOpacity,
+  DrawerLayoutAndroid,
+   ProgressBarAndroid,
+  View
+} from 'react-native';
+var NUM_ITEMS = 20;
+
+class MyProject extends Component {
+   statics: {
+    title: '<ScrollView>',
+    description: 'Component that enables scrolling through child components.'
+  }
+
+  makeItems(nItems: number, styles): Array<any> {
+    var items = [];
+    for (var i = 0; i < nItems; i++) {
+       items[i] = (
+         <TouchableOpacity key={i} style={styles}>
+           <Text>{'Item ' + i}</Text>
+         </TouchableOpacity>
+       );
+    }
+    return items;
+  }
+ 
+  render() {
+    // One of the items is a horizontal scroll view
+    var items = this.makeItems(NUM_ITEMS, styles.itemWrapper);
+    items[4] = (
+      <ScrollView key={'scrollView'} horizontal={true}>
+        {this.makeItems(NUM_ITEMS, [styles.itemWrapper, styles.horizontalItemWrapper])}
+      </ScrollView>
+    );
+ 
+    var verticalScrollView = (
+      <ScrollView style={styles.verticalScrollView}>
+        {items}
+      </ScrollView>
+    );
+ 
+    return verticalScrollView;
+  }
+}
+
+const styles = StyleSheet.create({
+  
+   verticalScrollView: {
+    margin: 10,
+  },
+  itemWrapper: {
+    backgroundColor: '#dddddd',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderWidth: 5,
+    borderColor: '#a52a2a',
+    padding: 30,
+    margin: 5,
+  },
+  horizontalItemWrapper: {
+    padding: 50
+  }
+});
+
+AppRegistry.registerComponent('MyProject', () => MyProject);
+```
+
+**效果如下**
+
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/react1.png)
