@@ -340,6 +340,8 @@ AppRegistry.registerComponent('Abc', () => Abc);
 
 实现了页面跳转和通过Navigator传递数据并回传数据，在componentDidMount中获取传递过来的数据  
 
+**注意**     
+initialRoute两个括号里面的内容没有显示出来，不知道为什么，大概是jkelly的解析原因吧,到github中去看源码吧
 
 ```
 /**
