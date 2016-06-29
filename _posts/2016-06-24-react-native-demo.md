@@ -367,7 +367,7 @@ class DongFang extends Component {
       let defaultComponent=List;
     return (
         <Navigator
-            initialRoute={{ name: defaultName, component: defaultComponent }}
+            initialRoute={{name: defaultName, component: defaultComponent}}
             //配置场景
             configureScene=
                 {
