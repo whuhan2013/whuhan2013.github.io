@@ -13,6 +13,9 @@ description: React Native实例
 1. ToolbarAndroid控件 
 2. Switch开关控件    
 3. Picker选择控件
+4. ViewPagerAndroid组件
+5. Touchable组件
+6. RefreshControl组件
 
 
 ### ToolbarAndroid控件
@@ -227,3 +230,270 @@ AppRegistry.registerComponent('MyProject', () => MyProject);
 **效果如下**
 
 ![](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/3.2.jpg)
+
+
+### ViewPagerAndroid组件 
+
+ViewPagerAndroid中的所有子View必须为<View>控件，不能为复合型的组件。你可以为每一个子视图添加列如:padding或则backgroundColor之类的属性。 
+
+
+
+```
+'use strict';
+import React, {
+  AppRegistry,
+  Component,
+  StyleSheet,
+  Text,
+  View,
+  ViewPagerAndroid,
+} from 'react-native';
+ 
+class ViewPagerDemo extends Component {
+  render() {
+    return (
+      <View >
+        <Text style={styles.welcome}>
+            ViewPagerAndroid实例
+        </Text>
+        <ViewPagerAndroid style={styles.pageStyle} initialPage={0}>
+             <View style={{backgroundColor:"red"}}>
+                   <Text>First Page!</Text>
+             </View>
+             <View style={{backgroundColor:"yellow"}}>
+                   <Text>Second Page!</Text>
+             </View>
+        </ViewPagerAndroid>
+      </View>
+    );
+  }
+}
+const styles = StyleSheet.create({
+   pageStyle: {
+    alignItems: 'center',
+    padding: 20,
+    height:200,
+  }
+});
+AppRegistry.registerComponent('ViewPagerDemo', () => ViewPagerDemo);
+```
+
+**效果如下** 
+
+![](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/02/1.jpg)
+
+### Touchable组件 
+
+
+今天我们一起来看一下Touchable*系列组件的使用详解，该系列组件包括四种分别为:TouchableHighlight,TouchableNativeFeedback,TouchableOpacity,TouchableWithoutFeedback。其中最后一个控件是触摸点击不带反馈效果的，另外三个都是有反馈效果。可以这样理解前面三个都是继承自TouchableWithoutFeedback扩展而来。
+
+
+```
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+
+  StyleSheet,
+  Text,
+  View,
+  Picker,
+  Image,
+  TouchableHighlight,
+  ViewPagerAndroid,
+   TouchableOpacity,
+   TouchableWithoutFeedback,
+} from 'react-native';
+class MyProject extends Component {
+render() {
+    return (
+       <View style={styles.flex}>
+
+          <TouchableHighlight onPress={this.show.bind(this,'欢迎学习React Native技术')}
+              underlayColor='#E1F6FF'
+              >
+          <Text style={styles.item}>欢迎学习React Native技术-TouchableHighlight</Text>
+
+          </TouchableHighlight>
+
+          <TouchableOpacity onPress={this.show.bind(this,'作者东方耀Q：3096239789')}>
+          <Text style={styles.item}>作者东方耀Q：3096239789-TouchableOpacity</Text>
+
+          </TouchableOpacity>
+
+
+          <TouchableWithoutFeedback onPress={this.show.bind(this,'作者东方耀Q：3096239789')}>
+            <Text style={styles.item}>作者东方耀Q：3096239789-TouchableWithoutFeedback</Text>
+
+
+          </TouchableWithoutFeedback>
+
+        </View>
+    );
+  }
+
+   show(txt){
+    alert(txt);
+  }
+
+
+}
+
+
+
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+   
+  },
+  heiligt:
+  {
+    borderRadius: 8,
+    padding: 6,
+    marginTop:5,
+  
+
+  },
+   flex:{
+    flex:1,
+    marginTop:25,
+  },
+
+ item:{
+   fontSize:18,
+   color:'#434343',
+   marginLeft:5,
+   marginTop:10,
+ },
+});
+
+AppRegistry.registerComponent('MyProject', () => MyProject);
+```
+
+
+**注意**
+
+必须要有onPress方法，不然的话不会产生点击效果，也就不会产生变化了。
+
+
+### RefreshControl组件
+
+This component is used inside a ScrollView or ListView to add pull to refresh functionality. When the ScrollView is at scrollY: 0, swiping down triggers an onRefresh event.
+
+
+**Examples** 
+
+```
+'use strict';
+ 
+const React = require('react-native');
+const {
+  AppRegistry,
+  ScrollView,
+  StyleSheet,
+  RefreshControl,
+  Text,
+  View,
+} = React;
+ 
+const styles = StyleSheet.create({
+  row: {
+    borderColor: 'red',
+    borderWidth: 5,
+    padding: 20,
+    backgroundColor: '#3a5795',
+    margin: 5,
+  },
+  text: {
+    alignSelf: 'center',
+    color: '#fff',
+  },
+  scrollview: {
+    flex: 1,
+  },
+});
+ 
+const Row = React.createClass({
+  _onClick: function() {
+    this.props.onClick(this.props.data);
+  },
+  render: function() {
+    return (
+        <View style={styles.row}>
+          <Text style={styles.text}>
+            {this.props.data.text}
+          </Text>
+        </View>
+    );
+  },
+});
+ 
+const RefreshControlDemo = React.createClass({
+  getInitialState() {
+    return {
+      isRefreshing: false,
+      loaded: 0,
+      rowData: Array.from(new Array(20)).map(
+        (val, i) => ({text: '初始行 ' + i})),
+    };
+  },
+  render() {
+    const rows = this.state.rowData.map((row, ii) => {
+      return <Row key={ii} data={row}/>;
+    });
+    return (
+      <ScrollView
+        style={styles.scrollview}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this._onRefresh}
+            colors={['#ff0000', '#00ff00', '#0000ff','#3ad564']}
+            progressBackgroundColor="#ffffff"
+          />
+        }>
+        {rows}
+      </ScrollView>
+    );
+  },
+  _onRefresh() {
+    this.setState({isRefreshing: true});
+    setTimeout(() => {
+      // 准备下拉刷新的5条数据
+      const rowData = Array.from(new Array(5))
+      .map((val, i) => ({
+        text: '刷新行 ' + (+this.state.loaded + i)
+      }))
+      .concat(this.state.rowData);
+ 
+      this.setState({
+        loaded: this.state.loaded + 5,
+        isRefreshing: false,
+        rowData: rowData,
+      });
+    }, 5000);
+  },
+});
+ 
+AppRegistry.registerComponent('RefreshControlDemo', () => RefreshControlDemo);
+```
+
+
+**References**
+
+[函数的扩展 - ECMAScript 6入门](http://es6.ruanyifeng.com/#docs/function)           
+[Array.prototype.map() - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map)                 
+
+**effect**
+
+![](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/02/demo1.gif)

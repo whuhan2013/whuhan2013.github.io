@@ -27,7 +27,39 @@ Let's now modify this application to render all of this data in a ListView compo
 Why is a ListView better than just rendering all of these elements or putting them in a ScrollView? Despite React being fast, rendering a possibly infinite list of elements could be slow. ListView schedules rendering of views so that you only display the ones on screen and those already rendered but off screen are removed from the native view hierarchy.
 
 
-**代码**
+**简单例子**
+
+```
+'use strict';
+import React, {
+  AppRegistry,
+  Component,
+  StyleSheet,
+  Text,
+  View,
+  ListView,
+} from 'react-native';
+var ListViewDemo = React.createClass({
+    getInitialState: function() {
+      var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        return {
+          dataSource: ds.cloneWithRows(['row 1', 'row 2','row 3','row 4','row 5','row 6','row 7','row 8']),
+        };
+    },
+    render: function() {
+      return (
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => <Text>{rowData}</Text>}
+        />
+      );
+    }
+});
+AppRegistry.registerComponent('ListViewDemo', () => ListViewDemo);
+```
+
+
+**复杂例子代码**
 
 ```
 /**
