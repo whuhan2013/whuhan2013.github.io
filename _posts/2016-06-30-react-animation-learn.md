@@ -23,8 +23,8 @@ class Playground extends React.Component {
         source={{uri: 'http://i.imgur.com/XMKOH81.jpg'}}
         style={{
           flex: 1,
-          transform: [                        // `transform`   有顺序的数组
-            {scale: this.state.bounceValue},  // Map `bounceValue` to `scale`
+          transform: [                        // 
+            {scale: this.state.bounceValue},  //
           ]
         }}
       />
