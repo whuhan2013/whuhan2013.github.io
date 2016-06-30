@@ -1,10 +1,10 @@
 ---
 layout: post
-title: React Native之Animated动画库详解
+title: React Native之Animated详解
 date: 2016-6-30
 categories: blog
 tags: [React Native]
-description: React Native之Animated动画库详解
+description: ReactAnimated动画库详解
 ---
 
 
