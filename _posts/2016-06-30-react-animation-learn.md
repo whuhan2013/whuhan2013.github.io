@@ -4,9 +4,8 @@ title: React Native之Animated详解
 date: 2016-6-30
 categories: blog
 tags: [React Native]
-description: ReactAnimated动画库详解
+description: React Animated动画库详解
 ---
-
 
 Animated库可以让开发者非常容易并且非常高效的性能实现各种的动画以及交互的方式。使用Animated的时候，我们只需要关注设置动画的实现和结束即可，然后在里边设置一个动画可配置的函数。间接着通过start/stop的方法来控制动画按照顺序执行。例如下面就是一个在加载的时候带有比较简单的弹跳动画的效果实例:
 
