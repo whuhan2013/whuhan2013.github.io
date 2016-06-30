@@ -177,15 +177,7 @@ class FadeInView extends React.Component {
 下面我们来看一个实例，我们需要通过Animated.Value的值从0变化到1，组件的位置从150px移动到0px，同时透明度从0变化到1。我们可以非常方便的修改style就可以实现。如下代码:
 
 ```
-style={{
-   opacity: this.state.fadeAnim, // Binds directly
-   transform: [{
-     translateY: this.state.fadeAnim.interpolate({
-       inputRange: [0, 1],
-       outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
-     }),
-   }],
- }}>
+build gitpage出现问题，代码删除
 ```
 
 
