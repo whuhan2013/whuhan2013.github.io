@@ -186,7 +186,7 @@ style={{
      }),
    }],
  }}>
- ```
+```
 
 
  **Animated.ValueXY介绍** 
