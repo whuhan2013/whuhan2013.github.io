@@ -9,6 +9,11 @@ description: React Animated动画库详解
 
 Animated库可以让开发者非常容易并且非常高效的性能实现各种的动画以及交互的方式。使用Animated的时候，我们只需要关注设置动画的实现和结束即可，然后在里边设置一个动画可配置的函数。间接着通过start/stop的方法来控制动画按照顺序执行。例如下面就是一个在加载的时候带有比较简单的弹跳动画的效果实例:
 
+
+**注意**
+
+这里的代码会导致gitpage build fail，所以不放在这里了，完整版请见:[code](http://www.lcode.org/react-native%E8%BF%9B%E9%98%B6%E4%B9%8Banimated%E5%8A%A8%E7%94%BB%E5%BA%93%E8%AF%A6%E8%A7%A3-%E5%AE%9E%E4%BE%8B%E7%AF%8765/)
+
 ```
 class Playground extends React.Component {
   constructor(props: any) {
@@ -21,10 +26,7 @@ class Playground extends React.Component {
     return (
       <Animated.Image                         // 基础组件: Image, Text, View
         source={{uri: 'http://i.imgur.com/XMKOH81.jpg'}}
-        style={{
-          flex: 1,
-          transform: [                        // 
-            {scale: this.state.bounceValue},  //
+        
           ]
         }}
       />
