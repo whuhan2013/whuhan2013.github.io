@@ -61,9 +61,10 @@ $ ionic run android
 ```
 
 
-### Problems
+### Problems            
 
-- As a common cause for Chinese programmers,the existence of GFW will make it hard for us to dowlad gradles
+**problem1**               
+As a common cause for Chinese programmers,the existence of GFW will make it hard for us to dowlad gradles
 
 **solutions:**
 
@@ -83,14 +84,16 @@ var distributionUrl = 'distributionUrl=../gradle-2.2.1-all.zip';
 [ionic build android error when download gradle - Stack Overflow](http://stackoverflow.com/questions/29874564/ionic-build-android-error-when-download-gradle)
 
 
-- ionic serve opened a blank page  
+**problem2**    
+ionic serve opened a blank page  
 
 **solutions:**
 
 change your browse,firefox or chorme will be fine.  
 
 
-- EveryTime I run ionic run android,the code will go back to the original and don't change.
+**problem3**    
+EveryTime I run ionic run android,the code will go back to the original and don't change.
 
 **solutions:** 
 
