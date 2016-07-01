@@ -15,10 +15,9 @@ description: React学习经验总结
 个人背景：熟练掌握javascript，用angular做过一个项目，粗略的看过ember和polymer。
 
 - 官网首页             
-看一遍官网首页的内容，对react有一个大概的了解。  
+看一遍[官网首页](http://facebook.github.io/react/)的内容，对react有一个大概的了解。  
 
-- 官网的[Getting Started](http://facebook.github.io/react/docs/getting-started.html) 和 Tutorial
-
+- 官网的[Getting Started](http://facebook.github.io/react/docs/getting-started.html) 和 Tutorial        
 跟着官方的Getting Started 和 Tutorial做一遍。
 记住，一定要自己动手写，并且写的时候一定要思考代码背后的逻辑和思想。
 
@@ -34,4 +33,8 @@ description: React学习经验总结
 
 - to be continue          
 接下来打算把做一些react-native和工程化这两方面的学习。
+
+
+**原文链接**      
+[React学习经验总结 - 土豆爱鸡蛋 - SegmentFault](https://segmentfault.com/a/1190000002961760)
 
