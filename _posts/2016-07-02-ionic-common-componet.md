@@ -311,7 +311,7 @@ Cards are primarily a CSS component. To use add a basic card, follow this struct
 </ion-card>
 ```
 
-![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic2.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic2.png)
 
 
 
@@ -331,7 +331,7 @@ Just like a normal page, cards can be customized to include headers. To add use 
 ```
 
 
-![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic3.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic3.png)
 
 
 **Lists In Cards**
@@ -380,7 +380,7 @@ A card can contain a list of items. To create a card list, add elements with the
 </ion-card>
 ```
 
-![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic4.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic4.png)
 
 
 
@@ -405,7 +405,7 @@ Images often vary in size, so it is important that they adopt a consistent style
 </ion-card>
 ```
 
-![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic5.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic5.png)
 
 
 **Background Images**
