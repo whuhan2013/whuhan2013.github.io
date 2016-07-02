@@ -14,6 +14,7 @@ description: Ionic common componet
 2. Alerts
 3. Badges
 4. Buttons
+5. Cards    
 
 ### Action Sheets 
 
@@ -282,4 +283,172 @@ The primary property sets the color of the button. Ionic includes a number of de
 </ion-content>
 ```
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic1.jpg?raw=true)
+![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic1.jpg)
+
+
+### Cards
+
+ Cards are a great way to display important pieces of content, and are quickly emerging as a core design pattern for apps. They're are a great way to contain and organize information, while also setting up predictable expectations for the user. With so much content to display at once, and often so little screen realestate, cards have fast become the design pattern of choice for many companies, including the likes of Google, Twitter, and Spotify.
+
+For mobile experiences, Cards make it easy to display the same information visually across many different screen sizes. They allow for more control, are flexible, and can even be animated. Cards are usually placed on top of one another, but they can also be used like a "page" and swiped between, left and right. 
+
+
+**Basic Usage** 
+
+Cards are primarily a CSS component. To use add a basic card, follow this structure:
+
+```
+<ion-card>
+
+  <ion-card-header>
+    Card Header
+  </ion-card-header>
+
+  <ion-card-content>
+    <!-- Add card content here! -->
+  </ion-card-content>
+
+</ion-card>
+```
+
+![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic2.png)
+
+
+**Card Headers**
+
+Just like a normal page, cards can be customized to include headers. To add use add a card header, add the <ion-card-header> component inside of your card:
+
+```
+<ion-card>
+  <ion-card-header>
+    Header
+  </ion-card-header>
+  <ion-card-content>
+    The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
+  </ion-card-content>
+</ion-card>
+```
+
+
+![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic3.png)
+
+**Lists In Cards**
+
+
+A card can contain a list of items. To create a card list, add elements with the ion-item attribute inside of an ion-list in your card:
+
+```
+<ion-card>
+  <ion-card-header>
+    Explore Nearby
+  </ion-card-header>
+
+  <ion-list>
+    <button ion-item>
+      <ion-icon name="cart" item-left></ion-icon>
+      Shopping
+    </button>
+
+    <button ion-item>
+      <ion-icon name="medical" item-left></ion-icon>
+      Hospital
+    </button>
+
+    <button ion-item>
+      <ion-icon name="cafe" item-left></ion-icon>
+      Cafe
+    </button>
+
+    <button ion-item>
+      <ion-icon name="paw" item-left></ion-icon>
+      Dog Park
+    </button>
+
+    <button ion-item>
+      <ion-icon name="beer" item-left></ion-icon>
+      Pub
+    </button>
+
+    <button ion-item>
+      <ion-icon name="planet" item-left></ion-icon>
+      Space
+    </button>
+
+  </ion-list>
+</ion-card>
+```
+
+![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic4.png)
+
+
+**Images In Cards**
+
+
+Images often vary in size, so it is important that they adopt a consistent style throughout your app. Images can easily be added to cards. Adding an image to a card will give the image a constant width, and a variable height. Lists, headers, and other card components can easily be combined with image cards. To add an image to a card, use the following markup:
+
+
+```
+<ion-card>
+  <img src="img/nin-live.png"/>
+  <ion-card-content>
+    <ion-card-title>
+      Nine Inch Nails Live
+      </ion-card-title>
+    <p>
+      The most popular industrial group ever, and largely
+      responsible for bringing the music to a mass audience.
+    </p>
+  </ion-card-content>
+</ion-card>
+```
+
+![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic5.png)
+
+**Background Images**
+
+
+Cards can be used to achieve a multitude of designs. We provide many of the elements to achieve common designs, but sometimes it will be necessary to add custom styles. Adding background images to cards is a perfect example of how adding custom styles can achieve a completely different look.
+
+The following html can be added to the content of a page:
+
+```
+<ion-content class="card-background-page">
+
+  <ion-card>
+    <img src="img/card-saopaolo.png"/>
+    <div class="card-title">São Paulo</div>
+    <div class="card-subtitle">41 Listings</div>
+  </ion-card>
+
+  <ion-card>
+    <img src="img/card-amsterdam.png"/>
+    <div class="card-title">Amsterdam</div>
+    <div class="card-subtitle">64 Listings</div>
+  </ion-card>
+
+  <ion-card>
+    <img src="img/card-sf.png"/>
+    <div class="card-title">San Francisco</div>
+    <div class="card-subtitle">72 Listings</div>
+  </ion-card>
+
+  <ion-card>
+    <img src="img/card-madison.png"/>
+    <div class="card-title">Madison</div>
+    <div class="card-subtitle">28 Listings</div>
+  </ion-card>
+
+</ion-content>
+```
+
+
+![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic6.jpg)
+
+
+**BE Careful**
+
+scss file must be import in app.core.scss file so it will work,or it will be invalid.
+
+
+
+
