@@ -151,10 +151,10 @@ export class Test {
 **effects** 
 
 
-<div style="float:left;border:solid 1px 000;margin:2px;"><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ionic4.png" alt="screenshot" title="screenshot" width="200" height="436" ></div>
-<div style="float:left;border:solid 1px 000;margin:2px;"><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ionic5.png" alt="screenshot" title="screenshot" width="200" height="436" ></div>
-<div style="float:left;border:solid 1px 000;margin:2px;"><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ionic6.png" alt="screenshot" title="screenshot" width="200" height="436" ></div>
-<div style="float:left;border:solid 1px 000;margin:2px;"><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ionic3.jpg" alt="screenshot" title="screenshot" width="200" height="436" ></div>
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ionic4.png" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ionic5.png" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ionic6.png" alt="screenshot" title="screenshot" width="250" height="436" ></div>
+<div style="float:left;border:solid 1px 000;margin:2px;"><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ionic3.jpg" alt="screenshot" title="screenshot" width="250" height="436" ></div>
 <div style="clear:both;"></div>
 
 
