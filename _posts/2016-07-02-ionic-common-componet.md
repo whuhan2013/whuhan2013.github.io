@@ -13,6 +13,7 @@ description: Ionic common componet
 1. Action Sheets    
 2. Alerts
 3. Badges
+4. Buttons
 
 ### Action Sheets 
 
@@ -205,3 +206,80 @@ Badges are small components that typically communicate a numerical value to the 
 ```
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ionic7.jpg)
+
+
+### Buttons
+
+
+Buttons are an essential way to interact with and navigate through an app, and should clearly communicate what action will occur after the user taps them. Buttons are simple components in Ionic, can consist of text, an icon, or both, and can be enhanced with a wide range of attributes.
+
+
+**variable kinds of buttons**
+
+
+- Contents
+- Default Style
+- Outline Style
+- Clear Style
+- Round Buttons
+- Block Buttons
+- Full Buttons
+- Button Sizes
+- Icon Buttons
+- Floating Action Buttons
+- Buttons In Components
+
+
+**example** 
+
+**Basic Usage**
+
+
+```
+<button>Button</button>
+```  
+
+The primary property sets the color of the button. Ionic includes a number of default colors which can be easily overridden:
+
+```
+<button light>Light</button>
+<button>Primary</button>
+<button secondary>Secondary</button>
+<button danger>Danger</button>
+<button dark>Dark</button>
+```  
+
+
+**Round Buttons**
+
+```
+<ion-header>
+  <ion-navbar>
+    <ion-title>Button</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <p>
+    <button light round>Light</button>
+  </p>
+  <p>
+    <button round>Default</button>
+  </p>
+
+  <p>
+    <button secondary round>Secondary</button>
+  </p>
+
+  <p>
+    <button danger round>Danger</button>
+  </p>
+
+  <p>
+    <button dark round>Dark</button>
+  </p>
+</ion-content>
+```
+
+![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic1.jpg?raw=true)
