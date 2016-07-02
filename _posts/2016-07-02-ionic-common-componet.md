@@ -283,7 +283,7 @@ The primary property sets the color of the button. Ionic includes a number of de
 </ion-content>
 ```
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic1.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic1.jpg)
 
 
 ### Cards
@@ -311,7 +311,8 @@ Cards are primarily a CSS component. To use add a basic card, follow this struct
 </ion-card>
 ```
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic2.png)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic2.jpg)
+
 
 
 **Card Headers**
@@ -330,7 +331,8 @@ Just like a normal page, cards can be customized to include headers. To add use 
 ```
 
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic3.png)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic3.jpg)
+
 
 **Lists In Cards**
 
@@ -378,7 +380,8 @@ A card can contain a list of items. To create a card list, add elements with the
 </ion-card>
 ```
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic4.png)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic4.jpg)
+
 
 
 **Images In Cards**
@@ -402,7 +405,8 @@ Images often vary in size, so it is important that they adopt a consistent style
 </ion-card>
 ```
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic5.png)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic5.jpg)
+
 
 **Background Images**
 
@@ -442,7 +446,8 @@ The following html can be added to the content of a page:
 ```
 
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/Ionic/ionic6.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic6.jpg)
+
 
 
 **BE Careful**
