@@ -14,7 +14,9 @@ description: Ionic common componet
 2. DateTime
 3. Gesture   
 4. Grid
-5. Icon
+5. Icon  
+6. Inputs                  
+7. Lists
 
 
 ### Checkbox
@@ -206,5 +208,224 @@ export class MyFirstPage {
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic13.png)
 
+
+
+### Inputs 
+
+Inputs are essential for collecting and handling user input in a secure way. They should follow styling and interaction guidelines for each platform, so that they are intuitive for users to interact with. Ionic uses Angular 2’s form library, which can be thought of as two dependent pieces, Controls, and Control Groups.
+
+Each input field in a form has a Control, a function that binds to the value in the field, and performs validation. A Control Group is a collection of Controls. Control Groups handle form submission, and provide a high level API that can be used to determine whether the entire form is valid.
+
+A number of attributes that can be used to style forms and their various input fields are listed below. For more info on form logic, check out the Inputs API docs.
+
+
+- Fixed Inline Labels              
+Use fixed to place a label to the left of the input element. When the user enters text, the label does not hide. The user’s input will align on the same position, regardless of the length of the label. Note that there’s nothing stopping you from also using a placeholder label too.                     
+- Floating Labels            
+Floating labels are just like Stacked Labels, except that their labels animate, or “float” up when text is entered in the input. Each <ion-label> should have the floating attribute assigned.              
+- Inline Labels                       
+If a label attribute is not provided, an <ion-label> component will default to using an inline label. When the user enters text, the label does not hide. Note that there’s nothing stopping you from also using a placeholder as well.                  
+- Inset Labels               
+By default each input item will fill 100% of the width of its parent element (the list). However, you can inset the list by adding the inset attribute.              
+- Placeholder Labels                           
+Add the placeholder attribute to an <input> element to simulate the input’s label. When the user begins to enter text into the input, the placeholder label will be hidden.               
+- Stacked Labels                        
+
+
+**Basic Usages** 
+
+```
+<ion-list>
+
+  <ion-item>
+    <ion-label stacked>Username</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Password</ion-label>
+    <ion-input type="password"></ion-input>
+  </ion-item>
+
+</ion-list>
+```
+
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic14.png)
+
+
+
+
+### Lists 
+
+Lists are used to display rows of information, such as a contact list, playlist, or menu. Or maybe something crazy we don’t even know exists yet!            
+
+
+**Basic Usage (Default)**
+
+By default, all lists will be styled with divider lines:
+
+```
+<ion-list>
+  <ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+    {{item.title}}
+  </ion-item>
+</ion-list>
+```
+
+**Basic Usage (No Lines)**
+
+Adding the no-lines attribute will hide the dividers between list items:
+
+```
+<ion-list no-lines>
+  <ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+    {{item.title}}
+  </ion-item>
+</ion-list>
+```
+
+**Inset List**
+
+By default, lists have no outside margin, to add one, add the inset property to the list component.
+
+```
+<ion-list inset>
+  <ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+    {{item.title}}
+  </ion-item>
+</ion-list>
+```
+
+**List Dividers**
+
+To divide groups of items, use <ion-item-group> instead of <ion-list>. Use <ion-item-divider> components to divide the group in to multiple sections:
+
+```
+<ion-content>
+    <ion-item-group>
+
+      <ion-item-divider light>A</ion-item-divider>
+      <ion-item>Angola</ion-item>
+      <ion-item>Argentina</ion-item>
+
+    </ion-item-group>
+</ion-content>
+```
+
+**List Headers**
+
+Each list can include a header at the top of the list,looks quite like list dividers:
+
+```
+<ion-list>
+  <ion-list-header>
+    Action
+  </ion-list-header>
+  <ion-item>Terminator II</ion-item>
+  <ion-item>The Empire Strikes Back</ion-item>
+  <ion-item>Blade Runner</ion-item>
+</ion-list>
+```
+
+**Icon List**
+
+Adding icons to list items is a great way to hint about the contents of each item. The position of the icon can be set using the item-left and item-right attributes:
+
+```
+<ion-list>
+  <ion-item>
+    <ion-icon name="leaf" item-left></ion-icon>
+      Herbology
+    <ion-icon name="rose" item-right></ion-icon>
+  </ion-item>
+</ion-list>
+```
+
+**Avatar List**
+
+Item avatars showcase an image larger than an icon, but smaller than a thumbnail. To use an avatar, add an <ion-avatar> component inside of an item. The position of the avatar can be set using the item-left and item-right attributes:
+
+```
+<ion-list>
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="img/avatar-cher.png">
+    </ion-avatar>
+    <h2>Cher</h2>
+    <p>Ugh. As if.</p>
+  </ion-item>
+</ion-list>
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic16.jpg)
+
+
+**Multiline List**          
+
+Multiline lists are identical to regular lists, except they can multiple lines of text. When multiple header or paragraph tags are added to an <ion-item>, the item will automatically adjust its height to fit the new lines. Below is an example with three lines of text:
+
+```
+<ion-list>
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="img/avatar-finn.png">
+    </ion-avatar>
+    <h2>Finn</h2>
+    <h3>Don't Know What To Do!</h3>
+    <p>I've had a pretty messed up day. If we just...</p>
+  </ion-item>
+</ion-list>
+```
+
+**Sliding List**
+
+Sliding items can be swiped to the left to reveal a set of buttons. To use a sliding item, add a <ion-item-sliding> component inside of a list. Next, add a <ion-item-options> component inside of the sliding item to contain the buttons:
+
+```
+<ion-list>
+  <ion-item-sliding>
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="img/slimer.png">
+      </ion-avatar>
+      <h2>Slimer</h2>
+    </ion-item>
+    <ion-item-options>
+      <button primary>
+        <ion-icon name="text"></ion-icon>
+        Text
+      </button>
+      <button secondary>
+        <ion-icon name="call"></ion-icon>
+        Call
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic17.png)
+
+
+**Thumbnail List**
+
+Item thumbnails showcase an image that takes up the entire height of an item. To use a thumbnail, add an <ion-thumbnail> component inside of an item. The position of the thumbnail can be set using the item-left and item-right attributes:
+
+```
+<ion-list>
+  <ion-item>
+    <ion-thumbnail item-left>
+      <img src="img/thumbnail-totoro.png">
+    </ion-thumbnail>
+    <h2>My Neighbor Totoro</h2>
+    <p>Hayao Miyazaki • 1988</p>
+    <button clear item-right>View</button>
+  </ion-item>
+</ion-list>
+```
+
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/Ionic/ionic18.png)
 
 
