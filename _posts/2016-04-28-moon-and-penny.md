@@ -16,7 +16,7 @@ description: 月亮与六便士
 &emsp;&emsp;《月亮与六便士》是英国作家毛姆的名作，讲述了一个平凡的中年男人，证券经纪人，在活到四十岁的时候，大多数
 人都快要被舒适生活所淹没的时候，突然抛妻弃子，跑到塔希提岛，与土著人一起生活，获得灵感，创作出许多艺术杰作，生前藉藉无名，死后却被称为天才的故事。
 
-<center><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/blog/blog3.png" height="600"></center>
+<center><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/blog/blog3.png" height="300"></center>
 
 &emsp;&emsp;故事的主人公，思特里克兰德，没有做过什么违法的事，却是一个顶恶的恶棍。他从来不关心别人的意见与看法，
 也不关心别人的感受，从不爱任何一个人，对世界的一切都没有一丝同情心，也从不觉得自己对别人有什么责任。作者用第一人称
