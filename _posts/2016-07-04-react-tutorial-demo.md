@@ -317,7 +317,7 @@ var Comment = React.createClass({
 
 With the traditional DOM, input elements are rendered and the browser manages the state (its rendered value). As a result, the state of the actual DOM will differ from that of the component. This is not ideal as the state of the view will differ from that of the component. In React, components should always represent the state of the view and not only at the point of initialization.
 
-Hence, we will be using this.state to save the user's input as it is entered. We define an initial state with two properties author and text and set them to be empty strings. In our <input> elements, we set the value prop to reflect the state of the component and attach onChange handlers to them. These <input> elements with a value set are called controlled components. Read more about controlled components on the Forms article.
+Hence, we will be using this.state to save the user's input as it is entered. We define an initial state with two properties author and text and set them to be empty strings. In our input elements, we set the value prop to reflect the state of the component and attach onChange handlers to them. These input elements with a value set are called controlled components. Read more about controlled components on the Forms article.
 
 ```
 // tutorial16.js
