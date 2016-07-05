@@ -111,7 +111,7 @@ var HelloMessage = React.createClass({
 });
 ```
 
-** this.props.children**      
+**this.props.children**      
 React uses this.props.children to access a component's children nodes.
 
 ```
@@ -256,7 +256,7 @@ ReactDOM.render(
 **Form**            
 According to React's design philosophy, this.state describes the state of component and is mutated via user interactions, and this.props describes the properties of component and is stable and immutable.
 
-Since that, the value attribute of Form components, such as <input>, <textarea>, and <option>, is unaffected by any user input. If you wanted to access or update the value in response to user input, you could use the onChange event.
+Since that, the value attribute of Form components, such as input, textarea, and option, is unaffected by any user input. If you wanted to access or update the value in response to user input, you could use the onChange event.
 
 ```
 var Input = React.createClass({
