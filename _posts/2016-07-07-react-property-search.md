@@ -13,7 +13,11 @@ React Native 开发越来越火了，web app也是未来的潮流, 现在react n
 **原Ios版本**     
 [React Native 实例 - 房产搜索App Mystra](http://www.wangchenlong.org/2016/04/12/1604/121-rn-property-demo/)
 
+**原版效果**           
+![](http://www.wangchenlong.org/2016/04/12/1604/121-rn-property-demo/rn-property-anim.gif)
+
 **主要内容:**      
+
 - 使用Navigator栈跳转页面.       
 - 使用fetch请求网络数据.         
 - 使用ListView展示列表数据.             
