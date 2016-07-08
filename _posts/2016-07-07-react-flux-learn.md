@@ -12,7 +12,7 @@ Flux is the application architecture that Facebook uses for building client-side
 
 Flux applications have three major parts: the dispatcher, the stores, and the views (React components). These should not be confused with Model-View-Controller. Controllers do exist in a Flux application, but they are controller-views — views often found at the top of the hierarchy that retrieve data from the stores and pass this data down to their children. Additionally, action creators — dispatcher helper methods — are used to support a semantic API that describes all changes that are possible in the application. It can be useful to think of them as a fourth part of the Flux update cycle.
 
-**Structure and Data Flow **                 
+**Structure and Data Flow**                 
 Data in a Flux application flows in a single direction:    
 ![](http://facebook.github.io/flux/img/flux-simple-f8-diagram-1300w.png)
 
@@ -231,6 +231,10 @@ var TodoActions = {
 
 module.exports = TodoActions;
 ```
+
+**references**           
+- [Flux Application Architecture for Building User Interfaces](http://facebook.github.io/flux/docs/overview.html#content)                   
+- [Learn-flux Tech & Life](http://jevirs.top/2016/03/23/Learn-flux/)
 
 **effect**   
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/React/react2.png)
