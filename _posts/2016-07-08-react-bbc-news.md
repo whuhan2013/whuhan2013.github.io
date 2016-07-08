@@ -145,7 +145,8 @@ _fetchData() {
 }
 ```               
 
-then语法是promiser的chaing结构                              
+then语法是promiser的chaing结构     
+                         
 > Because the then method returns a Promise, you can easily chain then calls. Values returned from the onFulfilled or onRejected callback functions will be automatically wrapped in a resolved promise.
 
 列表项提供分类显示功能, 点击类别, 可以重新加载所选类型的新闻, 把Feed页面再次添加至导航navigator, 即页面栈.
