@@ -9,7 +9,8 @@ description: Java常用工具
 
 **本文包括以下内容**  
 
-1. Commons Collections之Bag的使用 
+1. Commons Collections之Bag的使用     
+2. android反编译工具         
 
 
 ### Bag的使用 
@@ -98,3 +99,11 @@ private Bag productList = new HashBag();
 [Commons Collections - - ITeye技术网站](http://thaim.iteye.com/blog/1320826)
 
 
+
+### android反编译工具               
+
+onekey decompile apk                
+
+**使用方法**   
+
+[3分钟傻瓜式反编译一个APP - 简书](http://www.jianshu.com/p/c719cfb237b2)

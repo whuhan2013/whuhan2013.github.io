@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 拓扑排序
+title: 数据结构之拓扑排序
 date: 2016-7-10
 categories: blog
 tags: [数据结构]
@@ -180,6 +180,6 @@ int ListDG::topologicalSort()
 }
 ```
 
-**说明： **                   
+**说明:**                   
 (01) queue的作用就是用来存储没有依赖顶点的顶点。它与前面所说的Q相对应。         
 (02) tops的作用就是用来存储排序结果。它与前面所说的T相对应。               
