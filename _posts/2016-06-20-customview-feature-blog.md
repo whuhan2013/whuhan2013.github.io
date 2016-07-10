@@ -21,3 +21,4 @@ description: 自定义View专题博客
 - 内容比较杂，看完可以删除：[huachao1001的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/huachao1001)
 - ReactNative开发文集[ReactNative开发 - 文集 - 简书](http://www.jianshu.com/notebooks/2315713/latest)
 - 数据结构与算法详细[数据结构与算法系列 目录 - 如果天空不死 - 博客园](http://www.cnblogs.com/skywang12345/p/3603935.html)
+- 设计模式相关[归档 Xu Yushi''s Blog](http://xuyushi.github.io/archives/)
