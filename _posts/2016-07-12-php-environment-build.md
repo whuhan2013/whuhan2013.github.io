@@ -43,3 +43,19 @@ phpinfo();
 ?>
 ```
 
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/php/p1.png)
+
+**当在phpinfo中可以看到mysql则说明mysql配置成功**    
+当看不到时，或者访问mysql时发生500错误，解决方法为将 php_mysql.dll    ,libmysql.dll 拷贝到system32下,将php,php ext加入到环境变量中，然后再重启试试。        
+
+**mysql测试代码**       
+
+```
+<?php 
+$link=mysql_connect('localhost','root','root'); 
+if(!$link) echo "FAILED!"; 
+else echo "SUCCESS!"; 
+mysql_close(); 
+?>
+```
+
