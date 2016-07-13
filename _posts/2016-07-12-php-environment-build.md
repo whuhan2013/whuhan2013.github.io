@@ -59,3 +59,29 @@ mysql_close();
 ?>
 ```
 
+
+### 虚拟主机配置          
+通常情况下，一个web服务代理一个网站，但是有时候我们需要用一台服务器代理多个网站。这个就是基于域名的虚拟主机技术。
+
+我们可以直接在httpd.conf当中进行配置，也可以使用extra中的httpd-vhosts.conf配置，建议使用第二种方式。
+
+首先要开启vhost.conf配置
+![](http://img.blog.csdn.net/20140623142317546?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGtncmF5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+其中*表示所有的ip地址，如果是一个具体的ip，你可以写上这个ip，但建议使用*，80指的是端口。
+
+接下来，要单独的配置具体的域名，通过 VirtualHost 指令段，其参数必须和NameVirtualHost
+
+而且在指令段中必须包含ServerName 和 DocumentRoot
+![](http://img.blog.csdn.net/20140623142352125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGtncmF5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+### 访问权限配置 
+
+Apache通过配置项 <Directory 所需配置的目录>来实现的
+
+**参考：**[Apache配置某个目录的权限_百度经验](http://jingyan.baidu.com/article/219f4bf7ff4fe6de442d3880.html)
+
+[php虚拟主机配置、访问权限配置、分布式文件配置 - pkgray的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/pkgray/article/details/33730995)
+
+
+
