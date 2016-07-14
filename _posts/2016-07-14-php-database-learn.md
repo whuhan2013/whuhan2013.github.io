@@ -72,6 +72,7 @@ echo "<br />";
 #### php连接mysql的基本操作  
 
 - 连接认证          
+
 ```
 header('Content-Type: text/html; charset=utf-8');
 $host = '127.0.0.1';
@@ -109,4 +110,5 @@ fetch一次，只能取得当前记录，但是可以向后移动记录指针！
 - 关闭连接             
 mysql_free_result(结果集)          
 mysql_close(连接资源);                 
+
 

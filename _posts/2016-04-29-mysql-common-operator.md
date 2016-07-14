@@ -348,3 +348,21 @@ show create table <表名>;
 ```
 show variables like '%char%';
 ```
+
+**触发器**    
+
+```
+create trigger test_trigger 
+after insert -- 事件
+on select_student for each row -- 哪个表的记录在监听
+insert into student_log values (null, 'insert', now(), 'new ID') -- 执行的sql集合
+;
+
+create table student_log (
+id int primary key auto_increment,
+op varchar(10),
+op_time datetime,
+ps varchar(255)
+);
+```
+
