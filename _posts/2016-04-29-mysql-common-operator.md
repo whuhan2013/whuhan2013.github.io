@@ -318,3 +318,33 @@ name  VarChar(128)
 
 )Engine MyISAM
 ```
+
+#### mysql客户端乱码问题      
+将编码全部设置为utf-8模式，上传，下载数据也正常，不过在客户端无法正常显示。原因是因为编码是UTF-8，而客户端的编码只能是GBK，所以不能显示。      
+
+**解决方法**      
+
+```
+set character_set_client=gbk;
+set character_set_results=gbk;
+```
+
+- set names gbk;            
+就是一个快捷操作，将上面两个配置同时更改成目标编码！      
+在程序中使用utf-8编码，在黑窗口中使用gbk,因为黑窗口只支持gbk,因为用哪个编码取决于客户端能用哪个编码.       
+set names gbk|utf8 取决于，客户端所能接受的编码！  
+
+setnames只修改了客户端的编码与返回结果，服务器端编码是不会变的，服务器端编码由创建表的时候决定。
+
+**查看创建表的时候用的什么编码**       
+
+```
+show create table <表名>;
+```
+
+
+**显示当前的编码的命令**   
+
+```
+show variables like '%char%';
+```
