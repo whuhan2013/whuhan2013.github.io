@@ -71,8 +71,7 @@ echo "<br />";
 
 #### php连接mysql的基本操作  
 
-- 连接认证
-
+- 连接认证          
 ```
 header('Content-Type: text/html; charset=utf-8');
 $host = '127.0.0.1';
@@ -99,18 +98,15 @@ mysql_query(sql, 连接资源);
 返回true：没有返回数据的： use，set，insert，update，delete，DDL        
 
 - 处理结果         
-称之为结果集（result set）类型资源！
+称之为结果集（result set）类型资源！      
+结果集：结果的集合！              
+将数据，从结果集中取出来！称之为 fetch！        
+使用函数：                    
+mysql_fetch_assoc|row|array。功能完全一致，只是返回的数据格式不同！       
+在结果集中，取得一条记录。结果集内也存在结果集记录指针的概念！             
+fetch一次，只能取得当前记录，但是可以向后移动记录指针！配合上循环结构可以将所有的记录从结果集中取出！         
 
-结果集：结果的集合！
-
-将数据，从结果集中取出来！称之为 fetch！
-使用函数：           
-mysql_fetch_assoc|row|array。功能完全一致，只是返回的数据格式不同！
-
-在结果集中，取得一条记录。结果集内也存在结果集记录指针的概念！
-fetch一次，只能取得当前记录，但是可以向后移动记录指针！配合上循环结构可以将所有的记录从结果集中取出！
-
-- 关闭连接
+- 关闭连接             
 mysql_free_result(结果集)          
 mysql_close(连接资源);                 
 
