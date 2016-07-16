@@ -545,6 +545,11 @@ session_set_cookie_params();设置该cookie变量的选项的
 在表示有效期的第一个参数，是时间周期，而不是时间戳！留意，应该在session-start()之前，就完成cookie选项的设置！
 （类似于 session_set_save_handler一样）
 
+```
+session_set_cookie_params('3600');
+session_start();
+```
+
 此外还应该保证，服务器端垃圾判定的时间要与session持久化的时间尽量一致！
 session.gc_maxlifetime = 3600;
 
