@@ -72,7 +72,7 @@ MsgId 消息ID号
 
 后台格式：
  
- ```
+```
 <xml><ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
 <FromUserName><![CDATA[oIDrpjqASyTPnxRmpS9O_ruZGsfk]]></FromUserName>
 <CreateTime>1359028479</CreateTime>
@@ -1029,4 +1029,7 @@ $item_str    </Articles>
 }
 ?>
 ```
+
+**参考链接**     
+[微信公众平台开发入门教程 - 方倍工作室 - 博客园](http://www.cnblogs.com/txw1958/p/wechat-tutorial.html)
 
