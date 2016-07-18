@@ -40,7 +40,12 @@ description: 微信开发
 signature	微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。        
 timestamp	时间戳         
 nonce	随机数         
-echostr	随机字符串        
+echostr	随机字符串     
+
+在开发者首次提交验证申请时，微信服务器将发送GET请求到填写的URL上，并且带上四个参数（signature、timestamp、nonce、echostr），开发者通过对签名（即signature）的效验，来判断此条消息的真实性。
+ 
+此后，每次开发者接收用户消息的时候，微信也都会带上前面三个参数（signature、timestamp、nonce）访问开发者设置的URL，开发者依然通过对签名的效验判断此条消息的真实性。效验方式与首次提交验证申请一致。
+   
 
 下面的代码实现了输入一个？返回当前时间的功能，其中valid的方法，是用于验证接口的，responseMsg方法用于返回消息  
 
