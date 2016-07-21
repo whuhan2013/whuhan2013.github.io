@@ -16,7 +16,7 @@ description: Norwegain wood
 月在跟渡边打完台球后回家自尽了，初美在永泽去德国后两年割腕自尽，直子在最后也是走向了自杀这条，好像一开始就为她铺好
 的道路。生命有这么脆弱吗？作者说，“死并非生的对立面，而是作为生的一部分永存。”这就不是我所知道的了。本书的时代背景是60年代末，那正是左翼思潮席卷世界的年代，中国正爆发文革，法国正是五月革命，美国的马丁路德金在华盛顿广场高呼我有一个梦想，其时切格瓦拉正是全民偶像，而日本也爆发了赤军运动，罢课，罢工等活动也是此起彼伏。但在这样的时代背景下，渡边君的罗曼史没有一点这样的痕迹，只有提到绿子参加的社团里面，每个人都在装模作样的读马克思，作者借绿子之口说社团的人，讨论的时候就更加不可一世。一个个无不摆出无所不通的架势，玩弄一大堆玄而又玄的词句。在村上看来，这些家伙全是江湖骗子，自呜得意地炫耀几句高深莫测的牛皮大话，博取新入学女孩儿的好感，一到毕业的时候，就赶紧把头发剪短，忙不迭地钻到什么三菱商社、什么东京广播局、什么ＩＢＭ公司、什么富士银行找份差事，讨一个压根儿没读过马克思的老婆，挖空心思给孩子取个玄而又玄的名字。至于粉碎产学协同体，简直笑掉眼泪。
 
-<center img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/blog/blog12.jpg"></center>
+<center><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/blog/blog12.jpg"></center>
 
 &emsp;&emsp;光阴荏苒，时过镜迁，现如今马克思主义早已无人问津，被标为小资的村上却风蘼全球，这是村上的胜利吗？不过此时此刻恰如
 彼时彼刻，当初标榜马克思主义的年轻人现如今不也是在追逐民主自由吗，当初的赤军现如今不是变成太阳花了吗？村上的故事
@@ -32,7 +32,7 @@ description: Norwegain wood
 有什么作用，除了能让你清醒的痛苦之外。人生有许多无名奈何之事，正如直子永远忘不了木月一样，渡边也忘不了真子，作者在第一章说：“时至今日，我才恍然领悟到直子之所以求我别忘掉她的原因。直子当然知道，知道她在我心目中的记忆迟早要被冲淡。唯其如此，她才强调说:希望你能记住我，记住我曾这样存在过。想到这里，我悲哀得难以自禁。因为，直子连爱都没爱过我。”这
 大概是村上作品的魅力所在，孤独与无奈。村上作品中最动人的部分，就是这份把玩孤独与无奈的人生态度，既然做什么都无可奈何，都是枉费心机，不如退回来罢了。
 
-<center img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/blog/blog11.jpg"></center>
+<center><img src="https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/blog/blog11.jpg"></center>
 
 &emsp;&emsp;书中还要一个人，有些意思，初看起来，大概是平凡的花花公子罢了，家境富裕，东京大学在读，将来是要做外
 交官的人，有一个完美的女朋友 ，却总是花时间追逐一夜情与刺激，总之看起来，也没有什么独特之处，就是一个花心有钱的
@@ -43,28 +43,28 @@ description: Norwegain wood
 
 同情自己是卑劣懦夫干的勾当，看到这句话我才明白，永泽并不爱自己。美国一位哲学家说，人对自己所喜爱的事物以及一切存在物的依恋，本质上都来源于对自己的爱。永泽不爱自己，所以更不可能爱上别人，而绝不同情自己，也绝不同情他人，这是永泽对自己的人生的定位，所以无论初美多么完美，他都不会爱上她。永泽是个对自己狠的人，他要去当外资官就会倾尽全力去学习语言，有着自己的人生目标，平常人日复一日的努力，在他看来，不是努力，只是劳动。永泽所说的努力，与这截然不同。所谓努力，指的是主动而有目的的活动。虽说有些何不食肉糜，却也表现了他的人生态度。永泽的人生目标，是做一个绅士，做一个做自己该做的，而不是做自己想做的绅士。这就是永泽，原来是这样的一个人。最后用甲壳虫的Norwegian wood来结尾吧：
 
-> I once had a girl 
-> Or should I say she once had me 
-> She showed me her room 
-> Isn't it good Norwegian wood? 
+> I once had a girl      
+> Or should I say she once had me       
+> She showed me her room    
+> Isn't it good Norwegian wood?        
 
-> She asked me to stay 
-> And she told me to sit anywhere 
-> So I looked around 
-> And I noticed there wasn't a chair 
+> She asked me to stay       
+> And she told me to sit anywhere      
+> So I looked around         
+> And I noticed there wasn't a chair         
  
-> I sat on a rug biding my time 
-> drinking her wine 
-> We talked until two and then she said 
-> "it's time for bed" 
+> I sat on a rug biding my time        
+> drinking her wine            
+> We talked until two and then she said        
+> "it's time for bed"         
  
-> She told me she worked 
-> in the morning and started to laugh 
-> I told her I didn't 
-> and crawled off to sleep in the bath 
+> She told me she worked    
+> in the morning and started to laugh      
+> I told her I didn't       
+> and crawled off to sleep in the bath       
 
-> And when I awoke I was alone 
-> This bird had flown 
-> So I lit a fire 
-> Isn't it good Norwegian wood
+> And when I awoke I was alone      
+> This bird had flown         
+> So I lit a fire         
+> Isn't it good Norwegian wood         
 
