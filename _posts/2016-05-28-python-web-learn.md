@@ -7,68 +7,11 @@ tags: [python]
 description: python Web学习资源.
 ---
 
-### Django教程
-
-**目录**
-
-**Django 基础教程**              
-Django 基础教程          
-Django 简介          
-Django 环境搭建          
-Django 基本命令          
-Django 视图与网址          
-Django 视图与网址进阶          
-Django 模板（templates)          
-Django 模板进阶          
-Django 模型(数据库)          
-Django 自定义 Field          
-Django 数据表更改          
-Django QuerySet API          
-Django 后台          
-Django 表单          
-Django 配置          
-Django 静态文件          
-Django 部署 (Apache)          
-Django 部署 (Nginx)          
-Django 发送邮件          
-
-**Django 中级教程**          
-Django 数据导入          
-Django 数据迁移          
-Django 多数据库联用          
-Django 用户注册系统          
-Django 缓存系统          
-Django 生成静态网页          
-Django 安全          
-Django 国际化          
-Django session          
-Django传递数据给JS          
-Django Ajax          
-Django Ajax CSRF 认证          
-Django Sitemap 站点地图          
-只用 Django 数据库          
-Django 通用视图          
-Django 上下文渲染器          
-Django 中间件          
-Django 微信接口          
-Django 单元测试          
-
-**Django 项目实战**          
-开发内容管理系统          
-其它（书写中）          
-
-**Django 应用分享**          
-Django CMS          
-Python/Django 二维码          
+### Django教程     
+- [Django 开发内容管理系统 - Django 教程 - 自强学堂](http://www.ziqiangxuetang.com/django/django-cms-develop.html)
 
 
-
-### 链接地址
-
-[Django 开发内容管理系统 - Django 教程 - 自强学堂](http://www.ziqiangxuetang.com/django/django-cms-develop.html)
-
-
-### python flask  
+#### python flask  
 
 作者：萧井陌
 链接：https://www.zhihu.com/question/26669731/answer/33605606
@@ -102,7 +45,7 @@ flask有一本书不错，中文版在此：图灵社区 : 图书 : [Flask Web�
 这样可以让你找到一份还过得去的工作，但是如果想要在编程道路上走得更宽更远，还是应该要补全基础知识。        
 
 
-### 书的地址 
+#### 书的地址 
 
 [下载](Flask Web开发：基于Python的Web应用开发实战 - 下载频道 - CSDN.NET
 http://download.csdn.net/detail/wangmi0354/8583125#comment)
