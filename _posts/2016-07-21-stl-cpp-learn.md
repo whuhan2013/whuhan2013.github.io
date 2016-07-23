@@ -950,3 +950,7 @@ int main()
 inserter (container ,pos);
  
 container是将要用来存入数据的容器，pos是容器存入数据的开始位置。上例中，是把文件内容存入（copy()）到向量v1中。
+
+**References** 
+
+[STL in ACM - To be an ACMan - 博客园](http://www.cnblogs.com/ACMan/archive/2012/05/30/2526927.html)
