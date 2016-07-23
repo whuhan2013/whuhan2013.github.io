@@ -15,8 +15,6 @@ description: python学习实例.
 - [Python快速搭建自动回复微信公众号 - ^-^ - 博客频道 - CSDN.NET](http://blog.csdn.net/tobacco5648/article/details/51190039)
 
 
-
-
 **python机器学习**       
 
 - [用机器学习判定红楼梦后40回是否曹雪芹所写 - 黎晨扯运营 - 知乎专栏](https://zhuanlan.zhihu.com/p/21421723)
