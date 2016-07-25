@@ -305,9 +305,14 @@ $smarty -> display("05.html");
 ```
 
 
-#### 与已有项目结合
+#### 与已有项目结合       
+引入smarty后，auto_load自动加载失效。                           
+Smarty与已有框架结合重点：把加载机制级别设置与Smarty一致。       
 
-                  
+spl_autoload_register声明会覆盖原始的autoload加载机制，引入全部的加载机制都声明为spl_autoload_register就可以分别执行。    
+
+spl_autoload_register("__autoload");
+
 
 
 
