@@ -284,7 +284,7 @@ mysqldump -u 用户名 -p 数据库名 > 文件名.sql
 
 **恢复**
 
-mysqldump -u 用户名 -p 数据库名 > 文件名.sql
+mysql -u 用户名 -p 数据库名 < 文件名.sql
 
 **注意**   
 

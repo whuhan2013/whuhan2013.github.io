@@ -136,3 +136,48 @@ $tom是不存在的对象
 
 
 
+#### ThinkPHP数据库操作             
+
+在config.php中配置
+
+```
+ //数据库配置
+    'DB_TYPE'               => 'mysql',     // 数据库类型
+    'DB_HOST'               => 'localhost', // 服务器地址
+    'DB_NAME'               => 'shop',          // 数据库名
+    'DB_USER'               => 'root',      // 用户名
+    'DB_PWD'                => '111111',          // 密码
+    'DB_PORT'               => '',        // 端口
+    'DB_PREFIX'             => 'sw_',    // 数据库表前缀
+    'DB_FIELDTYPE_CHECK'    => false,       // 是否进行字段类型检查
+    //
+    //处于性能考虑，把数据表字段放入缓存里边，
+    //这样下次访问就避免执行sql语句重复执行重新获取
+    //开发调试模式APP_DEBUG=true,下边缓存无效
+    //生产模式APP_DEBUG=false,缓存有效
+    'DB_FIELDS_CACHE'       => true,        // 启用字段缓存
+    
+    //修改模板引擎为smarty
+    'TMPL_ENGINE_TYPE'      =>  'Smarty',     // 默认模板引擎 
+    
+    //在页面底部显示日志信息
+     'SHOW_PAGE_TRACE'   => true,   // 显示页面Trace信息
+```
+
+**实例化数据模型model的三种方法**            
+1.$goods_model  = new GoodsModel();            
+2.$goods_model  = D(“Goods”);   快捷函数             
+a)$obj = D();  //创建了一个基类model的对象，没有指明具体操作的数据表            
+b)通过这个$obj就可以执行原生的sql语句                 
+3.$model = M();   创建基类model对象               
+a)$model = M(‘User’);  创建基类model对象，但是操作的数据表sw_user                 
+
+
+**查询数据信息**        
+
+```
+$goods_model = D('Goods');
+$info=$goods_model->select();
+```
+
+
