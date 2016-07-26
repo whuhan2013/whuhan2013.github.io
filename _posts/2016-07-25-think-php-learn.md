@@ -173,7 +173,7 @@ b)通过这个$obj就可以执行原生的sql语句
 a)$model = M(‘User’);  创建基类model对象，但是操作的数据表sw_user                 
 
 
-**查询数据信息**        
+#### 查询数据信息       
 ① Model.class.php类本身就存在该方法，例如(where()  field()  limit() select())           
 ② __call()自动调用方法集成了一些方法，例如(table()  order()   group())
     这些方法可以进行连贯操作$info = $obj -> where()->order()->limit()->select()
@@ -264,7 +264,7 @@ insert  update   delete
 成功执行返回受影响的记录数目           
 
 
-**添加数据add**      
+#### 添加数据add
 两种方式实现数据添加：数组方式、AR方式      
 AR规则：            
 1.数据库中的每个数据表都对应一个类,model        
@@ -332,7 +332,7 @@ AR规则：
     }
 ```
 
-**修改数据**            
+#### 修改数据       
 查询：select()   添加：add()           
 修改关键字：save()  返回受影响的记录数目              
 

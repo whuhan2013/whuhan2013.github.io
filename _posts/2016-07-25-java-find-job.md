@@ -104,3 +104,78 @@ D：方法的参数列表指定要传递给方法什么样的信息，采用的�
 - 用户自定义类加载器： java.lang.ClassLoader 的子类 
 
 父类委托机制是可以修改的，有些服务器就是自定义类加载器优先的。
+
+
+**11、在Java中，关于HashMap类的描述，以下错误的是**                
+HashMap不能保证元素的顺序,HashMap能够将键设为null，也可以将值设为null，与之对应的是Hashtable,(注意大小写：不是HashTable)，Hashtable不能将键和值设为null，否则运行时会报空指针异常错误；
+HashMap线程不安全，Hashtable线程安全.                
+HashMap是Hashtable的轻量级实现（非线程安全的实现），他们都完成了Map接口，
+主要区别在于HashMap允许空（null）键值（key）,由于非线程安全，效率上可能高于Hashtable。
+HashMap 把Hashtable的contains方法去掉了，改成containsvalue和containsKey。因为contains方法容易让人引起误解。 
+
+
+**12、抽象类和接口**                
+相同点：都不能被实例化,位于继承树的顶端，都包含抽象方法            
+不同点：1、设计目的：接口体现的一种规范，类似与整个系统的总纲，制订了系统各模块应该遵循的标准，因此接口不应该经常改变，一旦改变对整个系统是辐射性的。                     
+抽象类作为多个子类的共同父类，体现的是一种模板式设计，可以当作系统实现过程中的中间产品，已经实现了系统部分功能。
+2、使用不同：（1）接口只能包含抽象方法，抽象类可以包含普通方法。              
+（2）接口里不能定义静态方法，抽象类可以。                     
+（3）接口只能定义静态常量属性不能定义普通属性，抽象类可以。             
+（4）接口不包含构造器，抽象类可以（不是用于创建对象而是让子类完成初始化）。             
+（5）接口里不能包含初始化块，抽象类完全可以。              
+（6）接口多继承，抽象类但继承（只能有一个直接父类）。                
+总结：接口所有方法全是抽象方法只能 public abstract修饰 （默认public abstract修饰 ），属性默认public static final修饰。            
+抽象类除了包含抽象方法外与普通类无区别。                    
+
+**13、 JAVA 异常类**             
+![](http://uploadfiles.nowcoder.com/images/20151113/140047_1447376765880_373DC390B08E99ABC340DB1F78F35FCB)
+都是Throwable的子类：           
+1.Exception（异常） :是程序本身可以处理的异常。            
+2.Error（错误）:               是程序无法处理的错误。这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时，一般不需要程序处理。    
+3.检查异常（编译器要求必须处置的异常） ：  除了Error，RuntimeException及其子类以外，其他的Exception类及其子类都属于可查异常。这种异常的特点是Java编译器会检查它，也就是说，当程序中可能出现这类异常，要么用try-catch语句捕获它，要么用throws子句声明抛出它，否则编译不会通过。            
+4.非检查异常(编译器不要求处置的异常): 包括运行时异常（RuntimeException与其子类）和错误（Error）。           
+
+
+**14、Servlet的生命周期**           
+- init()：仅执行一次，负责在装载Servlet时初始化Servlet对象             
+- service() ：核心方法，一般HttpServlet中会有get,post两种处理方式。在调用doGet和doPost方法时会构造servletRequest和servletResponse请求和响应对象作为参数。           
+- destory()：在停止并且卸载Servlet时执行，负责释放资源        
+初始化阶段：Servlet启动，会读取配置文件中的信息，构造指定的Servlet对象，创建ServletConfig对象，将ServletConfig作为参数来调用init()方法。所以选ACD。B是在调用service方法时才构造的         
+
+每一次请求来到容器时，会产生HttpServletRequest与HttpServlceResponse对象，并在调用service()方法时当做参数传入。
+在WEB容器启动后，会读取Servlet设置信息，将Servlet类加载并实例化，并为每个Servlet设置信息产生一个ServletConfig对象，而后调用Servlet接口的init()方法，并将产生的ServletConfig对象当作参数传入。
+
+**15、下面有关final, finally, finalize的区别描述错误的是**          
+final修饰的方法不能被覆盖      
+final修饰的字段为常量              
+final修饰的类不能被继承               
+
+final        
+修饰符（关键字）如果一个类被声明为final，意味着它不能再派生出新的子类，不能作为父类被继承。因此一个类不能既被声明为 abstract的，又被声明为final的。将变量或方法声明为final，可以保证它们在使用中不被改变。被声明为final的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。
+
+finally        
+异常处理时提供 finally 块来执行任何清除操作。如果抛出一个异常，那么相匹配的 catch 子句就会执行，然后控制就会进入 finally 块（如果有的话）。一般异常处理块需要。
+
+finalize              
+方法名。Java 技术允许使用 finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的。它是在 Object 类中定义的，因此所有的类都继承了它。子类覆盖 finalize() 方法以整理系统资源或者执行其他清理工作。finalize() 方法是在垃圾收集器删除对象之前对这个对象调用的。 
+Java中所有类都从Object类中继承finalize()方法。
+当垃圾回收器(garbage colector)决定回收某对象时，就会运行该对象的finalize()方法。
+
+
+**16、变量修饰符，重写，与重载**       
+![](http://uploadfiles.nowcoder.com/images/20151012/458054_1444618871663_E93E59ACFE1791E0A5503384BEBDC544)
+
+方法的重写（override）两同两小一大原则：        
+方法名相同，参数类型相同         
+子类返回类型小于等于父类方法返回类型，         
+子类抛出异常小于等于父类方法抛出异常，        
+子类访问权限大于等于父类方法访问权限。           
+
+
+**17、对象序列化**           
+使用ObjectOutputStream和ObjectInputStream可以将对象进行传输.
+声明为static和transient类型的成员数据不能被串行化。因为static代表类的状态， transient代表对象的临时数据。
+
+
+**18、对于线程局部存储TLS(thread local storage)，以下表述正确的是**        
+同一全局变量或者静态变量每个线程访问的是同一变量，多个线程同时访存同一全局变量或者静态变量时会导致冲突，尤其是多个线程同时需要修改这一变量时，通过TLS机制，为每一个使用该全局变量的线程都提供一个变量值的副本，每一个线程均可以独立地改变自己的副本，而不会和其它线程的副本冲突。
