@@ -20,6 +20,7 @@ description: python学习资源.
 	+ [Python 3 网络爬虫学习建议？ - 知乎](https://www.zhihu.com/question/41277528)
 	+ [python3网络爬虫多个例子](http://lovenight.github.io/categories/%E7%BC%96%E7%A8%8B/Python/)
 	+ [allen的博客](http://allenwu.itscoder.com/python#undefined)
+	+ [python爬虫入门(1):爬万本书籍 - 简书](http://www.jianshu.com/p/389fc7e1e491)
 
 #### python实战教程     
 - [voidsky_很有趣儿 - 简书](http://www.jianshu.com/users/30f737ee0051/latest_articles)
