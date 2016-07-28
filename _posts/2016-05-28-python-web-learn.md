@@ -9,6 +9,7 @@ description: python Web学习资源.
 
 ### Django教程     
 - [Django 开发内容管理系统 - Django 教程 - 自强学堂](http://www.ziqiangxuetang.com/django/django-cms-develop.html)
+- [Django简介 Django搭建简易博客教程](https://andrew-liu.gitbooks.io/django-blog/content/django_introduction.html)
 
 
 #### python flask  

@@ -132,3 +132,9 @@ class wechatCallbackapiTest
 **第三步：依据接口文档实现业务逻辑**          
 这里就在于自己开发了
 
+
+**参考链接**      
+
+- [微信公众开发](http://www.cnblogs.com/mchina/tag/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97/)      
+- [微信公众平台开发入门教程 - 方倍工作室 - 博客园](http://www.cnblogs.com/txw1958/p/wechat-tutorial.html)
+- [用微信php-sdk+图灵机器人＋谁是卧底搭游戏建 - 微信开发教程 ](http://www.9miao.com/thread-57405-1-1.html)
