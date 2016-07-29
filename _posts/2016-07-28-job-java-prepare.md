@@ -75,6 +75,24 @@ StringBuilder并没有对方法进行加同步锁，所以是非线程安全的�
 同一个父类，但一个线程安全，一个线程不安全，最后，如果程序不是多线程的，那么使用StringBuilder效率高于StringBuffer。
 
 
+**7、Map、Set、List、Queue、Stack的特点与用法**       
+Set集合类似于一个罐子，"丢进"Set集合里的多个对象之间没有明显的顺序。        
+List集合代表元素有序、可重复的集合，集合中每个元素都有其对应的顺序索引。         
+Stack是Vector提供的一个子类，用于模拟"栈"这种数据结构(LIFO后进先出)         
+Queue用于模拟"队列"这种数据结构(先进先出 FIFO)。                             
+Map用于保存具有"映射关系"的数据，因此Map集合里保存着两组值               
+
+**8、HashMap和HashTable的区别，TreeMap、HashMap、LindedHashMap的区别**           
+Hashtable是基于陈旧的Dictionary类的，HashMap是Map接口的一个实现        
+Hashtable的方法是线程同步的，而HashMap的方法不是。         
+只有HashMap可以让你将空值作为一个表的条目的key或value            
+
+
+Hashmap 是一个最常用的Map,它根据键的HashCode 值存储数据,根据键可以直接获取它的值，具有很快的访问速度，遍历时，取得数据的顺序是完全随机的。          
+LinkedHashMap保存了记录的插入顺序，在用Iterator遍历LinkedHashMap时，先得到的记录肯定是先插入的.也可以在构造时用带参数，按照应用次数排序                                                   
+TreeMap取出来的是排序后的键值对。但如果您要按自然顺序或自定义顺序遍历键，那么TreeMap会更好。         
+
+
 
 
 
