@@ -134,7 +134,9 @@ public GirlPresenter(GirlContract.View baseView) {
 
 
 
-### 参考链接
+### 参考链接         
+
+[浅谈 MVP in Android - Hongyang - 博客频道 - CSDN.NET](http://blog.csdn.net/lmj623565791/article/details/46596109)
 
 [ANDROID MVP模式 简单易懂的介绍方式 - MOE STUDIO - 萌の軌跡・願いの叶う場所](http://kaedea.com/2015/10/11/android-mvp-pattern/)
 

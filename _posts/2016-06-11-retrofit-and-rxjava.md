@@ -153,7 +153,7 @@ getUser(userId)
 **其中** 
 
 
-doOnNext()的执行在onNext()之前，对数据进行相关处理。doOnNext在哪一个线程处理，暂时不明。
+doOnNext()的执行在onNext()之前，对数据进行相关处理。doOnNext在observeOn所指定的线程中工作的
 
 **参考链接**
 
@@ -308,7 +308,8 @@ static class LoggingInterceptor implements Interceptor {
 [rengwuxian RxJava Samples](https://github.com/rengwuxian/RxJavaSamples)
 
 
-**参考链接**
+**参考链接**               
+[【Android】RxJava + Retrofit完成网络请求 - 简书](http://www.jianshu.com/p/1fb294ec7e3b)
 
 [给 Android 开发者的 RxJava 详解](http://gank.io/post/560e15be2dca930e00da1083#toc_14)
 
