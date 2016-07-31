@@ -49,7 +49,8 @@ Android插件化基础
 - 重写onLayout(不必须)
 - 重写onDraw
 
-**5、 Android 事件分发机制**　　　　　　　　
+**5、Android 事件分发机制**             
+　　　　
 呈Ｕ字型，dispatchTouchEVent从上到下，onTouchEvent从下到上。        
 
 
@@ -84,7 +85,8 @@ ART缺点：
 更大的存储空间占用，可能会增加10%-20%
 更长的应用安装时间
 
-**8、Android关于OOM的解决方案**　　　　　　　　　
+**8、Android关于OOM的解决方案**　　　　　
+　　　　
 OOM　　　　　　　　　　　　　　　　　
 
 内存溢出（Out Of Memory）　　　　　　　　　　　　　　　
