@@ -28,6 +28,7 @@ description: Android之事件分发机制
 
 3. 最后执行onTouchEvent方法，处理事件
 
+呈U字型，拦截时从父View到子View,onTouchEvent时，则是从下到上。
 
 ### View的事件分发
 
