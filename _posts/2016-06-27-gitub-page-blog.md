@@ -36,7 +36,7 @@ description: 利用githubpages创建你的个人博客
         <script>hljs.initHighlightingOnLoad();</script>
 ```
 
-- 注释footer.html中关于highlight的部分**           
+- 注释footer.html中关于highlight的部分       
 
 各种高亮效果预览:[https://highlightjs.org/static/demo/](https://highlightjs.org/static/demo/)           
 
