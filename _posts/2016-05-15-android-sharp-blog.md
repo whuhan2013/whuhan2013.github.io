@@ -62,3 +62,4 @@ description: Android开发相关的Blog推荐
 - 比尔盖茨的博客[Home Bill Gates](https://www.gatesnotes.com/)
 - 资源：[Android开发所需的Android SDK、开发中用到的工具、Android开发教程、Android设计规范，免费的设计素材等。](https://github.com/inferjay/AndroidDevTools)
 - Android sdk源码解析:[https://github.com/whuhan2013/AndroidSdkSourceAnalysis](https://github.com/whuhan2013/AndroidSdkSourceAnalysis)
+- 有很多关于Android系统方面的知识[Gityuan博客](http://gityuan.com/)
