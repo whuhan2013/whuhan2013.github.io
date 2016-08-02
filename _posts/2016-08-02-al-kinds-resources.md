@@ -9,4 +9,5 @@ description: 各类学习资源
 
 这里是各类学习相关资源收藏。
 
-- 学习PPT,EXCEL,PS,Flash等资源[http://oeasy.org/](http://oeasy.org/)
+- 学习PPT,EXCEL,PS,Flash等资源：[http://oeasy.org/](http://oeasy.org/)          
+- 各种语言在线编程网站：[全部 - 课程 - 实验楼](https://www.shiyanlou.com/courses/)
