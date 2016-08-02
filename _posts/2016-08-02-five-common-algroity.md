@@ -36,7 +36,7 @@ step3 合并：将各个子问题的解合并为原问题的解。
  
 Divide-and-Conquer(P)
 
-1. if |P|≤n0
+1. if P≤n0
 
 2. then return(ADHOC(P))
 
@@ -222,9 +222,9 @@ try(int i)
           }  
       }  
  }
- ```
+```
 
- **8皇后问题**           
+**8皇后问题**           
 
 ```
  #include<iostream>
