@@ -12,3 +12,4 @@ description: 实用工具总结
 - 在线简历生成网站:[Online CV Builder and Professional Resume CV Maker - VisualCV](https://www.visualcv.com/)  
 - 强大的搜索聚合网站[快搜 — 搜索快人一步](http://so.chongbuluo.com/)            
 - 利用hosts文件科学上网：[2016 Google hosts 持续更新](https://laod.org/hosts/2016-google-hosts.html)
+- Android尺寸，手机，网络相关工具类[https://github.com/Blankj/AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)
