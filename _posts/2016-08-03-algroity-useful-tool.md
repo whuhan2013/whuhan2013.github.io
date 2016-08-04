@@ -49,4 +49,15 @@ std::vector<std::string> split(std::string str,std::string pattern)
 }
 ```
 
+**求字符串中字串的数量**        
+
+```
+int fun1(const std::string& str, const std::string& sub)
+{
+    int num = 0;
+    for (size_t i=0; (i=str.find(sub,i)) != std::string::npos; num++, i++);
+    return num;
+}
+```
+
 

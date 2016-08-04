@@ -104,7 +104,13 @@ TIME_WAIT 并不会占用很大资源的，除非受到攻击。
 还有，如果一方send 或recv 超时，就会直接进入CLOSED 状态
 
 
-**5、TCP拥塞控制**　　　　　　　　　　　　
+![](http://dl.iteye.com/upload/attachment/0077/6058/5d4e8c89-fc42-3862-bdb8-399bc982f410.png)    
+
+
+
+
+**5、TCP拥塞控制**　      
+　　　　　　　　　　　
 1、慢开始与拥塞避免　　　　　　　
 2、快重传和快恢复　　　　　　　　　
 3、随机早期检测RED　　　　　　　　
