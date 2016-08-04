@@ -268,6 +268,32 @@ PhotoWallAdapter是整个照片墙程序中最关键的一个类了，这里我�
 由于我们使用了LruCache来缓存图片，所以不需要担心内存溢出的情况，当LruCache中存储图片的总大小达到容量上限的时候，会自动把最近最少使用的图片从缓存中移除。
 
 
+**onScroll方法自动调用问题**            
+在刚开始进入时，明明没有滑动，为什么onScroll方法也会调用呢？             
+
+我们先看setOnScrollListener源码：
+
+```
+public void setOnScrollListener(OnScrollListener l) {
+        mOnScrollListener = l;
+        invokeOnItemScrollListener();
+    }
+```
+
+setOnScrollListener里面调用了invokeOnItemScrollListener()方法，接着看该方法源码： 
+
+```
+void  invokeOnItemScrollListener() {
+        if (mFastScroller != null) {
+             mFastScroller.onScroll(mFirstPosition, getChildCount(), mItemCount);
+         }
+         if (mOnScrollListener != null) {
+            mOnScrollListener.onScroll(this, mFirstPosition, getChildCount(), mItemCount);//这里调用onScroll,一切真相大白了。
+         }
+         onScrollChanged(0, 0, 0, 0); // dummy values, View's implementation does not use these.
+       }
+```
+
 
 ### 硬盘缓存实现  
 
