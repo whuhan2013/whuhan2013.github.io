@@ -61,3 +61,19 @@ int fun1(const std::string& str, const std::string& sub)
 ```
 
 
+**C++动态数组**         
+
+一维
+
+```
+int *p=new int[n];
+```
+
+二维
+
+```
+float **p;
+p=new float *[n];
+for(int i=0;i<n;i++)
+p[i]=new float[m];
+```
