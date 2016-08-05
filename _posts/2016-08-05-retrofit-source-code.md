@@ -398,7 +398,300 @@ Response<T> parseResponse(okhttp3.Response rawResponse) throws IOException
 
 - 首先构造retrofit，几个核心的参数呢，主要就是baseurl,callFactory(默认okhttpclient),converterFactories,adapterFactories,excallbackExecutor。
 - 然后通过create方法拿到接口的实现类，这里利用Java的Proxy类完成动态代理的相关代理
-- 在invoke方法内部，拿到我们所声明的注解以及实参等，构造ServiceMethod，ServiceMethod中解析了大量的信息，最痛可以通过toRequest构造出okhttp3.Request对象。有了okhttp3.Request对象就可以很自然的构建出okhttp3.call，最后calladapter对Call进行装饰返回。
+- 在invoke方法内部，拿到我们所声明的注解以及实参等，构造ServiceMethod，ServiceMethod中解析了大量的信息，最终可以通过toRequest构造出okhttp3.Request对象。有了okhttp3.Request对象就可以很自然的构建出okhttp3.call，最后calladapter对Call进行装饰返回。
 - 拿到Call就可以执行enqueue或者execute方法了        
 
 
+#### 自定义Converter.Factory              
+
+**responseBodyConverter**
+
+关于Converter.Factory，肯定是通过addConverterFactory设置的
+
+```
+Retrofit retrofit = new Retrofit.Builder()
+    .addConverterFactory(GsonConverterFactory.create())
+        .build();
+```
+
+该方法接受的是一个Converter.Factory factory对象
+
+该对象呢，是一个抽象类，内部包含3个方法：
+
+```
+abstract class Factory {
+
+    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations,
+        Retrofit retrofit) {
+      return null;
+    }
+
+
+    public Converter<?, RequestBody> requestBodyConverter(Type type,
+        Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
+      return null;
+    }
+
+
+    public Converter<?, String> stringConverter(Type type, Annotation[] annotations,
+        Retrofit retrofit) {
+      return null;
+    }
+  }
+```
+
+可以看到呢，3个方法都是空方法而不是抽象的方法，也就表明了我们可以选择去实现其中的1个或多个方法，一般只需要关注requestBodyConverter和responseBodyConverter就可以了。
+
+ok，我们先看如何自定义，最后再看GsonConverterFactory.create的源码。
+
+先来个简单的，实现responseBodyConverter方法，看这个名字很好理解，就是将responseBody进行转化就可以了。
+
+ok，这里呢，我们先看一下上述中我们使用的接口：
+
+```
+package com.zhy.retrofittest.userBiz;
+
+public interface IUserBiz
+{
+    @GET("users")
+    Call<List<User>> getUsers();
+
+    @POST("users")
+    Call<List<User>> getUsersBySort(@Query("sort") String sort);
+
+    @GET("{username}")
+    Call<User> getUser(@Path("username") String username);
+
+    @POST("add")
+    Call<List<User>> addUser(@Body User user);
+
+    @POST("login")
+    @FormUrlEncoded
+    Call<User> login(@Field("username") String username, @Field("password") String password);
+
+    @Multipart
+    @POST("register")
+    Call<User> registerUser(@Part("photos") RequestBody photos, @Part("username") RequestBody username, @Part("password") RequestBody password);
+
+    @Multipart
+    @POST("register")
+    Call<User> registerUser(@PartMap Map<String, RequestBody> params,  @Part("password") RequestBody password);
+
+    @GET("download")
+    Call<ResponseBody> downloadTest();
+
+}
+```
+
+
+假设哈，我们这里去掉retrofit构造时的GsonConverterFactory.create，自己实现一个Converter.Factory来做数据的转化工作。
+
+首先我们解决responseBodyConverter，那么代码很简单，我们可以这么写：
+
+
+```
+public class UserConverterFactory extends Converter.Factory
+{
+    @Override
+    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit)
+    {
+        //根据type判断是否是自己能处理的类型，不能的话，return null ,交给后面的Converter.Factory
+        return new UserConverter(type);
+    }
+
+}
+
+public class UserResponseConverter<T> implements Converter<ResponseBody, T>
+{
+    private Type type;
+    Gson gson = new Gson();
+
+    public UserResponseConverter(Type type)
+    {
+        this.type = type;
+    }
+
+    @Override
+    public T convert(ResponseBody responseBody) throws IOException
+    {
+        String result = responseBody.string();
+        T users = gson.fromJson(result, type);
+        return users;
+    }
+}
+```
+
+使用的时候呢，可以
+
+```
+Retrofit retrofit = new Retrofit.Builder()
+.callFactory(new OkHttpClient()).baseUrl("http://example/springmvc_users/user/")
+//.addConverterFactory(GsonConverterFactory.create())
+.addConverterFactory(new UserConverterFactory())
+            .build();
+```
+
+ok，这样的话，就可以完成我们的ReponseBody到List<User>或者User的转化了。
+
+可以看出，我们这里用的依然是Gson，那么有些同学肯定不希望使用Gson就能实现，如果不使用Gson的话，一般需要针对具体的返回类型，比如我们针对返回List<User>或者User
+
+你可以这么写：
+
+
+```
+package com.zhy.retrofittest.converter;
+/**
+ * Created by zhy on 16/4/30.
+ */
+public class UserResponseConverter<T> implements Converter<ResponseBody, T>
+{
+    private Type type;
+    Gson gson = new Gson();
+
+    public UserResponseConverter(Type type)
+    {
+        this.type = type;
+    }
+
+    @Override
+    public T convert(ResponseBody responseBody) throws IOException
+    {
+        String result = responseBody.string();
+
+        if (result.startsWith("["))
+        {
+            return (T) parseUsers(result);
+        } else
+        {
+            return (T) parseUser(result);
+        }
+    }
+
+    private User parseUser(String result)
+    {
+        JSONObject jsonObject = null;
+        try
+        {
+            jsonObject = new JSONObject(result);
+            User u = new User();
+            u.setUsername(jsonObject.getString("username"));
+            return u;
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private List<User> parseUsers(String result)
+    {
+        List<User> users = new ArrayList<>();
+        try
+        {
+            JSONArray jsonArray = new JSONArray(result);
+            User u = null;
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                u = new User();
+                u.setUsername(jsonObject.getString("username"));
+                users.add(u);
+            }
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return users;
+    }
+}
+```
+
+
+这里简单读取了一个属性，大家肯定能看懂，这样就能满足返回值是Call<List<User>>或者Call<User>.
+
+这里郑重提醒：如果你针对特定的类型去写Converter，一定要在UserConverterFactory#responseBodyConverter中对类型进行检查，发现不能处理的类型return null，这样的话，可以交给后面的Converter.Factory处理，比如本例我们可以按照下列方式检查:
+
+
+```
+public class UserConverterFactory extends Converter.Factory
+{
+    @Override
+    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit)
+    {
+        //根据type判断是否是自己能处理的类型，不能的话，return null ,交给后面的Converter.Factory
+        if (type == User.class)//支持返回值是User
+        {
+            return new UserResponseConverter(type);
+        }
+
+        if (type instanceof ParameterizedType)//支持返回值是List<User>
+        {
+            Type rawType = ((ParameterizedType) type).getRawType();
+            Type actualType = ((ParameterizedType) type).getActualTypeArguments()[0];
+            if (rawType == List.class && actualType == User.class)
+            {
+                return new UserResponseConverter(type);
+            }
+        }
+        return null;
+    }
+
+}
+```
+
+好了，到这呢responseBodyConverter方法告一段落了，谨记就是将reponseBody->返回值返回中的实际类型，例如Call<User>中的User;还有对于该converter不能处理的类型一定要返回null。
+
+
+**requestBodyConverter**
+
+ok，上面接口一大串方法呢，使用了我们的Converter之后，有个方法我们现在还是不支持的。
+
+```
+@POST("add")
+Call<List<User>> addUser(@Body User user);
+```
+
+ok，这个@Body需要用到这个方法，叫做requestBodyConverter，根据参数转化为RequestBody，下面看下我们如何提供支持。
+
+```
+public class UserRequestBodyConverter<T> implements Converter<T, RequestBody>
+{
+    private Gson mGson = new Gson();
+    @Override
+    public RequestBody convert(T value) throws IOException
+    {
+        String string = mGson.toJson(value);
+        return RequestBody.create(MediaType.parse("application/json; charset=UTF-8"),string);
+    }
+}
+```
+
+然后在UserConverterFactory中复写requestBodyConverter方法，返回即可：
+
+
+```
+public class UserConverterFactory extends Converter.Factory
+{
+
+    @Override
+    public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit)
+    {
+        return new UserRequestBodyConverter<>();
+    }
+}
+```
+
+
+这里偷了个懒，使用Gson将对象转化为json字符串了，如果你不喜欢使用框架，你可以选择拼接字符串，或者反射写一个支持任何对象的，反正就是对象->json字符串的转化。最后构造一个RequestBody返回即可。
+
+ok,到这里，我相信如果你看的细致，自定义Converter.Factory是干嘛的，但是我还是要总结下：
+
+- responseBodyConverter 主要是对应@Body注解，完成ResponseBody到实际的返回类型的转化，这个类型对应Call<XXX>里面的泛型XXX，其实@Part等注解也会需要responseBodyConverter，只不过我们的参数类型都是RequestBody，由默认的converter处理了。
+- requestBodyConverter 完成对象到RequestBody的构造。
+- 一定要注意，检查type如果不是自己能处理的类型，记得return null （因为可以添加多个，你不能处理return null ,还会去遍历后面的converter）.
+
+
+
+**参考链接**   
+
+[Retrofit2 完全解析 探索与okhttp之间的关系 - Hongyang - 博客频道 - CSDN.NET](http://blog.csdn.net/lmj623565791/article/details/51304204)
