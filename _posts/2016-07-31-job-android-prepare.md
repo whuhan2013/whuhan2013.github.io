@@ -24,8 +24,10 @@ description:
 
 一个Thread对应多个Handler 一个Thread对应一个Looper和MessageQueue，Handler与Thread共享Looper和MessageQueue。 Message只是消息的载体，将会被发送到与线程绑定的唯一的MessageQueue中，并且被与线程绑定的唯一的Looper分发，被与其自身绑定的Handler消费。
 
-**3、插件化技术学习**                         
-Android插件化基础                  
+**3、插件化技术学习**             
+
+Android插件化基础             
+
 - 开发者将插件代码封装成Jar或者APK
 - 宿主下载或者从本地加载Jar或者APK到宿主中
 - 将宿主调用插件中的算法或者Android特定的Class（如Activity）               
@@ -86,11 +88,9 @@ ART缺点：
 更长的应用安装时间
 
 
-**8、Android关于OOM的解决方案**　              　　　　
+**8、Android关于OOM的解决方案**          　　　　
 　　　　
-OOM　　　　　　　　　　　　　　　　　
-
-内存溢出（Out Of Memory）　   　　　　　　　　　　　　　　
+OOM内存溢出（Out Of Memory） 　　　　　　　　　　　　　　
 也就是说内存占有量超过了VM所分配的最大　　  　　　　　　　　
 出现OOM的原因　　　　　　　　　　　　　　
 
@@ -304,3 +304,21 @@ EventBus是一个发布 / 订阅的事件总线。简单点说，就是两人约
 Rx：函数响应式编程 ，响应式代码的基本组成部分是Observables和Subscribers（事实上Observer才是最小的构建块，但实践中使用最多的是Subscriber，因为Subscriber才是和Observables的对应的。）。Observable发送消息，而Subscriber则用于消费消息。
 
 主要区别是，rx里面当建立起订阅关系时，你可以用操作符做任何处理（比如转换数据，更改数据等等），而且他能处理异步的操作。 eventbus 就相当于广播，发送了，总能接收到，他在发送后是不能做任何的数据改变，如果要改变，又要重新post一次。
+
+
+**Android性能优化**               
+
+- 布局优化         
+布局优化的思想很简单，减少布局文件的层级                 
+- 绘制优化             
+绘制优化是指View的onDraw方法要避免执行大量的操作：                       
+在onDraw中不要创建新的局部对象，这是因为onDraw方法可能会被频繁调用，这样就会在一瞬间产生大量的临时对象，这不仅占用了过多的内存而且还会导致系统更加频繁的gc，降低了程序的执行效率。                     
+onDraw方法中不要指定耗时任务，也不能执行成千上万次的循环操作，View的绘制帧率保证60fps是最佳的，这就要求每帧的绘制时间不超过16ms，虽然程序很难保证16ms这个时间，但是尽量降低onDraw方法的复杂度总是切实有效的。                
+- 内存泄漏优化                   
+可能导致内存泄漏的场景很多，例如静态变量、单例模式、属性动画、AsyncTask、Handler等等        
+- ListView和Bitmap优化           
+ListView优化：采用ViewHolder并避免在getView方法中执行耗时操作；根据列表的滑动状态来绘制任务的执行效率；可以尝试开启硬件加速期来使ListView的滑动更加流畅。                   
+Bitmap优化：根据需要对图片进行采样，主要是通过BitmapFactory.Options来根据需要对图片进行采样，采样主要用到了BitmapFactory.Options的inSampleSize参数。      
+- 线程优化               
+采用线程池，避免程序中存在大量的Thread。线程池可以重用内部的线程，从而避免了线程的创建和销毁所带来的性能开销，同时线程池还能有效的控制线程池的最大并发数，避免大量的线程因互相抢占系统资源从而导致阻塞现象的发生。             
+
