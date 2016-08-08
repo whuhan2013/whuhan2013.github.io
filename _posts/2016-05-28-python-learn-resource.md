@@ -13,7 +13,8 @@ description: python学习资源.
 
 #### Python爬虫学习系列教程
 - **Python版本：2.7**               
-	+ [Python爬虫学习系列教程](http://cuiqingcai.com/1052.html)
+	+ [Python爬虫学习系列教程](http://cuiqingcai.com/1052.html)        
+	+ [爬虫学习，资源很多](http://cuiqingcai.com/tag/%E7%88%AC%E8%99%AB)
 
 - **python3网络爬虫教程**
 	+ [python3爬虫教程](http://aljun.me/category/python%E7%88%AC%E8%99%AB)
