@@ -198,3 +198,122 @@ getParent().requestDisallowInterceptTouchEvent(true);  这样即使ViewGroup在M
 
 
 
+
+
+**事件分发实例**   
+
+实现了滑动时viewgroup处理，点击时子view处理       
+
+由于onInterceptTouchEvent()的机制比较复杂，上面的说明写的也比较复杂，总结一下，基本的规则是：  
+
+1.       down事件首先会传递到onInterceptTouchEvent()方法                 
+
+2.       如果该ViewGroup的onInterceptTouchEvent()在接收到down事件处理完成之后return false，那么后续的move, up等事件将继续会先传递给该ViewGroup，之后才和down事件一样传递给最终的目标view的onTouchEvent()处理。 
+
+3.       如果该ViewGroup的onInterceptTouchEvent()在接收到down事件处理完成之后return true，那么后续的move, up等事件将不再传递给onInterceptTouchEvent()，而是和down事件一样传递给该ViewGroup的onTouchEvent()处理，注意，目标view将接收不到任何事件。 
+
+4.       如果最终需要处理事件的view的onTouchEvent()返回了false，那么该事件将被传递至其上一层次的view的onTouchEvent()处理。 
+
+5.       如果最终需要处理事件的view 的onTouchEvent()返回了true，那么后续事件将可以继续传递给该view的onTouchEvent()处理。
+
+
+```
+package com.zj.custom;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+public class CustomInt extends ViewGroup{
+
+    public CustomInt(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        // TODO Auto-generated method stub
+         int childCount = getChildCount();
+         // 设置主布局的高度
+         MarginLayoutParams lp = (MarginLayoutParams) getLayoutParams();
+         
+         setLayoutParams(lp);
+
+         for (int i = 0; i < childCount; i++)
+         {
+             View child = getChildAt(i);
+             child.layout(l, i*100, r, (i+1)*100);
+         }
+    }
+    float y=0;
+    float y2=0;
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        // TODO Auto-generated method stub
+        
+        switch (ev.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            y=ev.getY();
+            Log.i("validate", "down_y=="+y);
+            break;
+        
+        case MotionEvent.ACTION_MOVE:
+            Log.i("validate", "move_y="+ev.getY());
+            if(ev.getY()-y>100){
+                return true;
+            }
+            break;
+        case MotionEvent.ACTION_UP:
+            Log.i("validate", "intercept UP");
+            if(ev.getY()-y>100){
+                Log.e("validate","heree");
+                return true;
+            }
+            break;
+
+        default:
+            break;
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
+    
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // TODO Auto-generated method stub
+        
+        switch(event.getAction()){
+        case MotionEvent.ACTION_DOWN:
+            Log.i("validate", "parent down"+event.getY());
+            y=event.getY();
+            return true;
+            
+        case MotionEvent.ACTION_MOVE:
+            Log.i("validate","parent move"+event.getY());
+            y2=event.getY();
+            
+            break;
+        case MotionEvent.ACTION_UP:
+            Log.e("validate","parent up"+event.getY()+","+"y=="+y);
+            if(y2-y>100)
+            Toast.makeText(getContext(), "move", 0).show();
+            break;
+        }
+        return super.onTouchEvent(event);
+    }
+    
+
+
+}
+```
+
+**参考链接**     
+[浅谈onInterceptTouchEvent、onTouchEvent与onTouch - 短裤党 - ITeye技术网站](http://gundumw100.iteye.com/blog/1052270) 
+
+**效果如下**  
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/android/p1.jpg)
