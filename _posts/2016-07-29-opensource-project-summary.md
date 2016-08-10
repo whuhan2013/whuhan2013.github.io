@@ -23,3 +23,8 @@ GitHub 的使用有各种技巧，只不过基本的就够我们用了，但是�
 这个项目跟上面的区别是，这个项目只整理了所有跟 Android UI         相关的优秀开源项目，基本你在实际开发中用到的各种效果上面都几乎能找到类似的，简直是 UI 开发必备。               
 - [Android_Data](https://github.com/Freelander/Android_Data)           
 几乎包括了国内各种学习 Android 的资料，简直太全了
+
+
+- 30天ReactNative项目，每天一个小程序：[30-days-of-react-native: 30 days of React Native demos](https://github.com/fangwei716/30-days-of-react-native)
+- 每天一个python程序，适合入门:[show-me-the-code: Python 练习册，每天一个小程序](https://github.com/Show-Me-the-Code/show-me-the-code)
+- React-Native学习指南:[React Native指南汇集了各类react-native学习资源、开源App和组件](https://github.com/reactnativecn/react-native-guide)
