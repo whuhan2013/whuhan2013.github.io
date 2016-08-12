@@ -7,6 +7,13 @@ tags: [求职]
 description: 笔试&&面试经验
 ---
 
+**最新更新有用的面经**               
+
+- Java,Android,网络部分都有[Job Hunting HujiaweiBujidao](http://hujiaweibujidao.github.io/blog/2015/10/09/a-li-bao-bao-de-man-man-qiu-zhi-lu/)
+- 很详细，可反复观看:[2016秋招面经(蘑菇街+BT+网易杭研+CVTE+唯品会)_笔试面经_牛客网](http://www.nowcoder.com/discuss/3206?type=2&order=4&pos=8&page=2)
+
+
+
 本专题将收集一些IT互联网企业的笔试题目和面试的面经  
 
 - [难忘的面试周——百度校招面经 - 简书](http://www.jianshu.com/p/36f5ef6336f1)

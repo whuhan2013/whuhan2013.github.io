@@ -12,7 +12,8 @@ description: python学习实例.
 
 - [从零开始 Python 微信公众号开发 - 小段同学的杂记 - 知乎专栏](https://zhuanlan.zhihu.com/p/21354943?refer=666666)
 - [Python 微信公众号开发(2)——听得懂语音消息的聊天机器人 - 小段同学的杂记 - 知乎专栏](https://zhuanlan.zhihu.com/p/21390250?refer=666666)
-- [Python快速搭建自动回复微信公众号 - ^-^ - 博客频道 - CSDN.NET](http://blog.csdn.net/tobacco5648/article/details/51190039)
+- [Python快速搭建自动回复微信公众号 - ^-^ - 博客频道 - CSDN.NET](http://blog.csdn.net/tobacco5648/article/details/51190039)             
+- [Python对微信好友进行简单统计分析 - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21967333)
 
 
 **python机器学习**       
