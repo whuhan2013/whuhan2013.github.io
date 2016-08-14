@@ -40,8 +40,34 @@ Android插件化基础
 
 什么是动态加载技术
 
-动态加载技术就是使用类加载器加载相应的apk、dex、jar(必须含有dex文件)，再通过反射获得该apk、dex、jar内部的资源（class、图片、color等等）进而供宿主app使用。             
+动态加载技术就是使用类加载器加载相应的apk、dex、jar(必须含有dex文件)，再通过反射获得该apk、dex、jar内部的资源（class、图片、color等等）进而供宿主app使用。  
 
+
+**主apk如何加载插件apk中的activity**      
+
+启动一个activity的过程 
+
+(1) 我们app中是使用了Activity的startActivity方法，具体调用的是ContextImpl的同名函数。
+
+(2) ContextImpl中会调用Instrumentation的execStartActivity方法。
+
+(3) Instrumentation通过aidl进行跨进程通信，最终调用AMS的startActivity方法。
+
+(4) 在系统进程中AMS中先判断权限，然后通过调用ActivityStackSupervisor和ActivityStack进行一系列的交互用来确定Activity栈的使用方式。
+
+(5) 通过ApplicationThread进行跨进程通信，转回到app进程。
+
+(6) 通过ActivityThread中的H（一个handler）传递消息，最终调用Instrumentation来创建一个Activity。      
+
+
+插件化的Activity如何加载进去  
+
+首先我们要明确，要解决的核心问题是［如何能让没有在manifst中注册的Activity能启动起来］。由于权限验证机制是系统做的，我们肯定是没办法修改的，既然我们没办法修改，那是不是考虑去欺骗呢？也就是说可以在manifest中预先定义好几个Activity，俗称占坑，比如名字就叫ActivityA，ActivityB，在校验权限之前把我们插件apk中的Activity替换成定义好的Activity，这样就能顺利通过校验，而在之后真正生成Activity的地方再换回来，瞒天过海。   
+
+
+那怎么去欺骗呢？回归前面的代码，其实答案已经呼之欲出了——我们可以有两种选择，hook Instrumentation或者hook ActivityManagerNative。这也正好对应了Small和DroidPlugin的实现方案。 
+
+参考链接：[Android插件机制](http://zjutkz.net/2016/05/06/%E8%AE%A9%E6%88%91%E4%BB%AC%E6%9D%A5%E8%81%8A%E4%B8%80%E8%81%8A%E6%8F%92%E4%BB%B6%E5%8C%96%E5%90%A7/)
 
 **4、自定义控件**          
 
@@ -306,7 +332,7 @@ Rx：函数响应式编程 ，响应式代码的基本组成部分是Observables
 主要区别是，rx里面当建立起订阅关系时，你可以用操作符做任何处理（比如转换数据，更改数据等等），而且他能处理异步的操作。 eventbus 就相当于广播，发送了，总能接收到，他在发送后是不能做任何的数据改变，如果要改变，又要重新post一次。
 
 
-**Android性能优化**               
+**20、Android性能优化**               
 
 - 布局优化         
 布局优化的思想很简单，减少布局文件的层级                 
@@ -321,4 +347,75 @@ ListView优化：采用ViewHolder并避免在getView方法中执行耗时操作�
 Bitmap优化：根据需要对图片进行采样，主要是通过BitmapFactory.Options来根据需要对图片进行采样，采样主要用到了BitmapFactory.Options的inSampleSize参数。      
 - 线程优化               
 采用线程池，避免程序中存在大量的Thread。线程池可以重用内部的线程，从而避免了线程的创建和销毁所带来的性能开销，同时线程池还能有效的控制线程池的最大并发数，避免大量的线程因互相抢占系统资源从而导致阻塞现象的发生。             
+
+**21、onSaveInstanceState()和onRestoreInstanceState()调用的过程和时机**
+
+当某个activity变得“容易”被系统销毁时，该activity的onSaveInstanceState就会被执行，除非该activity是被用户主动销毁的，例如当用户按BACK键的时候。 
+
+注意上面的双引号，何为“容易”？言下之意就是该activity还没有被销毁，而仅仅是一种可能性。这种可能性有哪些？通过重写一个activity的所有生命周期的onXXX方法，包括onSaveInstanceState和onRestoreInstanceState方法，我们可以清楚地知道当某个activity（假定为activityA）显示在当前task的最上层时，其onSaveInstanceState方法会在什么时候被执行，有这么几种情况：             
+
+1、当用户按下HOME键时。              
+这是显而易见的，系统不知道你按下HOME后要运行多少其他的程序，自然也不知道activity A是否会被销毁，故系统会调用onSaveInstanceState，让用户有机会保存某些非永久性的数据。以下几种情况的分析都遵循该原则        
+2、长按HOME键，选择运行其他的程序时。                    
+3、按下电源按键（关闭屏幕显示）时。             
+4、从activity A中启动一个新的activity时。                
+5、屏幕方向切换时，例如从竖屏切换到横屏时。                   
+
+总而言之，onSaveInstanceState的调用遵循一个重要原则，即当系统“未经你许可”时销毁了你的activity，则onSaveInstanceState会被系统调用，这是系统的责任，因为它必须要提供一个机会让你保存你的数据（当然你不保存那就随便你了）。 
+
+至于onRestoreInstanceState方法，需要注意的是，onSaveInstanceState方法和onRestoreInstanceState方法“不一定”是成对的被调用的，onRestoreInstanceState被调用的前提是，activity A“确实”被系统销毁了，而如果仅仅是停留在有这种可能性的情况下，则该方法不会被调用，例如，当正在显示activity A的时候，用户按下HOME键回到主界面，然后用户紧接着又返回到activity A，这种情况下activity A一般不会因为内存的原因被系统销毁，故activity A的onRestoreInstanceState方法不会被执行。 
+另外，onRestoreInstanceState的bundle参数也会传递到onCreate方法中，你也可以选择在onCreate方法中做数据还原。 
+
+
+**22、onNewIntent调用时机**          
+
+```
+Activity启动模式设置：
+
+        <activity android:name=".MainActivity" android:launchMode="standard" />
+
+Activity的四种启动模式：
+
+    1. standard
+
+        默认启动模式，每次激活Activity时都会创建Activity，并放入任务栈中。
+
+    2. singleTop
+
+        如果在任务的栈顶正好存在该Activity的实例， 就重用该实例，否者就会创建新的实例并放入栈顶(即使栈中已经存在该Activity实例，只要不在栈顶，都会创建实例)。
+
+    3. singleTask
+
+        如果在栈中已经有该Activity的实例，就重用该实例(会调用实例的onNewIntent())。重用时，会让该实例回到栈顶，因此在它上面的实例将会被移除栈。如果栈中不存在该实例，将会创建新的实例放入栈中。 
+
+    4. singleInstance
+
+        在一个新栈中创建该Activity实例，并让多个应用共享改栈中的该Activity实例。一旦改模式的Activity的实例存在于某个栈中，任何应用再激活改Activity时都会重用该栈中的实例，其效果相当于多个应用程序共享一个应用，不管谁激活该Activity都会进入同一个应用中。
+```
+
+大家遇到一个应用的Activity供多种方式调用启动的情况，多个调用希望只有一个Activity的实例存在，这就需要Activity的onNewIntent(Intent intent)方法了。只要在Activity中加入自己的onNewIntent(intent)的实现加上Manifest中对Activity设置lanuchMode=“singleTask”就可以。
+
+onNewIntent（）非常好用，Activity第一启动的时候执行onCreate()---->onStart()---->onResume()等后续生命周期函数，也就时说第一次启动Activity并不会执行到onNewIntent(). 而后面如果再有想启动Activity的时候，那就是执行onNewIntent()---->onResart()------>onStart()----->onResume().  如果android系统由于内存不足把已存在Activity释放掉了，那么再次调用的时候会重新启动Activity即执行onCreate()---->onStart()---->onResume()等。
+
+当调用到onNewIntent(intent)的时候，需要在onNewIntent() 中使用setIntent(intent)赋值给Activity的Intent.否则，后续的getIntent()都是得到老的Intent。
+
+
+**23、 知道哪几种类型的广播，说一下它们的区别**　　　　　　　　　　
+
+根据广播的发送方式，可以将其分为以下几种类型：
+
+- Normal Broadcast：普通广播
+此处将普通广播界定为：开发者自己定义的intent，以context.sendBroadcast_"AsUser"(intent, ...)形式
+- System Broadcast: 系统广播
+Android系统中内置了多个系统广播，只要涉及到手机的基本操作，基本上都会发出相应的系统广播。如：开启启动，网络状态改变，拍照，屏幕关闭与开启，点亮不足等等。每个系统广播都具有特定的intent-filter，其中主要包括具体的action，系统广播发出后，将被相应的BroadcastReceiver接收。系统广播在系统内部当特定事件发生时，有系统自动发出。
+- Ordered broadcast：有序广播
+有序广播的有序广播中的“有序”是针对广播接收者而言的，指的是发送出去的广播被BroadcastReceiver按照先后循序接收。有序广播的定义过程与普通广播无异，只是其的主要发送方式变为：sendOrderedBroadcast(intent, receiverPermission, ...)。
+- Sticky Broadcast：粘性广播(在 android 5.0/api 21中deprecated,不再推荐使用，相应的还有粘性有序广播，同样已经deprecated)
+既然已经deprecated，此处不再多做总结。
+- Local Broadcast：App应用内广播
+App应用内广播可以理解成一种局部广播的形式，广播的发送者和接收者都同属于一个App
+
+
+
+
 
