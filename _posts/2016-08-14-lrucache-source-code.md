@@ -20,8 +20,7 @@ public LruCache(int maxSize) {
     if (maxSize <= 0) {                                                   
         throw new IllegalArgumentException("maxSize <= 0");               
     }                                                                     
-    this.
-     = maxSize;                                               
+    this.maxSize = maxSize;                                                  
     this.map = new LinkedHashMap<K, V>(0, 0.75f, true);                   
 }                             
 ```
@@ -124,7 +123,7 @@ private void writeObject(ObjectOutputStream stream) throws IOException {
   * expensive division.                                                     
   */                                                                        
  static final float DEFAULT_LOAD_FACTOR = .75F;    
- ```
+```
 
 
 第一段的注释还是说了这个接口忽略了loadFactor，但是API里面有，所以不能完全的把这个东西封闭起来，第二段呢则是在说这个东西硬编码成了0.75f，提升了性能。然而，看这个loadFactor看了这么久，我们仍然连它是干嘛的都不知道，而且在源码里似乎已经找不到头绪了。没关系，还有最后一招——看官方文档 ! 作为一名Android开发者，我首先上了Android Developer官网，查看HashMap的描述，结果大失所望——并没有相关的任何信息，只是不痛不痒的介绍了一下HashMap的排序以及它的线程不安全。然后我又上了Oracle官网，去查看相关描述，果然找到了：
