@@ -192,11 +192,11 @@ static class Values {
  - void add(ThreadLocal<?> key, Object value)：也是往table里面添加键值对，但是比起put()来少了很多繁琐但是很棒的操作，下面再详述
  - Object getAfterMiss(ThreadLocal<?> key)：在首位置没找到值的时候通过这个方法来找到给定key的值
  - void remove(ThreadLocal<?> key)：删掉给定key对应的值
- ```
+```
 
  **构造方法**     
 
- ```
+```
  Values() {
     //初始化table
     initializeTable(INITIAL_SIZE);
