@@ -385,3 +385,7 @@ Android文档中有写到AsyncTask应该处理几秒钟的操作（通常为轻�
 ### 总结
 
 尽管AsyncTask现在已经很少使用了，但是它的一些设计思路可以借鉴到我们的框架中。比如我们的代码中尽量设计灵活一些，就像AysnTask里面存在串行、并行的操作一样，提供用户同的api，让用户在不同的场景下选择不同的业务逻辑处理。
+
+
+**参考链接**        
+[Asynctask解析](https://github.com/white37/AndroidSdkSourceAnalysis/blob/master/article/AsyncTask和AsyncTaskCompat源)
