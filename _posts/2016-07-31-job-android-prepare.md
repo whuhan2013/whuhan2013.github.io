@@ -418,4 +418,46 @@ App应用内广播可以理解成一种局部广播的形式，广播的发送�
 
 
 
+**24、Android中ClassLoader和java中有什么关系和区别**       
 
+java中使用java虚拟机，android中使用Dalvik虚拟机，它可以支持已转换为 .dex（即Dalvik Executable）格式的Java应用程序的运行，.dex格式是专为Dalvik设计的一种压缩格式，适合内存和处理器速度有限的系统。Dalvik 经过优化，允许在有限的内存中同时运行多个虚拟机的实例，并且每一个Dalvik 应用作为一个独立的Linux 进程执行。独立的进程可以防止在虚拟机崩溃的时候所有程序都被关闭。
+
+java class装载的过程    
+
+首先何时需要加载类呢？ 
+
+有一下集中情况：             
+1. 第一次去访问类的静态变量             
+2. 第一次去实例化类                                                        
+3. 第一次调用Class.forName()                         
+4. 遇到以上三种情况时，该类的所有祖先类都会被加载                     
+
+
+加载class的过程主要分为以下几步：                     
+1. 将二进制的class文件装入虚拟机，当然某个class的装载是由它的classloader来完成的。（之后会详细介绍）   
+2. 验证该类的语法            
+3. 准备阶段，该阶段是负责给该类分配变量空间，以及一些默认值的处理。          
+4. 分析（可选），负责把常量池中的应用转化为直接应用              
+5. 初始化，该步是执行类中的static变量和static的语句块               
+
+
+**classloader**
+
+![](http://my.csdn.net/uploads/201205/22/1337696409_6114.jpg)
+
+从上图可以看出，两者有很多相同点，都是树状结构，都有一个根classloader叫做Bootstrap classloader，而且他们都采用了双亲代理模式，什么叫双亲代理模式呢？
+所谓双亲代理模式就是装载一个类时，先由自己定义的类装载器请求其parent装载，parent再请求它自己的parent装载，直到顶级的Bootstrap ClassLoader。 若某一级的parent能装载则装载之，否则由它的“下级”自己尝试装载。
+
+
+**Android程序比起一般Java程序在使用动态加载时麻烦在哪里**
+
+通过上面的分析，我们知道使用ClassLoader动态加载一个外部的类是非常容易的事情，所以很容易就能实现动态加载新的可执行代码的功能，但是比起一般的Java程序，在Android程序中使用动态加载主要有两个麻烦的问题：
+
+- Android中许多组件类（如Activity、Service等）是需要在Manifest文件里面注册后才能工作的（系统会检查该组件有没有注册），所以即使动态加载了一个新的组件类进来，没有注册的话还是无法工作；
+- Res资源是Android开发中经常用到的，而Android是把这些资源用对应的R.id注册好，运行时通过这些ID从Resource实例中获取对应的资源。如果是运行时动态加载进来的新类，那类里面用到R.id的地方将会抛出找不到资源或者用错资源的异常，因为新类的资源ID根本和现有的Resource实例中保存的资源ID对不上；
+说到底，抛开虚拟机的差别不说，一个Android程序和标准的Java程序最大的区别就在于他们的上下文环境（Context）不同。Android中，这个环境可以给程序提供组件需要用到的功能，也可以提供一些主题、Res等资源，其实上面说到的两个问题都可以统一说是这个环境的问题，而现在的各种Android动态加载框架中，核心要解决的东西也正是“如何给外部的新类提供上下文环境”的问题。
+
+**参考链接**   
+
+[java和android classloader分析 - donway的日志 - eoe 移动开发者论坛 - Powered by Discuz!](http://www.eoeandroid.com/blog-626979-3065.html)        
+[Android动态加载基础 ClassLoader工作机制 - 中二病也要开发ANDROID - SegmentFault](https://segmentfault.com/a/1190000004062880)
