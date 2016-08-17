@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 设计模式之适配器模式
+title: 设计模式之适配器模式与外观模式
 date: 2016-8-10
 categories: blog
 tags: [设计模式]
@@ -217,3 +217,117 @@ public class Adapter implements Target {
 
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/designpattern/p6.png)
+
+
+### 外观模式  
+
+**定义**
+
+外观模式：为了简化接口，进而改变接口，将一个或者数个类的复杂影藏在背后，只露出一个干净美好的外观
+
+**实例场景**
+
+构造舒适的家庭影院，我们需要进行以下这些麻烦操作：
+
+```
+打开爆米花机
+开始爆米花
+将灯光调暗
+放下屏幕
+打开投影机
+....
+....
+....
+....
+....
+....
+....
+开始播放 DVD
+```
+
+
+可以看见，为了看一部电影，要进行这么多操作，很麻烦。不仅如此，关闭的时候也是这样。而外观模式提供了一个更合理的外观类，可以将一个复杂的子系统变的很容易使用。并且外观只是提供你更直接的操作，并未将原来的子系统阻隔(封装)起来，如果需要使用底层的，也还是可以的。另外外观不只是简化了接口，同时也将客户从组建的子系统中解耦。
+
+代码如下，可以仔细体会一下：
+
+
+```
+   public class HomeTheaterFacade{
+        Amplifier amp;
+        Tuner tuner;
+        DvdPlayer dvd;
+        CdPlayer cd;
+        Projecter pro;
+        TheaterLights tl;
+        Screen sc;
+        PopcornPopper pp;
+
+        Public HomeTheaterFacade(
+        Amplifier amp,
+        Tuner tuner,
+        DvdPlayer dvd,
+        CdPlayer cd,
+        Projecter pro,
+        TheaterLights tl,
+        Screen sc,
+        PopcornPopper pp;
+        ) {
+            this.amp = amp;
+            ...
+            this.sc = sc;
+            this.pp = pp;
+        }
+
+        public void WatchMovie(String movie){
+
+            sout("start");
+            amp.start();
+            ...
+            dvd.play(movie);
+        }
+
+        public void EndMovie(){
+
+            sout("start");
+            amp.off();
+            ...
+            dvd.off();
+        }
+     }
+
+    public class HomeTheaterTestDriver{
+        psvm(String args[]){
+            //省略实例化的组件
+
+            //根据子系统的所有组件来实例化外观
+            HomeTheaterFacade ht = new HomeTheaterFacade(amp....,pp);
+            //使用简化的接口
+            ht.watchMovie("Red Dog");
+            ht.ednMovie();
+        }
+    }
+```
+
+
+**javaAPI中涉及**
+
+JDBC的设计就是典型的外观模式，封装了数据库的连接过程和对数据的操作，隐藏了具体细节。要是没有JDBC，我们就要针对不同的数据库（DB2，ORACLE，SQL Server）去操作
+
+由此也引入了设计原则：最少知识原则，只和密友谈话。个人理解，简单点说：不要一个方法调用一个方法，即太多类耦合在一起，免得修改其中的一部分影响到另外许多类，即类与类之间有太多依赖
+
+另外，我们可以想到在 java 中 "System.out.println()"违反了最少原则
+
+
+### 总结
+
+外观和最少知识原则，对于 Client 来说，它只有一个"朋友"也就是 HomeTheaterFacade ，它帮助 Client 管理 全部子系统组件，并且我们可以在不影响客户的情况下升级这些组件
+
+这一章经常说道装饰者，适配器，外观模式，下面比较一下其中的用法区别：
+
+- 适配器将一个对象包装起来以改变其接口
+- 装饰者将一个对象包装起来以增加新的行为和责任
+- 外观则将一群对象包装起来简化其接口
+
+**参考链接**        
+
+[写点 Android 姿势 allen的个人博客](http://allenwu.itscoder.com/android/#undefined)
