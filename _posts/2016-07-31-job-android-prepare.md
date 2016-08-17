@@ -17,7 +17,48 @@ description:
 非静态内部类默认会持有外部类的引用。               
 - Handler 造成的内存泄漏           
 由于 Handler 属于 TLS(Thread Local Storage) 变量, 生命周期和 Activity 是不一致的。因此这种实现方式一般很难保证跟 View 或者 Activity 的生命周期保持一致，故很容易导致无法正确释放。                         
-解决方法：即推荐使用静态内部类 + WeakReference 这种方式。每次使用前注意判空。                     
+解决方法：即推荐使用静态内部类 + WeakReference 这种方式。每次使用前注意判空。    
+
+
+**如何避免内存泄漏** 
+
+- 避免在 activity 或 fragment 之外传递 Context 对象。
+永远永远不要创建静态的 Context 或 View 对象，或者将二者存储于静态变量中。这是内存泄露的首要标志。
+
+private static TextView textView; //DO NOT DO THIS
+private static Context context; //DO NOT DO THIS
+
+- 总是记得在 onPause() 或 onDestroy() 方法中的取消注册监听器(listeners)。这包括 Android
+监听器，以及位置服务、显示管理器服务，还有自定义的一些监听器。
+
+- 不要在 AsyncTasks(异步任务)或后台线程中存储指向 activities 的强引用。Activity 可能会关闭，但是
+AsyncTask 会继续执行，一直保存着对该 activity 的引用。
+
+如果可以，使用 Context-application (getApplicationContext())，而不是某个 activity
+的 Context 对象。
+
+- 尽力避免使用非静态的内部类。将引用存储至某个 Activity 或 View 内部会导致内存泄露。如果不得不存储引用，请使用
+WeakReference。
+
+文／OneAPM_Official（简书作者）
+原文链接：http://www.jianshu.com/p/a8c6b4827333
+著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。        
+
+
+**内存泄露探测工具** 
+
+MAT的使用
+
+- 安装MAT
+- 配置运行参数：VM参数-XX:+HeapDumpOnOutOfMemoryError
+- 导入hprof文件
+
+参考链接
+
+[性能分析工具之-- Eclipse Memory Analyzer tool(MAT)（二） - 骆骆的博客 - 博客频道 - CSDN.NET](http://blog.csdn.net/rachel_luo/article/details/8992461)
+
+[查找并修复Android中的内存泄露—OutOfMemoryError - 简书](http://www.jianshu.com/p/a8c6b4827333)
+
 
 **2、线程通信基础流程分析**          
 当我们调用handler.sendMessage(msg)方法发送一个Message时，实际上这个Message是发送到与当前线程绑定的一个MessageQueue中，然后与当前线程绑定的Looper将会不断的从MessageQueue中取出新的Message，调用msg.target.dispathMessage(msg)方法将消息分发到与Message绑定的handler.handleMessage()方法中。
