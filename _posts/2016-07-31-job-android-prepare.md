@@ -65,6 +65,19 @@ MAT的使用
 
 一个Thread对应多个Handler 一个Thread对应一个Looper和MessageQueue，Handler与Thread共享Looper和MessageQueue。 Message只是消息的载体，将会被发送到与线程绑定的唯一的MessageQueue中，并且被与线程绑定的唯一的Looper分发，被与其自身绑定的Handler消费。
 
+参考链接：
+
+不能在子线程中更新主线程UI，所以如果是子线程中的handler不能更新，但可以用              
+handler = new MyHandler(Looper.getMainLooper());                 
+就可以更新了。
+
+[Handler一定要在主线程实例化吗?new Handler()和new Handler(Looper.getMainLooper())的区别](http://blog.csdn.net/thanklife/article/details/17006865)
+
+[Android之Handler有感(三) - lee0oo0 - 博客园](http://www.cnblogs.com/lee0oo0/archive/2012/04/06/2434985.html)
+
+[android中looper的实现原理，为什么调用looper.prepare就在当前线程关联了一个lo_百度知道](http://zhidao.baidu.com/link?url=nO2k2ZJG6RFaoLvggfWgu-cNAv7v4OhLLkiVWYROYYJayzD2T1iba0IlT6BYP2ZiBAd4BbHDKUZa_hdEpEuYPcKNaJ9s5W11btKghG6jyJC)
+
+
 **3、插件化技术学习**             
 
 Android插件化基础             
