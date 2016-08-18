@@ -66,4 +66,22 @@ init进程 –-> Zygote进程 –> SystemServer进程 –>应用进程
 
 上面截取了最关键的代码，也是本文重点要分析的内容。可以看到，在Main（）方法中实例化之后直接调用了run()方法。在run()方法中首先获取主线程的Looper对象，这也就意味着SystemServer后续是可以获取主线程中的消息。下面先分析createSystemContext()。
 
-#### 
+#### 创建Context对象
+
+SystemServer#createSystemContext()
+
+
+```
+ private void createSystemContext() {
+        ActivityThread activityThread = ActivityThread.systemMain();
+        mSystemContext = activityThread.getSystemContext();
+        mSystemContext.setTheme(android.R.style.Theme_DeviceDefault_Light_DarkActionBar);
+    }
+```
+
+在createSystemContext()中首先获取了一个ActivityThread对象，紧接着根据ActivityThread对象获取了mSystemContext，mSystemContext是Context对象。这可不得了。我们知道，ActivityThread其实就是所谓的主线程，看来ActivityThread#systemMain()这个方法大有搞头。跟进。
+
+源码位置：frameworks/base/core/java/android/app/ActivityThread.java 
+
+**ActivityThread#systemMain()**
+
