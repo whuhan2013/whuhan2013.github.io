@@ -9,8 +9,25 @@ description: 笔试&&面试经验
 
 **最新更新有用的面经**               
 
+- 详细全面，反复看：[LearningNotes](https://github.com/GeniusVJR/LearningNotes)
+- [国内一线互联网公司内部面试题库](https://github.com/JackyAndroid/AndroidInterview-Q-A/blob/master/README-CN.md)
 - Java,Android,网络部分都有[Job Hunting HujiaweiBujidao](http://hujiaweibujidao.github.io/blog/2015/10/09/a-li-bao-bao-de-man-man-qiu-zhi-lu/)
-- 很详细，可反复观看:[2016秋招面经(蘑菇街+BT+网易杭研+CVTE+唯品会)_笔试面经_牛客网](http://www.nowcoder.com/discuss/3206?type=2&order=4&pos=8&page=2)
+- 很详细，可反复观看:[2016秋招面经(蘑菇街+BT+网易杭研+CVTE+唯品会)_笔试面经_牛客网](http://www.nowcoder.com/discuss/3206?type=2&order=4&pos=8&page=2)            
+- 内容很多，很全：[史上最全 Android 面试资料集合 - 简书](http://www.jianshu.com/p/d1efe2f31b6d)
+- 详细基础知识：[面试心得与总结---BAT、网易、蘑菇街_笔试面经_牛客网](http://www.nowcoder.com/discuss/3043?type=2&order=0&pos=4&page=3)
+- 计算机网络:[计算机网络之面试常考_笔试面经_牛客网](http://www.nowcoder.com/discuss/1937?type=2&order=4&pos=50&page=3)
+- 高票答案可以看一下：[学android校招进BAT要到什么水平？ - 知乎](https://www.zhihu.com/question/36654270)
+- 操作系统等相关：[面试笔试重点总结：操作系统、计算机网络、设计模式](http://www.kangry.net/blog/?type=article&article_id=348)
+- [一个五年Android 开发者百度、阿里、聚美、映客的面试心经 - DiyCode](http://www.diycode.cc/topics/165)
+- [Android`s，面试不过也许真的是你不够努力 - DiyCode](http://www.diycode.cc/topics/168)
+
+
+**网易面经**   
+
+- [网易内推android面经_笔试面经_牛客网](http://www.nowcoder.com/discuss/7460?type=0&order=0&pos=39&page=1)
+- [更新····网易android止步二面_笔试面经_牛客网](http://www.nowcoder.com/discuss/7403)
+- [网易内推（android）拿offer_笔试面经_牛客网](http://www.nowcoder.com/discuss/2994?type=0&order=0&pos=7&page=2)
+
 
 
 

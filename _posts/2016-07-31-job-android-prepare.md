@@ -400,7 +400,12 @@ onDraw方法中不要指定耗时任务，也不能执行成千上万次的循�
 ListView优化：采用ViewHolder并避免在getView方法中执行耗时操作；根据列表的滑动状态来绘制任务的执行效率；可以尝试开启硬件加速期来使ListView的滑动更加流畅。                   
 Bitmap优化：根据需要对图片进行采样，主要是通过BitmapFactory.Options来根据需要对图片进行采样，采样主要用到了BitmapFactory.Options的inSampleSize参数。      
 - 线程优化               
-采用线程池，避免程序中存在大量的Thread。线程池可以重用内部的线程，从而避免了线程的创建和销毁所带来的性能开销，同时线程池还能有效的控制线程池的最大并发数，避免大量的线程因互相抢占系统资源从而导致阻塞现象的发生。             
+采用线程池，避免程序中存在大量的Thread。线程池可以重用内部的线程，从而避免了线程的创建和销毁所带来的性能开销，同时线程池还能有效的控制线程池的最大并发数，避免大量的线程因互相抢占系统资源从而导致阻塞现象的发生。
+
+
+**更加详细版本参见**         
+
+[PPT分享：老司机在实际项目中是如何做性能优化的](http://mp.weixin.qq.com/s?__biz=MzIwNjQ1NzQxNA==&mid=2247483791&idx=1&sn=e89655613e19262036b659cba04f54f9&scene=1&srcid=0818vZyVqodLcQspghgIfT5T&from=groupmessage&isappinstalled=0#wechat_redirect)             
 
 **21、onSaveInstanceState()和onRestoreInstanceState()调用的过程和时机**
 
@@ -515,3 +520,35 @@ java class装载的过程
 
 [java和android classloader分析 - donway的日志 - eoe 移动开发者论坛 - Powered by Discuz!](http://www.eoeandroid.com/blog-626979-3065.html)        
 [Android动态加载基础 ClassLoader工作机制 - 中二病也要开发ANDROID - SegmentFault](https://segmentfault.com/a/1190000004062880)
+
+
+**25、Android动画**                                                            
+在Android中开发动效有两套框架可以使用，分别为 Animation 和 Property Animation；    
+
+- 区别一：需要的Anroid API level不一样 Property Animation需要Android API level 11的支持,当然可以使用nineoldandroids.jar进行兼容，而View Animation则是最原始的版本。
+- 区别二：适用范围不一样 Property Animation适用于所有的Object对象，而View Animation则只能应用于View对象。
+- 区别三，实际改变不一样： Animation：改变的是view的绘制位置，而非实际属性； 
+Property Animation：改变的是view的实际属性； 
+如：用两套框架分别对一个button做位移动画，用animation处理之后的点击响应会在原处，而用Property Animation处理后的点击响应会在最终位置处；
+
+
+Animation分为帧动画，补间动画。
+
+**Property Animation**
+
+属性动画，它更改的是对象的实际属性，在View Animation（Tween Animation）中，其改变的是View的绘制效果，真正的View的属性保持不变，比如无论你在对话中如何缩放Button的大小，Button的有效点击区域还是没有应用动画时的区域，其位置与大小都不变。而在Property Animation中，改变的是对象的实际属性，如Button的缩放，Button的位置与大小属性值都改变了。而且Property Animation不止可以应用于View，还可以应用于任何对象。Property Animation只是表示一个值在一段时间内的改变，当值改变时要做什么事情完全是你自己决定的。 在Property Animation中，可以对动画应用以下属性：
+
+
+
+**26、ListView的优化**        
+
+1. ListView需要设置adapter,它的item是通过adapter的方法getView(int position, View convertView, ViewGroup parent)获得的。
+
+2. ListView中只有第一屏的item需要新建，它的引用会被存在RecycleBin对象内，在拖动时后面的item实际上是重从了之前创建的item。
+
+3. 根据上述，ListView在需要显示item时，最开始第一屏时，getView(int position, View convertView, ViewGroup parent )的第二个参数为null,显示第二屏或者回滚显示第一屏时，getView(int position, View convertView, ViewGroup parent )第二个参数是一个原来缓存的item,我们只需要在getView中把它内部数据更新即可。
+
+4. 如果item结构比较复杂，在更新一个已有的item内部数据的时候，查找item内部每一个元素也需要占用不少资源，所以，可以把这些内部元素的引用缓存起来，直接对其赋值，最有效的方法是把这些引用存到对应的item中，比较好的方法是使用setTag()方法。
+
+
+

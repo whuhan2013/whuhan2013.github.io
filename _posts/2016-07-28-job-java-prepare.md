@@ -119,15 +119,44 @@ java.lang.StackOverflowError ------> 不会抛OOM error，但也是比较常见�
 内部静态类不需要有指向外部类的引用。但非静态内部类需要持有对外部类的引用。　　　　　　　　　　
 非静态内部类能够访问外部类的静态和非静态成员。静态类不能访问外部类的非静态成员。他只能访问外部类的静态成员。一个非静态内部类不能脱离外部类实体被创建，一个非静态内部类可以访问外部类的数据和方法，因为他就在外部类里面。　　　　　　　　
 
-**14、22.线程同步的方法：sychronized、lock、reentrantLock等**       
+**14、线程同步的方法：sychronized、lock、reentrantLock等**       
 sychronized是java中最基本同步互斥的手段,可以修饰代码块,方法,类，在修饰代码块的时候需要一个reference对象作为锁的对象，在修饰方法的时候默认是当前对象作为锁的对象，在修饰类时候默认是当前类的Class对象作为锁的对象.           
 ReentrantLock除了synchronized的功能,多了三个高级功能.                           
 等待可中断,在持有锁的线程长时间不释放锁的时候,等待的线程可以选择放弃等待                  
 
 公平锁, 按照申请锁的顺序来一次获得锁称为公平锁.synchronized的是非公平锁,ReentrantLock可以通过构造函数实现公平锁
-绑定多个Condition. 通过多次newCondition可以获得多个Condition对象,可以简单的实现比较复杂的线程同步的功能.通过await(),signal();       
+绑定多个Condition. 通过多次newCondition可以获得多个Condition对象,可以简单的实现比较复杂的线程同步的功能.通过await(),signal();      
 
-**15、锁的等级：方法锁、对象锁、类锁。**　　　　　　　　　　　　
+
+**区别**
+
+使用synchronized代码块，可以只对需要同步的代码进行同步，这样可以大大的提高效率。
+ 
+ 
+使用synchronized 代码块相比方法有两点优势：
+ 
+1、可以只对需要同步的使用
+ 
+2、与wait()/notify()/nitifyAll()一起使用时，比较方便
+
+ 
+ 
+wait() 与notify()/notifyAll()
+ 
+这三个方法都是Object的方法，并不是线程的方法！
+ 
+wait():释放占有的对象锁，线程进入等待池，释放cpu,而其他正在等待的线程即可抢占此锁，获得锁的线程即可运行程序。而sleep()不同的是，线程调用此方法后，会休眠一段时间，休眠期间，会暂时释放cpu，但并不释放对象锁。也就是说，在休眠期间，其他线程依然无法进入此代码内部。休眠结束，线程重新获得cpu,执行代码。wait()和sleep()最大的不同在于wait()会释放对象锁，而sleep()不会！
+
+
+1.Lock能完成几乎所有synchronized的功能，并有一些后者不具备的功能，如锁投票、定时锁等候、可中断锁等候等
+
+2.synchronized 是Java 语言层面的，是内置的关键字；Lock 则是JDK 5中出现的一个包，在使用时，synchronized 同步的代码块可以由JVM自动释放；Lock 需要程序员在finally块中手工释放，如果不释放，可能会引起难以预料的后果（在多线程环境中）。
+
+
+[对比synchronized与java.util.concurrent.locks.Lock 的异同 - 敬诚为之 - 博客频道 - CSDN.NET](http://blog.csdn.net/hintcnuie/article/details/11022049)
+
+**15、锁的等级：方法锁、对象锁、类锁**　　　　　
+　　　　　　　
 方法锁，synchronized标记的方法　　　　　　　　　
 对象锁，在方法上加了synchronized的锁，或者synchronized(this）的代码段　　　　　　　　　
 类锁，在代码中的方法上加了static和synchronized的锁，因为在静态方法中加同步锁会锁住整个类　　　　
