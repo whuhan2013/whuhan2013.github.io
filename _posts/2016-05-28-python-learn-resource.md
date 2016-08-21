@@ -8,13 +8,15 @@ description: python学习资源.
 ---
 
 #### python入门
-	+ [Runestone Interactive](http://interactivepython.org/runestone/default/user/login)
-	+ [如何入门 Python 爬虫?-知乎](https://www.zhihu.com/question/20899988)
+- [Runestone Interactive](http://interactivepython.org/runestone/default/user/login)
+- [如何入门 Python 爬虫?-知乎](https://www.zhihu.com/question/20899988)
+
 
 #### Python爬虫学习系列教程
 - **Python版本：2.7**               
 	+ [Python爬虫学习系列教程](http://cuiqingcai.com/1052.html)        
 	+ [爬虫学习，资源很多](http://cuiqingcai.com/tag/%E7%88%AC%E8%99%AB)
+	+ [如何学习Python爬虫入门篇？ - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21479334?refer=passer)
 
 - **python3网络爬虫教程**
 	+ [python3爬虫教程](http://aljun.me/category/python%E7%88%AC%E8%99%AB)

@@ -551,4 +551,15 @@ Animation分为帧动画，补间动画。
 4. 如果item结构比较复杂，在更新一个已有的item内部数据的时候，查找item内部每一个元素也需要占用不少资源，所以，可以把这些内部元素的引用缓存起来，直接对其赋值，最有效的方法是把这些引用存到对应的item中，比较好的方法是使用setTag()方法。
 
 
+**27、invalidate与postvalidate区别**   
+
+Android中实现view的更新有两组方法，一组是invalidate，另一组是postInvalidate，其中前者是在UI线程自身中使用，而后者在非UI线程中使用。 
+
+Android提供了Invalidate方法实现界面刷新，但是Invalidate不能直接在线程中调用，因为他是违背了单线程模型：Android UI操作并不是线程安全的，并且这些操作必须在UI线程中调用。 
+
+参考：[android中Invalidate和postInvalidate的区别 - tt_mc - 博客园](http://www.cnblogs.com/tt_mc/archive/2012/01/30/2332023.html)
+
+[为什么说android UI操作不是线程安全的 - LVXIANGAN的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/lvxiangan/article/details/39504145)
+
+
 

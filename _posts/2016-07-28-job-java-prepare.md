@@ -53,6 +53,21 @@ clone、equals、hashCode、getClass、wait、notify、notifyAll、toString
 也就是说，如果集合中现在已经有1000个元素，那么第1001个元素加入集合时，它就要调用1000次equals方法。这显然会大大降低效率。           
 于是，Java采用了哈希表的原理。哈希（Hash）实际上是个人名，由于他提出一哈希算法的概念，所以就以他的名字命名了。 
 
+
+**hashcode方法与equal方法的区别**      
+
+1、默认情况（没有覆盖equals方法）下equals方法都是调用Object类的equals方法，而Object的equals方法主要用于判断对象的内存地址引用是不是同一个地址（是不是同一个对象）。
+
+2 、要是类中覆盖了equals方法，那么就要根据具体的代码来确定equals方法的作用了，覆盖后一般都是通过对象的内容是否相等来判断对象是否相等。
+
+hashCode是根类Obeject中的方法。
+ 
+默认情况下，Object中的hashCode() 返回对象的32位jvm内存地址。也就是说如果对象不重写该方法，则返回相应对象的32为JVM内存地址。
+
+
+[java中的==、equals和hashCode以及hashCode生成_百度经验](http://jingyan.baidu.com/article/ff41162582507512e5823763.html)
+
+
 参考：[关于hashCode方法的作用 - huxin1的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/huxin1/article/details/6325061)                    
 
 **5、ArrayList、LinkedList、Vector的区别**       
@@ -222,5 +237,50 @@ jni一般有以下一些应用场景
 3.需要使用大内存，远远超过jvm所能分配的内存，如：进程内Cache            
 4.调用C或者操作系统提供的服务，如：java调用搜索服务，其中搜索是由C/C++实现的，不过这个一般可以设计成更加通用的方式，比如soa的方式                                                                                 
 所有这些场景的前提是牺牲了java代码的可移植性，不同的os，甚至版本都需要写不同版本的native实现            
+
+
+
+**25、九种基本数据类型与大小**        
+
+boolean - - - Boolean                   
+char 16-bit Unicode 0 Unicode 2^16-1 Character           
+byte 8-bit -128 +127 Byte                
+short 16-bit -2^15 +2^15+1 Short               
+int 32-bit -2^31 +2^15+1 Integer               
+long 64-bit -2^63 +2^63+1 Long             
+float 32-bit IEEE754 IEEE754 Float              
+double 64-bit IEEE754 IEEE754 Double                
+void - - - Void               
+
+
+
+**26、Java 注解**
+
+注解是 Java 5 的一个新特性。注解是插入你代码中的一种注释或者说是一种元数据（meta data）。这些注解信息可以在编译期使用预编译工具进行处理（pre-compiler tools），也可以在运行期使用 Java 反射机制进行处理。
+
+能够添加到 Java 源代码的语法元数据。类、方法、变量、参数、包都可以被注解，可用来将信息元数据与程序元素进行关联。Annotation 中文常译为“注解”
+
+
+**作用**
+
+a. 标记，用于告诉编译器一些信息               
+b. 编译时动态处理，如动态生成代码                 
+c. 运行时动态处理，如得到注解信息           
+
+这里的三个作用实际对应着后面自定义 Annotation 时说的 @Retention 三种值分别表示的 Annotation
+
+
+**Annotation 分类**
+
+1 标准 Annotation                       
+包括 Override, Deprecated, SuppressWarnings，标准 Annotation 是指 Java 自带的几个 Annotation，上面三个分别表示重写函数，不鼓励使用(有更好方式、使用有风险或已不在维护)，忽略某项 Warning
+
+2 元 Annotation                    
+@Retention, @Target, @Inherited, @Documented，元 Annotation 是指用来定义 Annotation 的 Annotation，在后面 Annotation 自定义部分会详细介绍含义
+
+3 自定义 Annotation                 
+自定义 Annotation 表示自己根据需要定义的 Annotation，定义时需要用到上面的元 Annotation
+这里只是一种分类而已，也可以根据作用域分为源码时、编译时、运行时 Annotation，后面在自定义 Annotation 时会具体介绍
+
 
 

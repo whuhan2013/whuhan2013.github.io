@@ -640,6 +640,10 @@ int main()
 ```
 
 
+**分析算法时间复杂度**          
+[快速排序算法的时间复杂度分析[详解Master method] - SolidMango - 博客园](http://www.cnblogs.com/pugang/archive/2012/07/02/2573075.html)
+
+
 ### 各种排序算法性能比较  
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/android/p2.png)
