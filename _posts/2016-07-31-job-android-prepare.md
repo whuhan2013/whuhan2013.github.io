@@ -591,6 +591,134 @@ onMeasure的作用是遍历所有子View，对其大小进行测量。
 **参考：**[LinearLayout与RelativeLayout异同深入探讨 - - 博客频道 - CSDN.NET](http://blog.csdn.net/oShunz/article/details/50425844)
 
 
+**29、RXJava与EventBus的区别与使用场景**        
+
+EventBus比较适合仅仅当做组件间的通讯工具使用，主要用来传递消息。使用EventBus可以避免搞出一大推的interface，仅仅是为了实现组件间的通讯，而不得不去实现那一推的接口，eventbus基于反射
+
+RxJava,函数响应式编程,基于观察者模式，使用的场景确实异步数据流的处理,异步操作很关键的一点是程序的简洁性，因为在调度过程比较复杂的情况下，异步代码经常会既难写也难被读懂。 Android 创造的 AsyncTask 和Handler ，其实都是为了让异步代码更加简洁。RxJava 的优势也是简洁，但它的简洁的与众不同之处在于，随着程序逻辑变得越来越复杂，它依然能够保持简洁。
 
 
 
+**Fragment与Activity，Fragment消息传递，Fragment切换状态保存**          
+
+**Fragment间的通信**
+
+现实中我们经常想要一个Fragment跟另一个Fragment进行通信，例如，要基于一个用户事件来改变内容。所有的Fragment间的通信都是通过跟关联的Activity来完成的。另个Fragment不应该直接通信。也就是说Fragment间不直接通信，通过Activity转一下，按java常规，转一下多是使用Interface实现的。
+
+定义Interface
+
+为了让Fragment跟它的Activity通信，你可以在Fragment类中定义一个接口，并在它所属的Activity中实现该接口。Fragment在它的onAttach()方法执行期间捕获该接口的实现，然后就可以调用接口方法，以便跟Activity通信。
+
+```
+public class HeadlinesFragment extends ListFragment {
+    OnHeadlineSelectedListener mCallback;
+
+    // Container Activity must implement this interface
+    public interface OnHeadlineSelectedListener {
+        public void onArticleSelected(int position);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnHeadlineSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+    }
+    
+    ...
+}
+
+@Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        // Send the event to the host activity
+        mCallback.onArticleSelected(position);
+    }
+```
+
+
+把消息传递给另一个Fragment
+通过使用findFragmentById()方法捕获Fragment实例，宿主Activity可以把消息发送给该Fragment，然后直接调用该Fragment的公共方法。
+例如，上面的示例，Activty通过Interface的实现方法，传递数据到另一个Fragment。
+
+
+```
+public static class MainActivity extends Activity
+        implements HeadlinesFragment.OnHeadlineSelectedListener{
+    ...
+
+    public void onArticleSelected(int position) {
+        // The user selected the headline of an article from the HeadlinesFragment
+        // Do something here to display that article
+
+        ArticleFragment articleFrag = (ArticleFragment)
+                getSupportFragmentManager().findFragmentById(R.id.article_fragment);
+
+        if (articleFrag != null) {
+            // If article frag is available, we're in two-pane layout...
+
+            // Call a method in the ArticleFragment to update its content
+            articleFrag.updateArticleView(position);
+        } else {
+            // Otherwise, we're in the one-pane layout and must swap frags...
+
+            // Create fragment and give it an argument for the selected article
+            ArticleFragment newFragment = new ArticleFragment();
+            Bundle args = new Bundle();
+            args.putInt(ArticleFragment.ARG_POSITION, position);
+            newFragment.setArguments(args);
+        
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack so the user can navigate back
+            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.addToBackStack(null);
+
+            // Commit the transaction
+            transaction.commit();
+        }
+    }
+}
+```
+
+**参考链接**        
+[Android UI开发第二十六篇——Fragment间的通信 - 张兴业的博客 - 博客频道 - CSDN.NET](http://blog.csdn.net/xyz_lmn/article/details/8631195)
+
+
+**Fragment切换时如何保存状态**
+
+- 如果用的Fragment嵌套的是ViewPager的话就简单点，直接mViewpager.setOffscreenPageLimit(4);
+
+解决方法二：解决方法，在fragment onCreateView 里缓存View: 
+
+```
+private View rootView;// 缓存Fragment view
+
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState)
+  {
+    Log.i(TAG, "onCreateView");
+
+    if (rootView == null)
+    {
+      rootView = inflater.inflate(R.layout.fragment_1, null);
+    }
+    // 缓存的rootView需要判断是否已经被加过parent，如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
+    ViewGroup parent = (ViewGroup) rootView.getParent();
+    if (parent != null)
+    {
+      parent.removeView(rootView);
+    }
+    return rootView;
+  }
+```
+
+参考：[关于fragment的缓存 - 一站到底s的博客 - 博客频道 - CSDN.NET](http://blog.csdn.net/yanxiangxue/article/details/52043328)
