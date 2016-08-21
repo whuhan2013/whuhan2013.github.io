@@ -563,3 +563,34 @@ Android提供了Invalidate方法实现界面刷新，但是Invalidate不能直�
 
 
 
+**28、Relativelayout与LinearLayout性能，绘制上的区别**            
+
+使用 LinearLayout 容易产生多层嵌套的布局，这会降低布局的性能。而RelativeLayout从使用上来讲，通常层级结构都比较扁平，使用LinearLayout的情况可以用一个RelativeLayout 来替换，以降低布局的层级。另外，RelativeLayout的使用要更灵活一些，作为根布局更容易满足各种情况。这应该就是Google在根布局中使用RelativeLayout的原因。
+
+Relativelayout性能更好，更灵活。因为使用LinearLayout 容易产生多层嵌套的布局结构，而因为Relativelayout的灵活性的优点，可以降低布局的嵌套层级，优化性能，因此当嵌套多时推荐使用RelativeLayout。
+
+RelativeLayout与LinearLayout都继承于ViewGroup，而ViewGroup实现了android.view.ViewParent和android.view.ViewManager接口，赋予了其装载控件和管理子控件的能力。例如ViewParent中的requestLayout()与ViewManager中的addView(View view, ViewGroup.LayoutParams params)
+
+ViewGroup的作用是组织和管理它的子View，即对子View进行布局，让子View绘制自身并对它们的大小、边距进行约束等。ViewGroup管理View的基本过程是onMeasure()->onLayout()，RelativeLayout与LinearLayout对子View绘制与布局的区别就大部分就在这两个函数中
+
+
+LinearLayout的onMeasure：                  
+onMeasure的作用是遍历所有子View，对其大小进行测量。            
+
+接下来是RelativeLayout               
+与LinearLayout相同，RelativeLayout同样继承于ViewGroup，同样需要经过onMeasure与onLayout。
+
+首先是onMeasure：                    
+当第一次执行onMeasure或者执行requestLayout后，需要调用sortChildren方法，根据添加顺序对所有的子View进行排序，横着一次(mSortedHorizontalChildren)，竖着一次（mSortedVerticalChildren），然后对两个序列进行检查，通过依赖图静态类DependencyGraph中的getSortedViews方法根据依赖关系进行排序。          
+
+
+因为对于LinearLayout，他在onMeasure方法中对子View是遍历测量的，所以在层级关系比较复杂，尤其是LinearLayout嵌套的页面，底层子View就会被测量好多次！遍历测绘是很耗费性能的一件事。
+如果你没看过源码，那么我想你在应用LinearLayout和RelativeLayout的时候总会遇到这样一种情况，RelativeLayout在布局中上面的子View无法引用下面的子View，而LinearLayout可以，其实，就是这个道理。
+
+
+**参考：**[LinearLayout与RelativeLayout异同深入探讨 - - 博客频道 - CSDN.NET](http://blog.csdn.net/oShunz/article/details/50425844)
+
+
+
+
+
