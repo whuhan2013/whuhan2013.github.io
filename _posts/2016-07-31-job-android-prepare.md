@@ -588,7 +588,21 @@ onMeasure的作用是遍历所有子View，对其大小进行测量。
 如果你没看过源码，那么我想你在应用LinearLayout和RelativeLayout的时候总会遇到这样一种情况，RelativeLayout在布局中上面的子View无法引用下面的子View，而LinearLayout可以，其实，就是这个道理。
 
 
-**参考：**[LinearLayout与RelativeLayout异同深入探讨 - - 博客频道 - CSDN.NET](http://blog.csdn.net/oShunz/article/details/50425844)
+**参考：**[LinearLayout与RelativeLayout异同深入探讨 - - 博客频道 - CSDN.NET](http://blog.csdn.net/oShunz/article/details/50425844)    
+
+
+**总结**        
+从源码中我们似乎能看出，我们先前的测试结果中RelativeLayout不如LinearLayout快的根本原因是RelativeLayout需要对其子View进行两次measure过程。而LinearLayout则只需一次measure过程，所以显然会快于RelativeLayout，但是如果LinearLayout中有weight属性，则也需要进行两次measure，但即便如此，应该仍然会比RelativeLayout的情况好一点。
+
+**结论**            
+1.RelativeLayout会让子View调用2次onMeasure，LinearLayout 在有weight时，也会调用子View2次onMeasure       
+2.RelativeLayout的子View如果高度和RelativeLayout不同，则会引发效率问题，当子View很复杂时，这个问题会更加严重。如果可以，尽量使用padding代替margin。                 
+3.在不影响层级深度的情况下,使用LinearLayout和FrameLayout而不是RelativeLayout。       
+
+最后再思考一下文章开头那个矛盾的问题，为什么Google给开发者默认新建了个RelativeLayout，而自己却在DecorView中用了个LinearLayout。因为DecorView的层级深度是已知而且固定的，上面一个标题栏，下面一个内容栏。采用RelativeLayout并不会降低层级深度，所以此时在根节点上用LinearLayout是效率最高的。而之所以给开发者默认新建了个RelativeLayout是希望开发者能采用尽量少的View层级来表达布局以实现性能最优，因为复杂的View嵌套对性能的影响会更大一些。
+
+[Android中RelativeLayout和LinearLayout性能分析 - 简书](http://www.jianshu.com/p/8a7d059da746)
+
 
 
 **29、RXJava与EventBus的区别与使用场景**        
