@@ -245,16 +245,21 @@ jni一般有以下一些应用场景
 
 **25、九种基本数据类型与大小**        
 
-boolean - - - Boolean                   
-char 16-bit Unicode 0 Unicode 2^16-1 Character           
-byte 8-bit -128 +127 Byte                
-short 16-bit -2^15 +2^15+1 Short               
-int 32-bit -2^31 +2^15+1 Integer               
-long 64-bit -2^63 +2^63+1 Long             
-float 32-bit IEEE754 IEEE754 Float              
-double 64-bit IEEE754 IEEE754 Double                
-void - - - Void               
+int-char-long各占多少字节数
 
+byte 位数 8 字节数 1
+
+short 16 2
+
+int 32 4
+
+long 64 8
+
+float 32 4
+
+double 64 8
+
+char 16 2
 
 
 **26、Java 注解**
@@ -310,6 +315,12 @@ Java 提供了很丰富的 API 但没有为停止线程提供 API。JDK 1.0 本�
 **有三个线程 T1，T2，T3，怎么确保它们按顺序执行？**
 
 在多线程中有多种方法让线程按特定顺序执行，你可以用线程类的 join ()方法在一个线程中启动另一个线程，另外一个线程完成该线程继续执行。为了确保三个线程的顺序你应该先启动最后一个(T3 调用 T2，T2 调用 T1)，这样 T1 就会先完成而 T3 最后完成。
+
+**java之yield(),sleep(),wait()区别详解-备忘笔记**     
+
+Thread.yield()方法作用是：暂停当前正在执行的线程对象，并执行其他线程。
+
+
 
 ### 下面的来自Java研发方向如何准备BAT技术面试答案
 

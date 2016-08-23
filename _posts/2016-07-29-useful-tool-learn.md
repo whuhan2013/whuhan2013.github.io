@@ -13,4 +13,5 @@ description: 实用工具总结
 - 强大的搜索聚合网站[快搜 — 搜索快人一步](http://so.chongbuluo.com/)            
 - 利用hosts文件科学上网：[2016 Google hosts 持续更新](https://laod.org/hosts/2016-google-hosts.html)        
 - 科学上网工具latern,速度较快：[http://lanterncn.cn/](http://lanterncn.cn/)
+- 科学上网，搭建服务器：[Docker实战(1)——使用Docker快速搭建Shadowsocks服务器 - 简书](http://www.jianshu.com/p/8535c9ddedc1)
 - Android尺寸，手机，网络相关工具类[https://github.com/Blankj/AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)

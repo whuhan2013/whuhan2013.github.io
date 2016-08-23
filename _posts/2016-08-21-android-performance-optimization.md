@@ -245,3 +245,108 @@ Hierarchy Viewer在哪？
 
 **参考链接**            
 [Android UI性能优化实战 识别绘制中的性能问题 - Hongyang - 博客频道 - CSDN.NET](http://blog.csdn.net/lmj623565791/article/details/45556391)
+
+
+### 更新    
+
+#### 性能问题常见原因
+
+性能问题一般归结为三类：
+
+1. UI卡顿和稳定性:这类问题用户可直接感知，最为重要；
+
+2. 内存问题：内存问题主要表现为内存泄露，或者内存使用不当导致的内存抖动。如果存在内存泄露，应用会不断消耗内存，易导致频繁gc使系统出现卡顿，或者出现OOM报错；内存抖动也会导致UI卡顿。
+
+3. 耗电问题：会影响续航，表现为不必要的自启动，不恰当持锁导致系统无法正常休眠，系统休眠后频繁唤醒系统等；
+
+#### UI卡顿常见原因和分析方法
+
+下面分别介绍出现这些问题的常见原因以及分析这些问题的一般步骤。
+
+1.卡顿常见原因
+
+1）人为在UI线程中做轻微耗时操作，导致UI线程卡顿；
+
+2） 布局Layout过于复杂，无法在16ms内完成渲染；
+
+3）同一时间动画执行的次数过多，导致CPU或GPU负载过重；
+
+4） View过度绘制，导致某些像素在同一帧时间内被绘制多次，从而使CPU或GPU负载过重；
+
+5） View频繁的触发measure、layout，导致measure、layout累计耗时过多及整个View频繁的重新渲染；
+
+6） 内存频繁触发GC过多（同一帧中频繁创建内存），导致暂时阻塞渲染操作；
+
+7） 冗余资源及逻辑等导致加载和执行缓慢；
+
+8）工作线程优先级未设置为
+
+Process.THREAD_PRIORITY_BACKGROUND
+导致后台线程抢占UI线程cpu时间片，阻塞渲染操作；
+
+9） ANR；
+
+#### 卡顿分析解决的一般步骤
+
+**1）解决过度绘制问题**
+
+>在设置->开发者选项->调试GPU过度绘制中打开调试，看对应界面是否有过度绘制，如果有先解决掉：
+
+![](http://blog.tingyun.com/dynamic/transitionResourcePath?key=image/forumImage20160307112725104.png&filename=123456.png)
+
+**2) 检查是否有主线程做了耗时操作：**
+
+ 严苛模式（StrictMode），是Android提供的一种运行时检测机制，用于检测代码运行时的一些不规范的操作，最常见的场景是用于发现主线程的IO操作。应用程序可以利用StrictMode尽可能的发现一些编码的疏漏。
+
+- 开启 StrictMode
+
+- 对于应用程序而言，Android 提供了一个最佳使用实践：尽可能早的在
+
+android.app.Application 或 android.app.Activity 的生命周期使能 StrictMode，onCreate()方法就是一个最佳的时机，越早开启就能在更多的代码执行路径上发现违规操作。
+
+- 监控代码    
+
+```
+public void onCreate() {
+ if (DEVELOPER_MODE) {
+ StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+ .detectAll() .penaltyLog() .build());
+     StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+ .detectAll() .penaltyLog() .build());
+ }
+     super.onCreate();
+}
+```
+
+如果主线程有网络或磁盘读写等操作，在logcat中会有"D/StrictMode"tag的日志输出，从而定位到耗时操作的代码。 
+
+3）如果主线程无耗时操作，还存在卡顿，有很大可能是必须在UI线程操作的一些逻辑有问题，比如控件measure、layout耗时过多等，此时可通过Traceview以及systrace来进行分析。
+
+4）Traceview：Traceview主要用做热点分析，找出最需要优化的点。
+
+打开DDMS然后选择一个进程，接着点击上面的“Start Method Profiling”按钮（红色小点变为黑色即开始运行），然后操作我们的卡顿UI,然后点击"Stop Method Profiling",会打开如下界面：
+
+![](http://blog.tingyun.com/dynamic/transitionResourcePath?key=image/forumImage20160307112900105.png&filename=111.png)
+
+
+#### 内存性能分析优化         
+
+导出内存文件，利用MAT分析        
+
+
+#### 耗电量优化建议
+
+电量优化主要是注意尽量不要影响手机进入休眠，也就是正确申请和释放WakeLock，另外就是不要频繁唤醒手机，主要就是正确使用Alarm。
+
+#### 一些好的代码实践
+
+1. 节制地使用Service
+
+2. 当界面不可见时释放内存
+
+3. 当内存紧张时释放内存
+
+4. 避免在Bitmap上浪费内存
+
+
+[Android客户端性能优化（魅族资深工程师毫无保留奉献）](http://blog.tingyun.com/web/article/detail/155)

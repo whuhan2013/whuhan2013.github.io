@@ -613,7 +613,7 @@ RxJava,函数响应式编程,基于观察者模式，使用的场景确实异步
 
 
 
-**Fragment与Activity，Fragment消息传递，Fragment切换状态保存**          
+**30、Fragment与Activity，Fragment消息传递，Fragment切换状态保存**          
 
 **Fragment间的通信**
 
@@ -736,3 +736,12 @@ private View rootView;// 缓存Fragment view
 ```
 
 参考：[关于fragment的缓存 - 一站到底s的博客 - 博客频道 - CSDN.NET](http://blog.csdn.net/yanxiangxue/article/details/52043328)
+
+- 情景一：stack中只有一个Fragment的时候旋转屏幕               
+在onSaveInstanceState中保存即可        
+- 情景二：Fragment从回退栈的返回        
+我们只能手动的在onDestroyView中保存这些数据。              
+- 情景三：在回退栈中有一个以上的Fragment的时候旋转两次           
+当你旋转一次屏幕，onSaveInstanceState被调用，UI的状态会如预期的那样被保存，，但是当你再一次旋转屏幕，上面的代码就可能会崩溃。原因是虽然onSaveInstanceState被调用了，但是当你旋转屏幕，回退栈中Fragment的view将会销毁，同时在返回之前不会重建。这就导致了当你再一次旋转屏幕，没有可以保存数据的view。saveState()将会引用到一个不存在的view而导致空指针异常NullPointerException，因此需要先检查view是否存在。如果存在保存其状态数据，将Argument中的数据再次保存一遍，或者干脆啥也不做，因为第一次已经保存了。
+
+[Android中保存和恢复Fragment状态的最好方法](http://www.luchenglong.com/2016/07/06/20160706/)
