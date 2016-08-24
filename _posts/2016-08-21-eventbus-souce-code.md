@@ -497,3 +497,59 @@ Async则会动态控制并发。
 [Android EventBus源码解析 带你深入理解EventBus - Hongyang - 博客频道 - CSDN.NET](http://blog.csdn.net/lmj623565791/article/details/40920453)
 
 [EventBus源码解析](http://a.codekk.com/detail/Android/Trinea/EventBus%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90)
+
+
+### EventBus3.0源码解析           
+
+![](http://img.blog.csdn.net/20160710021031385)
+
+可以看到，发布者(Publisher)使用post()方法将Event发送到Event Bus，而后Event Bus自动将Event发送到多个订阅者(Subcriber)。这里需要注意两个地方：
+
+（1）一个发布者可以对应多个订阅者。
+
+（2）3.0以前订阅者的订阅方法为onEvent()、onEventMainThread()、onEventBackgroundThread()和onEventAsync()。在Event Bus3.0之后统一采用注解@Subscribe的形式
+
+
+注解标签Subscribe
+
+对注解不了解的同学可以看下这篇[博客](http://www.cnblogs.com/yydcdut/p/4646454.html)。
+
+```
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD})
+public @interface Subscribe {
+    ThreadMode threadMode() default ThreadMode.POSTING;
+
+    /**
+     * If true, delivers the most recent sticky event (posted with
+     * {@link EventBus#postSticky(Object)}) to this subscriber (if event available).
+     */
+    boolean sticky() default false;
+
+    /** Subscriber priority to influence the order of event delivery.
+     * Within the same delivery thread ({@link ThreadMode}), higher priority subscribers will receive events before
+     * others with a lower priority. The default priority is 0. Note: the priority does *NOT* affect the order of
+     * delivery among subscribers with different {@link ThreadMode}s! */
+    int priority() default 0;
+}
+
+public enum ThreadMode {
+
+    POSTING,
+
+    MAIN,
+
+    BACKGROUND,
+
+    ASYNC
+}
+```
+
+
+注解Subscribe在运行时解析，且只能加在METHOD上。其中有三个方法，threadMode()返回类型ThreadMode为枚举类型，默认值为POSTING，sticky()默认返回false,priority()默认返回0。
+
+
+关于register与post的详细过程可以参见：
+
+[Android EventBus3.0使用及源码解析 ](http://blog.csdn.net/qq_17250009/article/details/51872731)

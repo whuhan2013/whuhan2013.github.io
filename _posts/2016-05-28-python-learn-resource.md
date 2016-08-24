@@ -19,6 +19,7 @@ description: python学习资源.
 	+ [如何学习Python爬虫入门篇？ - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21479334?refer=passer)
 
 - **python3网络爬虫教程**
+	+ [sunhaiyu - 简书](http://www.jianshu.com/users/4943cb2c6ea4/latest_articles)
 	+ [python3爬虫教程](http://aljun.me/category/python%E7%88%AC%E8%99%AB)
 	+ [Python 3 网络爬虫学习建议？ - 知乎](https://www.zhihu.com/question/41277528)
 	+ [python3网络爬虫多个例子](http://lovenight.github.io/categories/%E7%BC%96%E7%A8%8B/Python/)
