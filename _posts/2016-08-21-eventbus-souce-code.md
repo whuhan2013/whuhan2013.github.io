@@ -553,3 +553,10 @@ public enum ThreadMode {
 关于register与post的详细过程可以参见：
 
 [Android EventBus3.0使用及源码解析 ](http://blog.csdn.net/qq_17250009/article/details/51872731)
+
+[EventBus 3.0 源码分析 - 简书](http://www.jianshu.com/p/f057c460c77e)
+
+#### 设计模式              
+观察者模式                
+观察者模式观察者模式是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己。EventBus并不是标准的观察者模式的实现,但是它的整体就是一个发布/订阅框架,也拥有观察者模式的优点,比如:发布者和订阅者的解耦.
+

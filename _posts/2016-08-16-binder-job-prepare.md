@@ -161,6 +161,34 @@ Binder驱动也会为这些服务分配句柄（大于0），同时会将这些�
 5）Client获取句柄之后，就会再加上想要的服务，还有这个句柄，再发送给Binder驱动，Binder驱动就会找到对应的句柄，然后。。。。
 
 
+**详细解释**
+
+1）Binder是CS架构的，有对应的协议， 其中定义了众多的命令和数据结构来在不同的进程间传递数据。           
+2）在不同的进程间传递数据，是通过驱动的ioctl命令来对数据进行读写操作，也就是说，很多数据是在驱动中交互的。
+但是，问题又来了，那到底整个过程是怎么样的呢，能不能具体点呢？                  
+
+面试官好像要发火了，嗯，仔细再想想，怎么讲好？
+
+Server和Client，那么肯定是先要有Server，才会有所谓的Client来请求的。
+不对，之前应该先有ServiceManager的。
+对，但是ServiceManager也是一个Server。
+
+事情应该是这样的：
+
+1）Server启动了，他要创建一个Binder实体，它的句柄是0，比如BpBinder(0)，当设置了BINDER_SET_CONTEXT_MGR，驱动收到这个命令，它就知道是要将当前进程设置为ServiceManager，于是它就会当前这个Binder实体创建一个Binder节点（BinderNode），它在这里记录了 0 -> ServiceManager这样的mapping。
+
+2）另一个Server启动了，它也会创建一个Binder实体，名字叫 XXXManagerService吧，但是它的句柄就不会是0了，是什么呢？不知道，当它这个Binder实体放到驱动中，驱动同时也会为其创建一个Binder节点，并且为其随机创建一个句柄，比如就叫 1 吧。       
+于是我们就知道在驱动中, 1 -> XXXManagerService的引用。
+它进入驱动是为了寻找句柄0，去注册自己，也就是addService。
+当然，驱动就会找到句柄0，发现其对应的是ServiceManager，就会将对应的数据，让ServiceManager来进行处理，这当然利用的就是内核空间的内存了。
+
+在ServiceManager中，有一个服务列表svclist，保存了不同的服务名称对应的句柄，比如ServiceManager就会在自己的空间中保存这样一个对应  1-  > “XXXManagerService”。
+OK，到这里，XXXManagerService就将自己注册到ServiceManager中了。           
+
+3）有一个Client也启动了，它要找XXXManagerService请求点资源，但是它只知道XXXManagerService的名字，而不知道其具体的句柄，不同进程之间，咫尺就是天涯啊。但是它知道有个叫ServiceManager的东西，它可能知道XXXManagerService在哪里，刚好，它知道它句柄就是0，于是它就去驱动中找一个句柄为0的，找到了，跟他通信，说它要找XXXManagerService，也就是findService。
+
+刚好XXXManagerService注册了，ServiceManager就将其句柄传给了Client，现在Client终于知道XXXManagerService的地址（句柄）了，于是它就又重新包装好数据，这次的句柄就不是0了，而是 1 了，又一头扎进驱动了，继续做该做的事情。
+
 **参考链接**      
 
 [跟面试官讲Binder（零） - 持剑 - 博客频道 - CSDN.NET](http://blog.csdn.net/linmiansheng/article/details/37918333)

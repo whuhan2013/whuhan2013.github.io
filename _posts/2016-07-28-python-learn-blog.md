@@ -9,6 +9,7 @@ description: python相关博客
 
 这里是学习过程中碰到的比较好的python相关博客与资源，记录下来，方便将来学习。          
 
+- 新手入门，练手项目:[有哪些适合新手练手的Python项目？ - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/22164270)
 - 非常非常棒的一系列　python 机器学习（Machine Learning）实践入门教程:[python Machine Learning](http://www.johnwittenauer.net/machine-learning-exercises-in-python-part-1/)
 - Show me your code这个项目特别适合入门：[Python初学者（零基础学习Python、Python入门）书籍、视频、资料、社区推荐](https://github.com/Yixiaohan/codeparkshare)
 - 从入门到精通，非常详实:[零基础学习Python数据分析 - 聊聊数据统计分析 - 知乎专栏](https://zhuanlan.zhihu.com/p/21799170)

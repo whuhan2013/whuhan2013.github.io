@@ -8,6 +8,7 @@ description: 路人甲学编程
 ---   
 
 
+- [有哪些适合新手练手的Python项目？ - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/22164270)
 - [Linux初学者(学习资料) - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21723250)
 - [如何学习Python爬虫[入门篇]？ - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21479334?refer=passer)
 - [Java工程师笔试题整理[校招篇] - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21513402?refer=passer)
