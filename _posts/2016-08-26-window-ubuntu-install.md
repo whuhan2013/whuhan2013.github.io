@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 安装Ubuntu双系统总结
+title: 双系统安装总结
 date: 2016-8-26
 categories: blog
 tags: [linux]
