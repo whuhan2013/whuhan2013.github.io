@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 双系统安装总结
+title: python双系统
 date: 2016-8-26
 categories: blog
-tags: [linux]
-description:linux 
+tags: [python]
+description: 
 ---
 
 ### 工具/原料   
