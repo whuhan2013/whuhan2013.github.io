@@ -1,9 +1,9 @@
 ---
 layout: post
-title: python双系统
+title: 双系统安装过程总结
 date: 2016-8-26
 categories: blog
-tags: [python]
+tags: [linux]
 description: 
 ---
 
