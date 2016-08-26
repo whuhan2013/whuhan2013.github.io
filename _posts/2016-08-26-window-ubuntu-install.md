@@ -51,6 +51,12 @@ Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsU
 
 参考：[小技巧教你解决此windows副本不是正版的问题_百度经验](http://jingyan.baidu.com/article/7c6fb42869452380642c9027.html)
 
+### 软件安装及其他       
+
+**1、pycharm安装**   
+
+
+
 **效果如下**        
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/android/p4.png)
