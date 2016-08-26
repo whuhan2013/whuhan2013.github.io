@@ -1,6 +1,6 @@
---
+---
 layout: post
-title: 双系统安装过程总结
+title: 双系统安装详解
 date: 2016-8-26
 categories: blog
 tags: [linux]
@@ -55,7 +55,7 @@ Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsU
 
 **1、pycharm安装**               
 要先安装JDK,速度挺慢的             
-详细参见：[pycharm安装](http://www.jianshu.com/p/bf05fb3a4709)           
+详细参见：[pycharm安装](http://blog.csdn.net/qq_33880788/article/details/51479564)           
   
 
 **2、主文件夹改为中文**          
