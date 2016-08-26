@@ -1,17 +1,18 @@
 ---
 layout: post
-title: Windows7下安装Ubuntu16.04双系统
+title: Windows7下安装Ubuntu16双系统
 date: 2016-8-26
 categories: blog
 tags: [linux]
 description:linux 
 ---
 
-### 工具/原料     
-UltraISO         
-Ubuntu 16.04 LTS安装镜像         
-2G以上U盘 1个       
-easyBCD           
+### 工具/原料   
+
+- UltraISO         
+- Ubuntu 16.04 LTS安装镜像         
+- 2G以上U盘 1个       
+- easyBCD           
 
 ### 准备工作
 
