@@ -1,4 +1,3 @@
--
 --
 layout: post
 title: 双系统安装过程总结
@@ -61,7 +60,7 @@ Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsU
 
 **2、主文件夹改为中文**          
 
-详细参考：[](http://blog.csdn.net/l0605020112/article/details/20285239)
+详细参考：[主文件夹改为中文](http://blog.csdn.net/l0605020112/article/details/20285239)
 
 **3、Ubuntu使用Git**       
 
