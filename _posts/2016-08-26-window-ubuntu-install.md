@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Windows7下安装Ubuntu16双系统
+title: Windows下安装Ubuntu双系统
 date: 2016-8-26
 categories: blog
 tags: [linux]
