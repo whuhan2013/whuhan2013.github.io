@@ -1,4 +1,5 @@
----
+-
+--
 layout: post
 title: 双系统安装过程总结
 date: 2016-8-26
@@ -53,7 +54,29 @@ Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsU
 
 ### 软件安装及其他       
 
-**1、pycharm安装**   
+**1、pycharm安装**               
+要先安装JDK,速度挺慢的             
+详细参见：[pycharm安装](http://www.jianshu.com/p/bf05fb3a4709)           
+  
+
+**2、主文件夹改为中文**          
+
+详细参考：[](http://blog.csdn.net/l0605020112/article/details/20285239)
+
+**3、Ubuntu使用Git**       
+
+ubuntu中使用Git与显示隐藏文件，可参见：               
+[Ubuntu中使用Git](http://www.cnblogs.com/fanyong/p/3424501.html)            
+[显示隐藏文件](http://jingyan.baidu.com/album/6079ad0e84cd9728ff86dbc1.html)              
+ 
+
+**4、sublime中无法输入中文**        
+
+这个参照了很多方法始终无法解决，只能待以后了          
+
+[解决Ubuntu下Sublime Text 3无法输入中文](http://www.jianshu.com/p/bf05fb3a4709)
+
+[无法输入中文解决方案](http://blog.csdn.net/bleachswh/article/details/51674552)           
 
 
 
