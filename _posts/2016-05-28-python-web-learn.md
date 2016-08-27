@@ -7,6 +7,10 @@ tags: [python]
 description: python Web学习资源.
 ---
 
+### python web学习资源       
+
+- [有哪些python+flask的搭建的博客或论坛开源推荐？ - 知乎](https://www.zhihu.com/question/40746923#answer-43141822)
+
 ### Django教程     
 - [Django 开发内容管理系统 - Django 教程 - 自强学堂](http://www.ziqiangxuetang.com/django/django-cms-develop.html)
 - [Django简介 Django搭建简易博客教程](https://andrew-liu.gitbooks.io/django-blog/content/django_introduction.html)
