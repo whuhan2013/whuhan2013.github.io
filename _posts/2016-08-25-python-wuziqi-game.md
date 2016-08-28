@@ -11,6 +11,7 @@ description:
 **本文主要实现了以下小游戏**        
 
 1. 五子棋      
+2. 贪吃蛇AI
 
 
 #### 五子棋  
@@ -113,3 +114,16 @@ main()
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/python/p1.png)
 
+
+
+#### 贪吃蛇AI
+
+用到了广度优先遍历等知识及curses模块
+
+详见：[如何用Python写一个贪吃蛇AI](http://www.hawstein.com/posts/snake-ai.html)
+
+原版用的是python2编写，在python3中运行需要一些改动:[Python 2.7.x 和 Python 3.x 的主要区别](https://segmentfault.com/a/1190000000618286#xrange)
+
+**效果如下**     
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/python/p2.png)
