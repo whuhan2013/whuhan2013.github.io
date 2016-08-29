@@ -27,6 +27,16 @@ description: Django
 - pip install bootstrap-admin     
 - pip install markdown       
 
+#### 运行    
+
+默认的运行方法只能在内网访问，要在公网访问，可以用          
+
+```
+python manage.py runserver 0.0.0.0:80
+```
+
+外网和127.0.0.1都能够访问,参考：[django自带的server能让外网主机访问](http://blog.csdn.net/wang1144/article/details/12168369)
+
 #### 要注意的一些问题     
 
 - 模板的位置       

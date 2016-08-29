@@ -78,6 +78,9 @@ ubuntu中使用Git与显示隐藏文件，可参见：
 [无法输入中文解决方案](http://blog.csdn.net/bleachswh/article/details/51674552)           
 
 
+**5、Ubuntu系统下Chrome浏览器显示的汉字颜色很淡**      
+
+解决方案：[chrome浏览器汉字颜色淡](https://www.zhihu.com/question/46303724)
 
 **效果如下**        
 
