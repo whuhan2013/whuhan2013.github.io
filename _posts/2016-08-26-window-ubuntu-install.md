@@ -82,6 +82,30 @@ ubuntu中使用Git与显示隐藏文件，可参见：
 
 解决方案：[chrome浏览器汉字颜色淡](https://www.zhihu.com/question/46303724)
 
+**6、Ubuntu系统下修改hosts文件科学上网**                
+
+- gedit /etc/hosts 打开hosts文件 然后下载好的hosts内容复制粘帖到/etc/hosts里 保存 
+- 终端输入sudo systemctl restart NetworkManager 至此搞定
+
+其中sudo systemctl restart NetworkManager还修复了我的网卡与声卡，真是神奇,也可以说是喜出望外，解决了长久的问题
+
+参考：[ Ubuntu 16.04 经验积累和总结](http://blog.csdn.net/u013230444/article/details/51388211)
+
+
+**7、Ubuntu系统下安装网易云音乐失败**         
+
+Ubuntu下可以安装网易云音乐了，棒。不过安装时会缺少依赖，用下面这句命令即可。   
+
+```
+apt-get -f install
+```
+
+**8、Ubuntu 16.04中为Chromium、Chrome、Firefox安装Flash播放器插件**          
+
+Ubuntu中除了B站外，其他网站不能看视频，是因为缺少Flash插件的原因，不过安装了之后，腾讯视频依旧不能看，其他的可以，不知道是为什么。       
+
+具体步骤参见：[Ubuntu 16.04中为Chromium、Chrome、Firefox安装Flash播放器插件](http://www.linuxidc.com/Linux/2016-05/131098.htm)
+
 **效果如下**        
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/android/p4.png)
