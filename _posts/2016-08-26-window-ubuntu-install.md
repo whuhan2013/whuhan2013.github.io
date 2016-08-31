@@ -106,6 +106,11 @@ Ubuntu中除了B站外，其他网站不能看视频，是因为缺少Flash插�
 
 具体步骤参见：[Ubuntu 16.04中为Chromium、Chrome、Firefox安装Flash播放器插件](http://www.linuxidc.com/Linux/2016-05/131098.htm)
 
+
+**9、Ubuntu安装eclipse**         
+ 
+[如何在Ubuntu安装Eclipse](https://xiequan.info/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu%E5%AE%89%E8%A3%85eclipse/)
+
 **效果如下**        
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/android/p4.png)
