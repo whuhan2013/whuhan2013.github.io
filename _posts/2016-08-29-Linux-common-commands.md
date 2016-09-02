@@ -825,3 +825,40 @@ lsb_release -a
 查看空闲内存
 free -m
 ```
+
+
+#### 断开SSH连接后使服务仍旧运行    
+
+
+查了一下用 screen 可以很方便的进行这个操作，有点像虚拟屏幕的管理。
+
+用法：非常简单，只要在原始的命令之前加上 screen 即可：
+
+```
+
+$screen java -jar xxxx.jar
+其他功能：
+
+查看当前全部的 screen ：
+
+$screen -ls
+会显示下面的信息：
+
+There are screens on:
+        1542.pts-1.AY1212021007126539381        (01/30/2013 03:29:06 PM)       (Detached)
+        1434.pts-1.AY1212021007126539381        (01/30/2013 03:13:56 PM)       (Attached)
+2 Sockets in /var/run/screen/S-user.
+其中每一条最前面的就是 screen 的 id
+
+连接到 detached 的 screen ：
+
+$screen -r 1542
+从 screen 中退出（但不关闭 screen 进程）：
+
+按 Ctrl-A-D
+在 screen 中查看全部命令；
+
+按 Ctrl-A-?
+```
+
+**参考：**[Linux Screen 超简单用法](http://www.cnblogs.com/biggates/archive/2013/01/30/2883164.html)
