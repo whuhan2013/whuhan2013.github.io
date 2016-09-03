@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 爬虫基础知识
-date: 2016-9-2
+date: 2016-9-3
 categories: blog
 tags: [网络爬虫]
 description: 爬虫58 
