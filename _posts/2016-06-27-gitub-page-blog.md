@@ -57,16 +57,16 @@ description: 利用githubpages创建你的个人博客
 
 
 
-#### 添加latex解析功能           
+### 添加latex解析功能           
 
 **使用 MathJax 公式显示 JS 引擎**
 
 JS 动态加载，解析速度有些慢。GitHub Pages 支持的 Kramdown 解析器默认使用该引擎解析渲染数学公式，使用时需要在页面引入 MathJax 库。公式书写语法参考 [Math Blocks](http://kramdown.gettalong.org/syntax.html#math-blocks)。
-但是即便不改换 Markdown 解析器，只要加载 MathJax 库，仍然可以正确显示公式，博主亲测！查阅 Jekyll 内置的 Kramdown 代码也没看到有相关的配置，只是简单的将文本中的公式区块解析成 HTML 标签 <script type="math/tex">，最终的公式渲染工作还是由 JS 实现。
+但是即便不改换 Markdown 解析器，只要加载 MathJax 库，仍然可以正确显示公式，博主亲测！查阅 Jekyll 内置的 Kramdown 代码也没看到有相关的配置，只是简单的将文本中的公式区块解析成 HTML 标签 ,最终的公式渲染工作还是由 JS 实现。
 
 按照下面的步骤，可以在 Markdown 文本中书写数学公式：
 
-按照下面的步骤，可以在 Markdown 文本中书写数学公式：
+
 
 (1) 安装 kramdown 包
 
@@ -149,7 +149,7 @@ $$
 
 可以得到：
 
-而段内插入 LaTeX 公式是这样的： {z∈C∣z2=α}{z∈C∣z2=α}，试试看看吧
+而段内插入 LaTeX 公式是这样的： $ \{\,z\in C \mid z^2 = {\alpha}\,\} $，试试看看吧
 
 
 **参考链接：**[GitHub Pages 静态博客 - 个人建站实录](http://alfred-sun.github.io/blog/2014/12/05/github-pages/)

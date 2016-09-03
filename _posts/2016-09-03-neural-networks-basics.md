@@ -11,8 +11,8 @@ description: 神经网络
 
 ![](http://img.blog.csdn.net/20160413164315280)
 
-其中为输入单元，称为偏置单元（bias unit），![](http://latex.codecogs.com/gif.latex?%5Clarge%20%5Cleft%20%5C%7B%20%5Ctheta%20_%7B0%7D%2C%20%5Ctheta%20_%7B1%7D%2C%5Ctheta%20_%7B2%7D%2C%5Ctheta%20_%7B3%7D%5Cright%20%5C%7D)称为连接权重。其中![](http://latex.codecogs.com/gif.latex?%5Clarge%20h_%7B%5Ctheta%20%7D%28x%29%20%3D%20%5Cfrac%7B1%7D%7B1&plus;e%5E%7B-%5Ctheta%20%5E%7BT%7Dx%7D%7D) 
-还记得逻辑回归的sigmoid函数吗，在这里称作“激励函数”（motivation function）![](http://latex.codecogs.com/gif.latex?%5Clarge%20sigmoid%28x%29%20%3D%20%5Cfrac%7B1%7D%7B1&plus;e%5E%7B-x%7D%7D)，其图像为（图片来自wiki）：
+其中${x1,x2,x3}$为输入单元，x$_0$称为偏置单元（bias unit），x$_0$=1，{x$_0$，x$_1$，x$_2$，x$_3$}称为连接权重。其中。 
+还记得逻辑回归的sigmoid函数吗，在这里称作“激励函数”（motivation function），其图像为（图片来自wiki）：
 
 ![](http://img.blog.csdn.net/20160413163808528)
 
@@ -25,3 +25,4 @@ $$
 $$
 
 而段内插入 LaTeX 公式是这样的： $ \{\,z\in C \mid z^2 = {\alpha}\,\} $，试试看看吧
+
