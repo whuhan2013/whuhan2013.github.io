@@ -17,3 +17,11 @@ description: 神经网络
 ![](http://img.blog.csdn.net/20160413163808528)
 
 
+$$
+\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} 
+\leq 
+\left( \sum_{k=1}^n a_k^2 \right) 
+\left( \sum_{k=1}^n b_k^2 \right)
+$$
+
+而段内插入 LaTeX 公式是这样的： $ \{\,z\in C \mid z^2 = {\alpha}\,\} $，试试看看吧
