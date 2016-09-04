@@ -36,9 +36,9 @@ $$h_{0}(x)=\frac{1}{1+e^{-\theta}}$$
 
 **3、希腊字母**   
 
-![](http://img3.ph.126.net/oO9OwozmzWbB35FfvwENhA==/1112107633001078313.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/python/p2.jpg)
 
-![](http://img8.ph.126.net/3iMdjO_gbmJX-Rdql-0wOA==/2731151699040784098.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/python/p3.jpg)
 
 
 **4、矩阵表示** 
