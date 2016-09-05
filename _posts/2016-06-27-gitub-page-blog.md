@@ -23,6 +23,10 @@ description: 利用githubpages创建你的个人博客
 - [5分钟教你使用 github pages 搭建博客 - 简书](http://www.jianshu.com/p/bb7f9dcf556b)           
 - [如何搭建一个独立博客——简明Github Pages与Hexo教程 - 简书](http://www.jianshu.com/p/05289a4bc8b2)
 
+**简历**  
+
+[程序员必备技能：在Github Pages上部署自己的简历](https://zhuanlan.zhihu.com/p/22250197)
+
 
 **改进代码高亮风格为AndroidStudio默认风格**           
 
