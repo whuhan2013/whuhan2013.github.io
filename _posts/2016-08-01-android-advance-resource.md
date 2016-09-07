@@ -16,3 +16,4 @@ description: 进阶
 - Android性能优化：[Android优化和性能 - 君子乐道 - 博客频道 - CSDN.NET](http://blog.csdn.net/zjqblog/article/details/48417411)           
 - 对流行的优质android开源项目分析:[android开源项目解析](https://github.com/wingjay/android-open-source-project-cracking)
 - NDK与OpenCV:[HujiaweiBujidao](http://hujiaweibujidao.github.io/mobile/)            
+- 多个项目实例，有时间可以看看：[2016最值得学习的项目课程，干货最多](http://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&mid=2650821003&idx=1&sn=289fd1253f8067ef311fad9f8718df13&scene=0#wechat_redirect)
