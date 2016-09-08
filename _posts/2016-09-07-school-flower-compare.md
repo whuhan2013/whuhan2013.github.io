@@ -394,6 +394,8 @@ $Rank->selectStu();
 
 **访问地址：**[Campus campus Belle ranking selection](http://119.29.152.242:8888/)
 
+**参考链接：**[校花是怎么评出来的？ - 实验楼](https://www.shiyanlou.com/courses/321/labs/990/document)
+
 **效果如下**
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/php/p9.png)
