@@ -18,3 +18,4 @@ description: python相关博客
 - [免费中文Python电子书（教程）](http://foofish.net/blog/97/python-free-ebook)
 - [python2 与 python3 语法区别 - 博客频道 - CSDN.NET](http://blog.csdn.net/samxx8/article/details/21535901)  
 - [python入门教程大纲 - 雨敲窗python入门教程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21787953?refer=c_42227538)
+- python博客集合：[有哪些值得关注的技术博客（Python篇） - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/22370545)
