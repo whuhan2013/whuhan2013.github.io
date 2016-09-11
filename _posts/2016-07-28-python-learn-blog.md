@@ -20,3 +20,4 @@ description: python相关博客
 - [python入门教程大纲 - 雨敲窗python入门教程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21787953?refer=c_42227538)
 - python博客集合：[有哪些值得关注的技术博客（Python篇） - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/22370545)
 - 包括一些项目和文章：[Python学习资料总结](https://zhuanlan.zhihu.com/p/22333205)
+- 网络爬虫项目实战：[Python网络爬虫实战项目代码大全](https://zhuanlan.zhihu.com/p/22390905)

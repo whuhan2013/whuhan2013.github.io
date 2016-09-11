@@ -8,6 +8,28 @@ description:
 ---
 
 
+#### 常用命令
+
+**ftp上传文件夹**              
+
+ftp是不能直接传输文件夹的。您可以将文件夹压缩之后再进行传输的。具体操作如下：
+
+
+```
+1.压缩文件夹，比如文件夹叫etc
+tar -zcvf etc.tar.gz  etc
+2.上传文件夹
+ftp ip(ftp服务器的ip)
+用户名//ftp账号
+密码//ftp密码
+put etc.tar.gz
+3.去服务器上解压etc.tar.gz
+tar -zxvf etc.tar.gz
+```
+
+这样就完成了文件夹的传输
+
+
 **终端快捷键**     
 
 ```
