@@ -189,3 +189,105 @@ if __name__ == '__main__':
 
 **代码地址：**[CSDN访问量](https://github.com/whuhan2013/pythoncode/tree/master/csdn)
 
+
+**更新**             
+发现虽然重复访问访问量不会增加，但还是会增加9个左右，所以循环读取全部文章，每个访问20次左右，这样就可以增加访问量了。
+
+```
+__author__ = 'MrChen'
+
+import urllib.request
+import re
+import time
+from bs4 import BeautifulSoup
+
+def get_req(url):
+    # 先伪造一下头部吧,使用字典
+    blog_eader = {
+                'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.152 Safari/537.36',
+                'Host':'blog.csdn.net',
+                'Referer':'http://blog.csdn.net/',
+                'GET':url
+                }
+    req = urllib.request.Request(url,headers = blog_eader)
+    return req
+def get_blog_list(url):
+    req = get_req(url)
+    try:
+        response = urllib.request.urlopen(req,timeout = 3)
+    except:
+        print('无法挽回的错误')
+        return None
+    # 由于 Csdn 是 utf-8 所以不需要转码
+    html = response.read()
+    # 存储一个正则表达式 规则
+    regx = '<span class="link_title"><a href="(.+?)">'
+    pat = re.compile(regx)
+    # 其实这里 写作 list1 = re.findall('<span class="link_title"><a href="(.+?)">',str(html)) 也是一样的结果
+    blog_list = re.findall(pat,str(html))
+    return blog_list
+
+p = re.compile('/whuhan2013/article/details/........')
+
+# 自己的博客主页
+url = "http://blog.csdn.net/whuhan2013"
+
+# 使用build_opener()是为了让python程序模仿浏览器进行访问
+opener = urllib.request.build_opener()
+opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+
+html = opener.open(url).read().decode('utf-8')
+
+allfinds = p.findall(html)
+# print(allfinds)
+
+urlBase = "http://blog.csdn.net"  # 需要将网址合并的部分
+# 页面中的网址有重复的，需要使用set进行去重复
+blogurl = 'http://blog.csdn.net/whuhan2013/'
+mypages1 = get_blog_list(blogurl + 'article/list/1?viewmode=contents')
+mypages2 = get_blog_list(blogurl + 'article/list/2?viewmode=contents')
+mypages3 = get_blog_list(blogurl + 'article/list/3?viewmode=contents')
+mypages4 = get_blog_list(blogurl + 'article/list/4?viewmode=contents')
+mypages=mypages1+mypages2+mypages3+mypages4
+for i in range(len(mypages)):
+    mypages[i] = urlBase + mypages[i]
+
+
+print('要刷的网页有：')
+for index, page in enumerate(mypages):
+    print(str(index), page)
+
+# 设置每个网页要刷的次数
+brushNum = 20
+
+# 所有的页面都刷
+i=0;
+while 1:
+    i=i+1
+    print('下面开始刷了哦：')
+    for index, page in enumerate(mypages):
+        for j in range(brushNum):
+            try:
+                pageContent = opener.open(page).read().decode('utf-8')
+                # 使用BeautifulSoup解析每篇博客的标题
+                soup = BeautifulSoup(pageContent)
+                blogTitle = str(soup.title.string)
+                blogTitle = blogTitle[0:blogTitle.find('-')]
+                print(index,str(j), blogTitle)
+
+            except urllib.error.HTTPError:
+                print('urllib.error.HTTPError')
+                time.sleep(3)  # 出现错误，停几秒先
+
+            except urllib.error.URLError:
+                print('urllib.error.URLError')
+                time.sleep(3)  # 出现错误，停几秒先
+
+            time.sleep(0.5)  # 正常停顿，以免服务器拒绝访问
+    print("one time end",i)
+    time.sleep(120)
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/python/p6.png)
+
+
