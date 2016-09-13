@@ -140,3 +140,49 @@ db.qq_data.ensureIndex({x:1})   x= 1表示正向排序，x=-1表示逆向排序
 
 
 [Ubuntu下Mongodb的配置和使用](http://my.oschina.net/kakoi/blog/515603)
+
+
+**mongodb备份还原导出导入**
+
+mongodump备份数据库
+
+常用命令格
+
+```
+mongodump -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 -o 文件存在路径  
+```
+
+- 如果没有用户谁，可以去掉-u和-p。
+- 如果导出本机的数据库，可以去掉-h。
+- 如果是默认端口，可以去掉--port。
+- 如果想导出所有数据库，可以去掉-d。
+
+mongorestore还原数据库
+
+常用命令格式
+
+```
+mongorestore -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 --drop 文件存在路径  
+```
+
+--drop的意思是，先删除所有的记录，然后恢复。
+
+恢复所有数据库到mongodb中
+
+```
+[root@localhost mongodb]# mongorestore /home/zhangy/mongodb/   #这里的路径是所有库的备份路径 
+```
+
+
+**将MongoDB的collection导出成CVS**
+
+```
+mongoexport -h localhost -d dbname -c collname -f field1,field2 --csv -o output.csv
+```
+
+**参考链接**
+
+[mongodb 备份 还原 导出 导入](http://blog.51yip.com/nosql/1573.html)
+
+[如何将MongoDB的collection导出成CVS](https://segmentfault.com/q/1010000000136706)
+
