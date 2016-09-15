@@ -64,5 +64,59 @@ exec "$PRGDIR"/"$EXECUTABLE" start "$@"
 **详情可参见：**[Ubuntu 14.04 安装jdk，tomcat](http://blog.csdn.net/carlos1992/article/details/43085897)
 
 
+### apache安装 
+
+apache的安装比较简单，可以直接几句命令搞定。
+
+**详情参见：**[手把手教你在ubuntu上安装apache和mysql和php](http://blog.csdn.net/guaikai/article/details/6905781)
 
 
+**Ubuntu下启动/重启/停止apache服务器**
+
+```
+Task: Start Apache 2 Server /启动apache服务
+# /etc/init.d/apache2 start
+or
+$ sudo /etc/init.d/apache2 start
+Task: Restart Apache 2 Server /重启apache服务
+# /etc/init.d/apache2 restart
+or
+$ sudo /etc/init.d/apache2 restart
+Task: Stop Apache 2 Server /停止apache服务
+# /etc/init.d/apache2 stop
+or
+$ sudo /etc/init.d/apache2 stop
+```
+
+**ubuntu下安装wordpress**
+
+[Ubuntu下搭建wordpress环境](http://www.jianshu.com/p/26d9e752994e)
+
+
+**Ubuntu 14.04下 Apache修改网站根目录及默认网页**
+
+```
+修改根目录： 
+在 /etc/apache2/sites-available 中修改 000-default.conf 
+中的DocumentRoot /var/www/ 修改为想要的目录 
+比如：DocumentRoot /var/www/html/mainpage
+
+
+接下来重启apache,sudo apache2ctl -k restart 即可
+
+修改默认网页： 
+修改/etc/apache2/mods-available/dir.conf中的内容 
+原来是：
+
+<IfModule mod_dir.c>
+    DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm 
+</IfModule>
+
+添加上想要的/wordpress就行啦~
+
+<IfModule mod_dir.c>
+    DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm /wordpress
+</IfModule>
+```
+
+**参考：**[Ubuntu 14.04下 Apache修改网站根目录及默认网页](http://www.linuxidc.com/Linux/2015-07/120724.htm)

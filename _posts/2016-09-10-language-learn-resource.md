@@ -21,3 +21,4 @@ description: 语言类学习资源
 #### 日语 
 
 - 日语学习网站：[有那些相见恨晚的日语学习网站](https://zhuanlan.zhihu.com/p/22125279)
+- 有时间可以看一下：[如何开始学日语](https://www.zhihu.com/question/19773175)
