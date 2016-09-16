@@ -16,5 +16,5 @@ description: PHP
   + PHP - ThinkPHP实现云书签             
 - [报告，我要学php！[学习资料整理] - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21910473)
 - [wordoress开发 - 衫小寨 - WordPress工坊](http://qzhai.net/category/wordoress-develop/page/2)
-- [](https://zhuanlan.zhihu.com/p/22423268)
+- [有哪些值得关注的技术博客（PHP篇）](https://zhuanlan.zhihu.com/p/22423268)
   

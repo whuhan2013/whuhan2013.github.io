@@ -13,3 +13,4 @@ description: WEB前端
 - FreeCodeCamp相关介绍：[如何在一年之内通过自学找到Web开发工作 - 从零学习前端开发 - 知乎专栏](https://zhuanlan.zhihu.com/p/22213177)
 - 前端资源汇总：[送给前端的你，推荐几篇前端汇总文章。 - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/22229868)
 - 前端博客：[有哪些值得关注的技术博客（前端篇）](https://zhuanlan.zhihu.com/p/22276837)
+- 可以看看：[送给那些正在自学或准备自学前端的人](https://zhuanlan.zhihu.com/p/22385795)
