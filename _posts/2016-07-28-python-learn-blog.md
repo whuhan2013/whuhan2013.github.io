@@ -22,3 +22,4 @@ description: python相关博客
 - 包括一些项目和文章：[Python学习资料总结](https://zhuanlan.zhihu.com/p/22333205)
 - 网络爬虫项目实战：[Python网络爬虫实战项目代码大全](https://zhuanlan.zhihu.com/p/22390905)
 - 一些实例与博客：[Python学习资料总结](https://zhuanlan.zhihu.com/p/22333205)
+- 有时间可以看看：[Python入门资料大全](http://michaelxiang.me/2015/12/02/python-files-list/)
