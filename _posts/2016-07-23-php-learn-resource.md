@@ -17,4 +17,11 @@ description: PHP
 - [报告，我要学php！[学习资料整理] - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/21910473)
 - [wordoress开发 - 衫小寨 - WordPress工坊](http://qzhai.net/category/wordoress-develop/page/2)
 - [有哪些值得关注的技术博客（PHP篇）](https://zhuanlan.zhihu.com/p/22423268)
+
+
+**wordpress主题**  
+
+- 免费简洁的主题：[mywpku](https://www.mywpku.com/)
+- [wordpress主题在哪下载好看的啊](https://www.zhihu.com/question/21646574)
+- Markdown等插件管理:[给力星的博客](http://www.powerxing.com/about/)
   

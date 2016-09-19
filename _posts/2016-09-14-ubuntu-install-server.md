@@ -120,3 +120,14 @@ $ sudo /etc/init.d/apache2 stop
 ```
 
 **参考：**[Ubuntu 14.04下 Apache修改网站根目录及默认网页](http://www.linuxidc.com/Linux/2015-07/120724.htm)
+
+
+**wordpress支持Markdown与代码高亮，丰富文章样式，文章访问量插件等**   
+
+[给力星的博客插件](http://www.powerxing.com/about/)
+
+
+
+
+
+

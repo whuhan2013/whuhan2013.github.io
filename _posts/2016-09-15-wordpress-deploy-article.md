@@ -98,8 +98,17 @@ if __name__=='__main__':
 
 **访问：**[良有以也的博客](http://119.29.152.242/wordpress/)   
 
+**wordpress支持Markdown与代码高亮，丰富文章样式，文章访问量插件等**   
+
+[给力星的博客插件](http://www.powerxing.com/about/)
+
 **效果如下**
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/php/p12.png)
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/php/p13.png)
+
+
+
+
+
