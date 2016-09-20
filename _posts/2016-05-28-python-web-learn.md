@@ -10,6 +10,8 @@ description: python Web学习资源.
 ### python web学习资源       
 
 - [有哪些python+flask的搭建的博客或论坛开源推荐？ - 知乎](https://www.zhihu.com/question/40746923#answer-43141822)
+- [Python Web under Ubuntu](http://allenwu.itscoder.com/2016/04/23/python-web-under-unbuntu/)
+- [有多少人按@萧井陌大神给出的Python+Flask路线找到工作了](https://www.zhihu.com/question/29775447#)
 
 ### Django教程     
 - [Django 开发内容管理系统 - Django 教程 - 自强学堂](http://www.ziqiangxuetang.com/django/django-cms-develop.html)
