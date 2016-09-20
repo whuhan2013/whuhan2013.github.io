@@ -3,8 +3,8 @@ layout: post
 title: postgres与osm初步使用
 date: 2016-9-20
 categories: blog
-tags: [图像处理]
-description: 图像处理
+tags: [地图开发]
+description: 地图开发
 ---
 
 **本文主要包括以下内容**   
