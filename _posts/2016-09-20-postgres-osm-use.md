@@ -1,6 +1,6 @@
 ---
 layout: post
-title: postgres与osm初步使用
+title: VIM常用操作
 date: 2016-9-20
 categories: blog
 tags: [地图开发]
