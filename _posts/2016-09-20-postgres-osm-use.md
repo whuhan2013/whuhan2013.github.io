@@ -46,7 +46,9 @@ node通过经纬度定义了一个地理坐标点。同时，还可以height=*�
 
 下载osm：http://dev.openstreetmap.org/~bretth/osmosis-build/osmosis-latest.zip
 
-**下载中国地图数据**                
+
+
+**下载中国地图数据**                     
 http://download.geofabrik.de/asia/china.html
 
 
