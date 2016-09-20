@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Postgres数据库与osm初步使用
+title: Postgres与osm初步使用
 date: 2016-9-20
 categories: blog
 tags: [地图开发]
