@@ -7,9 +7,9 @@ tags: [地图开发]
 description: 地图开发
 ---
 
-mac test 测试
 
-**本文主要包括以下内容**   
+
+**本文包括以下内容**   
 
 - postgreSQL数据库，用来存放地图原始数据
 - osm2pgsql 用来将osm地图数据导入到postgreSQL
