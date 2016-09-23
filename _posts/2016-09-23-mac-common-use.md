@@ -8,7 +8,7 @@ description: Mac使用入门
 ---
 
 
-＊＊mac常用快捷键＊＊
+**mac常用快捷键**
 
 ```
 全屏/退出全屏   ctr+command+F
