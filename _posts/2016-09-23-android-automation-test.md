@@ -156,6 +156,72 @@ public class RunnerTest {
 }
 ```
 
+#### python封装版本  
+
+github上有人开源了python版本uiautomator
+
+**Installation**   
+
+```
+pip install uiautomator
+```
+
+**使用**
+
+```
+
+#-*- coding:utf-8 -*-
+
+from uiautomator import device as d
+import sys
+import log
+import log, logging
+import time
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 
+def runwatch(d,data):
+    times = 3
+    while True:
+        if data == 1:
+            return True
+        # d.watchers.reset()
+        d.watchers.run()
+        times -= 1
+        if times == 0:
+            break
+        else:
+            time.sleep(0.5)
 
+#d.screen.on()
+#d(description="创建工单").click()
+logger = log.Logger('log.log', clevel=logging.DEBUG, Flevel=logging.INFO)
+d.watcher('create').when(description="创建工单").click(description="创建工单")
+print d.watcher("create").triggered
+print d.watcher("objBuild").triggered
+#logger.info('here')
+d.watcher('agree').when(text='NancyCustomer1').click(text='NancyCustomer1')
+#logger.info('here2')
+
+d.watcher('objAsset').when(text='资产范围').click(text='资产范围')
+
+#d.watcher('objBuild').when(text='楼宇BADGOOD').click(text='楼宇BADGOOD')
+#d.watcher('objPanel').when(text='qq').click(text='qq')
+
+if(d.watcher("objBuild").triggered):
+    time.sleep(1)
+    print 'here1'
+    #d.watcher('objSaveAsset').when(text='完成').click(text='完成')
+
+
+runwatch(d,0)
+```
+
+拥有watcher函数，可以注册是否可以找到值。
+
+**参考**
+
+[uiautomator python](https://github.com/xiaocong/uiautomator#watcher)
+
+[使用uiautomator的python封装进行测试](https://my.oschina.net/yangyanxing/blog/498403)
