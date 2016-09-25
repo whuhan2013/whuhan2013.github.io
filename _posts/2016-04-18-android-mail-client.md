@@ -43,8 +43,8 @@ description: Android实现电子邮箱客户端
      props.setProperty("mail.smtp.port", "465");    
       props.setProperty("mail.smtp.socketFactory.port", "465");    
       props.put("mail.smtp.auth", "true");    
-      final String username = "2868405029";    
-      final String password = "muxnyevnatfjdcda";    
+      final String username = "yourusername";    
+      final String password = "yourpassword";    
      Session session = Session.getDefaultInstance(props, new Authenticator(){    
           protected PasswordAuthentication getPasswordAuthentication() {    
               return new PasswordAuthentication(username, password);    
@@ -56,7 +56,7 @@ description: Android实现电子邮箱客户端
      // -- Set the FROM and TO fields --    
      msg.setFrom(new InternetAddress(username + "@qq.com"));    
       msg.setRecipients(Message.RecipientType.TO,    
-       InternetAddress.parse("2868405029@qq.com",false));    
+       InternetAddress.parse("yourusername@qq.com",false));    
       msg.setSubject("Hello");    
       msg.setText("How are you");    
      msg.setSentDate(new Date());    
@@ -100,7 +100,7 @@ description: Android实现电子邮箱客户端
          
      //请将红色部分对应替换成你的邮箱帐号和密码    
      URLName urln = new URLName("pop3","pop.qq.com",995,null,    
-       "2868405029@qq.com", "muxnyevnatfjdcda");    
+       "yourusername@qq.com", "yourpassword");    
     Store store = session.getStore(urln);    
       Folder inbox = null;    
       try {    
@@ -562,7 +562,7 @@ public class MailBoxActivity extends Activity {
              
          //请将红色部分对应替换成你的邮箱帐号和密码    
          final URLName urln = new URLName("pop3","pop.qq.com",995,null,    
-           "2868405029@qq.com", "muxnyevnatfjdcda");   
+           "yourusername@qq.com", "yourpassword");   
         
          
          
@@ -764,8 +764,8 @@ public class MailEditActivity extends Activity {
         attachment = (ImageButton) findViewById(R.id.add_att);
         add_lianxiren = (ImageButton) findViewById(R.id.add_lianxiren);
 
-        mail_from.setText("2868405029@qq.com");
-        mail_to.setText("2868405029@qq.com");
+        mail_from.setText("yourusername@qq.com");
+        mail_to.setText("yourusername@qq.com");
 
     }
 
@@ -800,8 +800,8 @@ public class MailEditActivity extends Activity {
                     props.setProperty("mail.smtp.port", "465");
                     props.setProperty("mail.smtp.socketFactory.port", "465");
                     props.put("mail.smtp.auth", "true");
-                    final String username = "2868405029";
-                    final String password = "muxnyevnatfjdcda";
+                    final String username = "yourusername";
+                    final String password = "yourpassword";
                     Session session = Session.getDefaultInstance(props,
                             new Authenticator() {
                                 protected PasswordAuthentication getPasswordAuthentication() {
