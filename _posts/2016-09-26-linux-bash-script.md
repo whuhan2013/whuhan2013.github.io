@@ -52,5 +52,21 @@ git commit -m 'update'
 git push origin master
 ```
 
+**expect实现ssh登录脚本**  
+
+安装expect:brew install expect  
+
+代码
+
+```
+#!/usr/bin/expect
+spawn ssh root@192.168.22.194
+expect "*password:"
+send "123\r"
+expect "*#"
+interact
+```
+
+**参考链接:**[expect详解](http://www.cnblogs.com/lzrabbit/p/4298794.html)
 
 
