@@ -79,3 +79,16 @@ react-native upgrade
 **References**
 
 [创建 React-Native 工程时，如何指定特定的 React-Native 版本 - 简书](http://www.jianshu.com/p/646c5fbd9659)
+
+
+**Mac下搭建react native环境**     
+
+mac下搭建react native环境比在windows下快多了，少了很多坑，十分钟就解决了，而且ios模拟器也不卡，真的是很棒，具体过程可以参见：
+
+[mac下搭建reactnative环境](http://www.lcode.org/%E3%80%90react-native%E5%BC%80%E5%8F%91%E3%80%91react-native-for-android%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B/)
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/new/p1.png)
+
+
+
+
