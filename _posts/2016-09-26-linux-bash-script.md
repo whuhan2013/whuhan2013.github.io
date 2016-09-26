@@ -43,5 +43,14 @@ $ chmod u+rx hello.sh
 $  ./hello.sh
 ```
 
+利用bash编程可以有效的提高工作效率，避免重复输入命令，比如上传github的bash脚本
+
+```
+cd ~/data/whuhan2013.github.io/
+git add .
+git commit -m 'update'
+git push origin master
+```
+
 
 
