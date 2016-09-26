@@ -9,7 +9,7 @@ description: bash脚本
 
 **什么是Bash?**
 
-1.简介
+1.bash简介
 
 Bash（GNU Bourne-Again Shell）是一个为GNU计划编写的Unix shell，它是许多Linux平台默认使用的shell。
 
