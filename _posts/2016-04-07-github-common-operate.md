@@ -85,7 +85,15 @@ git push -f
 
 [利用Jekyll在GitHub Pages上部署博客 - Bannings的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/zhangao0086/article/details/37922607)  
 
-### 
+### rebase的使用与意义   
+
+rebase与merge的区别
+
+![](http://static.oschina.net/uploads/img/201511/09165236_lus8.jpg)
+
+参考：[git rebase简介](https://my.oschina.net/china008/blog/528130)
+
+
  
 
 
