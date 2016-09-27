@@ -87,6 +87,27 @@ mac下搭建react native环境比在windows下快多了，少了很多坑，十�
 
 [mac下搭建reactnative环境](http://www.lcode.org/%E3%80%90react-native%E5%BC%80%E5%8F%91%E3%80%91react-native-for-android%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B/)
 
+**问题**    
+
+**运行android项目时要配置ANDROID_HOME**   
+
+vim .bash_profile编辑
+
+```
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:~/Library/Android/sdk/platform-tools/
+export PATH=${PATH}:~/Library/Android/sdk/tools/
+```
+
+**使用sublime3开发react native**     
+
+- ReactJS : 支持React开发，代码提示，高亮显示 ，介绍地址：点我
+- Emmet ：前端开发必备。
+- Terminal : 在sublime中打开终端并定位到当前目录，神器，mac下的快捷键为：command+shift+T
+- react-native-snippets：react native 的代码片段
+
+参见：[Sublime开发react native](http://www.jianshu.com/p/2ddfff095e90]
+
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/new/p1.png)
 
 
