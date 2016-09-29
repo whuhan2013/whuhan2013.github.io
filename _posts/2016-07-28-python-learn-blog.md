@@ -21,6 +21,7 @@ description: python相关博客
 
 - 新手入门，练手项目:[有哪些适合新手练手的Python项目？ - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/22164270)
 - Show me your code这个项目特别适合入门：[Python初学者（零基础学习Python、Python入门）书籍、视频、资料、社区推荐](https://github.com/Yixiaohan/codeparkshare)
+- python11个方面资源，了解python的应用范围：[学好Python的11个优秀资源](https://zhuanlan.zhihu.com/p/21464202?refer=passer)
 
 
 **其他**      

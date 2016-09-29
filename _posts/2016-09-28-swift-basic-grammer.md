@@ -416,7 +416,8 @@ redSquare.backgroundColor = UIColor.redColor()
 
 Many of the classes you’ll be introduced to in the lessons come from UIKit, so you’ll see this import statement often.
 
-With this breadth of knowledge about Swift, you’re about to jump into making a full-fledged app in the next lesson. Although this lesson is the extent of playgrounds you’ll work with for now, remember that they can be a powerful tool in app development for anything from debugging, to visualizing complex code, to rapid prototyping.
+
+**参考:**[swift基础语法](https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/)
 
 
 
