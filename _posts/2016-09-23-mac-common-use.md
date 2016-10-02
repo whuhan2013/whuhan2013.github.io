@@ -46,6 +46,19 @@ Mac不像Win那样，按住左上角关闭按钮就是退出程序，在Mac中�
 [收集整理Android开发所需的Android SDK](https://github.com/inferjay/AndroidDevTools)
 
 
+**mac高速下载百度云**     
+
+在mac下的百度云客户端很烦，是同步盘，用浏览器下速度对太慢，最后采用aira2+浏览器插件实现百度云高速下载。
+
+[Mac 百度云加速下载](http://xclient.info/a/6b6c46df-3e4f-1b17-ae30-0c8b49df92cc.html)
+
+
+
+
+
+
+
+
 
 
 
