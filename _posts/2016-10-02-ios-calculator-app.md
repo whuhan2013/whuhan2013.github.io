@@ -102,4 +102,176 @@ class CalculViewController: UIViewController {
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ios/p1.png)
 
 
+**增加model文件** 
+
+
+```
+import Foundation
+
+class CalculatorBrain {
+    private enum Op : CustomStringConvertible{
+        case operand(Double)
+        case UnaryOperation(String,Double->Double)
+        case BinaryOperation(String,(Double,Double)->Double)
+        
+        var description:String{
+            get{
+                switch self {
+                case .operand(let operand):
+                    return "\(operand)"
+                case .BinaryOperation(let symbol,_):
+                    return symbol
+                case .UnaryOperation(let symbol, _):
+                    return symbol
+                
+                }
+            }
+            
+        }
+        
+    }
+    
+    private var opstack=[Op]()
+    private var knowOps=[String:Op]()
+    
+    init(){
+        func learnOp(op:Op){
+            knowOps[op.description]=op
+        }
+        learnOp(Op.BinaryOperation("×"){$0*$1})
+        learnOp(Op.BinaryOperation("÷"){$1/$0})
+        learnOp(Op.BinaryOperation("+"){$0+$1})
+        learnOp(Op.BinaryOperation("-"){$1-$0})
+        learnOp(Op.UnaryOperation("√"){sqrt($0)})
+//        knowOps["×"]=Op.BinaryOperation("×"){$0*$1}
+//        knowOps["÷"]=Op.BinaryOperation("÷"){$1/$0}
+//        knowOps["+"]=Op.BinaryOperation("+"){$0+$1}
+//        knowOps["-"]=Op.BinaryOperation("-"){$1-$0}
+//        knowOps["√"]=Op.UnaryOperation("√"){sqrt($0)}
+    }
+    
+    private func evaluate(ops:[Op])->(result:Double?,remainOps:[Op]){
+        if !ops.isEmpty {
+            var remainOps=ops;
+            let op=remainOps.removeLast()
+            switch op {
+            case Op.operand(let operand):
+                return(operand,remainOps)
+            case Op.UnaryOperation(_, let operation):
+                let operandEvalution=evaluate(remainOps)
+                if let operand=operandEvalution.result{
+                    return(operation(operand),operandEvalution.remainOps)
+                }
+            case Op.BinaryOperation(_, let operation):
+                let operandEvlution1=evaluate(remainOps)
+                if let operand1=operandEvlution1.result {
+                    let operandEvlution2=evaluate(operandEvlution1.remainOps)
+                    if let operand2=operandEvlution2.result {
+                        return (operation(operand1,operand2),operandEvlution2.remainOps)
+                    }
+                }
+            
+            }
+        }
+        
+        return (nil,ops)
+    }
+    
+    func evaluate()->Double?{
+        let (result,remainder)=evaluate(opstack)
+        print("\(opstack)=\(result)with\(remainder)left over")
+        return result
+    }
+    
+    
+    func pushOperand(operand:Double)->Double?{
+        opstack.append(Op.operand(operand))
+        return evaluate()
+    }
+    
+    func performOperation(symbol:String)->Double?{
+        if let operation=knowOps[symbol]{
+            opstack.append(operation)
+        }
+        
+        return evaluate()
+        
+    }
+    
+}
+```
+
+
+controll修改为
+
+```
+import UIKit
+
+class CalculViewController: UIViewController {
+
+    @IBOutlet weak var display: UILabel!
+    
+    var userIsInTheMiddleOFTypingANumber:Bool=false
+    var brain=CalculatorBrain()
+    
+    @IBAction func appendDigit(sender: UIButton) {
+        let digit=sender.currentTitle!
+        if userIsInTheMiddleOFTypingANumber {
+        display.text=display.text!+digit
+        }else{
+            display.text=digit
+            userIsInTheMiddleOFTypingANumber=true
+        }
+    }
+    //var operandstack:Array<Double>=Array<Double>()
+    
+
+    @IBAction func operate(sender: UIButton) {
+        
+        if userIsInTheMiddleOFTypingANumber {
+            enter()
+        }
+        if let operation=sender.currentTitle{
+            if let result=brain.performOperation(operation) {
+                displayValue=result
+            }else{
+                displayValue=0
+            }
+        }
+        
+    }
+    
+    
+    
+    @IBAction func enter() {
+        userIsInTheMiddleOFTypingANumber=false
+        if let result=brain.pushOperand(displayValue){
+            displayValue=result
+        }else{
+            displayValue=0
+        }
+        
+        
+    }
+    
+    var displayValue:Double{
+        get{
+            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+        }
+        set{
+            display.text="\(newValue)"
+            userIsInTheMiddleOFTypingANumber=false
+        }
+    }
+    
+    
+}
+```
+
+
+
+
+
+
+
 
