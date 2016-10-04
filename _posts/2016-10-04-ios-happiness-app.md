@@ -119,6 +119,68 @@ class FaceView: UIView {
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ios/p2.png)
 
 
+**利用协议与代理联结数据源**  
+
+```
+protocol FaceViewDataSource:class {
+    func smilnessForFaceView(sender:FaceView)->Double?
+}
+```
+
+
+**手势识别实现缩放与改变笑脸弧度**  
+
+```
+ @IBOutlet weak var faceView: FaceView!{
+        didSet{
+            faceView.dataSource=self
+            faceView.addGestureRecognizer(UIPinchGestureRecognizer(target: faceView, action: "scale:"))
+            //faceView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "changeHappiness:"))
+            
+        }
+    }
+    private struct Constants{
+        static let HappinessGestureScale:CGFloat=4
+    }
+    
+    @IBAction func changeHappiness(sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .Ended:
+            fallthrough
+        case .Changed:
+            let translation=sender.translationInView(faceView)
+            
+            let happinessChange = -Int(translation.y/Constants.HappinessGestureScale)
+            
+            if happinessChange != 0{
+                happiness+=happinessChange
+                sender.setTranslation(CGPoint.zero, inView: faceView)
+            }
+        default:
+            break
+      
+        }
+    }
+
+
+    func scale(gesture:UIPinchGestureRecognizer){
+        if gesture.state == .Changed{
+            
+            scale*=gesture.scale
+            
+            gesture.scale=1
+        }
+    }
+```
+
+
+**源代码:**[Happiness](https://github.com/whuhan2013/IOSProject/tree/master/Happiness)
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/ios/p3.png)
+
+
+
+
 
 
 
