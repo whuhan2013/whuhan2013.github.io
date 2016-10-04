@@ -22,6 +22,7 @@ description: IOS
 - Understand syntax for (and basic concepts behind) inheritance and protocol conformance
 - Determine implicit types and find additional information using Xcode’s quick help shortcut (Option-click)
 - Import and use UIKit
+- designated init and convient init
 
 
 **常量与变量**
@@ -421,7 +422,25 @@ Many of the classes you’ll be introduced to in the lessons come from UIKit, so
 
 
 
+**designated init and convient init**
 
+By the time any init is done, all properties must have values (optionals can have the value nil) There are two types of inits in a class, convenience and designated (i.e. not convenience)
+A designated init must (and can only) call a designated init that is in its immediate superclass You must initialize all properties introduced by your class before calling a superclass’s init
+You must call a superclass’s init before you assign a value to an inherited property
+A convenience init must (and can only) call a designated init in its own class
+A convenience init may call a designated init indirectly (through another convenience init) A convenience init must call a designated init before it can set any property values
+The calling of other inits must be complete before you can access properties or invoke methods
+
+- Inheriting init       
+If you do not implement any designated inits, you’ll inherit all of your superclass’s designateds If you override all of your superclass’s designated inits, you’ll inherit all its convenience inits If you implement no inits, you’ll inherit all of your superclass’s inits
+Any init inherited by these rules qualifies to satisfy any of the rules on the previous slide
+
+- Required init       
+A class can mark one or more of its init methods as required
+Any subclass must implement said init methods (though they can be inherited per above rules)
+
+- Fiable init    
+ If an init is declared with a ? (or !) after the word init, it returns an Optional
 
 
 
