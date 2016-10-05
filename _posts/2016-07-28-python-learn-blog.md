@@ -12,6 +12,7 @@ description: python相关博客
 
 **数据分析**
 
+- [怎么用最短时间高效而踏实地学习Python](https://www.zhihu.com/question/28530832#answer-18871330)
 - [Python下开始数据科学研究的全面指南](https://zhuanlan.zhihu.com/p/22256689)
 - 非常非常棒的一系列　python 机器学习（Machine Learning）实践入门教程:[python Machine Learning](http://www.johnwittenauer.net/machine-learning-exercises-in-python-part-1/)
 - 从入门到精通，非常详实:[零基础学习Python数据分析 - 聊聊数据统计分析 - 知乎专栏](https://zhuanlan.zhihu.com/p/21799170)
