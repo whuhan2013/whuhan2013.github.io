@@ -39,6 +39,24 @@ description: IOS之Lifecycle与Autolayout
 #### Autolayout       
 Autolayout主要是通过StoryBoard来进行实现, Autolayout还是要在自己不断的使用和调试中积累经验,在此不做过多的叙述.
 
+**Hugging priority与Compression Resistance priority**
+
+Hugging priority 确定view有多大的优先级阻止自己变大。
+
+Compression Resistance priority确定有多大的优先级阻止自己变小。
+
+很抽象，其实content Hugging就是要维持当前view在它的optimal size（intrinsic content size），可以想象成给view添加了一个额外的width constraint，此constraint试图保持view的size不让其变大：
+
+view.width <= optimal size
+
+此constraint的优先级就是通过上面的方法得到和设置的，content Hugging默认为250.
+
+Content Compression Resistance就是要维持当前view在他的optimal size（intrinsic content size），可以想象成给view添加了一个额外的width constraint，此constraint试图保持view的size不让其变小：
+view.width >= optimal size           
+此默认优先级为750.
+
+**参考：**[AutoLayout中的Content Hugging 和 Content Compression Resistance](http://blog.csdn.net/yongyinmg/article/details/39526207)
+
 **AutolayoutDemo**  
 
 本课跟随教程实现了一个小登录器的项目,主要是调试登录后图片的自动布局及旋转后的布局,大多数布局由StoryBoard上的操作完成,图片的自动布局有代码来完成.DEMO的代码如下
