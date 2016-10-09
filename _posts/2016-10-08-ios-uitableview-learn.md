@@ -206,12 +206,11 @@ class TweetTableViewCell: UITableViewCell {
 
 **问题**  
 
-1. Transport security has blocked a cleartext HTTP   
-
+1. Transport security has blocked a cleartext HTTP        
 解决方法参见：[stackoverflow](http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http)
 
 
-**源码**[smashtag](https://github.com/whuhan2013/IOSProject/tree/master/SmashTag)
+**源码:**[smashtag](https://github.com/whuhan2013/IOSProject/tree/master/SmashTag)
 
 ![](https://github.com/whuhan2013/ImageRepertory/blob/master/ios/p15.png?raw=true)
 
