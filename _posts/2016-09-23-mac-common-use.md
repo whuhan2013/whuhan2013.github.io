@@ -53,6 +53,13 @@ Mac不像Win那样，按住左上角关闭按钮就是退出程序，在Mac中�
 [Mac 百度云加速下载](http://xclient.info/a/6b6c46df-3e4f-1b17-ae30-0c8b49df92cc.html)
 
 
+**mac效率提升**   
+
+[提升你的 Mac 生产力](https://zhuanlan.zhihu.com/p/22673342)        
+[Mac效率利器（一）系统管理篇](http://kaito-kidd.com/2016/09/13/Mac-edge-tools-system/)        
+[Mac效率利器（二）开发篇](http://kaito-kidd.com/2016/09/26/Mac-edge-tools-dev/)
+
+
 
 
 
