@@ -225,3 +225,15 @@ runwatch(d,0)
 [uiautomator python](https://github.com/xiaocong/uiautomator#watcher)
 
 [使用uiautomator的python封装进行测试](https://my.oschina.net/yangyanxing/blog/498403)
+
+
+**使用bash脚本运行automation**  
+
+```
+adb shell am instrument -w -r   -e debug false -e class com.rock.myapplication.RunnerTest com.rock.myapplication.test/android.support.test.runner.AndroidJUnitRunner
+```
+
+参考：[Android, Error=Unable to find instrumentation info for: ComponentInfo](http://stackoverflow.com/questions/36753486/android-error-unable-to-find-instrumentation-info-for-componentinfo)
+
+
+
