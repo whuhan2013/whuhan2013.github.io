@@ -31,6 +31,16 @@ aapt dump badging ~/temp/automattest/apk/app-internal-release-3.6.21.apk
 adb shell am start -n breakan.test/breakan.test.TestActivity
 ```
 
+**adb截图并发送到电脑** 
+
+```
+adb shell /system/bin/screencap -p /sdcard/screenshot.png（保存到SDCard）
+adb pull /sdcard/screenshot.png d:/screenshot.png（保存到电脑）
+```
+
+
+
+
 
 
 
