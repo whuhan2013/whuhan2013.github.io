@@ -12,6 +12,7 @@ description: WEB前端
 - 全世界最好的WEB前端学习网站：[Learn to Code and Help Nonprofits](https://www.freecodecamp.com/)    
 - FreeCodeCamp相关介绍：[如何在一年之内通过自学找到Web开发工作 - 从零学习前端开发 - 知乎专栏](https://zhuanlan.zhihu.com/p/22213177)
 - FreeCodeCamp项目源码，参考资料等:[FreeCodeCamp学习参考资料](https://zhuanlan.zhihu.com/p/22841310)
+- 各阶断web学习指南：[Web开发工程师完全成长指南](https://zhuanlan.zhihu.com/p/22978846)
 - 新手项目：[有哪些适合新手练手的前端项目](https://zhuanlan.zhihu.com/p/22766255)
 - 前端资源汇总：[送给前端的你，推荐几篇前端汇总文章。 - 学习编程 - 知乎专栏](https://zhuanlan.zhihu.com/p/22229868)
 - 前端博客：[有哪些值得关注的技术博客（前端篇）](https://zhuanlan.zhihu.com/p/22276837)
