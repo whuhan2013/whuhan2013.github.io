@@ -7,6 +7,9 @@ tags: [python]
 description: python学习资源.
 ---
 
+
+看知乎历史数据下载，可以用于分析知乎:[闲来无事写了个小玩意+看知乎历史数据下载](https://zhuanlan.zhihu.com/p/22887287)
+
 #### python入门
 - [Runestone Interactive](http://interactivepython.org/runestone/default/user/login)
 - [如何入门 Python 爬虫?-知乎](https://www.zhihu.com/question/20899988)
