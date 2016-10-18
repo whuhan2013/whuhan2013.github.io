@@ -87,6 +87,13 @@ text-align: center;
 ```
 
 
+**新闻中心制作**  
+
+**源码：** [新闻中心](https://github.com/whuhan2013/freeCodeCampProject/blob/master/newsCenter.html)
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/javascript/p2.png)
+
+
 
 
 
