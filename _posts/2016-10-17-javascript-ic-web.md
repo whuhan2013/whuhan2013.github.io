@@ -45,6 +45,18 @@ margin: 0 auto;
 }
 ```
 
+水平居中规定width之后用margin:0 auto;就可以了。另外关于居中的方法很多。这里再告诉你一种：
+
+```
+.Absolute-Center { 
+margin: auto; 
+position: absolute; 
+top: 0; left: 0; bottom: 0; right: 0; 
+} 
+```
+
+这个用在规定过高度的元素上可以水平且垂直居中。算是我看过兼容性各项比较好的。ie8以上都可以。
+
 **文字居中** 
 
 ```
@@ -130,6 +142,19 @@ text-align: center;
 ````
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/javascript/p3.png)
+
+
+**企业网站完整项目**  
+
+分为  
+
+- 首页
+- 新闻列表页
+- 新闻详情页
+
+**源代码:**[ICNWeb](https://github.com/whuhan2013/freeCodeCampProject/tree/master/INCWeb)
+
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/javascript/p4.png)
 
 
 
