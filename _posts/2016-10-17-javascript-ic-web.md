@@ -156,8 +156,18 @@ text-align: center;
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/javascript/p4.png)
 
+**编程挑战**
+
+小伙伴们，综合所学知识，制作如下所示的页面布局。
+
+要求：页面宽度1000px，水平居中。
 
 
+**源代码：**[MuKe挑战](https://github.com/whuhan2013/freeCodeCampProject/tree/master/MUKEparactice)
+
+**效果图**   
+
+![](http://img.mukewang.com/53edabd70001532811161020.jpg)
 
 
 
