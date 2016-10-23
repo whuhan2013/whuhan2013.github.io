@@ -20,3 +20,4 @@ description: WEB前端
 - [简要概述自学前端的5个月（大家来提提意见）？ - 三只小猪捡贝壳的回答 - 知乎](https://www.zhihu.com/question/36982021/answer/122581573?from=profile_answer_card)
 - [10大顶级公开课，带你入门Web前端开发](https://zhuanlan.zhihu.com/p/22700195)
 - [统一回复《怎么学JavaScript？》](https://zhuanlan.zhihu.com/p/22703019)
+- [Web 前端开发学习之路（入门篇)](http://www.jianshu.com/p/b9ad2af81e35)

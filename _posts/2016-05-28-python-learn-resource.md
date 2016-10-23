@@ -8,7 +8,10 @@ description: python学习资源.
 ---
 
 
-看知乎历史数据下载，可以用于分析知乎:[闲来无事写了个小玩意+看知乎历史数据下载](https://zhuanlan.zhihu.com/p/22887287)
+#### 爬虫与数据分析
+
+- 看知乎历史数据下载，可以用于分析知乎:[闲来无事写了个小玩意+看知乎历史数据下载](https://zhuanlan.zhihu.com/p/22887287)
+- [爬虫分析留学论坛](https://www.zhihu.com/question/27621722/answer/127684753?from=profile_answer_card)
 
 #### python入门
 - [Runestone Interactive](http://interactivepython.org/runestone/default/user/login)
