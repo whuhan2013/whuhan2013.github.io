@@ -44,7 +44,7 @@ description: 村庄尾字图实现
 
 与省份的方法类似，加载后效果如下，比较难看 ,所有的点都堆叠在一起了
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/weixin/p3.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/weixin/p3.jpg)
 
 同样，我们右键cun这个图层，选择properties，在Style中选择Categorized     
 
@@ -72,13 +72,13 @@ right(name,1)
 **注意**      
 由于可能数据导入时造成中文乱码问题，需要在设置中设置数据的编码方式  
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/weixin/p6.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/weixin/p6.jpg)
 
 **多种尾字图叠加效果** 
 
 如何生成混在一起的图呢，只需要将所有的尾字都勾选上就可以
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/weixin/p7.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/weixin/p7.jpg)
 
 
 可以由图得知   
@@ -91,7 +91,7 @@ right(name,1)
 **参考链接**    
 [中国村庄名称尾字图 教程](https://zhuanlan.zhihu.com/p/22659847)
 
-![](https://github.com/whuhan2013/ImageRepertory/blob/master/weixin/p5.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/weixin/p5.jpg)
 
 
 
