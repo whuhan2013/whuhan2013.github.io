@@ -15,3 +15,4 @@ description: 实用工具总结
 - 科学上网工具latern,速度较快：[http://lanterncn.cn/](http://lanterncn.cn/)
 - 科学上网，搭建服务器：[Docker实战(1)——使用Docker快速搭建Shadowsocks服务器 - 简书](http://www.jianshu.com/p/8535c9ddedc1)
 - Android尺寸，手机，网络相关工具类[https://github.com/Blankj/AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)
+- [kindle电子书资源](http://www.360doc.com/content/13/0624/17/12905210_295221511.shtml)
