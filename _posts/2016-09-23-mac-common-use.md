@@ -61,7 +61,9 @@ Mac不像Win那样，按住左上角关闭按钮就是退出程序，在Mac中�
 [Mac效率利器（二）开发篇](http://kaito-kidd.com/2016/09/26/Mac-edge-tools-dev/)
 
 
-
+**mac下sublime代码格式化**       
+安装HTML-CSS-JS Prettify: HTML-CSS-JavaScript 插件代码格式化      
+快捷键 command+shift+H
 
 
 

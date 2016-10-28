@@ -64,6 +64,35 @@ text-align: center;
 ```
 
 
+**display属性**         
+
+- none  此元素不会被显示。
+- block 此元素将显示为块级元素，此元素前后会带有换行符。
+- inline  默认。此元素会被显示为内联元素，元素前后没有换行符。
+- inline-block  行内块元素。（CSS2.1 新增的值）
+- table 此元素会作为块级表格来显示（类似 <table>），表格前后带有换行符。    
+
+**position**       
+
+absolute            
+生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。
+元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。
+
+fixed            
+生成绝对定位的元素，相对于浏览器窗口进行定位。
+元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。   
+
+relative               
+生成相对定位的元素，相对于其正常位置进行定位。
+因此，"left:20" 会向元素的 LEFT 位置添加 20 像素。
+
+static         
+默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。
+
+inherit           
+规定应该从父元素继承 position 属性的值。
+
+
 **myFocus库实现焦点图**  
 
 ```
