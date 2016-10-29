@@ -249,7 +249,7 @@ body {
 
 **源代码**[RandomQuote](https://github.com/whuhan2013/freeCodeCampProject/tree/master/RandomQuote)
 
-**live Demo**[live Demo]()
+**live Demo**[live Demo](https://whuhan2013.github.io/web/RandomQuote/index.html)
 
 
 
