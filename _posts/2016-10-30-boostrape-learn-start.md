@@ -45,12 +45,108 @@ Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统，�
 
 ![](http://images.cnitblog.com/blog/270324/201402/211703166921878.png)
 
+**栅格系统实例**     
+![](http://img.mukewang.com/5412b0f90001e80e12800575.jpg)
+
+```
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello World</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+    body {
+        padding: 5px;
+    }
+    
+    .row div p {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <p>慕课网是一家从事互联网免费教学的网络教育公司。秉承"开拓、创新、公平、分享"的精神，将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
+            </div>
+            <div class="col-md-4">
+                <p>慕课网是一家从事互联网免费教学的网络教育公司。秉承"开拓、创新、公平、分享"的精神，将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
+            </div>
+            <div class="col-md-4">
+                <p>慕课网是一家从事互联网免费教学的网络教育公司。秉承"开拓、创新、公平、分享"的精神，将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>慕课网是一家从事互联网免费教学的网络教育公司。秉承"开拓、创新、公平、分享"的精神，将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
+            </div>
+            <div class="col-md-4 col-md-offset-4">
+                <p>慕课网是一家从事互联网免费教学的网络教育公司。秉承"开拓、创新、公平、分享"的精神，将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                <p>慕课网是一家从事互联网免费教学的网络教育公司。秉承"开拓、创新、公平、分享"的精神，将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
+            </div>
+            <div class="col-md-3 col-md-offset-3">
+                <p>慕课网是一家从事互联网免费教学的网络教育公司。秉承"开拓、创新、公平、分享"的精神，将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <p>慕课网是一家从事互联网免费教学的网络教育公司。秉承"开拓、创新、公平、分享"的精神，将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
+            </div>
+        </div>
+    </div>
+    <script src=" http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+```
+
+
+
+
 #### 模板文件        
 包括按钮，表格，标签等的样式,代码参见：[template.html](https://github.com/whuhan2013/freeCodeCampProject/blob/master/bootstrap/template.html)
 
 可以通过这里详细学习：[玩转Bootstrap（基础）](http://www.imooc.com/learn/141)
 
 ![](https://raw.githubusercontent.com/whuhan2013/ImageRepertory/master/javascript/p14.png)
+
+
+**bootstrap综合实例**        
+
+主要包含以下功能
+
+- 导航栏
+- 滚动图片
+- 三栏布局
+- 标签页
+- 弹出框
+- 菜单定位
+
+**SOURCE：**[Bootstrap](https://github.com/whuhan2013/freeCodeCampProject/tree/master/bootstrap)
+
+**LiveDemo:**[现代浏览器博物馆](https://whuhan2013.github.io/web/bootstrap/index.html)
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/frontend/p1.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/frontend/p2.png)
 
 
 
