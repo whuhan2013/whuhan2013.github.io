@@ -66,6 +66,9 @@ Mac不像Win那样，按住左上角关闭按钮就是退出程序，在Mac中�
 快捷键 command+shift+H
 
 
+**mac录屏工具**        
+[Mac软件分享：上小巧实用的GIF格式录屏软件 LICEcap](http://www.cnblogs.com/emmet7life/p/4178599.html?utm_source=tuicool&utm_medium=referral)
+
 
 
 
