@@ -20,6 +20,7 @@ description: Mac使用入门
 搜索           command+f
 翻页           上一行是Command+上箭头 上一页是Command+Fn+上箭头
 sublime列操作   option+鼠标左键
+pageDown、pageUp   fn+上下箭头
 ```
 
 Mac不像Win那样，按住左上角关闭按钮就是退出程序，在Mac中‘关闭’的涵义只是关闭窗口，想要 退出程序 需要在菜单栏中或Dock右键“退出”程序
