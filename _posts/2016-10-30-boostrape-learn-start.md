@@ -149,5 +149,8 @@ Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统，�
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/frontend/p2.png)
 
 
+**Bootsrape练习**      
 
+[练习](https://github.com/whuhan2013/freeCodeCampProject/blob/master/bootstrap/practice.html)
+![](http://img.mukewang.com/543747c10001b14d19200943.jpg)
 
