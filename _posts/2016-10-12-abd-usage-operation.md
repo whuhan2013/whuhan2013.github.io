@@ -323,6 +323,82 @@ adb shell screenrecord /sdcard/demo.mp4
 ```
 
 
+**adb脚本在多个手机上运行** 
+
+```
+#!/bin/bash
+# Script adb+
+# Run any command adb provides on all your currently connected devices,
+# Or prompt to select one device
+
+showHelp() {
+    echo "Usage: adb+ [-a] <command>"
+    echo "       -h: show help"
+    echo "       -a: run command on all device"
+    echo "  command: normal adb commands"
+    echo
+    echo "Examples:"
+    echo "  adb+ -a install apidemo.apk"
+    echo "  adb+ shell"
+}
+
+if [[ $1 = '-h' ]]; then
+    showHelp
+    exit
+fi
+
+DEVICES=()
+while read line
+do
+    if [ ! "$line" = "" ] && [ `echo $line | awk '{print $2}'` = "device" ]
+    then
+        device=`echo $line | awk '{print $1 " - " $5} '`
+        DEVICES+=("${device}")
+    fi
+done < <(adb devices -l)
+
+#echo "${DEVICES[@]}"
+
+if [[ ${#DEVICES[@]} -lt 2 ]]; then
+    adb $@
+    exit
+fi
+
+if [[ $1 = '-a' ]]; then
+    shift
+    for dev in "${DEVICES[@]}"
+    do
+        device=`echo $dev | awk '{print $1}'`
+        adb -s $device $@
+    done
+    exit
+fi
+
+# select
+PS3="Enter number to select: "
+DEVICES+=('all')
+select dev in "${DEVICES[@]}"
+do
+case "$dev" in
+    'all')
+        $0 -a $*
+        break;;
+    *)
+        adb -s `echo $dev | awk '{print $1}'` $@
+        break;;
+esac
+done
+```
+
+运行方式
+
+```
+bash adb+.sh -a uninstall com.energymost.rocking
+bash adb+.sh -a install -r app-internal-release-3.9.14.apk
+bash adb+.sh -a shell am start -n com.energymost.rocking/com.energymost.rocking.MainActivity
+bash adb+.sh -a shell am instrument -w -r   -e debug false -e class com.rock.myapplication.RunnerTest com.rock.myapplication.test/android.support.test.runner.AndroidJUnitRunner
+```
+
 
 
 

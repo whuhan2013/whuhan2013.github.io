@@ -66,6 +66,11 @@ Mac不像Win那样，按住左上角关闭按钮就是退出程序，在Mac中�
 安装HTML-CSS-JS Prettify: HTML-CSS-JavaScript 插件代码格式化      
 快捷键 command+shift+H
 
+sublime的zoomCoding           
+
+可以快速生成大量重复代码，例如         
+div.row>div.col-md-12*10  使用ctr+e快捷键之后，会生成十个div
+
 
 **mac录屏工具**        
 [Mac软件分享：上小巧实用的GIF格式录屏软件 LICEcap](http://www.cnblogs.com/emmet7life/p/4178599.html?utm_source=tuicool&utm_medium=referral)
