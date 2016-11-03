@@ -75,6 +75,15 @@ div.row>div.col-md-12*10  使用ctr+e快捷键之后，会生成十个div
 **mac录屏工具**        
 [Mac软件分享：上小巧实用的GIF格式录屏软件 LICEcap](http://www.cnblogs.com/emmet7life/p/4178599.html?utm_source=tuicool&utm_medium=referral)
 
+**mac下安装tomcat**         
+
+- 将下载的zip包解压到usr/local目录下        
+- 将目录加到环境变量下，export PATH=${PATH}:/usr/local/apache-tomcat-8.5.6/bin，并用source .bash_profile激活     
+- sudo chmod 755 xxx/bin/*.sh     (xxx表示你tomcat放至的路径) 回车
+- startup.sh即可启动，shutdown.sh即可关闭      
+- 设置用户名与密码：<user username="admin" password="1234" roles="manager-gui"/>     
+
+参见：[mac下安装tomcat](http://blog.csdn.net/huyisu/article/details/38372663)
 
 
 
