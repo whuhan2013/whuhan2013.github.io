@@ -86,7 +86,9 @@ div.row>div.col-md-12*10  使用ctr+e快捷键之后，会生成十个div
 参见：[mac下安装tomcat](http://blog.csdn.net/huyisu/article/details/38372663)
 
 
+**mac下完全卸载postgresql**      
 
+[mac下完全卸载postgresql的方法](http://blog.csdn.net/stk_tianwen/article/details/17757393)
 
 
 
