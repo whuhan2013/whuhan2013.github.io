@@ -11,7 +11,8 @@ description: VIM常用操作
 
 ```
 翻页 整页翻页 ctrl-f ctrl-b
-f就是forword b就是backward
+f就是forword b就是backward       
+清除文件中的全部内容  先用G转到文件尾，再使用:1,.d 
 ```
 
 

@@ -218,7 +218,8 @@ class UITestDemo_UI_Tests: XCTestCase {
 [iOS 9 学习系列: UI Testing](http://blog.csdn.net/fish_yan_/article/details/50747861)       
 [Xcode7 UI自动化测试详解 带demo UITests](http://www.cocoachina.com/ios/20150925/13566.html)
 
-
+UITesting存在的问题：只适用于ios9.0以上的机器，以下的机器不能运行        
+同时存在不同的模拟器，比如iphon6,iphon6s等，有的可以正常运行，有的却不能等情况，不知道是模拟器的bug，还是程序的bug
 
 
 

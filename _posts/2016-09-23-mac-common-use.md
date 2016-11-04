@@ -91,4 +91,8 @@ div.row>div.col-md-12*10  使用ctr+e快捷键之后，会生成十个div
 [mac下完全卸载postgresql的方法](http://blog.csdn.net/stk_tianwen/article/details/17757393)
 
 
+**mac利用hosts文件科学上网**         
 
+1. 从https://laod.cn/hosts/2016-google-hosts.html下载最新hosts文件    
+2. 修改etc/hosts中的内容      
+3. 终端中输入sudo killall -HUP mDNSResponder即可
