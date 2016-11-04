@@ -1,6 +1,6 @@
 ---
 layout: post
-title: IOS之psychologist app
+title: psychologist app实现
 date: 2016-10-5
 categories: blog
 tags: [IOS]

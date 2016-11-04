@@ -31,4 +31,9 @@ xcode非常方便，在xcode下创建的模拟器也一点不卡，比android流
 
 ios项目在模拟器上测试时均无此错误，在真机上测试时有此现象，测试发现react native项目与oc项目均无此问题，swift项目有这个问题，此问题尚未解决。
 
+**更新**      
+解决方法太奇怪了，在钥匙串中将Apple Worldwide Developer Relations Certification Authority权限改为系统默认即可       
+参见：[dyld: Library not loaded: @rpath/libswiftCore.dylib中May的答案](http://stackoverflow.com/questions/26024100/dyld-library-not-loaded-rpath-libswiftcore-dylib)
+
+
 

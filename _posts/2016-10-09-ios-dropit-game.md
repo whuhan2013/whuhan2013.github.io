@@ -1,6 +1,6 @@
 ---
 layout: post
-title: IOS之dropit小游戏
+title: dropit小游戏实现
 date: 2016-10-9
 categories: blog
 tags: [IOS]

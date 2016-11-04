@@ -1,6 +1,6 @@
 ---
 layout: post
-title: IOS之笑脸app
+title: 笑脸app实现
 date: 2016-10-4
 categories: blog
 tags: [IOS]
