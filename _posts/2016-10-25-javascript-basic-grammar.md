@@ -311,7 +311,13 @@ rot13("SERR PBQR PNZC");
 
 
 
+**javascript获取数组的最大值**
 
+
+```
+var arr = [1, 2, 3];
+var max = Math.max(...arr);
+```
 
 
 
