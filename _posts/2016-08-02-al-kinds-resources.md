@@ -15,3 +15,12 @@ description: 各类学习资源
 - Awesome项目合集：[Awesome Awesomeness](https://github.com/bayandin/awesome-awesomeness)
 - 技术书籍：[有哪些可以提高程序员技术档次的书或博客？](https://www.zhihu.com/question/23821125#answer-42500600)
 - PPT学习资源：[ppter常去的几个网站你竟然不知道？](https://zhuanlan.zhihu.com/p/22367486)
+
+
+**kindle资源**         
+
+- 作者的个人网站，资源不多，界面好看：[周读](http://www.ireadweek.com/index.php/Index/index.html)
+- [有哪些好的kindle电子书下载网站？](https://www.zhihu.com/question/28498184)
+- 资源很多，不错，但每天只能下一本：[看看豆](https://kankandou.com/)
+- [kindle电子书资源](http://www.360doc.com/content/13/0624/17/12905210_295221511.shtml)
+

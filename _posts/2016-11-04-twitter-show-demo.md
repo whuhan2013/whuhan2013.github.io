@@ -1,13 +1,13 @@
 ---
 layout: post
-title: TWitch Streamers实现
+title: Twitch Streamers实现
 date: 2016-11-4
 categories: blog
 tags: [javascript]
 description: TWitch Streamers实现
 ---
 
-TWitch Streamers主要实现了以下功能       
+Twitch Streamers主要实现了以下功能       
 
 - 根据api获取twitter好友数据并展示      
 - 根据在线与离线状态可以切换效果
