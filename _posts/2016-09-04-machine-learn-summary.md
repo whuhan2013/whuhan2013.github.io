@@ -16,3 +16,4 @@ description: machine learning
 - 很多经验，可以看看：[深度学习如何入门](https://www.zhihu.com/question/26006703)
 - 这个Github上的Python机器学习库提供大量优秀资源，让你快速入门:[dive-into-machine-learning](https://github.com/hangtwenty/dive-into-machine-learning)
 - [肥肥的兔子的专栏](https://segmentfault.com/u/feifeidetuzi/articles)
+- 非常非常棒的一系列　python 机器学习（Machine Learning）实践入门教程:[python Machine Learning](http://www.johnwittenauer.net/machine-learning-exercises-in-python-part-1/)

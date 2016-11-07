@@ -10,14 +10,6 @@ description: python相关博客
 这里是学习过程中碰到的比较好的python相关博客与资源，记录下来，方便将来学习。          
 
 
-**数据分析**
-
-- [怎么用最短时间高效而踏实地学习Python](https://www.zhihu.com/question/28530832#answer-18871330)
-- [Python下开始数据科学研究的全面指南](https://zhuanlan.zhihu.com/p/22256689)
-- 非常非常棒的一系列　python 机器学习（Machine Learning）实践入门教程:[python Machine Learning](http://www.johnwittenauer.net/machine-learning-exercises-in-python-part-1/)
-- 从入门到精通，非常详实:[零基础学习Python数据分析 - 聊聊数据统计分析 - 知乎专栏](https://zhuanlan.zhihu.com/p/21799170)
-- [数据科学家的完整学习路径（Python版）](https://zhuanlan.zhihu.com/p/23229114)
-
 
 **入门**          
 
