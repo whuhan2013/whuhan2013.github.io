@@ -222,7 +222,49 @@ UITesting存在的问题：只适用于ios9.0以上的机器，以下的机器�
 同时存在不同的模拟器，比如iphon6,iphon6s等，有的可以正常运行，有的却不能等情况，不知道是模拟器的bug，还是程序的bug
 
 
+#### ios UI Automation      
 
+UI Automation是黑盒测试，基于javascript语言。      
+
+**实现要点**          
+
+- 标签上要加上accessibilty为true      
+- 要选中user interaction enabled      
+- 可以通过setting-general-accessiibilty中的工具探测id
+
+```
+var target = UIATarget.localTarget();
+var inputField = target.frontMostApp().mainWindow().textFields()["theinput"];
+inputField.setValue("hifdssdf");
+if (inputField.value() != "hi") UIALogger.logFail("The Input Field was NOT able to be set with the string!");
+else UIALogger.logPass("The Input Field was able to be set with the string!");
+
+target.frontMostApp().mainWindow().buttons()["Jumblify Button"].tap();
+
+target.delay(2);
+inputField.setValue("hi");
+target.delay(10);
+target.frontMostApp().mainWindow().buttons()["Jumblify Button"].tap();
+```
+
+```
+var target = UIATarget.localTarget();
+
+var inputField = target.frontMostApp().mainWindow().textFields()["theinput"];
+inputField.setValue("hi");
+if (inputField.value() != "hi") UIALogger.logFail("The Input Field was NOT able to be set with the string!");
+else UIALogger.logPass("The Input Field was able to be set with the string!");
+var button = target.frontMostApp().mainWindow().buttons()["Jumblify Button"];
+button.tap();
+target.frontMostApp().mainWindow().logElementTree();
+var stringResult = target.frontMostApp().mainWindow().staticTexts()["ih"];
+if (! stringResult.isValid()) UIALogger.logFail("The output text was NOT set with the correctly reversed string!");
+else UIALogger.logPass("The output text was set with the correctly reversed string!");
+```
+
+**参考链接**        
+[Introduction to iOS Testing With UI Automation](https://code.tutsplus.com/tutorials/introduction-to-ios-testing-with-ui-automation--cms-22730)        
+[如何使用UIAutomation进行iOS 自动化测试](https://my.oschina.net/u/1049180/blog/404681)
 
 
 
