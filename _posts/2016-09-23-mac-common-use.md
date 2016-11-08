@@ -96,3 +96,8 @@ div.row>div.col-md-12*10  使用ctr+e快捷键之后，会生成十个div
 1. 从https://laod.cn/hosts/2016-google-hosts.html下载最新hosts文件    
 2. 修改etc/hosts中的内容      
 3. 终端中输入sudo killall -HUP mDNSResponder即可
+
+
+**chrome网页视频下载**                
+使用FVD Video Downloaders插件可以有效的嗅探网页程序，现在好像更新成Flash Video Downloader了，不过没有以前的好用，可以手动下载老版并安装
+同时用internet Download Manager For Chrome管理下载。
