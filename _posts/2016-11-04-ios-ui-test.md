@@ -262,9 +262,59 @@ if (! stringResult.isValid()) UIALogger.logFail("The output text was NOT set wit
 else UIALogger.logPass("The output text was set with the correctly reversed string!");
 ```
 
-**参考链接**        
+**使用命令行运行**         
+
+如果你想让你的测试代码自动的运行起来，你还可以通过命令行来启动测试。其实，我比较推荐这种方式，而不是使用Instruments的图形界面程序。因为，Instruments的图形界面程序比较慢，而且即使你的测试代码跑完了它也还是会一直运行着。而通过命令行来启动和运行测试代码更快，它会在跑完测试后自动的停止。
+
+为了可以在命令行终端运行你的脚本，你需要知道你设备的UDID和类型：
+
+```
+instruments -w your_ios_udid -t 
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Instruments/PlugIns/AutomationInstrument.bundle/Contents/Resources/Automation.tracetemplate 
+name_of_your_app -e UIASCRIPT absolute_path_to_the_test_file
+例如，使用我自己的机子，就这么写的：
+
+instruments -w a2de620d4fc33e91f1f2f8a8cb0841d2xxxxxxxx -t 
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Instruments/PlugIns/AutomationInstrument.bundle/Contents/Resources/Automation.tracetemplate 
+TestAutomation -e UIASCRIPT 
+/Users/jc/Documents/Dev/TestAutomation/TestAutomation/TestUI/Test-2.js
+```
+
+一个小提示，不要忘了关闭你设备的密码验证，否则你会看到这样的日志信息的：remote exception encountered : ’device locked : Failed to launch process with bundle identifier ’com.manbolo.testautomation’. 的确，因为UIAutomation根本不知道你的密码啊。
+
+命令行终端同样可以在模拟器上使用，但你需要知道待测应用程序在文件系统中的绝对路径。模拟器将目录~/Library/Application Support/iPhone Simulator/5.1/ “模拟”成了设备的文件系统。在这个目录下，你可以找到一个包含装在模拟器上的所有应用程序的沙盒的Applications文件夹。定位到TestAutomation程序的目录，然后：
+
+```
+instruments -t /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Instruments/PlugIns/AutomationInstrument.bundle/Contents/Resources/Automation.tracetemplate "/Users/jc/Library/Application Support/iPhone Simulator/5.1/Applications/C28DDC1B-810E-43BD-A0E7-C16A680D8E15/TestAutomation.app" -e UIASCRIPT /Users/jc/Documents/Dev/TestAutomation/TestAutomation/TestUI/Test-2.js
+```
+
+最后，如果你没有指定日志输入到哪里的话，你的测试结果会被放到你命令行当前指定（工作）的目录下。你可以通过加入 -e UIARESULTSPATH results_path 参数来指定日志输入目录。
+
+我没有成功的将多个测试脚本并行着在命令行中运行起来。但是你可以将你的测试脚本串连进来，有一整晚去跑它，这样就真正的实现了“在你睡着的时候”，就完成了对应用程序的测试。
+
+**XCODE7模拟器与模拟器中app的路径**       
+ 在Xcode 7中, 模拟器的位置改变为：                          
+/Users/username/Library/Developer/CoreSimulator/Devices       
+在此目录下，有许多文件夹这就是模拟器啦：    
+
+2. 在Terminal中使用如下命令：        
+xcrun simctl list    
+可以知道uuid与版本的对应关系      
+
+比如，iOS 9.3下，iPhone 6s：         
+iPhone 6s (60B8F826-8241-498A-A180-35C3F4F59562) (Booted)
+
+因此，Application目录在：          
+/Users/username/Library/Developer/CoreSimulator/Devices/D2A94C2D-3216-4737-A502-5B64B38F6124/data/Containers/Data/Application/
+
+**参见：**[ Xcode 7中模拟器的位置](http://blog.csdn.net/yaoliangjun306/article/details/51481809)
+
+**参考链接**           
+[如何使用UIAutomation进行iOS 自动化测试（Part II）](http://www.cnblogs.com/vowei/archive/2012/08/17/2644158.html)       
 [Introduction to iOS Testing With UI Automation](https://code.tutsplus.com/tutorials/introduction-to-ios-testing-with-ui-automation--cms-22730)        
 [如何使用UIAutomation进行iOS 自动化测试](https://my.oschina.net/u/1049180/blog/404681)
+
+
 
 
 
