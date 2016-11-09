@@ -30,5 +30,14 @@ description: R语言入门
 	+ Slidify:制作和发布基于R的报告(PPT)
 
 
+**安装**        
+R与RStudio的安装       
+
+**包的安装**       
+下载r-package：cran、bioconductor、github      
+
+
+
+
 
 

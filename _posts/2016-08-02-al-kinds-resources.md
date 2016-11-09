@@ -16,6 +16,10 @@ description: 各类学习资源
 - 技术书籍：[有哪些可以提高程序员技术档次的书或博客？](https://www.zhihu.com/question/23821125#answer-42500600)
 - PPT学习资源：[ppter常去的几个网站你竟然不知道？](https://zhuanlan.zhihu.com/p/22367486)
 
+**公开课资源**        
+
+- [公开课可下载资源汇总](http://blog.coursegraph.com/%E5%85%AC%E5%BC%80%E8%AF%BE%E5%8F%AF%E4%B8%8B%E8%BD%BD%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB)
+- [共享我收藏的Coursera、Udacity等课程](https://www.douban.com/group/topic/44748285/)
 
 **kindle资源**         
 
