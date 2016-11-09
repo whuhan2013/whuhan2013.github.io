@@ -18,6 +18,7 @@ description: 各类学习资源
 
 **公开课资源**        
 
+- 课程图谱，各种公开课资源，很不错的网站：[http://blog.coursegraph.com/](http://blog.coursegraph.com/)
 - [公开课可下载资源汇总](http://blog.coursegraph.com/%E5%85%AC%E5%BC%80%E8%AF%BE%E5%8F%AF%E4%B8%8B%E8%BD%BD%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB)
 - [共享我收藏的Coursera、Udacity等课程](https://www.douban.com/group/topic/44748285/)
 
