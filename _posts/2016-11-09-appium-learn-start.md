@@ -3,8 +3,8 @@ layout: post
 title: Appium入门
 date: 2016-11-9
 categories: blog
-tags: [数据分析]
-description: R语言入门
+tags: [IOS]
+description: Appium入门
 ---
 
 Appium的使用，主要有四个方面的因素：
