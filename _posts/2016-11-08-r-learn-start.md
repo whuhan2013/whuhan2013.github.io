@@ -291,3 +291,158 @@ x%*%y //矩阵乘法
 ![](http://img.mukewang.com/5815e0060001ae4812800720.jpg)
 
 
+#### R语言重要函数的使用      
+
+**lapply函数**    
+
+- lapply 可以循环处理列表中每一个元素
+- lapply(参数):lapply(列表，函数/函数名，其他参数)
+- 结果总是返回一个列表
+
+str(lapply)
+
+```
+eg:
+x<-list(a=1:10,b=c(11,21,31,41,51))
+lapply(x,mean)#求平均
+
+x<-1:4
+lapply(x,runif)#runif，从一个均匀分布的总体里，抽取若干个数
+lapply(x,runif,min=0,max=1000)
+
+
+x<-list(a=matrix(1:6,2,3),b=matrix(4:7,2,2))
+lapply(x,function(m) m[1,])
+
+sapply//对lapply进行化简
+结果列表长度均为1，返回向量
+结果列表元素相同且大于1，返回矩阵
+```
+
+
+**apply**       
+
+#沿着数组的某一维度处理数据   
+#将函数用于矩阵的行或者列      
+#一句话就可以完成for/while函数    
+#apply(数组,维度,函数/函数名)   
+
+对于矩阵第一维度为行，第二维度为列
+
+```
+x <- matrix(1:16,4,4)
+apply(x, 2, mean)#求列的平均
+apply(x, 2, sum)#求列和
+apply(x, 1, mean)#求行的平均
+apply(x, 1, sum)#求行和
+
+x <- matrix(rnorm(100),10,10)  //rnorm随机从正态分布的数据中取出100个数据
+apply(x, 1, quantile, probs = c(0.25, 0.75))
+
+x <- array(rnorm(2*3*4),c(2,3,4))
+apply(x,c(1,2), mean)
+```
+
+**mapply**   
+
+#lapply的多元版本       
+#mapply（参数）      
+#mapply(函数/函数名，数据， 函数相关的参数)        
+
+```
+a<-list(rep(1,4), rep(2,3), rep(3,2),rep(4,1))
+b<-mapply(rep,1:4,4:1)#等价于上面的list
+
+s <- function(n, mean ,std){
+  rnorm(n, mean, std)
+}
+s(4,0,1)
+#调用函数s,生成1到5四个元素，其中均值是5到1，标准差是2
+mapply(s, 1:5,5:1,2)
+list(s(1,5,2),s(2,4,2),s(3,3,2),s(4,2,2),s(5,1,2))#这个list的效果跟mapply函数一样
+```
+
+**tapply**        
+
+#对向量的子集进行操作       
+tapply(向量，因子/因子列表，函数/函数名)      
+
+```
+x <- c(rnorm(5), runif(5),rnorm(5,1))
+f <- gl(3,5)
+tapply(x,f,mean)
+tapply(x,f,mean, simplify = FALSE)
+```
+
+**split**      
+
+- 根据因子或者因子列表将向量或其他对象分组        
+- 通常与lapply一起使用                        
+- 参数格式：split(向量/列表/数据框,因子/因子列表)    
+
+```
+x <- c(rnorm(5), runif(5),rnorm(5,1))
+f <- gl(3,5)
+split(x,f)
+lapply(split(x,f), mean)
+lapply(split(x,f), sum)
+
+head(airquality)
+
+split(airquality,airquality$Month)#按照month分组查看
+s <- split(airquality,airquality$Month)
+
+table(airquality$Month)#查看每个Month下包含的记录数
+
+lapply(s, function(x) colMeans(x[,c("Ozone","Wind","Temp")]))# 求平均值
+sapply(s, function(x) colMeans(x[,c("Ozone","Wind","Temp")]))#简化显示结果
+sapply(s, function(x) colMeans(x[,c("Ozone","Wind","Temp")],na.rm = T))#处理缺失值
+```
+
+**排序**    
+
+- sort对向量进行排序，返回排好序的内容
+- order返回排好序的内容的下标
+
+```
+x <- data.frame(v1=1:5, v2=c(10,7,9,6,8), v3=11:15, v4=c(1,1,2,2,1))
+x
+sort(x$v2)#v2列按照升序排列
+sort(x$v2,decreasing = True)#v2列按照降序排列
+
+order(x$v2)#返回的不是内容本身，是内容的下标
+x[order(x$v2),]#对x数据框按照v2进行排序
+x[order(x$v4, x$v2, decreasing = True), ]#将序排列x,先按照v4,次要按照v2
+```
+
+**总结数据信息**   
+
+#默认前六行或者后六行
+
+```
+head(airquality, 10)#查看前10行
+tail(airquality, 10)#查看后10行
+
+summary(airquality)#总结，数据分布整体把握
+str(airquality)#以简洁方式对数据总结
+
+table(airquality$Month)#对列进行频数统计
+table(airquality$Ozone, useNA = "ifany")#将Ozone中NA的数值统计出来
+
+any(is.na(airquality$Ozone))#判断是否有缺失值，true是有缺失值
+sum(is.na(airquality$Ozone))#统计缺失值数量
+
+all(airquality$Month < 12)#查看是不是所有的月份都小于12
+```
+
+#将Titanic强制转换为数据框
+
+```
+t <- as.data.frame(Titanic)
+x <- xtabs(Freq ~ Class + Age, data = t)#按照Class和Age生成交叉表
+ftable(x)#扁平化显示
+object.size(airquality)#查看对象大小
+print(object.size(airquality),units="Kb")#按照kb显示大小
+```
+
+![](http://img.mukewang.com/5815ebc00001d43f12800720.jpg)
