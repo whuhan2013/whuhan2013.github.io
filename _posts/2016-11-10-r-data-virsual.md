@@ -26,5 +26,29 @@ description: R语言之数据可视化
 ![](http://img.mukewang.com/5816e79c00010c4712800720.jpg)      
 
 **数值变量的特征与可视化**         
-
+集中趋势量
 ![](http://img.mukewang.com/5816e8390001506512800720.jpg)
+分散趋势量
+![](http://img.mukewang.com/57af010100016d3312800720.jpg)    
+稳健统计量：受到均值的影响是否大
+![](http://img.mukewang.com/57af01800001896b12800720.jpg)       
+可视化一个变量：箱图 四分位点 以及  极值的定义
+![](http://img.mukewang.com/57af03250001f27912800720.jpg)       
+
+
+**分类变量的特征与可视化**             
+
+![](http://img.mukewang.com/5816edef00018b4512800720.jpg)       
+
+两个分类变量的关系    
+列联表 +相对频率表     
+![](http://img.mukewang.com/5816eed100012c8a12800720.jpg)     
+
+两个分类变量的关系（可视化）：分段条形图，相对频率分段条形图     
+![](http://img.mukewang.com/57af07040001628212800720.jpg)      
+
+![](http://img.mukewang.com/57af07730001bfca12800720.jpg)   
+
+一个分类变量、一个数值变量的关系：并排箱图      
+![](http://img.mukewang.com/57cfb02000012bd912800720.jpg)
+
