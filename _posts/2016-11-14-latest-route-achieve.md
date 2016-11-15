@@ -247,3 +247,193 @@ order by t2.seq
 
 ![](https://github.com/whuhan2013/myImage/blob/master/R/p6.png?raw=true)
 
+**客户端实现**       
+
+```
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./css/prism.css" type="text/css">
+    <link rel="stylesheet" href="./css/ol.css" type="text/css">
+    <link rel="stylesheet" href="./css/layout.css" type="text/css">
+    <link rel="stylesheet" href="./css/popup.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <script src="js/ol-debug.js"></script>
+    <script src="js/ol-deps.js"></script>
+    <script src="js/ol.js"></script>
+    <title>HomeWork</title>
+</head>
+
+<body>
+    <div class="mycontainer">
+        <div class="row" id="header">
+            <h1>Digital engineering practice</h1>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="map" class="map"></div>
+                <div id="popup" class="ol-popup">
+                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                    <div id="popup-content"></div>
+                </div>
+                <!--鼠标点击-->
+                <div class="buttonlay">
+                    <button type="button" id="btStart" onclick="btStart_click()" data-original-title="Click" class="btn btn-lg btn-default btn-check mybutton"><span>Click to input start point</span></button>
+                    <button type="button" id="btEnd" onclick="btEnd_click()" data-original-title="Click" class="btn btn-lg btn-default btn-check mybutton"><span>Click to input end point</span> </button>
+                    <button type="button" id="selectShort" onclick="select_click()" data-original-title="Click" class="btn btn-lg btn-default btn-check mybutton"> <span>Click to slect shortest way</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+/**
+ * Elements that make up the popup.
+ */
+var container = document.getElementById('popup');
+var content = document.getElementById('popup-content');
+var closer = document.getElementById('popup-closer');
+
+//记录按钮动作
+var ableSt = false;
+var ableEd = false;
+
+//起点经度，起点维度，终点经度，终点纬度
+var st_lon, st_lat, ed_lon, ed_lat;
+
+
+/**
+ * Create an overlay to anchor the popup to the map.
+ */
+var overlay = new ol.Overlay( /** @type {olx.OverlayOptions} */ ({
+    element: container,
+    autoPan: true,
+    autoPanAnimation: {
+        duration: 250
+    }
+}));
+
+/**
+ * 加载瓦片图层
+ **/
+var source = new ol.source.XYZ({
+    url: 'http://localhost:8080/tilemill/{z}/{x}/{y}.png'
+});
+
+var center = ol.proj.transform([114.2207, 30.5960], 'EPSG:4326', 'EPSG:3857');
+var map = new ol.Map({
+    logo: false,
+    layers: [
+        new ol.layer.Tile({
+            source: source
+        })
+    ],
+    overlays: [overlay],
+    target: 'map',
+    view: new ol.View({
+        maxZoom: 18,
+        center: center,
+        zoom: 10
+    })
+});
+
+
+
+/**
+ * Add a click handler to hide the popup.
+ * @return {boolean} Don't follow the href.
+ */
+closer.onclick = function() {
+    overlay.setPosition(undefined);
+    closer.blur();
+    return false;
+};
+
+
+/**
+ * Add a click handler to the map to render the popup.
+ */
+map.on('singleclick', function(evt) {
+    var coordinate = evt.coordinate;
+    var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+        coordinate, 'EPSG:3857', 'EPSG:4326'));
+    var xy = ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326').toString();
+    var lon_string = xy.split(",")[0];
+    var lat_string = xy.split(",")[1];
+
+    var lon_number = new Number(lon_string);
+    var lat_number = new Number(lat_string);
+
+    if (ableSt) {
+        st_lon = lon_number.toFixed(4);
+        st_lat = lat_number.toFixed(4);
+        content.innerHTML = '<p>You put start point here:</p><code>' + hdms + '</code>';
+        ableSt = false;
+    } else {
+        if (ableEd) {
+            ed_lon = lon_number.toFixed(4);
+            ed_lat = lat_number.toFixed(4);
+            content.innerHTML = '<p>You put end point here:</p><code>' + hdms + '</code>';
+            ableEd = false;
+        } else {
+            content.innerHTML = '<p>You clicked here:</p><code>' + hdms + '</code>';
+        }
+    }
+
+    overlay.setPosition(coordinate);
+});
+
+/**
+ *按钮相应事件
+ **/
+function btStart_click() {
+    ableSt = true;
+}
+
+function btEnd_click() {
+    ableEd = true;
+}
+
+//最短路径按钮
+function select_click() {
+    overlay.setPosition(undefined);
+    closer.blur();
+
+    var getwayurl = 'http://localhost:8080/geoserver/wuhan/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=wuhan:wuhan&maxFeatures=50&outputFormat=application/json&viewparams=' + 'st_lon:' + st_lon + ';st_lat:' + st_lat + ';ed_lon:' + ed_lon + ';ed_lat:' + ed_lat;
+    var getMywayurl = 'http://localhost:8080/geoserver/wuhanwork/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=wuhanwork:tt&maxFeatures=50&outputFormat=application/json&viewparams=' + 'startLon:' + st_lon + ';startLat:' + st_lat + ';endLon:' + ed_lon + ';endLat:' + ed_lat;
+
+    var roadsource = new ol.layer.Vector({
+        source: new ol.source.Vector({       
+            url: getMywayurl,
+            format: new ol.format.GeoJSON({
+                extractStyles: true
+            }),
+            style: new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: [255, 255, 255, 1],
+                    width: 30
+                })
+            })
+        })
+    });
+
+    map.addLayer(roadsource);
+}
+</script>
+
+</html>
+```
+
+**源代码:**[SourceCode](https://github.com/whuhan2013/mywebproject/tree/master/DigitalEnginn)
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/R/p7.png)
