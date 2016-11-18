@@ -22,10 +22,12 @@ description: 各类学习资源
 - [公开课可下载资源汇总](http://blog.coursegraph.com/%E5%85%AC%E5%BC%80%E8%AF%BE%E5%8F%AF%E4%B8%8B%E8%BD%BD%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB)
 - [共享我收藏的Coursera、Udacity等课程](https://www.douban.com/group/topic/44748285/)
 
+
 **kindle资源**         
 
 - 作者的个人网站，资源不多，界面好看：[周读](http://www.ireadweek.com/index.php/Index/index.html)
 - [有哪些好的kindle电子书下载网站？](https://www.zhihu.com/question/28498184)
 - 资源很多，不错，但每天只能下一本：[看看豆](https://kankandou.com/)
 - [kindle电子书资源](http://www.360doc.com/content/13/0624/17/12905210_295221511.shtml)
+- 可以生词提示的电子书：[生词提示电子书](https://www.amazon.cn/b/ref=amb_link_108167292_7?node=1437806071&pf_rd_m=A1AJ19PSB66TGU&pf_rd_s=merchandised-search-1&pf_rd_r=SYE3NYF3AMZ3NZ73AH41&pf_rd_t=101&pf_rd_p=284511432&pf_rd_i=116169071)
 

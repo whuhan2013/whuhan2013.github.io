@@ -18,5 +18,17 @@ yo react-webpack
 ```
 
 注意webpack版本发生了变化，所以需要指定1.2.11版本，安装时要注意安装npm install,把需要的依赖全装上，不然会出各种错误
-完成后用grunt serve运行即可      
+完成后用grunt serve运行即可  
+
+**使localhost:8000热更新实现**     
+在index.html中添加<script type="text/javascript" src="/webpack-dev-server.js"></script>即可    
+
+**安装loader** 
+
+```
+npm install autoprefixer-loader --save-dev
+npm install json-loader --save-dev    
+```
+
+
 

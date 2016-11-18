@@ -101,3 +101,6 @@ div.row>div.col-md-12*10  使用ctr+e快捷键之后，会生成十个div
 **chrome网页视频下载**                
 使用FVD Video Downloaders插件可以有效的嗅探网页程序，现在好像更新成Flash Video Downloader了，不过没有以前的好用，可以手动下载老版并安装
 同时用internet Download Manager For Chrome管理下载。
+
+**spotlight查找文件并打开文件夹**     
+[Spotlight搜索文件并打开所在文件夹](http://jingyan.baidu.com/article/ab0b563084f8a9c15afa7d8a.html)
