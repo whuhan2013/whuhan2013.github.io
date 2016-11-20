@@ -18,57 +18,58 @@ matlab的lincense
 
 a symbol, or symbols, printed by a program to indicate that it's ready 4 input from the user of the program.
 
-2. Ctrl + C
+2、 Ctrl + C
 
 powerful command to quit
 
 
 
-3. CLC
+3、CLC
 
 clean the screen
 
 
 
-4. variable
+4、variable
 
 once assigned value, store it until change
 
 
 
-5.function = command
+5、function = command
 
 
 
-6. up button
+6、up button
 
 show the latest command history or repeat command
 
 
 
-7. 变量名可以使用underscore、upper case（任何位置）、数字，但数字不能放在第一个、特殊符号也不能出现在变量名，下划线不能出现在第一个位置
+7、变量名可以使用underscore、upper case（任何位置）、数字，但数字不能放在第一个、特殊符号也不能出现在变量名，下划线不能出现在第一个位置
 
 
 
-8.一行可以有两个分号隔开的commands，多行可以构成一个command，在前一行加上 ...
+8、一行可以有两个分号隔开的commands，多行可以构成一个command，在前一行加上 ...
 
 
 
-9. syntax is a language's set of rules for the form of the statements.
+9、syntax is a language's set of rules for the form of the statements.
 
 
 
-10. semantics is the meaning.
+10、 semantics is the meaning.
 
 比如x和y交换值的常见错误 x = y; y=x; %这样没有起到交换的本意
 
+```
 >> temp = x;        
 >> x = y;      
 >> y = temp;       
+```
 
 
-
-11. 语义错误比语法错误更严重，且不易发现
+11、 语义错误比语法错误更严重，且不易发现
 
 
 
@@ -84,7 +85,7 @@ show the latest command history or repeat command
 
 
 
-15. axis on/off 是坐标轴是否显示，grid on/off 是网格是否显示。
+15.axis on/off 是坐标轴是否显示，grid on/off 是网格是否显示。
 
 #### 矩阵与运算符      
 
