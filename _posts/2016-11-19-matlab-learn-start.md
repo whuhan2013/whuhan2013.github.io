@@ -155,3 +155,16 @@ Matrix Multiplication (z=x*y) is different from Array Multiplication (z=x.*y):
      3. Calculation of each element of z uses both multiplication and addition      
      
 [size(A),size(B)] 若得到vector中间两个数相同，则可以做矩阵的乘法
+
+**2.6 Arithmetic Part 2**      
+
+Z=X./Y 每个位置上x/y    
+Z=X.\Y 每个位置上y/x           
+X.^N 每个位置都开对应位置的N次方     
+X^3 X自己乘自己3次——必须是正方形矩阵     
+A+3 每个位置上的数都加3       
+
+**Precedence 计算的优先级**
+
+Unary examples: +2, -4, -x, H'    
+Binary examples: 3-4, X.*Y, X*Y, A^3      
