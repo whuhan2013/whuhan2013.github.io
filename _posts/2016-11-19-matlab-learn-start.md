@@ -14,7 +14,7 @@ description: Matlab学习入门
 matlab的lincense       
 [https://matlab.mathworks.com/](https://matlab.mathworks.com/)
 
-1. prompt
+1、 prompt
 
 a symbol, or symbols, printed by a program to indicate that it's ready 4 input from the user of the program.
 
@@ -119,3 +119,39 @@ ints = 1:100
 和colon(1,3,7) / colon(1,100)是一样的
 ```
 
+
+**2.3 Accessing Parts of a Matrix**       
+
+```
+x(2,3) 调出第二行第三个数字
+也可以对x(2,3)赋值，则输出改后的整个矩阵
+如果对不存在的矩阵中某个位置赋值，则自动生成一个矩阵
+x (2,[1,3]) 输出第二行的第一列和第三列 — subarray
+获得一个倒过来的矩阵：x(2:-1:1,3:-1:1)
+x(end,2)最后一行
+x(1,end-1)倒数第二列
+x(:,2) 等同于x(1:end,2)
+```
+
+**2.4 Combining and Transforming Matrices**     
+
+```
+[A1 A2 A3] 横向排列三个矩阵
+[A1;A2;A3] 纵向排列三个矩阵
+G = H’ 即行列颠倒后的矩阵 (transpose)
+(1:2:5)’ 得到1 3 5的三行
+```
+
+
+**2.5 Arithmetic Part 1**  
+
+Z=X+Y是指每个对应位置的元素相加后得到的矩阵    
+Z=X.*Y指每个对应位置的元素相乘得到新的矩阵     
+Z=X*Y指每个元素乘以行对应列以后的元素的积的和     
+
+Matrix Multiplication (z=x*y) is different from Array Multiplication (z=x.*y):    
+     1. Operator has no dot (* instead of .*)                              
+     2. Operaands must be “compatible” (as opposed to having the same shape)     
+     3. Calculation of each element of z uses both multiplication and addition      
+     
+[size(A),size(B)] 若得到vector中间两个数相同，则可以做矩阵的乘法
