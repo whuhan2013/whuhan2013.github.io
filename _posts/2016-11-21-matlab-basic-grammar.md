@@ -42,3 +42,75 @@ Within command window:
 [x ss] = myRand(2,3) 则输出两个输出值
 ```
 
+**3.3 Formal Definition of Functions**     
+
+function [out_arg1, out_arg2, …] = function_name (in_arg1, in_arg2, …)        
+function name should be new & not exist, to check, use help exist       
+
+
+**3.4 Subfunctions**     
+
+重写上一个公式，用subfunction来实现：
+
+```
+Within editor window:
+function [a,s] = myRand(low,high)
+a = low+ran(3,4)*(high-low);
+s = sumAllElements(a);
+
+function summa = sumAllElements(M)
+v = M(:);
+summa = sum(v);
+```
+
+在command window里，只能call主公式，不能call subfunction
+
+
+**3.5 Scope**     
+
+scope: the set of statements that can access a variable
+local scope: accessibility by statements in only one function or only in the Command Window
+
+如何使上一个公式里的v在command window里能够调出：
+
+```
+Within editor window:
+function [a,s] = myRand(low,high)
+a = low+ran(3,4)*(high-low);
+s = sumAllElements(a);
+
+function summa = sumAllElements(M)
+global v;
+v = M(:);
+summa = sum(v);
+Within command window:
+global v 则可输出公式内的v
+```
+
+尽量少用global variable，会造成困惑
+
+
+**3.7 Scripts**     
+
+可以运行的一套程序，公式的一种
+
+```
+e.g. 关闭界面
+Within command window:
+edit EndLessionThree
+Within editor window:
+fprintf(‘This concludes Lesson 3\n’)
+pause(5);
+quit;
+```
+
+
+
+
+
+
+
+
+
+
+
