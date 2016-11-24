@@ -184,7 +184,30 @@ fprintf('How about a single quote ('')?\n')
 ```
 
 
+**4.4 Plotting**
 
+```
+figure(2); plot(a)则可对第二个a进行绘图，可以比较两张图（对a赋值一个vector就可以绘图——还会拟合的，但是只有y值，x值是vector的容量比如说1~10）
+plot(t,b)就可以自己设定横坐标了
+在一个figure上画两个图：
+x1 = 0 : 0.1 : 2*pi; y1 = sin(x1);
+x2 = pi/2 : 0.1 : 3*pi; y2 = cos(x2);
+plot(x1,y1,x2,y2)
+如何改变两条曲线的颜色/样式：
+plot(x1,y1,'r',x2,y2,'k:’) 则x1-y1是红色实线，x2-y2是黑色虚线
+使用doc plot / help plot来查找line styles的代码
+另一个方法来在一个figure上画两个图：
+>> plot(x1,y1,'r')
+>> hold on
+>> plot(x2,y2,'k:')
+>> hold off
+grid: 在figure上显示网格
+title, xlabel, ylabel: 添加图表信息
+legend(‘aaa’,’bbb’): 添加多条线的指示信息
+axis([a b c d]): 四个数字分别是x,y轴的最大/最小值
+close all: 关掉所有的figure
+```
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/matlab/p1.png)
 
 
