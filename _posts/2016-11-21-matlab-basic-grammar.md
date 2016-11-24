@@ -211,3 +211,30 @@ close all: 关掉所有的figure
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/matlab/p1.png)
 
 
+**4.5 Debugging**
+
+```
+Syntax errors: red arrow messages
+Semantics errors:
+Sometimes MATLAB can catch it
+Some may cause the wrong result every time
+Some may only cause problems occasionally (e.g., with a certain combination of inputs)
+Hard to notice and find the cause of
+Important to test with a wide variety of inputs
+Syntax error examples:
+1 = x
+ramd(2)
+randd(2)
+y = rand(1,5); y(6) — runtime error
+Using debugger to debug
+Example:
+Edit rand_int
+function x = rand_int(n,m)
+x = randi(n,m);
+fprintf('The last element on the last row is %d.\n', x(n,m));
+Within command window, when entering "rand_int(3,2)”, it shows “索引超出矩阵维度。出错 rand_int (line 3)"
+在editor window里点击第三行最前的“-”，得到一个红色的点，是一个运行的停止点，可以在edit里任意添加多少个停止点，这种时候再运行function就是debugger模式，workspace里会显示function内部的变量，点击step来一步一步检查
+运行时会出现“K>>”K的意思是这时候可以用keyboard来在公式内部进行操作
+这个公式的错误在于对于randi的使用
+退出debugger：dbquit或者点击窗口上方的退出键
+```
