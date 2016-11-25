@@ -50,3 +50,9 @@ You can have how many “else-ifs" as you want.
 ```
 
 
+**5.2 If-Statements, continued**
+
+
+Return: Return control to invoking function        
+This MATLAB function forces MATLAB to return control to the invoking function before it reaches the end of the function.
+在function里面可以将得到的结果重新运用于上一个if语句

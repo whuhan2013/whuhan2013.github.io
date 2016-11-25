@@ -237,4 +237,4 @@ Within command window, when entering "rand_int(3,2)”, it shows “索引超出
 运行时会出现“K>>”K的意思是这时候可以用keyboard来在公式内部进行操作
 这个公式的错误在于对于randi的使用
 退出debugger：dbquit或者点击窗口上方的退出键
-```
+``` 

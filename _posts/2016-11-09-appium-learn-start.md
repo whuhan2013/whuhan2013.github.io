@@ -77,5 +77,16 @@ sample-code下载地址：[https://github.com/appium/sample-code](https://github
 
 
 
+**ios真机上运行**       
 
+可以通过appium inspector来探测元素，但首先要连上真机，要注意以下几点      
+
+- 将ip修改为127.0.0.1    
+- 直接通过ideviceinstaller -u [Your device's UID] -i [Path to your debug build]安装可能会导致权限问题，所以通过xcode安装    
+- 通过udid与包名找到相应app   
+- 通过sudo chmod -R 777 /var/db/lockdown/修改ideviceinstaller权限
+
+**参考:**   
+[WebDriverException: An unknown server-side error occurred while processing the command. Original error: Removing {appId} failed](http://stackoverflow.com/questions/39522679/webdriverexception-an-unknown-server-side-error-occurred-while-processing-the-c)   
+[appium+Python真机运行测试demo的方法](http://www.cnblogs.com/Nefeltari/p/5603163.html)
 
