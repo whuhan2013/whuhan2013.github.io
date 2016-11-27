@@ -225,4 +225,88 @@ end
 i在matlab里是自定变量，可以给i赋值，只要clear i以后就可以回复原值
 ```
 
+**6.3 Break Statement**      
+section，script中可以独立运行的部分，通过%%开始
+
+```
+e.g. edit BreakExamples
+%% Examples of skipping remainder of iterations
+
+%% Example 1
+% Skipping is accomplished in the while condition.
+ii = 1;
+while ii < length(readings) && readings(ii) <= 100
+readings(ii) = 0;
+ii = ii + 1;
+end
+```
+
+
+**6.4 Logical Indexing**
+
+```
+在数集w最后再添加一个数字v(ii)，只需输入：
+w = [w v(ii)]
+w = v(v >= o);
+w里是v里所有非负数的集合
+>> holmes = logical([1 -2 0 0 9.12 -2])
+holmes =
+1 1 0 0 1 1
+如果c = [1 0 1]是逻辑值而不是数字，另a = 1:3，那么a(c)则会输出a中和c对应的逻辑为真的数字，即第一个和第三个
+如何提取v里的非负数：
+keepers = v >= 0
+w = v(keepers)
+或者：直接跳过keepers，w = v(v>=0)
+可以同时附加多个条件，并排筛选
+如何将v里的负数改为0：
+v(v<0) = 0
+在等式左右都用logical indexing:
+v(v<0) = v(v<0)+100
+如果logical indexing用在一个矩阵上且在等式右侧，输出结果会把矩阵变成列向量
+矩阵里的数字顺序是从上往下，从左往右
+设计矩阵的logical index在等式两侧，也不会改变矩阵形状：
+>> A(A > 0.1) = sqrt(A(A > 0.1))
+A =
+0.7333 -1.3077 -1.3499 -0.2050 0.8194
+1.3542 -0.4336 1.7421 -0.1241 -1.2075
+-2.2588 0.5853 0.8517 1.2205 0.8469
+0.9285 1.8917 -0.0631 1.1870 1.2768
+0.5646 1.6642 0.8454 1.1905 0.6992
+取A和B矩阵里的较大值放在A里：
+A((A>B)) = A(A>B) -B(A>B)
+用好Logical Indexing可以省掉很多loops！
+```
+
+
+**6.5 Preallocation**
+
+```
+How to time the function:
+Tick - to start timing
+Tock - to stop timing
+e.g.
+>> tic; sum(1:1e3); toc
+edit noprealloc:
+function noprealloc
+N = 5000;
+for ii = 1:N
+for jj = 1:N
+A(ii,jj) = ii*jj;
+end
+end
+tic, noprealloc, toc - 73''
+edit prealloc:
+function noprealloc
+N = 5000;
+A = zeros(N,N);
+for ii = 1:N
+for jj = 1:N
+A(ii,jj) = ii*jj;
+end
+end
+tic, prealloc, toc - 0.6''
+在matlab中，如果不预先告诉matlab数集有多大，每次计算的时候都要重新将之前计算的内容复制到新的容量中。
+```
+
+
 
