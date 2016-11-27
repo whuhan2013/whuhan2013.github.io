@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Matlab基础语法(二)
-date: 2016-11-24
+title: Matlab基础语法(三)
+date: 2016-11-27
 categories: blog
 tags: [matlab]
 description: Matlab基础语法
