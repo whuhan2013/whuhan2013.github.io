@@ -240,3 +240,171 @@ number: 103
 title: 'Introductory Programming for Engineers and Scientists'
 ```
 
+**7.4 Cells**   
+
+Pointers                
+How to store a page of text?
+Each line should be a separate string
+Cannot use an array of chars:
+Each line would have to have the same length
+A vector of objects with each referring to one line
+
+
+Pointer     
+Each variable (scalar, vector, array, etc.) is stored in the computer memory.
+Each memory location has a unique address.
+A pointer is a variable that stores an address.
+MATLAB calls a pointer a “cell”.
+
+Cells     
+MATLAB has a restrictive pointer model
+Strict rules on what can be done with cells
+Harder to make mistakes
+But it is a powerful way to store heterogeneous data
+Cell arrays
+Used more frequently than structs  
+
+New syntax:         
+To access the data a cell points to, use: { }
+
+若令c2 = c1，改变c1中的元素，c2的元素不会同步变化——c2中的元素只是c1元素的copy     
+Cell functions,作为参数传入函数中，发生改变，原cell指向的不变。
+
+#### 文件输入输出     
+
+**8.1 File Input / Output**     
+
+File Input / Output    
+File:      
+Area in permanent storage (disk drive)    
+Stores information              
+Managed by the operating system      
+Can be copied or moved         
+Can be accessed by programs      
+
+File Input/Output (I/O)    
+Data exchange between programs and computers          
+Data exchange between the physical world and computers    
+Saving your work so you can continue with it later     
+MATLAB can handle                                      
+Mat-files and M-files AND text, binary, and Excel files    
+
+```
+>> pwd: print the directory of current folder
+>> ls: print all files in the current folder
+>> cd(x): change current folder - 可以是完整的路径，也可以输入子文件夹的名字，也可以用cd(‘..’)回到母文件夹，cd(‘../..’)回到再上一级文件夹
+>> mkdir('new_folder’): make a new folder
+>> rmdir('new_folder’): remove a new folder
+>> save: 保存工作区内容到matlab.mat
+>> load: 载入matlab.mat
+>> save my_data_file data s a: 可以自己设定储存的名字（my_data_file)和保存的变量（data s a)
+```
+
+**8.2 Excel Files**
+
+Excel files          
+Microsoft Excel® is a widely used data-analysis tool    
+Many other programs support reading and writing Excel files      
+MATLAB does too with two built-in functions     
+xlsread    
+xlswrite           
+Reading Excel files    
+
+```
+>> [num,txt,raw] = xlsread('Nashville_climate.xlsx');
+num: smaller than the size of spreadsheet, incl. NaN (Not a Number)
+>> [~, text] = xlsread('Nashville_climate_data.xlsx’): ignores the numerical data, only keep the text data
+>> [~,~, everything] = xlsread('Nashville_climate_data.xlsx’): ignores the numerical & text, only show the whole file
+>> num = xlsread('Nashville_climate_data.xlsx',1,'D15’): 得到表中的第一个sheet里D15的内容
+‘D15’可以换成’D15:E17’用来输出一个区域的值（左上角/右下角）
+```
+
+**8.3 Text Files**
+
+Text files      
+Text files contain characters     
+They use an encoding scheme:
+ASCII or ◦ Any one of many other schemes
+MATLAB takes care of encoding and decoding
+Before using a text file, we need to open it
+Once done with the file, we need to close it
+
+Opening text files     
+Opening: fid = fopen(filename, permission) — fid = file identifier     
+Closing: fclose(fid)          
+
+fid: Unique file identifier for accessing file       
+Permission: what we want to do with the file—
+read, write, overwrite, append, etc.      
+
+```
+例子： write_temp_precip_txt
+Reading text files
+One line at a time
+type prints a text file in the command window
+Let’s re-implement it:
+function view_text_file(filename)
+fid = fopen(filename,'rt');
+if fid < 0
+error('error opening file %s\n', filename);
+end
+
+% Read file as a set of strings, one string per line:
+oneline = fgets(fid);
+while ischar(oneline)
+fprintf('%s',oneline) % display one line
+oneline = fgets(fid);
+end
+fprintf('\n');
+fclose(fid);
+
+Reading lines into string variables is easy
+Parsing these strings to get numerical data is much harder
+Not covered
+Binary files are more suited for numerical data
+```
+
+
+**8.4 Binary Files**
+
+Binary files    
+Binary file = “not a text file”    
+Many different ways to represent numbers    
+All we need to know are their types.      
+
+Binary files need to be
+Opened with fopen
+Closed with fclose
+Writing binary files
+Data type is important
+
+Example: write a double array into a binary file
+
+```
+function write_array_bin(A,filename)
+fid = fopen(filename,'w+');
+if fid < 0
+error('error opening file %s\n', filename);
+end
+
+fwrite(fid,A,'double');
+
+fclose(fid);
+
+
+Reading binary files
+Example: read a double array from a binary file
+function A = read_bin_file(filename,data_type)
+fid = fopen(filename,'r');
+if fid < 0
+error('error opening file %s\n',filename);
+end
+
+A = fread(fid,inf,data_type);
+
+fclose(fid);
+Inf - open all the file
+```
+
+
+如果纯粹的用fwrite和fread，会使format改变，变成一个向量而无矩阵等，这种时候就要将格式信息也加进去—— write_dims_array_bin(A,filename) & A = read_dims_array_bin(filename)
