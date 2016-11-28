@@ -61,6 +61,14 @@ description: 机器学习入门
 我们的目标便是选择出可以使得建模误差的平方和能够最小的模型参数。 即使得代价函数,$J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2$最小     
 
 
+**代价函数的直观理解**   
+
+在上一个视频中,我们给了代价函数一个数学上的定义。在这个视频里,让我们通过一 些例子来获取一些直观的感受,看看代价函数到底是在干什么。
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/p5.png)  
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/p6.png)  
+
+#### 梯度下降算法    
 
 
 
