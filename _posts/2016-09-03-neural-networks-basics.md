@@ -11,8 +11,8 @@ description: 神经网络
 
 ![](http://img.blog.csdn.net/20160413164315280)
 
-其中${x1,x2,x3}$为输入单元，x$_0$称为偏置单元（bias unit），x$_0$=1，{x$_0$，x$_1$，x$_2$，x$_3$}称为连接权重。其中$h_{0}(x)=\frac{1}{1+e^{-\theta^{t}*x}}$。 
-还记得逻辑回归的sigmoid函数吗，在这里称作“激励函数”（motivation function）sigmoid(x)=$\frac{1}{1+e^{-x}}$，其图像为（图片来自wiki）：
+其中${x1,x2,x3}$为输入单元，x$_0$称为偏置单元（bias unit），$x_0=1$，{$x_0$，$x_1$，$x_2$，$x_3$}称为连接权重。其中$h_0(x)=\frac{1}{1+e^{-\theta^{t}*x}}$。 
+还记得逻辑回归的sigmoid函数吗，在这里称作“激励函数”（motivation function）$sigmoid(x)=\frac{1}{1+e^{-x}}$，其图像为（图片来自wiki）：
 
 ![](http://img.blog.csdn.net/20160413163808528)
 
