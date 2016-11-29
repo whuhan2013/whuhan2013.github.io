@@ -35,5 +35,7 @@ $AA^{-1}=A^{-1}A=I$
 $(A±B)^T=A^T±B^T$     
 $(A×B)^T= B^T×A^T$      
 $(A^T)^T=A$     
-$(KA)^T=KA^T    
+$(KA)^T=KA^T$        
+
+
 
