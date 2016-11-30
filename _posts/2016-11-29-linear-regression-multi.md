@@ -55,3 +55,10 @@ $$x_n=\frac{x_n-u_n}{s_n}$$
 通常可以考虑尝试些学习率: α=0.01,0.03,0.1,0.3,1,3,10
  
  
+**特征和多项式回归**       
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/p11.png)       
+
+注:如果我们采用多项式回归模型,在运行梯度下降算法前,特征缩放非常有必要。
+
+ 
