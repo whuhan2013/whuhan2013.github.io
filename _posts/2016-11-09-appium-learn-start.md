@@ -90,3 +90,12 @@ sample-code下载地址：[https://github.com/appium/sample-code](https://github
 [WebDriverException: An unknown server-side error occurred while processing the command. Original error: Removing {appId} failed](http://stackoverflow.com/questions/39522679/webdriverexception-an-unknown-server-side-error-occurred-while-processing-the-c)   
 [appium+Python真机运行测试demo的方法](http://www.cnblogs.com/Nefeltari/p/5603163.html)
 
+
+**升级到appium1.6**      
+
+```
+npm install -g appium    
+brew install carthage
+```
+
+
