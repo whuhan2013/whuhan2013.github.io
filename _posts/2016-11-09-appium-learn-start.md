@@ -96,6 +96,15 @@ sample-code下载地址：[https://github.com/appium/sample-code](https://github
 ```
 npm install -g appium    
 brew install carthage
+npm install -g ios-deploy
 ```
+
+**参考链接**        
+[https://github.com/appium/appium/issues/6867](https://github.com/appium/appium/issues/6867)       
+[appium-xcuitest-driver](https://github.com/appium/appium-xcuitest-driver/#external-dependencies)       
+[Ios 10 with xcode 8 issue](https://discuss.appium.io/t/ios-10-with-xcode-8-issue/12267)       
+
+**现存的问题**       
+[XCUITest - XCode 8 - iOS 10 Tests Are Running Very Slow](https://github.com/appium/appium/issues/7284)     
 
 
