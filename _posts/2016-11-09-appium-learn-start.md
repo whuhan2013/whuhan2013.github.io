@@ -97,6 +97,7 @@ sample-code下载地址：[https://github.com/appium/sample-code](https://github
 npm install -g appium    
 brew install carthage
 npm install -g ios-deploy
+进入nodumodule目录下，把webdriveragent与webdriveragentrunner都签名
 ```
 
 **参考链接**        
