@@ -66,5 +66,17 @@ $a^{(2)}=g(z^{(2)})$
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class4/p6.png)
 
 
+二元逻辑运算符(BINARY LOGICAL OPERATORS)当输入特征为布尔值(0 或 1)时,我 们可以用一个单一的激活层可以作为二元逻辑运算符,为了表示不同的运算符,我们之需要 选择不同的权重即可。   
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class4/p7.png)    
+
+我们可以利用神经元来组合成更为复杂的神经网络以实现更复杂的运算。例如我们要实 现 XNOR 功能(输入的两个值必须一样,均为 1 或均为 0),即 XNOR=(x1ANDx2) OR((NOTx1)AND(NOTx2))
+首先构造一个能表达(NOTx1)AND(NOTx2)部分的神经元:
+
+然后将表示 AND 的神经元和表示(NOTx1)AND(NOTx2)的神经元以及表示 OR 的神经元 进行组合:
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class4/p8.png)
+
+我们就得到了一个能实现 XNOR 运算符功能的神经网络。 按这种方法我们可以逐渐构造出越来越复杂的函数,也能得到更加厉害的特征值。 这就是神经网络的厉害之处。
 
 
