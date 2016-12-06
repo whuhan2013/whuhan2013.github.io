@@ -43,7 +43,7 @@ K 类分类:$S_L$=K, $y_i$ = 1 表示分到第 i 类;(K>2)
 关于反向误差的计算方法可以参见：[关于第5周反向传播算法的一些争论与思考](http://mooc.guokr.com/note/16702/)      
 具体数学推导可以参见：[反向传播（Backpropagation）算法的数学原理](https://my.oschina.net/findbill/blog/529001) 
 
-$$\delta^{(l)}_j=\frac{\sigma}{\sigma(z^{(l)_j})}J(\theta)$$
+$$\delta^{(l)}_j=\frac{\sigma}{\sigma(z^{(l)}_j)}J(\theta)$$
 
 重要的是清楚地知道上面式子中上下标的含义:       
 l 代表目前所计算的是第几层                                       
@@ -62,3 +62,21 @@ i 代表下一层中误差单元的下标,是受到权重矩阵中第 i 行影�
 在求出了 $\Delta^{(l)}_{ij}$之后,我们便可以计算代价函数的偏导数了,计算方法如下:
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class5/p6.png) 
+
+**实现注意:展开参数**         
+在上一段视频中,我们谈到了怎样使用反向传播算法计算代价函数的导数。在这段视频 中,我想快速地向你介绍一个细节的实现过程,怎样把你的参数从矩阵展开成向量,以便我 们在高级最优化步骤中的使用需要,使用方法见上图。    
+
+**梯度检验**       
+当我们对一个较为复杂的模型(例如神经网络)使用梯度下降算法时,可能会存在一些 不容易察觉的错误,意味着,虽然代价看上去在不断减小,但最终的结果可能并不是最优解。
+为了避免这样的问题,我们采取一种叫做梯度的数值检验(Numerical Gradient Checking) 方法。这种方法的思想是通过估计梯度值来检验我们计算的导数值是否真的是我们要求的。
+对梯度的估计采用的方法是在代价函数上沿着切线的方向选择离两个非常近的点然后 计算两个点的平均值用以估计梯度。即对于某个特定的 θ,我们计算出在 θ-ε 处和 θ+ε 的代 价值(ε 是一个非常小的值,通常选取 0.001),然后求两个代价的平均,用以估计在 θ 处 的代价值。
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class5/p7.png)    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class5/p8.png)    
+
+**注意**      
+一旦确认参数正确，开始训练样本，就必须关闭梯度检测，因为梯度检测效率低下，比反向传播要慢很多。     
+
+  
+
+
