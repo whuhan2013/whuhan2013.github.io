@@ -43,6 +43,8 @@ K 类分类:$S_L$=K, $y_i$ = 1 表示分到第 i 类;(K>2)
 关于反向误差的计算方法可以参见：[关于第5周反向传播算法的一些争论与思考](http://mooc.guokr.com/note/16702/)      
 具体数学推导可以参见：[反向传播（Backpropagation）算法的数学原理](https://my.oschina.net/findbill/blog/529001) 
 
+$$\delta^{(l)}_j=\frac{\sigma}{\sigma(z^{(l)_j})}J(\theta)$$
+
 重要的是清楚地知道上面式子中上下标的含义:       
 l 代表目前所计算的是第几层                                       
 j 代表目前计算层中的激活单元的下标,也将是下一层的第 j 个输入变量的下标。      
