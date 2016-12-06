@@ -13,6 +13,7 @@ description: machine learning
 **学习路线**     
 
 - 大概是最靠谱的入门学习路线了：[机器学习、数据挖掘 如何进阶成为大神？](https://www.zhihu.com/question/37256015/answer/85198013?from=profile_answer_card)
+- 作者完整地学完了三个机器学习教程：包括“Stanford CS229”，"Machine Learning on Coursrea" 和 "Stanford UFLDL"，博客包含各种数学推导部分：[machine learning的数学推导](https://my.oschina.net/findbill/blog/541143)
 
 
 **资源**

@@ -37,5 +37,7 @@ $(A×B)^T= B^T×A^T$
 $(A^T)^T=A$     
 $(KA)^T=KA^T$        
 
+**链式法则**       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class1/p1.png)   
 
 
