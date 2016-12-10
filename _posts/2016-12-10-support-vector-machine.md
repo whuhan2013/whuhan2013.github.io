@@ -41,7 +41,7 @@ description: 支持向量机
 
 如果 C 非常大,则最小化代价函数的时候,我们将会很希望找到一个使第一项为 0 的 最优解。因此,让我们尝试在代价项的第一项为 0 的情形下理解该优化问题。比如我们可以 把 C 设置成了非常大的常数,这将给我们一些关于支持向量机模型的直观感受
 
-这将遵从以下的约束: $\theta^Tx^{(i)}>=1$,如果y(i)是等于1的, $\theta^Tx^{(i)}<=-1,如果样本i是 一个负样本,这样当你求解这个优化问题的时候,当你最小化这个关于变量 θ 的函数的时
+这将遵从以下的约束: $\theta^Tx^{(i)}>=1$,如果y(i)是等于1的, $\theta^Tx^{(i)}<=-1$,如果样本i是 一个负样本,这样当你求解这个优化问题的时候,当你最小化这个关于变量 θ 的函数的时
 候,你会得到一个非常有趣的决策边界。      
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class7/p6.png) 
@@ -62,4 +62,19 @@ description: 支持向量机
 C 较大时,相当于 λ 较小,可能会导致过拟合,高方差。       
 C 较小时,相当于 λ 较大,可能会导致低拟合,高偏差。
 
+**数学背后的大边界分类**      
+根据$u^Tv=p●||u||$ ,    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class7/p9.png) 
+因此支持向量机做的全部事情,就是极小化参数向量 θ 范数的平方,或者说长度 的平方,即使p变大，则可以取得最小值。      
+
+
+#### 核函数       
+
+回顾我们之前讨论过可以使用高级数的多项式模型来解决无法用直线进行分隔的分类问题，我们可以通过创建多项式模型来解决问题
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class7/p10.png) 
+
+这些地标的作用是什么?如果一个训练实例 x 与地标 L 之间的距离近似于 0,则新特征
+f 近似于 $e^{-0}=1$,如果训练实例 x 与地标 L 之间距离较远,则 f 近似于 $e^{-(一个较大的数)}=0$。 假设我们的训练实例含有两个特征[x1 x2],给定地标$l^{(1)}$与不同的σ值,见下图:
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class7/p11.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class7/p12.png) 
 
