@@ -78,3 +78,32 @@ f 近似于 $e^{-0}=1$,如果训练实例 x 与地标 L 之间距离较远,则 f
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class7/p11.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class7/p12.png) 
 
+**如何选择地标?**           
+我们通常是根据训练集的数量选择地标的数量,即如果训练集中有 m 个实例,则我们 选取 m 个地标,并且令:$l^{(1)}=x^{(1)},l^{(2)}=x^{(2)},...,l^{(m)}=x^{(m)}$。这样做的好处在于:现在我们得到的新特 征是建立在原有特征与训练集中所有其他特征之间距离的基础之上的,即
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class7/p13.png) 
+
+下面我们将核函数运用到支持向量机中,修改我们的支持向量机假设为:      
+• 给定 x,计算新特征 f,当 $θ^Tf>=0$ 时,预测 y=1,否则反之。 相应地修改代价函数 为:
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class7/p14.png) 
+
+在此,我们不介绍最小化支持向量机的代价函数的方法,你可以使用现有的软件包(如 liblinear,libsvm 等)。在使用这些软件包最小化我们的代价函数之前,我们通常需要编写核 函数,并且如果我们使用高斯核函数,那么在使用之前进行特征缩放是非常必要的。
+
+另外,支持向量机也可以不使用核函数,不使用核函数又称为线性核函数(linear kernel), 当我们不采用非常复杂的函数,或者我们的训练集特征非常多而实例非常少的时候,可以采 用这种不带核函数的支持向量机。
+
+下面是支持向量机的两个参数 C 和 σ 的影响:     
+C 较大时,相当于 λ 较小,可能会导致过拟合,高方差;    
+C 较小时,相当于 λ 较大,可能会导致低拟合,高偏差;    
+σ 较大时,导致高方差;    
+σ 较小时,导致高偏差。     
+
+
+
+
+
+
+
+
+
+
+
