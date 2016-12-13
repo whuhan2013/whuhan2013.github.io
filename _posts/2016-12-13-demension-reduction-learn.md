@@ -53,3 +53,6 @@ PCA 技术的一个很大的优点是,它是完全无参数限制的。在 PCA �
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class9/p4.png) 
 
 我们需要计算出所有特征的均值,然后令 $x_j= x_j -μ_j$。如果特征是 在不同的数量级上,我们还需要将其除以标准差 $σ^2$。
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class9/p5.png) 
+
+
