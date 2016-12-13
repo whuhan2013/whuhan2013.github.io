@@ -173,3 +173,155 @@ fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
 可得准确率为95%     
 
 **SourceCode:**[machine-learning-ex3](https://github.com/whuhan2013/IntroductionToProgrammingWithMATLAB/tree/master/machine-learning-ex3)
+
+
+#### 神经网络实现       
+
+神经网络实现主要步骤如下：     
+
+- 初始化与导入数据
+- Compute Cost (Feedforward)    
+- Implement Regularization    
+- 随机初始化参数     
+- Implement Backpropagation     
+- 梯度检验
+- 训练神经网络    
+- 预测     
+
+**反向传播算法的具体实现**    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class1/p9.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class1/p10.png) 
+
+```
+function [J grad] = nnCostFunction(nn_params, ...
+                                   input_layer_size, ...
+                                   hidden_layer_size, ...
+                                   num_labels, ...
+                                   X, y, lambda)
+
+Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
+                 hidden_layer_size, (input_layer_size + 1));
+
+Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
+                 num_labels, (hidden_layer_size + 1));
+
+% Setup some useful variables
+m = size(X, 1);
+         
+% You need to return the following variables correctly 
+J = 0;
+Theta1_grad = zeros(size(Theta1));
+Theta2_grad = zeros(size(Theta2));
+
+
+%% 对y进行处理 Y(find(y==3))= [0 0 1 0 0 0 0 0 0 0]; 用于 Feedforward cost function 1和2   
+Y=[];
+E = eye(num_labels);    % 要满足K可以是任意，则不能写eye(10)！！
+for i=1:num_labels
+    Y0 = find(y==i);    % 找到等于y=i的序列号,替换向量
+    Y(Y0,:) = repmat(E(i,:),size(Y0,1),1);
+end
+
+%% regularized Feedforward cost function lambda=1
+% 计算前向传输 Add ones to the X data matrix  -jin
+X = [ones(m, 1) X];
+a2 = sigmoid(X * Theta1');   % 第二层激活函数输出
+a2 = [ones(m, 1) a2];        % 第二层加入b
+a3 = sigmoid(a2 * Theta2'); 
+
+temp1 = [zeros(size(Theta1,1),1) Theta1(:,2:end)];   % 先把theta(1)拿掉，不参与正则化
+temp2 = [zeros(size(Theta2,1),1) Theta2(:,2:end)];
+temp1 = sum(temp1 .^2);     % 计算每个参数的平方，再就求和
+temp2 = sum(temp2 .^2);
+
+cost = Y .* log(a3) + (1 - Y ) .* log( (1 - a3));  % cost是m*K(5000*10)的结果矩阵  sum(cost(:))全部求和
+J= -1 / m * sum(cost(:)) + lambda/(2*m) * ( sum(temp1(:))+ sum(temp2(:)) );  
+
+
+%% 计算 Gradient 
+delta_1 = zeros(size(Theta1));
+delta_2 = zeros(size(Theta2));
+
+for t = 1:m
+   % step 1
+   a_1 = X(t,:)';          
+%        a_1 = [1 ; a_1];
+   z_2 = Theta1 * a_1;   
+   a_2 = sigmoid(z_2);  
+      a_2 = [1 ; a_2];
+   z_3 = Theta2 * a_2;
+   a_3 = sigmoid(z_3);
+   % step 2
+   err_3 = zeros(num_labels,1);
+   for k = 1:num_labels     
+      err_3(k) = a_3(k) - (y(t) == k);
+   end
+   % step 3
+   err_2 = Theta2' * err_3;                % err_2有26行！！！
+   err_2 = err_2(2:end) .* sigmoidGradient(z_2);   % 去掉第一个误差值，减少为25. sigmoidGradient(z_2)只有25行！！！
+   % step 4
+   delta_2 = delta_2 + err_3 * a_2';
+   delta_1 = delta_1 + err_2 * a_1';
+end
+
+
+% step 5
+Theta1_temp = [zeros(size(Theta1,1),1) Theta1(:,2:end)];
+Theta2_temp = [zeros(size(Theta2,1),1) Theta2(:,2:end)];
+Theta1_grad = 1 / m * delta_1 + lambda/m * Theta1_temp;
+Theta2_grad = 1 / m * delta_2 + lambda/m * Theta2_temp ;
+
+% Unroll gradients
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
+
+
+end
+```
+
+
+**训练神经网络代码**    
+
+```
+options = optimset('MaxIter', 50);
+
+%  You should also try different values of lambda
+lambda = 1;
+
+% Create "short hand" for the cost function to be minimized
+costFunction = @(p) nnCostFunction(p, ...
+                                   input_layer_size, ...
+                                   hidden_layer_size, ...
+                                   num_labels, X, y, lambda);
+
+% Now, costFunction is a function that takes in only one argument (the
+% neural network parameters)
+[nn_params, cost] = fmincg(costFunction, initial_nn_params, options);
+```
+
+**预测结果代码** 
+
+```
+function p = predict(Theta1, Theta2, X)
+%PREDICT Predict the label of an input given a trained neural network
+%   p = PREDICT(Theta1, Theta2, X) outputs the predicted label of X given the
+%   trained weights of a neural network (Theta1, Theta2)
+
+% Useful values
+m = size(X, 1);
+num_labels = size(Theta2, 1);
+
+% You need to return the following variables correctly 
+p = zeros(size(X, 1), 1);
+
+h1 = sigmoid([ones(m, 1) X] * Theta1');
+h2 = sigmoid([ones(m, 1) h1] * Theta2');
+[dummy, p] = max(h2, [], 2);
+
+% =========================================================================
+
+
+end
+```
+
+准确率大概95%左右，根据随机初始化的参数会有1%左右的误差                 
+**SourceCode:**[machine-learning-ex4](https://github.com/whuhan2013/IntroductionToProgrammingWithMATLAB/tree/master/machine-learning-ex4)
