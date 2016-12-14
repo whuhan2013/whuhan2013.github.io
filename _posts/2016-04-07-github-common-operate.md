@@ -85,7 +85,9 @@ git push -f
 
 [利用Jekyll在GitHub Pages上部署博客 - Bannings的专栏 - 博客频道 - CSDN.NET](http://blog.csdn.net/zhangao0086/article/details/37922607)  
 
-
+**github发布githubPages**     
+现在github发布pages简单了许多，只要在设置中开启即可。     
+[Publishing with GitHub Pages, now as easy as 1, 2, 3](https://github.com/blog/2289-publishing-with-github-pages-now-as-easy-as-1-2-3)
 
 
 
