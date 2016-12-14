@@ -25,3 +25,12 @@ $x_{test}$。所谓的异常检测问题就是:我们希望知道这个新的飞
 
 再一个例子是检测一个数据中心,特征可能包含:内存使用情况,被访问的磁盘数量, CPU 的负载,网络的通信量等。根据这些特征可以构建一个模型,用来判断某些计算机是不 是有可能出错了。
 
+**高斯分布** 
+高斯分布,也称为正态分布。回顾高斯分布的基本知识。 通常如果我们认为变量 x 符合高斯分布 x~N(μ,σ2)则其概率密度函数为:     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class10/p3.png)
+
+**应用高斯分布开发异常检测算法**     
+
+异常检测算法:  
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class10/p4.png)  
+
