@@ -93,4 +93,6 @@ PCA 技术的一个很大的优点是,它是完全无参数限制的。在 PCA �
 
 另一个常见的错误是,默认地将主要成分分析作为学习过程中的一部分,这虽然很多时 候有效果,最好还是从所有原始特征开始,只在有必要的时候(算法运行太慢或者占用太多 内存)才考虑采用主要成分分析。   
 
-
+**pca的数学原理**    
+[机器学习中的数学(5)-强大的矩阵奇异值分解(SVD)及其应用](http://www.cnblogs.com/LeftNotEasy/archive/2011/01/19/svd-and-applications.html)      
+[PCA的数学原理](http://blog.codinglabs.org/articles/pca-tutorial.html)
