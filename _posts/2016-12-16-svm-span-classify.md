@@ -109,17 +109,17 @@ visualizeBoundary(X, y, model);
 
 In processEmail.m, we have implemented the following email prepro- cessing and normalization steps:   
 
-• Lower-casing: The entire email is converted into lower case, so that captialization is ignored (e.g., IndIcaTE is treated the same as Indicate).     
-• Stripping HTML: All HTML tags are removed from the emails. Many emails often come with HTML formatting; we remove all the HTML tags, so that only the content remains.
-• Normalizing URLs: All URLs are replaced with the text “httpaddr”.
-• Normalizing Email Addresses: All email addresses are replaced
+- Lower-casing: The entire email is converted into lower case, so that captialization is ignored (e.g., IndIcaTE is treated the same as Indicate).     
+- Stripping HTML: All HTML tags are removed from the emails. Many emails often come with HTML formatting; we remove all the HTML tags, so that only the content remains.
+- Normalizing URLs: All URLs are replaced with the text “httpaddr”.
+- Normalizing Email Addresses: All email addresses are replaced
 with the text “emailaddr”.
-• Normalizing Numbers: All numbers are replaced with the text
+- Normalizing Numbers: All numbers are replaced with the text
 “number”.
-• Normalizing Dollars: All dollar signs ($) are replaced with the text
+- Normalizing Dollars: All dollar signs ($) are replaced with the text
 “dollar”.
-• Word Stemming: Words are reduced to their stemmed form. For ex- ample, “discount”, “discounts”, “discounted” and “discounting” are all replaced with “discount”. Sometimes, the Stemmer actually strips off additional characters from the end, so “include”, “includes”, “included”, and “including” are all replaced with “includ”.
-• Removal of non-words: Non-words and punctuation have been re- moved. All white spaces (tabs, newlines, spaces) have all been trimmed to a single space character.
+- Word Stemming: Words are reduced to their stemmed form. For ex- ample, “discount”, “discounts”, “discounted” and “discounting” are all replaced with “discount”. Sometimes, the Stemmer actually strips off additional characters from the end, so “include”, “includes”, “included”, and “including” are all replaced with “includ”.
+- Removal of non-words: Non-words and punctuation have been re- moved. All white spaces (tabs, newlines, spaces) have all been trimmed to a single space character.
 
 处理之后效果如下:      
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/ex1/p4.png)
