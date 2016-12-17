@@ -38,3 +38,19 @@ description: 机器学习之推荐系统
 特征向量之间的距离$||x^{(i)}-x^{(j)}||$的大小。     
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class11/p5.png)  
 
+**向量化:低秩矩阵分解**      
+在上几节视频中,我们谈到了协同过滤算法,本节视频中我将会讲到有关该算法的向量 化实现,以及说说有关该算法你可以做的其他事情。
+
+举例子:     
+1.当给出一件产品时,你能否找到与之相关的其它产品。        
+2.一位用户最近看上一件产品,有没有其它相关的产品,你可以推荐给他。    
+
+我将要做的是:实现一种选择的方法,写出协同过滤算法的预测情况。     
+我们有关于五部电影的数据集,我将要做的是,将这些用户的电影评分,进行分组并存
+到一个矩阵中。    
+
+我们有五部电影,以及四位用户,那么 这个矩阵 Y 就是一个 5 行 4 列的矩阵,它将这
+些电影的用户评分数据都存在矩阵里:     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class11/p6.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class11/p7.png)
+
