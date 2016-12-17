@@ -54,3 +54,7 @@ description: 机器学习之推荐系统
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class11/p6.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class11/p7.png)
 
+**均值归一化**     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class11/p8.png)  
+
+然后我们利用这个新的 Y 矩阵来训练算法。如果我们要用新训练出的算法来预测评分, 则需要将平均值重新加回去,预测$(θ^{(j)})^T(x^{(i)})+μ_i$ 对于Eve,我们的新模型会认为她给每部电影 的评分都是该电影的平均分。
