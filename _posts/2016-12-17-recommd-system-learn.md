@@ -36,4 +36,5 @@ description: 机器学习之推荐系统
 通过这个学习过程获得的特征矩阵包含了有关电影的重要数据,这些数据不总是人能读
 懂的,但是我们可以用这些数据作为给用户推荐电影的依据。 例如,如果一位用户正在观看电影 $x^{(i)}$,我们可以寻找另一部电影 $x^{(j)}$,依据两部电影的
 特征向量之间的距离$||x^{(i)}-x^{(j)}||$的大小。     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class11/p5.png)  
 
