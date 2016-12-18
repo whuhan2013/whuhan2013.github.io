@@ -19,3 +19,11 @@ description: 大规模机器学习
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class12/p2.png)  
 
+**小批量梯度下降**      
+小批量梯度下降算法是介于批量梯度下降算法和随机梯度下降算法之间的算法,每计算 常数 b 次训练实例,便更新一次参数 θ。      
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class12/p3.png)  
+通常我们会令 b 在 2-100 之间。这样做的好处在于,我们可以用向量化的方式来循环 b 个训练实例,如果我们用的线性代数函数库比较好,能够支持平行处理,那么算法的总体 表现将不受影响(与随机梯度下降相同)。
+
+**随机梯度下降收敛**     
+
