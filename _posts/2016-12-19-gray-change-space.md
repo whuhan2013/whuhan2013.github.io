@@ -1,59 +1,46 @@
 ---
 layout: post
-title: 灰度变换与空间滤波
+title: 图像处理中的matlab使用
 date: 2016-12-19
 categories: blog
-tags: [图像处理]
-description: 灰度变换与空间滤波
+tags: [matlab]
+description: matlab
 ---
 
-术语“空间域”指的是图像平面本身，这类方法是以对图像像素直接处理为基础的。在本章中，我们着重讨论两种重要的空间域处理方法z亮度（或灰度）变换与空间滤波。后一种方法有时涉及邻域处理或空间卷积。    
+**图像的矩阵表示**     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/p2.png)   
 
-**背景知识**      
-前面已经指出，空间域技术直接对图像的像素进行操作。本章中讨论的空间域处理由F列表达式表示：      
-$$g (x, y) = T [f(x, y)] $$      
+**图像的输入输出和显示**     
+可以使用函数imread将图像读入MATLAB环境，imread的基本语法是：    
+imread （’filename’｝         
+此处，filename是含有图像文件全名的字符串（包括任何可用的扩展名）。例如语句    
 
-其中，f(x,y）为输入图像，g(x,y）为输出（处理后的）图像，T是对图像f的算子，作用于点。(x,y)定义的邻域。此外，T还可以对一组图像进行处理，例如为了降低噪声而叠加K幅图像。  
+```
+f = imread('Fig0101.tif');
+```
 
-为了定义点（x,y）的空间邻域，主要方法是利用一块中心位于（x,y）的正方形或矩形区域，如图二l所示。此区域的中心由起始点开始逐个像素移动，比如从左上角，在移动的同时包含不同的邻域。算子T作用于每个位置.(x,y），从而得到相应位置的输出图像g.只有中心点在(x,y)处的邻域内的像素被用来计算(x,y）处g的值。    
+将图像fig0101读取到图像数组f中。注意，单引号（’）是用来界定filename文件名字符串的，而命令行结尾处的分号在MATLAB中用于禁止输出。假如命令行中未包括分号，MATLAB将显示这一命令行指定的运算结果。当在MATLAB命令行窗口中出现提示符（》）时，表明命令行的开始      
 
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p2.png)  
+使用imshow函数在MATLAB桌面显示图像，imshow的基本语法是：imshow(f)   
+其中f是图像数组     
 
-### 灰度变换函数       
-变换 T 的最简单形式是如图2-1 中邻域大小为 1 ×1（单个像素）的情况。在此 情况下，在(x,y)处，g的值仅由f在这 点处的灰度决定， T也就成为亮度或灰度变换函数。 当处理单色（也就是灰度）图像时，这两个术语是可以相互换 用的。     
-当处理彩色图像时， 亮度用来表示在特定色彩空间里的彩色图像成分， 正像在第6章中描述的那样。
-由于输出值仅取决于点的灰度值， 而不是取决于点的邻域， 因此 灰度变换函数通常写成如F简单形式z    
-$$s = T(r) $$       
-其中，r表示图像f中的灰度，s表示图像g中的灰度。 两者在图像中处于相同的坐帧x,y）处。     
+图1-1显示了在屏幕上的输出。注意，图窗编号出现在最终得到的图窗的左上部。如果另一
+幅图像q随后用imshow来显示，MATLAB就用新图像取代
 
-**imadjust和stretchlim函数**    
+```
+》figure,imshow(g) 
+使用imwrite函数将图像写入当前日录，imwrite的基本语法如下：   
+imwrite(f，’filename') 
+```   
 
-imadjust函数是针对灰度图像进行灰度变换的基本图像处理工具箱函数， 一般的语法格
-式如下：      
-g = imadjust(f, [low_in high_in], [low_out high_out],gamma)  
+**类和图像类型**     
+虽然使用的是整数坐标， 但 MATLAB 中的像素值（亮度）并未限制为整数。 表 1-1 列出了 MATLAB 和图像处理工具箱为描述像素值而支持的各种类。 表中的前 8 项是数值型的数据类，第 9 项称为字符类， 最后一项称为逻辑类。
+uint8 和 logical 类广泛用于图像处理， 当以 TIFF 或 JPEG 图像文件格式读取图像时，会用到这两个类。 这两个类用1个字节表示每个像素。某些科研数据源， 比如医学成像， 要求提供超出 uint8 的动态范围：针对此类数据， 会采用 uint16 和 int16 类。 这两个类为每个矩阵元素使用2 个字节。针对计算灰度的操作， 比如傅立叶变换（见第 3 章）， 使用 double 和single 浮点类。 双精度浮点数每个数组元素使用8 个宇节， 而单精度浮点数使用 4 个字节。尽管工具箱支持 int8 、 uint32 和 int32 类， 但在图像处理中并不常用    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/p3.png)   
 
-正如图2-2中展示的那样，此函数将f的灰度值映像到q中的新值， 也就是将low in 与
-high_in之间的值映射到low_out 与high_out 之间的值。low_in以下与high_in以上
-的值可以被截去。也就是将low_in以下的值映射为low_out：将high in以上的值映射为
-high out. 输入图像应属于uint8、uintl6或double类。输出图像应和输入图像属于同一
-类。对于函数imadjust来说， 所有输入中除了图像f和gamma， 不论f属于什么类， 都将输入
-值限定在0和1之间。例如， 如果f属于uint8类， imadjust函数将乘以255来决定应用中的
-实际值。利用空矩阵（［］）得到［low_in high_in］或［low_out high_out ］， 将导致结果都默认
-为［0 I ］。如果high_out 小于low_out ， 输出灰度将反转。
-
-参数gamma指明了由f映射生成图像q时曲线的形状。如果gamma的值小于1， 映射被
-加权至较高（较亮）的输出值， 如图2-2(a）所示。如果gamma的值大于1， 映射加权至较低（较暗）
-的输出值。如果省略函数参量， gamma默认为I（线性映射）。
-
-
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p3.png)  
-
-stretchlim函数的较通用语法如下：      
-Low H工gh = stretchlim(f, tol)       
-
-其中， tol是两元素向量［low_frac high frac］， 指定了图像低和高像素值 饱和度的 百分比。
-如果tol 是标量， 那么low_frac = tol， 并且high_frac = l - low frac；     
-
-**饱和度**等于低像素值和高像素值的百分比． 如果在参数中忽略tol， 那么饱和度水平为2%, tol 的默认值为［0.01 0.99］。 如果选择tol =O， 那么Low_High = [min(f(:)) max(f（：））］。
+#### 算子       
+一般我们用字母M和N分别表示矩阵中的行与列。1x N
+矩阵被称为行向量， M*1矩阵被称为列向量， 1*1矩阵则被称为标量。    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p1.png)  
 
 
