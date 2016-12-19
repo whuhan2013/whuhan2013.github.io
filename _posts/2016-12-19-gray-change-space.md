@@ -19,10 +19,41 @@ $$g (x, y) = T [f(x, y)] $$
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p2.png)  
 
-**灰度变换函数**       
+### 灰度变换函数       
 变换 T 的最简单形式是如图2-1 中邻域大小为 1 ×1（单个像素）的情况。在此 情况下，在(x,y)处，g的值仅由f在这 点处的灰度决定， T也就成为亮度或灰度变换函数。 当处理单色（也就是灰度）图像时，这两个术语是可以相互换 用的。     
 当处理彩色图像时， 亮度用来表示在特定色彩空间里的彩色图像成分， 正像在第6章中描述的那样。
 由于输出值仅取决于点的灰度值， 而不是取决于点的邻域， 因此 灰度变换函数通常写成如F简单形式z    
 $$s = T(r) $$       
 其中，r表示图像f中的灰度，s表示图像g中的灰度。 两者在图像中处于相同的坐帧x,y）处。     
+
+**imadjust和stretchlim函数**    
+
+imadjust函数是针对灰度图像进行灰度变换的基本图像处理工具箱函数， 一般的语法格
+式如下：      
+g = imadjust(f, [low_in high_in], [low_out high_out],gamma)  
+
+正如图2-2中展示的那样，此函数将f的灰度值映像到q中的新值， 也就是将low in 与
+high_in之间的值映射到low_out 与high_out 之间的值。low_in以下与high_in以上
+的值可以被截去。也就是将low_in以下的值映射为low_out：将high in以上的值映射为
+high out. 输入图像应属于uint8、uintl6或double类。输出图像应和输入图像属于同一
+类。对于函数imadjust来说， 所有输入中除了图像f和gamma， 不论f属于什么类， 都将输入
+值限定在0和1之间。例如， 如果f属于uint8类， imadjust函数将乘以255来决定应用中的
+实际值。利用空矩阵（［］）得到［low_in high_in］或［low_out high_out ］， 将导致结果都默认
+为［0 I ］。如果high_out 小于low_out ， 输出灰度将反转。
+
+参数gamma指明了由f映射生成图像q时曲线的形状。如果gamma的值小于1， 映射被
+加权至较高（较亮）的输出值， 如图2-2(a）所示。如果gamma的值大于1， 映射加权至较低（较暗）
+的输出值。如果省略函数参量， gamma默认为I（线性映射）。
+
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p3.png)  
+
+stretchlim函数的较通用语法如下：      
+Low H工gh = stretchlim(f, tol)       
+
+其中， tol是两元素向量［low_frac high frac］， 指定了图像低和高像素值 饱和度的 百分比。
+如果tol 是标量， 那么low_frac = tol， 并且high_frac = l - low frac；     
+
+**饱和度**等于低像素值和高像素值的百分比． 如果在参数中忽略tol， 那么饱和度水平为2%, tol 的默认值为［0.01 0.99］。 如果选择tol =O， 那么Low_High = [min(f(:)) max(f（：））］。
+
 
