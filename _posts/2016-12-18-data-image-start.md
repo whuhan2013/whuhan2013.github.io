@@ -75,4 +75,4 @@ logical 函数可以把数值数组转换为二值图像。 因此， 如果 A �
 B = logical (A)      
 如果 A 中含有除了。和 1 之外的其他元素， 使用 logical 函数就可以将所有非 0 值变换为逻辑 l ，而将所有 0 值变换为逻辑 0。也可以使用关系和逻辑算子得到逻辑数组。可使用函数is logical 来测试数组是否为逻辑类.     
 
-
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/p4.png)   
