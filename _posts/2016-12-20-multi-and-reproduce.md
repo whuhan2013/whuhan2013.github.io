@@ -182,3 +182,7 @@ figure,imshow(J2,[]);
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter32/p4.png)  
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter32/p5.png)  
 
+直方图均衡化的数学原理:[直方图均衡化原理及编码实现](http://wenku.baidu.com/view/6c55ecbdc77da26925c5b090)     
+这个推导很详细，是我看过最清楚明白的一个。     
+
+
