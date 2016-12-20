@@ -277,5 +277,38 @@ imhist(imadjust(I,[],[],1.5));
 title('Gamma 1.5');
 ```
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p12.png) 
 注意图3.12中直方图非零区间位置的变化，以及这些变化给图像带来的影响。由于伽玛 变换并不是线性变换，所以它不仅可以改变图像的对比度，还能够增强细节，从而带来整体 图像效果的改善。  
+
+#### 灰度阙值变换      
+灰度阙值变换可以将一幅灰度图像转换成黑白的二值图像。用户指定一个起到分界线作用的灰度值，如果图像中某像素的灰度值小于该灰度值，则将该像素的灰度值设置为0，否 则设置为255；.这个起到分界线作用的灰度值称为阙值，灰度的阙值变换也常被称为阀值化， 或二值化。         
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p13.png) 
+
+将图像内容直接划分为我们关心的和不关心的2个部分，从而在复杂背景中直接提取出感兴趣的目标。因此它是图像分割的重要手段之一，这一点在第9章中还将进一步阐述。      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p14.png) 
+
+**matlab实现**     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p15.png) 
+
+```
+I = imread('rice.png');
+thresh = graythresh(I);
+bw1=im2bw(I,thresh);
+bw2=im2bw(I,130/255);
+subplot(1,3,1);
+imshow(I);
+title('原图像');
+
+subplot(1,3,2);
+imshow(bw1);
+title('自动选择阀值');   
+
+subplot(1,3,3);
+imshow(bw2);
+title('阀值130'); 
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p16.png) 
+
+由图可见，单纯的灰度阀值化无法很好地处理灰度变化较为复杂的图 像，常常给物体的边缘带来误差，或者给整个画面带来噪点。此时需要通过其他的图像处理 手段予以弥补，我们将在 8.4 节介绍相关的内容．
 
