@@ -70,3 +70,107 @@ imhist(I,64);
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p2.png)  
 
+**归一化直方图**    
+
+在由imhist 函数的返回值中， counts 保存了落入每个区间的像素的个数， 通过计算 couts与图像中像素总数的商可以得到归一化的直方图。
+
+```
+I = imread('pout.tif');
+figure;
+[M,N]=size(I);
+[counts,x]=imhist(I,32);
+counts= counts / M/N;
+stem(x,counts);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p3.png) 
+
+分析图像的灰度直方图往往可以得到很多有效的信息。 例如， 从图 3.4的一系列灰度直 方图上， 可以很直观地看出图像的亮度和对比度特征。 实际上， 直方图的峰值位置说明了图 像总体上的亮暗： 如果图像较亮， 则直方图的峰值出现在直方图的较右：部分：如果图像较暗．则直方图的峰值出现在直方图的较左部分， 从而造成暗部细节难以分辨。 如果直方图中只有中间某一小段非零值，贝IJ这张图像的对比度较低： 反之， 如果直方图的非零值分布很宽而且比较均匀， 则图像的对比度较高。
+
+#### 灰度的线性变换     
+线性灰度变换函数f(x）是一个一维线性函数：      
+$$D_B = f(D_A) ＝f_AD_A +f_B$$     
+式中参数$f_A$为线性函数的斜率， $f_B$为线性函数在y轴的截距， $D_A$ 表示输入图像的灰度，
+$D_B$ 表示输出图像的灰度。      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p4.png) 
+
+**matlab实现**      
+使用Matlab对图像执行线性变换无需专门的函数， 下面的程序对Matlab示例图像 coiilsJpg进行了不同参数的线性变换操作
+
+```
+I = imread('coins.png');		% 读入原图像
+
+I = im2double(I);			% 转换数据类型为double
+[M,N] = size(I);			% 计算图像面积
+
+figure(1);				% 打开新窗口
+imshow(I);				% 显示原图像
+title('原图像');
+
+figure(2);				% 打开新窗口
+[H,x] = imhist(I, 64);		% 计算64个小区间的灰度直方图
+stem(x, (H/M/N), '.');		% 显示原图像的直方图
+title('原图像');
+
+% 增加对比度
+Fa = 2; Fb = -55;
+O = Fa .* I + Fb/255;
+
+figure(3);
+subplot(2,2,1);
+imshow(O);
+title('Fa = 2 Fb = -55 增加对比度');
+
+figure(4);
+subplot(2,2,1);
+[H,x] = imhist(O, 64);
+stem(x, (H/M/N), '.');
+title('Fa = 2 Fb = -55 增加对比度');
+
+% 减小对比度
+Fa = 0.5; Fb = -55;
+O = Fa .* I + Fb/255;
+
+figure(3);
+subplot(2,2,2);
+imshow(O);
+title('Fa = 0.5 Fb = -55 减小对比度');
+
+figure(4);
+subplot(2,2,2);
+[H,x] = imhist(O, 64);
+stem(x, (H/M/N), '.');
+title('Fa = 0.5 Fb = -55 减小对比度');
+
+% 线性增加亮度
+Fa = 1; Fb = 55;
+O = Fa .* I + Fb/255;
+
+figure(3);
+subplot(2,2,3);
+imshow(O);
+title('Fa = 1 Fb = 55 线性平移增加亮度');
+
+figure(4);
+subplot(2,2,3);
+[H,x] = imhist(O, 64);
+stem(x, (H/M/N), '.');
+title('Fa = 1 Fb = 55 线性平移增加亮度');
+
+% 反相显示
+Fa = -1; Fb = 255;
+O = Fa .* I + Fb/255;
+
+figure(3);
+subplot(2,2,4);
+imshow(O);
+title('Fa = -1 Fb = 255 反相显示');
+
+figure(4);
+subplot(2,2,4);
+[H,x] = imhist(O, 64);
+stem(x, (H/M/N), '.');
+title('Fa = -1 Fb = 255 反相显示');
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p5.png) 
+
