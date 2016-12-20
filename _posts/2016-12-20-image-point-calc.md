@@ -216,7 +216,66 @@ title('对数变换后');
 
 伽玛变换的一般表达式为：     
 $$y=(x+esp)^{\gamma}$$        
-其中，x与y的取值范围均为［O.l］。esp为补偿系数，$\gamma$则为伽玛系数．    
+其中，x与y的取值范围均为［0,1］。esp为补偿系数，$\gamma$则为伽玛系数．    
 
 与对数变换不同，伽玛变换可以根据$\gamma$的不同取值选择性地增强低灰度区域的对比度或是高灰度区域的对比度。
 $\gamma$是图像灰度校正中非常重要的一个参数，其取值决定了输入图像和输出。图像之间的灰度映射方式，即决定了是增强低灰度（阴影区域〉还是增强高灰度（高亮区域):       
+
+- y>1时，图像的高灰度区域对比度得到增强；
+- y<1时，图像的低灰皮区域对比度得到增强；
+- y=1时，这一灰度变换是线性的，即不改变原图像．    
+
+伽玛变换的映射关系如图3.10所示。在进行变换时，通常需要将0～255的灰图动态范围首先变换到0～1的动态施围，然后执行伽玛变换后再恢复原动态范围。 
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p8.png) 
+
+**matlab实现**    
+Matlab中提供了实现灰度变换的基本工具imadust它有着非常广泛的用途，其调用的 一般语法为：     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p9.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p10.png) 
+
+**注意**    
+当$\gamma<1$时则映射被加权至更高输出值，当$\gamma>1$则映射被加权至更低输出值。     
+
+下面给出了gamma分别取不同值时的伽玛变换的程序实现：    
+
+```
+I = imread('pout.tif');
+
+subplot(1,3,1);
+imshow(imadjust(I,[],[],0.75));
+title('Gamma 0.75');
+
+subplot(1,3,2);
+imshow(imadjust(I,[],[],1));
+title('Gamma 1');
+
+subplot(1,3,3);
+imshow(imadjust(I,[],[],1.5));
+title('Gamma 1.5');
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p11.png) 
+
+上述程序的运行结果如图 3.11 所示，可以看出不同伽玛因子给图像的整体明暗程度带来 的变化，以及对图像暗部和亮部细节清晰度的影响。当伽玛因子取 1 的时候，图像没有任何改变。
+
+下面的程序生成了图3.12中3幅图像的灰直方图。   
+
+```
+I = imread('pout.tif');
+
+subplot(1,3,1);
+imhist(imadjust(I,[],[],0.75));
+title('Gamma 0.75');
+
+subplot(1,3,2);
+imhist(imadjust(I,[],[],1));
+title('Gamma 1');
+
+subplot(1,3,3);
+imhist(imadjust(I,[],[],1.5));
+title('Gamma 1.5');
+```
+
+注意图3.12中直方图非零区间位置的变化，以及这些变化给图像带来的影响。由于伽玛 变换并不是线性变换，所以它不仅可以改变图像的对比度，还能够增强细节，从而带来整体 图像效果的改善。  
+
