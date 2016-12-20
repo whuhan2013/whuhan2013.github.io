@@ -117,24 +117,46 @@ H? Undehned functioii <!>i; method ’sin’ for; input a,rguments of type- ’u
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p10.png)
 
 #### 图像的输入输出和显示    
-可以使用函数imread将图像读入MATLAB环境，imread的基本语法是：    
-imread （’filename’｝         
-此处，filename是含有图像文件全名的字符串（包括任何可用的扩展名）。例如语句    
+matlab可以处理以下的图像文件类型： BMP、HDF、JPEG、PCX、TIFF、XWD、ICO、
+GIF、CURo 可以使用imread和imwrite函数对国像文件进行读写操作，使用imfinfo函数来
+获得数字图像的相关信息．
 
-```
-f = imread('Fig0101.tif');
-```
+**1. imread函数**    
+imread函数可以将指定位置的图像文件读入工作区。对于除索引图像以外的情况，其原
+型为：      
+A =imread(FileNAME, FMT);       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p11.png)
 
-将图像fig0101读取到图像数组f中。注意，单引号（’）是用来界定filename文件名字符串的，而命令行结尾处的分号在MATLAB中用于禁止输出。假如命令行中未包括分号，MATLAB将显示这一命令行指定的运算结果。当在MATLAB命令行窗口中出现提示符（》）时，表明命令行的开始      
+**2. IMWRITE函数**    
+imwrite函数用于将指定的图像数据写入文件中，通过指定不同的保存文件扩展名，起到
+图像格式转换的作用〈参见例2.4 ）. 其调用格式为：            
+imwite(A, FileName，FMT);                
+• FILENAME参数指定文件名（不必包含扩展名）．      
+• FMT参数指定保存文件所采用的格式．      
 
-使用imshow函数在MATLAB桌面显示图像，imshow的基本语法是：imshow(f)   
-其中f是图像数组     
+存储索引图像时，还需要一并存储颜色索引表，则此时IMWRITE函数的使用方法应为：
+imwrite(A, HAP, FILENAME, FMT);      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p12.png)
 
-图1-1显示了在屏幕上的输出。注意，图窗编号出现在最终得到的图窗的左上部。如果另一
-幅图像q随后用imshow来显示，MATLAB就用新图像取代
+**3. imfinfo函数**
+imfinfo函数可以读取图像文件中的某些属性信息〈比如修改日期、大小、
+格式、高度、宽度、色深、颜色空间、存储方式等。其调用格式为：      
+imfinfo(FileName,FMT);
+参数说明        
+• FILENAME 参数指定文件名．      
+• FMT 参数是可选参数， 用于指定文件格式．    
 
-```
-》figure,imshow(g) 
-使用imwrite函数将图像写入当前日录，imwrite的基本语法如下：   
-imwrite(f，’filename') 
-```   
+**图像的显示**    
+一般使用imshow函数来显示图像， 该函数可以创建一个图像对象， 并可以自动设置图
+像的诸多属性，从而简化编程操作。这里介绍imshow函数的几种常见调用方式．      
+
+1.imshow函数    
+imshow函数用于显示工作区或图像文件中的图像．在显示的同时可控制部分效果〈参见
+例12.6）， 常用的调用形式为：    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p13.png)
+
+2.多帧图像的显示       
+在显示多帧图像时，可以显示多帧中的一帧，或者将它们显示在同一个窗口内，也可以
+将多帧图像转化成电影播放出来． 这3种方式的实现如例1.8所示。
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p14.png)
+
