@@ -176,3 +176,9 @@ figure,imshow(J2,[]);
 像中的细节更加清晰， 而第二幅图像更加柔和。  
 
 #### 直方图均衡化     
+直方图均衡化又称灰度均衡化．是指通过某种灰度映射使输入图像转换为在每一灰度级 上都有近似相同的像素点数的输出图像（即输出的直方图是均匀的〉。在经过均衡化处理后的图像中，像素将占有尽可能多的灰度级并且分布均匀．因此，这样的图像将具有较高的对比度和较大的动态范围。   
+
+为了便于分析，首先考虑灰度范围为0～1且连续的情况。此时图像的归一化直方图即为概率密度函数（PDF):     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter32/p4.png)  
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter32/p5.png)  
+
