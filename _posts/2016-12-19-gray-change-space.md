@@ -44,3 +44,24 @@ uint8 和 logical 类广泛用于图像处理， 当以 TIFF 或 JPEG 图像文�
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p1.png)  
 
 
+#### Matlab 图像类型及其存储方式      
+在介绍数字图像的分类时， 曾提及一些主要的图像类型。 本节将介绍这些主 要的图像类型在Matlab中是如何存储和表示的， 主要包括亮度图像、 RGB 图像、 索引图像、二值图像和多帧图像。   
+
+1. 亮度图像（Intensity Image)      
+亮度图像即灰度图像。 Matlab使用二维矩阵存储亮度图像，矩阵中的每个元素直接表示 一个像素的亮度〈灰度〉信息。 例如， 一个 200 像素× 300 像素的图像被存储为一个 200 行 300 列的矩阵，可以使用 1.1.5小节介绍的选取矩阵元素〈或子块〉的方式来选择图像中的一个像素或一个区域．     
+
+如果矩阵元素的类型是双精度的， 则元素的取值范围是从 0 到 1 ：如果是 8 位无符号整数，则取值范围从0到255。数据0表示黑色，而1（或255）表示最大亮度〈通常为白色〉      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p4.png)
+
+2. RGB 图像（RGBlmage)      
+RGB 图像使用3个一组的数据表达每个像素的颜色， 即其中的红色、绿色和蓝色分量。
+在Matlab 中， RGB 图像被存储在一个m ×n×3的三维数组中。对于图像中的每个像素， 存
+储的三个颜色分量合成像素的最终颜色。例如， RGB 图像I 中位置在11 行40 列的像素的
+RGB 值为I( 11,40.1:3 ）。或I( 11,40,:)，该像素的红色分量为I(11,40,1)，蓝色分量为I( 11,40,3 ）。
+而I (:,:,1 ）则表示整个的红色分量图像．
+
+RGB 图像同样可以由观精度数组或8 位无符号整数数组存储。图1.6 是一个使用双精度
+数组存储ROB 图像的例子。          
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p5.png)
+
+
