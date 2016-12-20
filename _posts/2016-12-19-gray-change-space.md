@@ -10,28 +10,7 @@ description: matlab
 **图像的矩阵表示**     
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/p2.png)   
 
-**图像的输入输出和显示**     
-可以使用函数imread将图像读入MATLAB环境，imread的基本语法是：    
-imread （’filename’｝         
-此处，filename是含有图像文件全名的字符串（包括任何可用的扩展名）。例如语句    
 
-```
-f = imread('Fig0101.tif');
-```
-
-将图像fig0101读取到图像数组f中。注意，单引号（’）是用来界定filename文件名字符串的，而命令行结尾处的分号在MATLAB中用于禁止输出。假如命令行中未包括分号，MATLAB将显示这一命令行指定的运算结果。当在MATLAB命令行窗口中出现提示符（》）时，表明命令行的开始      
-
-使用imshow函数在MATLAB桌面显示图像，imshow的基本语法是：imshow(f)   
-其中f是图像数组     
-
-图1-1显示了在屏幕上的输出。注意，图窗编号出现在最终得到的图窗的左上部。如果另一
-幅图像q随后用imshow来显示，MATLAB就用新图像取代
-
-```
-》figure,imshow(g) 
-使用imwrite函数将图像写入当前日录，imwrite的基本语法如下：   
-imwrite(f，’filename') 
-```   
 
 **类和图像类型**     
 虽然使用的是整数坐标， 但 MATLAB 中的像素值（亮度）并未限制为整数。 表 1-1 列出了 MATLAB 和图像处理工具箱为描述像素值而支持的各种类。 表中的前 8 项是数值型的数据类，第 9 项称为字符类， 最后一项称为逻辑类。
@@ -86,3 +65,76 @@ RGB 图像同样可以由观精度数组或8 位无符号整数数组存储。�
 
 Matlab 中使用uint8 型的逻辑数组存储二值图像， 通过一个逻辑标志表示数据有效范围是0到1，而如果逻辑标志未被置位，则有效范围为0到255。   
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p7.png)
+
+5､多帧图像（ Multlframe Image Array)       
+实际应用中， 可能需要处理多幅按时间或视角方式连续排列的图像， 我们把这种图像称
+之为多帧图像（所谓“ 帧” 就是影像动画中最小单位的单幅影像，画面〉。例如核磁共振成像数
+据或视频片断. Matlab提供了在同一个矩阵中存储多帧图像的方法， 实际上就是在图像矩阵
+中增加一个维度来代表时间或视角信息． 例如， 一个拥有5 张连续的400 像素× 300 像素的
+RGB图像的多帧连续片断的存储方式是一个400× 300 × 3× 5 的矩阵， 一组同样大小的灰皮
+图像则可以使用一个400× 300 × 1× 5 的矩阵来存储．  
+
+如果多帧图像使用索引图像的方式存储，则只有图像数据矩阵被按多帧形式存储， 而颜
+色索引表只能公用。因此， 在多帧索引图像中， 所有的索引图像公用一个颜色索引表， 进而
+只能使用相同的颜色组合。   
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p8.png)
+
+默认情况下，matlab将绝大多数数据存储为双精度类型〈ω 位浮点数）以保证运算的精
+确性． 而对于图像而言， 这种数据类型在图像尺寸较大时可能并不理想。例如， 一张1000
+像萦见方的图像拥有一百万个像素， 如果每个像索用64位二进制数表示， 则总共需要大约
+8MB的内存空间．        
+为了减小图像信息的空间开销， 可以将图像信息存为8 位无符号整型数（uint8）和16
+位无符号整型数（ uint16 ）的数组， 这样只需要双精度浮点数八分之一或四分之一的空间。      
+在上述3种存储类型中双精度和 uint8 使用最多， uint16 的情况与 uint8 大致类似．  
+
+#### Matlab的图像转换     
+有时必须将图像存储格式加以转换才能使用某些图像处理函数。例如，当使用某些Matlab
+内置的滤镜时， 需要将索引图像转换为RGB 图像或者灰度图像， Matlab 才会将图像滤镜应
+用于图像数据本身， 而不是索引图像中的颜色索引值表〈这将产生无意义的结果〉．     
+Matlab 提供了一系列存储格式转换函数，如表1.11 所示．它们的名字都便于记忆，例如，
+ind2gray 可以将索引图像转化为灰度图像。
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p9.png)
+
+也可以使用一些矩阵操作函数实现某些格式转换。例如．下面的语句可以将一幅灰度图
+像转换为RGB图像．     
+RGBIMAGE = CAT(3, GRAY, GRAY, GRAY);
+
+**2. 图像数据类型转换**      
+Matlab 图像处理工具箱中支持的默认图像数据类型是uint8， 使用imread函数读取的
+图像文件一般都为uint8类型。然而， 很多数学函数如sin等并不支持double以外的类
+型， 例如， 当试图对uint8 类型直接使用sin函数进行操作时， Matlb会提示如下的错
+误信息  
+
+```
+sin(D):
+H? Undehned functioii <!>i; method ’sin’ for; input a,rguments of type- ’uint8'
+```
+
+针对这种情况， 除了使用1.1.4 小节介绍的强制类型转换方法外， 还可利用图像处理工
+具箱中的内置图像数据类型转换函数． 内置转换函数的优势在于它们可以帮助处理数据偏移
+量和归一化变换， 从而简化了编程工作．      
+一些常用的图像类型转换函数如表1.12所示     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter2/p10.png)
+
+#### 图像的输入输出和显示    
+可以使用函数imread将图像读入MATLAB环境，imread的基本语法是：    
+imread （’filename’｝         
+此处，filename是含有图像文件全名的字符串（包括任何可用的扩展名）。例如语句    
+
+```
+f = imread('Fig0101.tif');
+```
+
+将图像fig0101读取到图像数组f中。注意，单引号（’）是用来界定filename文件名字符串的，而命令行结尾处的分号在MATLAB中用于禁止输出。假如命令行中未包括分号，MATLAB将显示这一命令行指定的运算结果。当在MATLAB命令行窗口中出现提示符（》）时，表明命令行的开始      
+
+使用imshow函数在MATLAB桌面显示图像，imshow的基本语法是：imshow(f)   
+其中f是图像数组     
+
+图1-1显示了在屏幕上的输出。注意，图窗编号出现在最终得到的图窗的左上部。如果另一
+幅图像q随后用imshow来显示，MATLAB就用新图像取代
+
+```
+》figure,imshow(g) 
+使用imwrite函数将图像写入当前日录，imwrite的基本语法如下：   
+imwrite(f，’filename') 
+```   
