@@ -15,6 +15,7 @@ description: machine learning
 - 大概是最靠谱的入门学习路线了：[机器学习、数据挖掘 如何进阶成为大神？](https://www.zhihu.com/question/37256015/answer/85198013?from=profile_answer_card)
 - 有很多资源，方便程序员向机器学习转型：[普通程序员如何向人工智能靠拢](https://www.zhihu.com/question/51039416)
 - 作者完整地学完了三个机器学习教程：包括“Stanford CS229”，"Machine Learning on Coursrea" 和 "Stanford UFLDL"，博客包含各种数学推导部分：[machine learning的数学推导](https://my.oschina.net/findbill/blog/541143)
+- 都在youtube上，需要vpn与英语：[2016年不可错过的21个深度学习视频、教程和课程](https://zhuanlan.zhihu.com/p/24362823)
 
 
 **资源**
