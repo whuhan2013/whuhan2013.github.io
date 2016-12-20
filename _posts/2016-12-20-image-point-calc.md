@@ -27,3 +27,46 @@ $$s=T(r)$$
 	+ 基于直方图均衡化的图像灰度归一化
 	+ 直方图匹配
 
+#### 灰度直方图     
+灰度直方圈描述了一幅图像的灰度级统计信息，主要应用于图像分割和图像灰度变换等
+处理过程中．      
+
+**理论基础**      
+从数学角度来说，图像直方图描述图像各个灰度级的统计特性，它是图像灰度值的函数，
+统计一幅图像中各个灰度级出现的次数或概率。有一种特殊的直方图叫做归一化直方图， 可
+以直接反映不同灰皮级出现的比率。     
+从图形上来说， 灰度直方图是一个二维图， 横坐标为图像中各个像素点的灰度级别， 纵坐标表示具有各个灰度级别的像素在图像中出现的次数或概率。      
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p1.png)  
+
+**matlab实现**       
+Matlab中的imhist函数可以进行图像的灰度直方圈运算，调用语法为：
+
+```
+imhist(I)
+imhist(I,n)
+[count,x]=imhist(...)
+```
+
+- I为需要计算灰度直方图的图像．   
+• n为指定的灰度级数目． 如果指定参数n，则会将所有的灰度级均匀分布在n 个小区
+间内，而不是将所有的灰度级全部分开．        
+• counts为直方图数据向量. counts(i）表示第i个灰度区间中的像素数目．
+• x是保存了对应的灰度小区间的向量．     
+
+若调用时不接收这个函数的返回值，贝Jj直接显示直方图：在得到这些返回数据之后，也
+可以使用stem(x, count)来手工绘制直方图。    
+
+**一般直方图**     
+
+```
+I = imread('pout.tif');
+figure;
+imshow(I); title('Souce');
+figure;
+imhist(I);title('Graph');
+figure;
+imhist(I,64);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter3/p2.png)  
+
