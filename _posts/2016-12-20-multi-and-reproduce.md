@@ -241,3 +241,71 @@ imhist(histeq(I4));
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter32/p7.png)  
 
+#### 直方图规定化      
+直方图均衡化算法可以自动确定灰度变换函数， 从而获得具有均匀直方图的输出图像。它主要用于增强动态范围偏小的图像对比度， 丰富图像的灰度级。 这种方法的优点是操作简单， 且结果可以预知， 当图像需要自动增强时是一种不错的选择。   
+
+但有时用户也希望可以对变换过程加以控制， 如能够人为地修正直方图的形状， 或者说获得具有指定直方图的输出图像．．这样就可以有选择地增强某个灰度范围内的对比度或使图
+像灰度值满足某种特定的分布 这种用于产生具有特定直方图图像的方法叫做直方图规定化，或直方图匹配．   
+
+直方图规定化是在运用均衡化原理的基础上，通过建立原始图像和期望图像〈待匹配直方图的图像〉之间的关系，使原始图像的直方图匹配特定的形状，从而弥补直方图均衡不具备交互作用的特性。         
+
+直方图规定化增强处理的步骤如下：      
+1，其增强原理是先对原始的直方图均衡化：S = T(r)
+2，同时对规定的直方图均衡化：v = G(z)
+3，由于都是均衡化，故令 S = v，则：$z = G^{-1}(v) = G^{-1}[T(r)]$ 。  
+
+当然，在实际计算中我们利用的是上述公式的离散形式，这样就不必去关心函数只f(r），g(z)
+以及反变换函数g的具体解析形式， 而可以直接将它们作为映射表处理。其中， f(r）为输入
+图像均衡化的离散灰度级映射关系， g(z）为标准图像均衡化的离散灰度级映射关系， 而g
+则是标准图像均衡化的逆映射关系， 它给出了从经过均衡化处理的标准化图像到原标准图像
+的离散灰度映射， 相当于均衡化处理的逆过程。
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter32/p8.png)  
+
+**matlab实现**     
+histeq函数不仅可以用于直方图均衡化， 也可以用于直方图规定化， 此时需要提供可选
+参数hgram. 调用语法为:      
+[J, T]=histeq(I, hgram)        
+
+函数会将原始图像I处理成一幅以用户指定向量hgram作为直方图的图像。            
+参数hgram的分量数目即为直方图的收集箱数目。对于double型图像，hgram的元素取
+值范围是［O, 1）：对于uint8型图像为［O, 255）：对于uint16型图像则为（0, 65535）。
+其他参数的意义与在直方圈均衡化中的相同。    
+
+```
+I = imread('pout.tif');
+I1 = imread('coins.png');
+I2 = imread('circuit.tif'); 
+
+[hgram1,x]=imhist(I1);
+[hgram2,x]=imhist(I2);
+
+J1 = histeq(I,hgram1);
+J2 = histeq(I,hgram2);
+
+subplot(2,3,1);
+imshow(I);title('原图');
+subplot(2,3,2);
+imshow(I1);title('标准图1');
+subplot(2,3,3);
+imshow(I2);title('标准图2');
+subplot(2,3,5);
+imshow(J1);title('规定化到1');
+subplot(2,3,6);
+imshow(J2);title('规定化到2');
+
+figure;
+
+subplot(2,3,1);
+imhist(I);title('原图');
+subplot(2,3,2);
+imhist(I1);title('标准图1');
+subplot(2,3,3);
+imhist(I2);title('标准图2');
+subplot(2,3,5);
+imhist(J1);title('规定化到1');
+subplot(2,3,6);
+imhist(J2);title('规定化到2');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter32/p9.png)  
+
