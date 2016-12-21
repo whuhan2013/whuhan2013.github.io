@@ -128,3 +128,36 @@ title('图像转置');
 
 #### 图像缩放    
 图像缩放是指图像大小按照指定的比率放大或者缩小     
+
+**图像缩放的变换公式**    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p11.png)  
+直接根据缩放公式计算得到的目标图像中，某些映射源坐标可能不是整数，从而找不到
+对应的像素位置。例如，当$S_x=S_y=2$ 时，图像放大2倍，放大图像中的像素（0, 1）对应于
+原图中的像素（0, 0.5)，这不是整数坐标位置，自然也就无法提取其灰度值。因此我们必须
+进行某种近似处理，这里介绍一种简单的策略即直接将它最邻近的整数坐标位置（0,0）或者
+(0,1）处的像素灰度值赋给它，这就是所谓的最近邻插值。当然还可以通过4.7节将介绍的其
+他插值算法来近似处理．   
+
+**matlab实现**    
+缩放变换仍然可借助前面几节中使用的imtransform函数来实现。此外，Matlab还提供
+专门的图像缩放函数imresize，具体调用形式为：    
+
+B = imresize(A,Scale,method);    
+
+参数说明：    
+a为缩放的原始图像     
+Scale为统一缩放比例    
+method用于指定插值方法，其合法取值同imtransform    
+
+```
+A = imread('lena.bmp');
+B = imresize(A,1.2,'nearest');
+
+figure,imshow(A);title('原图像');   
+figure,imshow(B);title('图像缩放');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p12.png)  
+
+
+
+
