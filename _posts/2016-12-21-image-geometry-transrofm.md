@@ -179,3 +179,29 @@ figure,imshow(B);title('图像缩放');
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p16.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p17.png) 
 
+**matlab实现**    
+图像旋转变换的效果受具体插值方法的影响较为明显，本节给出的实现均采用最近邻插 值，在 4.7 节中将给出来用不同的插值算法时图像旋转变换的效果比较。 
+
+可通过4.6.2 小节中学习的方法设置适当的变换结构TFORM，从而调用imtansform来
+实现以任意点为中心的图像旋转。此外， Matlab 还专门提供了围绕图像中心的旋转变换函数
+imrotate ，其调用方式如下：    
+B=imrotate(A,angle,method,'crop')    
+参数说明：
+
+- A是要旋转的图像．     
+• angle 为旋转角度，单位为度，如果为其指定一个正值，则imrotate 函数接逆时针方
+向旋转圈像．
+· 可选参数method为imrotate 函数指定插佳方法．
+• 'crop＇选项会裁剪旋转后增大的图像，使得到的圈像和原图大小一致．    
+
+```
+A = imread('lena.bmp');
+B = imrotate(A,30,'nearest','crop');
+subplot(1,2,1),imshow(A);
+title('原图像');
+subplot(1,2,2),imshow(B);
+title('逆时针旋转30度');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p18.png) 
+
+
