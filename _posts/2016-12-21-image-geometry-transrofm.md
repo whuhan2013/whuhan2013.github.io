@@ -106,5 +106,25 @@ title('竖直镜像');
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p8.png)  
 
+#### 图像转置
+图像转置是指将图像像素的x坐标和y坐标互换，图像的大小会随之改变：高度和宽度将互换。
 
+**图像转置的交换公式**    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p9.png)  
 
+matlab实现    
+
+```
+A = imread('lena.bmp');
+tform = maketform('affine',[0 1 0;1 0 0;0 0 1]);
+B = imtransform(A,tform,'nearest');
+
+subplot(1,2,1),imshow(A);
+title('原图像');   
+subplot(1,2,2),imshow(B);
+title('图像转置');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p10.png)  
+
+#### 图像缩放    
+图像缩放是指图像大小按照指定的比率放大或者缩小     
