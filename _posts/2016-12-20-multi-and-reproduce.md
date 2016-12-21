@@ -185,4 +185,59 @@ figure,imshow(J2,[]);
 直方图均衡化的数学原理:[直方图均衡化原理及编码实现](http://wenku.baidu.com/view/6c55ecbdc77da26925c5b090)     
 这个推导很详细，是我看过最清楚明白的一个。     
 
+**直方图均衡化的作用是图像增强**        
+有两个问题比较难懂，一是为什么要选用累积分布函数，二是为什么使用累积分布函数处理后像素值会均匀分布。     
+参见：[ 直方图均衡化原理](http://blog.csdn.net/rushkid02/article/details/9178117)
+
+**matlab实现**    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter32/p6.png)  
+
+下面的程序在读入了图像pout.tif后，分别对其进行了增加对比度，减小对比度，线性增 加亮度和线性减小亮度的处理， 得到了原图像的4个灰度变化版本；接着又分别对这4副图 像进行了立方图均衡化处理并显示了它们在处理前、 后的直方图．    
+
+```
+I = imread('pout.tif');
+I = im2double(I);
+
+I1 = 2*I - 55/255;
+subplot(4,4,1);
+imshow(I1);
+subplot(4,4,2);
+imhist(I1);
+subplot(4,4,3);
+imshow(histeq(I1));
+subplot(4,4,4);
+imhist(histeq(I1));
+
+I2 = 0.5*I + 55/255;
+subplot(4,4,5);
+imshow(I2);
+subplot(4,4,6);
+imhist(I2);
+subplot(4,4,7);
+imshow(histeq(I2));
+subplot(4,4,8);
+imhist(histeq(I2));
+
+I3 = I + 55/255;
+subplot(4,4,9);
+imshow(I3);
+subplot(4,4,10);
+imhist(I3);
+subplot(4,4,11);
+imshow(histeq(I3));
+subplot(4,4,12);
+imhist(histeq(I3));
+
+I4 = I - 55/255;
+subplot(4,4,13);
+imshow(I4);
+subplot(4,4,14);
+imhist(I4);
+subplot(4,4,15);
+imshow(histeq(I4));
+subplot(4,4,16);
+imhist(histeq(I4));
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter32/p7.png)  
 
