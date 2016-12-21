@@ -35,4 +35,14 @@ description: 图像的几何变换
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p2.png)  
 
 之所以要逆变换是因为:   
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p3.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p3.png)  
+
+
+#### 图像平移  
+图像平移就是将图像中所有的点按照指定的平移量水平或者垂直移动。     
+
+**图像平移的变换公式**    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p4.png)  
+
+对于原图中被移出图像显示区域的点通常也有两种处理方法：直接丢弃或者通过加目标图像的尺寸〈将新生成的图像宽度增加$T_x$，高度增加$T_y$〉的方法使新图像中能够包含这些点，在稍后给出的程序实现中，我们来用了第一种处理方法。．  
+
