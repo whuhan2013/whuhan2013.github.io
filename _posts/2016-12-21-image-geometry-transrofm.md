@@ -22,3 +22,17 @@ description: 图像的几何变换
   + 基于直方图均衡化的图像灰度归一化
   + 汽车牌照的投影失真校正
 
+#### 解决几何变换的一般思路      
+图像几何变换又称为图像空间变换， 它将一幅图像中的坐标位置映射到另一幅图像中的
+新坐标位置． 我们学习几何变换的关键就是要确定这种空间映射关系， 以及映射过程中的变
+换参数。       
+几何变换不改变图像的像素值， 只是在图像平面上进行像素的重新安排。一个几何变换
+需要两部分运算：首先是空问变换所需的运算， 如平移、旋转和镜像等， 需要用它来表示输
+出图像与输入图像之间的〈像素〉映射关系：此外， 还需要使用灰度插值算法， 因为按照这
+种变换关系进行计算， 输出图像的像素可能被映射到输入图像的非整数坐标上。
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p1.png)  
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p2.png)  
+
+之所以要逆变换是因为:   
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p3.png) 
