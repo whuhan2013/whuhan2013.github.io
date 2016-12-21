@@ -76,3 +76,35 @@ title('平移后');
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p5.png)  
 
+
+#### 图像镜像
+镜像变换又分为水平镜像和坚直镜像。水平镜像即将图像左半部分和右半部分以图像坚直中轴线为中心轴进行对换；而竖直镜像则是将图像上半部分和下半部分以图像水平中轴线为中心轴进行对换.   
+
+**图像镜像的交换公式**     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p6.png)  
+
+**matlab实现**     
+imtransform函数用于完成一般的二维空间变换，形式如下:      
+B=imtransform(A,TFrom,method)    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p7.png)  
+
+```
+A=imread('lena.bmp');
+[height,width,dim]=size(A);
+tform= maketform('affine',[-1 0 0;0 1 0;width 0 1]);
+
+B = imtransform(A,tform,'nearest');
+tform2=maketform('affine',[1 0 0;0 -1 0;0 height 1]);
+C = imtransform(A,tform2,'nearest');
+
+subplot(1,3,1),imshow(A);
+title('原图像');
+subplot(1,3,2),imshow(B);
+title('水平镜像');
+subplot(1,3,3),imshow(C);
+title('竖直镜像');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p8.png)  
+
+
+
