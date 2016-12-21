@@ -158,6 +158,24 @@ figure,imshow(B);title('图像缩放');
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p12.png)  
 
+#### 图像旋转    
+旋转一般是指将图像围绕某一指定点旋转一定的角度。旋转通常也会改变图像的大小，
+和4.2 节中图像平移的处理一样， 可以把转出显示区域的图像截去， 也可以改变输出图像的
+大小以扩展显示范围．     
 
+**以原点为中心的图像旋转**     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p13.png)  
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p14.png)  
 
+**以任意点为中心的图像旋转**     
+在4.6.1小节中给出的旋转示例是以坐标原点为中心进行的，那么如何围绕任意的指定
+点来旋转呢？将平移和旋转操作相结合即可，即先进行坐标系平移，再以新的坐标原点为中
+心旋转，然后将新原点平移回原坐标系的原点。这一过程可归纳为以下3个步骤:    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p15.png) 
+
+至此，我们已经实现了上述3个步骤中的第1步和第3步，再加上第2步的旋转变换就
+得到了围绕图像中心点旋转的最终变换矩阵，该矩阵实际上是3个变换步骤中分别用到的3
+个变换矩阵的级联。   
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p16.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p17.png) 
 
