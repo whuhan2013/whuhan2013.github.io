@@ -233,3 +233,19 @@ f(x,y) = g(round(x)， round (y) );
 要通过双线性插值得到正方形内任意点f(x,y)的值。   
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p20.png) 
 
+上面的推导是在单位正方形的前提下进行的， 稍加变换就可以推广到一般情况中．
+线性插值的假设是原图的灰度在两个像素之问是统性变化的， 显然这是一种比较合理的
+假设．因此在一般情况下，双线住插值都能取得不错的效果。更精确的方法是果用曲线插值，
+即认为像素’之间的灰度变化规律符合某种曲线方程， 当然这种处理的计算量是很大的。
+
+
+#### 高阶插值     
+在一些几何运算中， 双线性插值的平滑作用会使图像的细节退化， 而其斜率的不连续性
+则会导致变换产生不希望的结果． 这些都可以通过高阶插值得到弥补， 高阶插值常用卷积来
+实现。输出像素的值为输入图像中距离它最近的4×4领域内采样点像素值的加权平均值。       
+下面以三次插值为例， 它使用了如下的三次多项式来逼近理论上的最佳插值函数
+sin(x)/x，如图4.15 所示．      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p21.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p22.png) 
+
+
