@@ -204,4 +204,32 @@ title('逆时针旋转30度');
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p18.png) 
 
+### 插值算法        
+实现几何运算时， 有两种方法。第一种称为向前映射法， 其原理是将输入图像的灰度逐
+个像索地转移到输出图像中，即从原图像坐标计算出目标图像坐标： $g(x_1,y_1) = f(a(x_o,y_o}, b(x_o,
+y_o））$。前面的平移、镜像等操作就可以采用这种方法。   
 
+另外一种称为向后映射法， 它是向前映射变换的逆操作， 即输出像素逐个映射回输入图
+像中。如果一个输出像素映射到的不是输入图像来样栅格的整数坐标处的像素点， 则其灰度
+值就需要基于整数坐标的灰度值进行推断， 这就是插值。由于向后映射法是逐个像素产生输
+出图像， 不会产生计算浪费问题， 所以在缩放、旋转等操作中多采用这种方法， 本书采用的
+也全部为向后映射法。
+
+#### 最近邻插值      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p19.png) 
+
+最近邻插值可表示为：      
+f(x,y) = g(round(x)， round (y) );       
+我们在之前的各种变换Visual C++实现中均采用了最近邻插值的算法，因为它计算简单，
+而且在很多情况下的输出效果也可以接受。然而， 最近邻插值法会在图像中产生人为加工的
+痕迹， 详见例4.1.
+
+
+#### 双线性插值     
+双线性插值又称为一阶插值，是线性插值扩展到二维的一种应用。它可以通过一系列的一阶线性插值得到．       
+
+输出像素的值为输入图像中距离它最近的2×2邻域内来样点像素灰度值的加权平均。
+设己知单位正方形的顶点坐标分别为f(O,0)、f(1 ,O）、f(O,1）、f(1,1）， 如图4.14所示， 我们
+要通过双线性插值得到正方形内任意点f(x,y)的值。   
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p20.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p21.png) 
