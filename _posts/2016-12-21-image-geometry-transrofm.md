@@ -248,4 +248,27 @@ sin(x)/x，如图4.15 所示．
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p21.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p22.png) 
 
+**插值方法比较**            
+下面的程序对两幅不同的图像进行图像旋转， 分别采用了最近邻、双线性和三次插值，
+观察它们的不同效果．
+
+```
+A = imread('rectangle.bmp');
+B = imrotate(A,30,'nearest');
+C = imrotate(A,30,'bilinear');
+D = imrotate(A,30,'bicubic');
+
+subplot(2,2,1),imshow(A);
+title('原图像');
+subplot(2,2,2),imshow(B);
+title('最近邻插值');
+subplot(2,2,3),imshow(C);
+title('双线性插值');
+subplot(2,2,4),imshow(D);
+title('双三次插值');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p23.png)
+
+从图4.17可以看出最近邻的插值方法得到的结果还是可以接受的，但当图像中包含的像素之间灰度级有明显变化时（见图4.16），从结果图像的锯齿形边可以看出三种插值方法的效果依次递减，最近插值的效果明显不如另外两个好，锯齿比较多，而双三次插值得出的图像较好地保持了图像的细节。这是因为参与计算输出点的像章值的拟合点个数不同，个数越多效果越精确，当然参与计算的像素个数会影响计算的复杂度:实验结果也清楚地表明双三 次插值法花费的时间比另外两种的要长一些。最近邻和线性插值的速度在此次图像处理中几乎分不出来。所以，在讨算时间与质量之间有一个折中问题。
+
 
