@@ -71,3 +71,60 @@ g(x,y)=T[f(x,y)]
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p1.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p2.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p3.png)
+
+**边界处理**     
+执行滤波操作需注意当模板位于图像边缘时，需要对边缘附近的那些元素执行滤波操作单独处理，以避免引用到本不属于图像的无意义的值（在Matlab中这将引起系统的警告，而在vc中很可能会由于非法访问内存而产生运行错误〉。      
+
+以下3种策略都可以用来解决边界问题：      
+(1）收缩处理范围一处理时忽略位于图像f 边界附近会引起问题的那些点， 如对于
+图5.1中所使用的模板， 处理时忽略图像f 四周一圈1个像素宽的边界， 即只处理从x =
+1，2 ,3, ... .M-2和y = 1,2,3, .. .N-2 （在Matlab中应为x = 2,3,4, ... ,M-1和y = 2,3,4, ... N-1）范围内
+的点， 从而确保了滤被过程中模板始终不会超出图像f 的边界。       
+(2）使用常数填充图像一根据模板形状为图像f 虚拟出边界． 虚拟边界像素值为指定
+的常数， 如0， 得到虚拟图像f ’。保证模板在移动过程中始终不会超出f ’的边界。       
+(3）使用复制像素的方法填充图像,和（2）基本相同， 只是用来填充虚拟边界像素
+值的不是固定的常数， 而是复制图像f本身边界的模式．         
+这些技巧在本章后面的小节程序设计实例中将给出具体实现。  
+
+**相关和卷积**    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p4.png)   
+
+**滤波操作的Matlab实现**   
+Matlab中与滤披相关的函数主要有imfilter和fspecial. imfilter完成滤波操作，而fspecial
+可以为我们创建一些预定义的2维滤波器， 直接供imfilter函数使用．  
+
+滤波函数imfilter    
+函数原型如下：   
+g =imfilter(f,w,optional1,optional2);    
+
+参数说明          
+• f是要进行滤波操作的图像．
+• w是滤波操作所使用的模板，为一个二维数组．     
+• option 1, option2, ... 是可选项， 具体可以包括：  
+
+(1）边界选项： 主要针对5.2.2 小节中提到的边界处理问题， 如表5.1所示。
+采用第一种方式用固定值填充虚拟边界会使边缘附近会产生梯度， 采用后面三种方式填
+充可让边缘显得平滑。     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p5.png) 
+
+```
+f = imread('cameraman.tif');
+w = [1,1,1;1,1,1;1,1,10]/9;
+g = imfilter(f,w,'corr','replicate');
+figure;
+subplot(1,2,1);
+imshow(f),title('原图像');   
+subplot(1,2,2);
+imshow(g),title('滤波操作');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p6.png) 
+
+**fspecial创建预定义的二维滤波器**     
+其调用格式如下     
+h = fspecial(type,paramaters)    
+
+参数说明：     
+参数type用于指定滤波器的类型，其中一些类型的滤波器将在5.3节和5.4节中介绍，有些则将放到第9章的图像分割中介绍，作为边缘检测的算子.type的一些合法值 如表5.4所示．        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p7.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p8.png) 
+
