@@ -232,4 +232,4 @@ f(x,y) = g(round(x)， round (y) );
 设己知单位正方形的顶点坐标分别为f(O,0)、f(1 ,O）、f(O,1）、f(1,1）， 如图4.14所示， 我们
 要通过双线性插值得到正方形内任意点f(x,y)的值。   
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p20.png) 
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter4/p21.png) 
+
