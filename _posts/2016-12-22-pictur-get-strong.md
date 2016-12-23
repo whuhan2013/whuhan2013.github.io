@@ -146,10 +146,10 @@ h = fspecial(type,paramaters)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p8.png) 
 
 
-#### 图像平滑
+### 图像平滑
 图像平滑是一种可以减少和抑制图像噪声的实用数字图像处理技术。在空间域中一般可以采用邻域平均来达到平滑的目的。           
 
-**平均模板及其实现**      
+#### 平均模板及其实现
 从图5.2滤波前后的效果对比可以看出滤波后的图g有平滑或者说模糊的效果， 这完全
 是模板w作用的结果。例5.1中的w提供了一种平均的加权模式， 首先在以点（x, y ） 为中
 心，3×3邻域内的点都参与了决定新图像g中(x,y）点像素值的运算：而且所有系数都为1
@@ -164,4 +164,35 @@ h = fspecial(type,paramaters)
 点处产生灰度跳跃，但一般我们可以合理地假设偶尔出现的噪声影响并没有改变图像局部连
 续的性质，例如下面的局部图像f_sub，灰色底纹标识的为噪声点，在图像中表现为亮区中的
 2个暗点:      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p10.png) 
+
+显然，通过平滑滤波原局部图像f_sub中噪声点的灰度值得到了有效修正，像这样将每
+一个点用周围点的平均替代从而达到减少噪声影响的过程就称为平滑或模糊．    
+
+Matlab实现    
+
+```
+I = imread('baby_noise.bmp');
+h = fspecial('average',3);
+I3 = imfilter(I,h,'corr','replicate');
+h = fspecial('average',5);
+I5 = imfilter(I,h,'corr','replicate');
+h = fspecial('average',7);
+I7 = imfilter(I,h,'corr','replicate');
+figure;
+subplot(2,2,1);
+imshow(I),title('原图');
+
+subplot(2,2,2);
+imshow(I3),title('3*3');
+subplot(2,2,3);
+imshow(I5),title('5*5');
+subplot(2,2,4);
+imshow(I7),title('7*7');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p11.png) 
+
+上述程序的运行效果如图 5.3 所示， 可以看出随着模板的增大， 滤波过程在平滑更多噪声的同时也使得图像变得越来越模糊，这是由平均模板的工作机理决定的。当模板增大到7×7时， 图像中的某些细节，如衣服上的褶皱已经难以辨识了， 纽扣也变得相当模糊。 实际 上， 当图像细节与滤波器模板大小相近时， 图像细节就会受到比较大的影响， 尤其当它们的灰度值比较接近时， 混合效应导致的图像模糊会更明显。 随着模板地进一步增大， 像纽扣这样的细节都会被当作噪声平滑掉． 因此， 我们在确定模板尺寸时应仔细考虑要滤除的噪声点的大小， 有针对性地进行滤波．  
+
+#### 高斯平滑及其实现    
 
