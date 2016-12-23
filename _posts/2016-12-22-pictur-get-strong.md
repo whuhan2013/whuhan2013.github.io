@@ -202,3 +202,54 @@ imshow(I7),title('7*7');
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p12.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p13.png) 
 
+matlab实现   
+
+```
+I = imread('baby_noise.bmp');
+h3_5 = fspecial('gaussian',3,0.5);
+I3_5 = imfilter(I,h3_5);
+
+h3_8 = fspecial('gaussian',3,0.8);
+I3_8 = imfilter(I,h3_8);
+h3_18 = fspecial('gaussian',3,1.8);
+I3_18 = imfilter(I,h3_18);
+
+h5_8 = fspecial('gaussian',5,0.8);
+I5_8 = imfilter(I,h5_8);
+
+h7_12 = fspecial('gaussian',7,1.2);
+I7_12 = imfilter(I,h7_12);
+
+figure;
+subplot(2,3,1);
+imshow(I);
+subplot(2,3,2);
+imshow(I3_5);
+subplot(2,3,3);
+imshow(I3_8);
+subplot(2,3,4);
+imshow(I3_18);
+subplot(2,3,5);
+imshow(I5_8);
+subplot(2,3,6);
+imshow(I7_12);
+```
+
+上面介绍的平均平滑施波器和高斯平滑滤波器都是线性平滑滤波器， 在学习频率域滤波
+之后， 还可以为它们赋予另外一个名字一一低通滤波器。    
+
+#### 自适应平滑滤波     
+利用平均模板的平滑消除噪声的同时也会使图像变得模糊． 高斯平滑在一定程度上缓解
+了这些现象， 但由平滑滤波机理可知这种模糊是不可避免的。这当然是我们所不希望的． 于
+是想到选择性地进行平滑，即只在噪声局部区域进行平滑，而在无噪声局部区域不进行平滑，
+将模糊的影响降到最低， 这就是自适应滤波的思想．     
+
+如何判断该局部区域是包含噪声需要平滑的区域还是无明显噪声不需平滑的区域？ 这
+要基于噪声的性质来考虑， 5.3.1小节讨论了图像的局部连续性质， 噪声的存在导致在噪声点
+处产生灰度跳跃， 从而使噪声点局部区域灰度跨度较大． 因此可以选择如下两个标准中的1
+个作为局部区域存在噪声的判据：      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter5/p14.png) 
+对于那些噪声位置具有随机性和局部性的图像， 自适应的滤波具有非常好的效果． 有兴
+趣的读者可自己编制程序实现自适应的高斯平滑算法， 应用于具有上述特点的噪声图像中，
+并且，和我们给出的标准高斯平滑效果进行比较．
+
