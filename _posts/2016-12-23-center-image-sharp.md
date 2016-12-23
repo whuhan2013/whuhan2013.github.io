@@ -34,9 +34,9 @@ description: 图像处理
 Matlab提供了medfilt2函数实现中值滤波， 原型为:      
 I2 = medfilt2(I1,[m,n])     
 
-参数说明    
-• I1是原因矩阵．
-• m和n是中值滤波处理的模板大小，默认3x3.     
+参数说明      
+• I1是原因矩阵．           
+• m和n是中值滤波处理的模板大小，默认3x3.       
 
 输出结果      
 输出I2是中值滤波后的图像矩阵．     
@@ -44,4 +44,29 @@ I2 = medfilt2(I1,[m,n])
 下面的程序分别给出了一幅受椒盐噪声污染的图像经过平均平滑、高斯平滑和中值撼泼
 的处理效果．    
 
+```
+I = imread('lena_salt.bmp');
+J = imnoise(I,'salt & pepper');
+w = [1,2,1;2,4,2;1,2,1]/16;
+J1 = imfilter(J,w,'corr','replicate');
+
+w = [1,1,1;1,1,1;1,1,1]/9;
+J2 = imfilter(J,w,'corr','replicate');
+
+J3 = medfilt2(J,[3,3]);
+figure;
+subplot(2,3,1);
+imshow(I),title('原图像');
+subplot(2,3,2);
+imshow(J),title('椒盐噪声');  
+subplot(2,3,4);
+imshow(J1),title('高斯平滑');
+subplot(2,3,5);
+imshow(J2),title('平均平滑');
+subplot(2,3,6);
+imshow(J3),title('中值平滑');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p1.png)
+
+如图从中可见线性平滑滤波在降噪的同时不可避免地造成了模糊，而中值滤波在有效抑制椒盐噪声的同时模糊效应明显低得多，因而对于椒盐噪声污染的图像，中值滤波要远远优于线性平滑滤波．    
 
