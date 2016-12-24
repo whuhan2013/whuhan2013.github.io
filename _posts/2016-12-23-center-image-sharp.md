@@ -160,6 +160,13 @@ imshow(G,[]),title('sobel');
 
 #### 基于二阶微分的图像增强拉普拉斯算子     
 下面介绍一种对于图像锐化而言应用更为广泛的基于二阶微分的拉普拉斯（Laplacian)算子.    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p6.png)
 
-
+分析拉普拉斯模板的结构，可知这种模板对于90度的旋转是各向同性的。所谓对于某角
+度各向同性是指把原图像旋转该角度后再进行滤波与先对原图像滤波再旋转该角度的结果相
+同。这说明拉普拉斯算子对于接近水平和接近坚直方向的边缘都有很好的增强，从而也就避
+免我们在使用梯度算子时要进行两次滤波的麻烦。更进一步，我们还可以得到如下对于45°
+旋转各向同性的滤波器：     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p7.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p8.png)
 
