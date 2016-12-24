@@ -186,11 +186,11 @@ figure;
 subplot(2,2,1);
 imshow(temp),title('原图像');
 subplot(2,2,2);
-imshow(L1);
+imshow(abs(L1),[]);
 subplot(2,2,3);
-imshow(L2);
+imshow(abs(L2),[]);
 subplot(2,2,4);
-imshow(L3);
+imshow(abs(L3),[]);
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p9.png)
 
