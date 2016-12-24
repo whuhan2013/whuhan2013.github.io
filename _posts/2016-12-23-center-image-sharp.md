@@ -170,3 +170,32 @@ imshow(G,[]),title('sobel');
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p7.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p8.png)
 
+分别使用上述3种拉普拉斯滤波的Matlab滤波程序如下    
+
+```
+I = imread('bacteria.BMP');
+temp = I;
+I = double(I);
+w1 = [0 -1 0;-1 4 -1;0 -1 0];
+L1 = imfilter(I,w1,'corr','replicate');
+w2 = [-1 -1 -1;-1 8 -1 ;-1 -1 -1];
+L2 = imfilter(I,w2,'corr','replicate');
+w3 = [1 4 1;4 -20 4;1 4 1];
+L3 = imfilter(I,w3,'corr','replicate');
+figure;
+subplot(2,2,1);
+imshow(temp),title('原图像');
+subplot(2,2,2);
+imshow(L1);
+subplot(2,2,3);
+imshow(L2);
+subplot(2,2,4);
+imshow(L3);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p9.png)
+
+上述程序运行结果如图5.9 所示．对于细菌图像，拉普拉斯锐化效果与之前Robert 与
+Sobel梯度锐化明显不同的一点是输出图像中的双边缘。此外，我们还注意到拉普拉斯锐化似乎
+对一些离散点有较强的响应，当然由于噪声也是离散点，因此这个性质有时是我们所不希望的．    
+
+
