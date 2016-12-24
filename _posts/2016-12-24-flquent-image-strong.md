@@ -32,6 +32,11 @@ description: 频率域图像增强
 
 ### 傅立叶变换基础知识     
 
+**通俗解释**      
+[到底什么是傅立叶级数](http://www.360doc.com/content/13/0328/12/202378_274443797.shtml)     
+[如何理解傅里叶变换公式?](https://www.zhihu.com/question/19714540?rf=20254033)     　
+[如果看了此文你还不懂傅里叶变换，那就过来掐死我吧](http://blog.jobbole.com/70549/)
+
 #### 傅立叶级数    
 法国数学家傅立叶发现任何周期函数只要满足一定条件（狄利赫里条件〉都可以用正弦函数和余弦函数构成无穷级数，即以不同频率的正弦和余弦函数的加权和来表示，后世称为:傅立叶级数。               
 对于有限定义域的非周期函数，可以对其进行周期拓延从而使其在整个扩展定义域上为周期函数，从而也可以展开为傅立叶级数．  
@@ -54,3 +59,10 @@ description: 频率域图像增强
 级数展开公式，只不过这里的频率u变为连续化，所以加权和采用了积分的形式。这是因为随着式（6－5)的积分上下限的T向整个实数定义域扩展，即T→∞，频率u则趋近于du （因为u= 1/T），导致原来离散变化的u的连续化．
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter6/p6.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter6/p7.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter6/p8.png) 
+显然，这是f(x,y）各个像素的灰度之和。而如果将系数1/MN放在正变换之前， 则F(O, 0)对应于原因像f(x, y） 的平均灰度。F(O, 0）有时被称作频谱的直流分量（DC）。        
+我们之前曾指出一维函数可以表示为正弦〈余弦〉函数的加权和形式：类似的， 二维函数f(x,y)可以分解为不同频率的二维正弦〈余弦〉平面波的按比例叠加。
+
+**幅度谱、相位谱和功率谱**     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter6/p9.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter6/p10.png) 
