@@ -236,14 +236,52 @@ Sobel梯度锐化明显不同的一点是输出图像中的双边缘。此外，
 无论是基于一阶微分的Robert、Sobel模板还是基于二阶微分的拉普拉斯模板，其中各系数和均为0。这说明算子在灰度恒定区域的响应为0， 即在锐化处理后的图像中，原图像的平滑区域近乎于黑色，而原图中所有的边缘、细节和灰度跳变点都作为黑背景中的高灰度部分突出显示．
 在基于锐化的图像增强中，我们常常希望在增强边缘和细节的同时仍然保留原图像中的信息，而不是将平滑区域的灰度信息丢失。因此可以把原图像加上锐化后的图像以得到比较理想的结果。        
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p11.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p12.png)
 形如式5-14这样的滤波处理就称为高提升滤波．       
 一般来说，权重系数A应为一个大于等于1的实数，A越大原图像所占比重越大，锐化效果越不明显。相对于A=1的情况，当A分别
 为1.8和3时，图中细节得到了有效增强，对比度也有了一定的改善。
 
 **实现**    
-高提升谴披可由以下3个步骤完成:
+高提升谴披可由以下3个步骤完成:    
 (1)图像锐化。     
 (2）原图像与锐化图像的按比例混合．     
 (3）混合后的灰度调整〈归一化至［0,255］。                        
 在实现中应注意， 高提升施加才锐化图像的响应是正还是负非常敏感。以拉普拉斯模板为例，当模板中心系数为正时，对于邻域中的相对高灰度值像素，其滤波响应为正值，叠加 到原图像中将使输出比原来更亮：而对于邻壤中的相对暗点，其滤波响应显然为负值，叠加到原图像中则使该点在输出图像中更暗。当模板中心系数为负时，由于原图像与滤波响应图 像之间变成了相减的关系，高提升的效果与正中心系数的模板完全相同．这样就达到了亮者愈亮，暗者愈暗的增强效果。
+
+#### 高斯·拉普拉斯交换     
+锐化在增强边缘和细节的同时往往也增强了噪声， 因此如何区分开噪声和边缘是锐化过程中要解决的一个核心问题。     
+基于二阶微分的拉普拉斯算子对于细节〈细线和孤立点〉能产生更强的相应， 并且各
+向同性， 因此在图像增强中较一阶的梯度算子更受到我们的青睐。然而， 它对于噪声点的
+响应也更强， 我们看到图像baby_noise.bmp经拉普拉斯锐化后噪声更明显。           
+为了在取得更好锐化效果的同时把噪声干扰降到最低， 可以先对带有噪声的原始图像进图像进行平滑滤波， 再进行锐化增强边缘和细节． 本着“强强联合” 的原则， 将在平滑领域工作得更好的高斯平滑算子同镜化界表现突出的拉普拉斯锐化结合起来， 得到高斯一拉普拉斯算子(Marr和Hildh也提出)。    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p13.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p14.png)
+
+Laplacian与LoG算子的锐化效果比较   
+
+```
+I = imread('baby.bmp');
+Id = double(I);
+h_lap = [ -1 -1 -1;-1 8 -1;-1 -1 -1];
+I_lap = imfilter(Id,h_lap,'corr','replicate');
+
+h_log = fspecial('log',5,0.5);
+I_log = imfilter(Id,h_log,'corr','replicate');
+h_log2 = fspecial('log',5,2);
+I_log2 = imfilter(Id,h_log2,'corr','replicate');
+
+figure;
+subplot(2,2,1);
+imshow(I),title('原图');
+subplot(2,2,2);
+imshow(uint8(abs(I_lap)),[]),title('laplacian');
+
+subplot(2,2,3);
+imshow(uint8(abs(I_log)),[]),title('LoG');
+subplot(2,2,4);
+imshow(uint8(abs(I_log2)),[]),title('LoG2');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p15.png)
+
+上述程序的运行结果如图所示，分别给出了对于图像baby.bmp，当σ＝0.5和σ＝2时的LoG增强效果。与laplacian相比， 噪声得到了有效的抑制，且σ越小细节增强效果更好， σ 越大则平滑效果越好．
 
