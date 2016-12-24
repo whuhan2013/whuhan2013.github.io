@@ -134,5 +134,32 @@ imshow(G,[]),title('Robert梯度');
 注意，为便于观察效果，做了显示时的重新标定， 即将图像的灰度范围线性变换到 0-255 之内， 并使图像的最小灰度值为 0，最大灰度值为255.      
 imshow(K,[])显示K，并将K的最大值和最小值分别作为纯白(255)和纯黑(0)，中间的K值映射为0到255之间的标准灰度值。    
 
+#### Sobel梯度    
+由于滤波时我们总是喜欢奇数尺寸的模板， 因而一种计算Sobel 梯度的Sobel 模板更加常用：     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p4.png)
+下面的Matlab 程序计算了一幅图像的竖直和水平梯度， 它们的和可以作为完整的Sobel梯度。
+
+```
+I = imread('bacteria.BMP');
+w1 = fspecial('sobel');
+w2 = w1';
+G1 = imfilter(I,w1);
+G2 = imfilter(I,w2);
+G = abs(G1)+abs(G2);
+figure;
+subplot(2,2,1);
+imshow(I),title('原图像');
+subplot(2,2,2);
+imshow(G1,[]),title('水平sobel');  
+subplot(2,2,3);
+imshow(G2,[]),title('竖直sobel');
+subplot(2,2,4);
+imshow(G,[]),title('sobel');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter52/p5.png)
+
+#### 基于二阶微分的图像增强拉普拉斯算子     
+下面介绍一种对于图像锐化而言应用更为广泛的基于二阶微分的拉普拉斯（Laplacian)算子.    
+
 
 
