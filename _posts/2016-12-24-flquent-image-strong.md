@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 频率域图像增强
+title: 傅立叶变换学习
 date: 2016-12-24
 categories: blog
 tags: [图像处理]
@@ -165,4 +165,94 @@ dim指出了在多维数组的哪个维度上执行平移操作．
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter6/p14.png) 
 
 注意:在执行IFFT2函数之前，如果曾经使用FFTShift函数对频域图像进行过原点平移，则还需要4将原点平移回原位置．  
+
+```
+I1 = imread('cell.tif');
+
+fcoef = fft2(I1);
+spectrum = fftshift(fcoef);
+temp = log(1+abs(spectrum));   
+
+subplot(1,2,1);
+imshow(temp,[]);
+title('FFT');
+subplot(1,2,2);
+imshow(I1);
+title('Source');
+
+I2 = imread('circuit.tif');
+fcoef = fft2(I2);
+spectrum = fftshift(fcoef);
+temp = log(1+abs(spectrum));
+
+figure;
+subplot(1,2,1);
+imshow(temp,[]);
+title('FFT');
+subplot(1,2,2);
+imshow(I2);
+title('source');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter6/p15.png) 
+
+可以看出， 图（b）中的图像较为平滑， 而在其傅立叶频谱中，低频部分对应的幅值较大，而对（d）中细节复杂的的图像circuit.tif，灰度的变化趋势更加剧烈，相应的频谱中高频分量较强。
+
+事实上，由于（b）图中基本只存在水平和垂直的线条，导致在输出的频谱中亮线集中存在于水平和垂直方向（并且经过原点〉。具体地说，原图像中的水平边缘对应频谱中的竖直亮线，而竖直边缘则对应频谱中的水平响应。我们不妨这样理解，水平方向的边缘可以看作在坚直方向上的灰度值的矩形脉冲，而这样的矩形脉冲可以分解为无数个竖直方向正弦平面波的叠加，从而对应频域图像中的垂直亮线：而对于竖直方向的边缘，情况类似。        
+
+通过例6.1，可以发现一些频谱与其空间域图像之间的联系．实际上，低频（频谱图像中靠近中心的区域〉对应图像的慢变化分量：高频〈频谱图像中远离中心的区域〉对应一幅图像中较快变化的灰度级， 常常对应图像细节， 如物体的边缘和噪声等。以图6.14 (c）的电
+路图像为例，电路板的灰度较为一致的背景区域就对应着频谱的低频部分，而横竖电路线条的灰度变换则是相对高频的成份，且灰度变换越剧烈，就对应越高的频域分量．
+
+**美女与猫一一交换两幅图像的相位谱**
+图a,（b）中分别是一张美女的照片和一张猫的照片，这里我们准备交换这两幅
+图像的相位谱，然用美女的幅度谱加上猫的相位谱，而用猫的幅度谱加上美女的相位谱，然
+后根据式（6-18）通过幅度谱和相位谱来还原傅立叶变换F(u，v），再经傅立叶反变换得到文
+又相位谱之后的图像． 根据6.2.2小节中关于幅度谱和相位谱各自作用的讨论，您能想到这样
+做将会产生怎样的结果吗？  
+
+```
+% c6s2.m
+
+% 读取图片
+A = imread('beauty.jpg');
+B = imread('cat.jpg');
+
+% 求傅立叶变换
+Af = fft2(A);
+Bf = fft2(B);
+
+% 分别求幅度谱和相位谱
+AfA = abs(Af);
+AfB = angle(Af);
+
+BfA = abs(Bf);
+BfB = angle(Bf);
+
+% 交换相位谱并重建复数矩阵
+AfR = AfA .* cos(BfB) + AfA .* sin(BfB) .* i;
+BfR = BfA .* cos(AfB) + BfA .* sin(AfB) .* i;
+
+% 傅立叶反变换
+AR = abs(ifft2(AfR));
+BR = abs(ifft2(BfR));
+
+% 显示图像
+subplot(2,2,1);
+imshow(A);
+title('美女原图像');
+
+subplot(2,2,2);
+imshow(B);
+title('猫的原图像');
+
+subplot(2,2,3);
+imshow(AR, []);
+title('美女的幅度谱和猫的相位谱组合');
+
+subplot(2,2,4);
+imshow(BR, []);
+title('猫的幅度谱和美女的相位谱组合');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter6/p16.png)
+
+通过这个示例可以发现， 经交换相位谱和反变换之后得到的图像内容与其相位谱对应的图像一致， 这就印证了我们之前关于相位谱决定图像结构的论断。 而图像中整体灰度分布特性， 如明暗、 灰度变化趋势等则在较大程度上取决于对应的幅度谱， 因为幅度谱反映了图像整体上各个方向的频率分量的相对强度。
 
