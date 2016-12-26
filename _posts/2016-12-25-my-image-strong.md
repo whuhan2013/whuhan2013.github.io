@@ -144,3 +144,51 @@ title('Ideal LPF,frq = 20');
 
 matlab实现      
 
+```
+function out = imgaussflpf(I, sigma)
+% imgaussflpf函数     		构造频域高斯低通滤波器
+% I参数				输入的灰度图像
+% sigma参数			高斯函数的Sigma参数
+
+[M,N] = size(I);
+out = ones(M,N);
+for i=1:M
+    for j=1:N
+        out(i,j) = exp(-((i-M/2)^2+(j-N/2)^2)/2/sigma^2);
+    end
+end
+
+I = imread('baby_noise.bmp');
+
+ff = imgaussflpf(I,20);
+out = imfreqfilt(I,ff);
+
+figure(1);
+subplot(2,2,1);
+imshow(I);
+title('Source');
+
+temp = fft2(I);
+temp = fftshift(temp);
+temp = log(1+abs(temp));
+figure(2);
+subplot(2,2,1);
+imshow(temp,[]);
+title('Source');
+
+figure(1);
+subplot(2,2,2);
+imshow(out);
+title('Gauss LPF,sigma=20');
+
+temp = fft2(out);
+temp = fftshift(temp);
+temp = log(1+abs(temp));
+figure(2);
+subplot(2,2,2);
+imshow(temp,[]);
+title('Gauss LPF,sigma=20');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p7.png) 
+
+
