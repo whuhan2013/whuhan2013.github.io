@@ -35,3 +35,104 @@ description: 频率域图像增强
 由上面的叙述易知， 滤波能否取得理想结果的关键取决于频域滤波函数H(u,v)。我们常常称之为滤波器，或滤波器传递函数，因为它在滤波中抑制或滤除了频谱中某些频率的分量，而保留其他的一些频率不受影响。本书中我们只关心值为实数的滤波器，这样滤波过程中H 的每一个实数元素分别乘以F中对应位置的复数元素，从而使F中元素的实部和虚部等比例变化，不会改变F的相位谱，这种滤波器也因此被称为“零相移” 滤波器。这样，最终反变换回空域得到的滤波结果图像 g(x,y）理论上也应当为实函数，然而由于计算舍入误差等原因， 可能会带有非常小的虚部，通常将虚部直接忽略。       
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p2.png) 
 
+**matlab实现**    
+为方便读者在Matlab中进行频域滤波，我们编写了imfreqfilt函数，其用法同空域滤波时使用的imfilter函数类似，调用时需要提供原始图像和与原图像等大的频域滤波器作为参数，函数的输出为经过滤波处理又反变换回空域之后的图像。    
+
+```
+function out = imfreqfilt(I, ff)
+% imfreqfilt函数			对灰度图像进行频域滤波
+% 参数I				输入的空域图像
+% 参数ff				应用的与原图像等大的频域滤镜
+
+if (ndims(I)==3) && (size(I,3)==3)   % RGB图像
+    I = rgb2gray(I);
+end
+
+if (size(I) ~= size(ff))
+    msg1 = sprintf('%s: 滤镜与原图像不等大，检查输入', mfilename);
+    msg2 = sprintf('%s: 滤波操作已经取消', mfilename);
+    eid = sprintf('Images:%s:ImageSizeNotEqual',mfilename);
+    error(eid,'%s %s',msg1,msg2);
+end
+
+% 快速傅立叶变换
+f = fft2(I);
+
+% 移动原点
+s = fftshift(f);
+
+% 应用滤镜及反变换
+out = s .* ff; %对应元素相乘实现频域滤波
+out = ifftshift(out);
+out = ifft2(out);
+
+% 求模值
+out = abs(out);
+
+% 归一化以便显示
+out = out/max(out(:));
+```
+
+#### 频域低通滤波器       
+在频谱中，低频主要对应图像在平滑区域的总体灰度级分布，而高频对应图像的细节部 分，如边缘和噪声。因此，图像平滑可以通过衰减图像频谱中的高频部分来实现，这就建立了空间域图像平滑与频域低通滤波之间对应关系。      
+
+**理想低通滤波器及其实现**     
+最容易想到的衰减高频成份的方法就是在一个称为“截止频率”的位置“截断”所有的 高频成份，将图像频谱中所有高于这一截止频率的频谱成份设为0，低于截止频率的成为保持不变。能够达到这种效果的滤波器如图6.16所示，我们称之为理想低通滤披器。如果图像的宽度为M，高度为N，那么理想低通频域滤波器可形式化地描述为：          
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p3.png) 
+
+其中Do 表示理想低通滤波器的截止频率，滤波器的频率域原点在频谱图像的中心处，在以截止频率为半径的圆形区域之内的滤镜元素值全部为1， 而该圆之外的滤镜元素值全部为o. 理想低通滤波辑的频率特性在截止频率处十分陡峭，无法用硬件实现，这也是我们称之为理想的原因， 但其软件编程的模拟实现较为简单。          
+理想低通滤波器可在一定程度上去除图像噪声， 但由此带来的图像边缘和细节的模糊效应也较为明显，其滤波之后的处理效果比较类似于5.3.1中的平均平滑。实际上，理想低通滤波器是一个与频谱图像同样尺寸的二维矩阵，通过将矩阵中对应较高频率的部分设为0，较低频率的部分〈靠近中心〉设为1，可在与频谱图像相乘后有效去除频谱的高频成份〈由于是矩阵对应元素相乘，频谱高频成份与滤波器中的0相乘〉。其中0与1的交界处即对应滤波器的截止频率。     
+
+**matlab实现**    
+
+```
+function out = imidealflpf(I, freq)
+% imidealflpf函数			构造理想的频域低通滤波器
+% I参数				输入的灰度图像
+% freq参数				低通滤波器的截止频率
+% 返回值：out – 指定的理想低通滤波器
+[M,N] = size(I);
+out = ones(M,N);
+for i=1:M
+    for j=1:N
+        if (sqrt(((i-M/2)^2+(j-N/2)^2))>freq)
+            out(i,j)=0;
+        end
+    end
+end
+
+I = imread('baby_noise.bmp');
+
+ff = imidealflpf(I,20);
+out = imfreqfilt(I,ff);
+
+figure(1);
+subplot(2,2,1);
+imshow(I);
+title('Source');
+
+temp = fft2(I);
+temp = fftshift(temp);
+temp = log(1+abs(temp));
+figure(2);
+subplot(2,2,1);
+imshow(temp,[]);
+title('Source');
+
+figure(1);
+subplot(2,2,2);
+imshow(out);
+title('Ideal LPF,frq = 20');
+
+temp = fft2(out);
+temp = fftshift(temp);
+temp = log(1+abs(temp));
+figure(2);
+subplot(2,2,2);
+imshow(temp,[]);
+title('Ideal LPF,frq = 20');    
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p4.png) 
+由图可知，当截止频率非常低时， 只有非常靠近原点的低频成份能够通过， 图像模糊严重：截止频率越高， 通过的频率成份就越多， 图像模糊的程度越小， 所获得的图像也就越接近原图像。 但可以看出， 理想低通滤波器并不能很好地兼顾噪声滤除与细节保留两个方面， 这和空域中采用平均模板时的情形比较类似。 下面将介绍频域的高斯低通滤 波器并比较它与理想低通滤波器的处理效果。
+
+#### 高斯低通滤波器及其实现     
