@@ -222,3 +222,36 @@ end
 **频域拉普拉斯滤波器及其实现** 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p10.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p11.png) 
+
+matlab实现     
+
+```
+function out = imlapf(I)
+% imlapff函数         构造频域拉普拉斯滤波器
+% I参数               输入的灰度图像
+
+[M,N] = size(I);
+out = ones(M,N);
+for i=1:M
+    for j=1:N
+        out(i,j) = -((i-M/2)^2+(j-N/2)^2);
+    end
+end
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p12.png) 
+
+#### Matlab 综合案例一一利用频域滤波消除周期噪声        
+介绍了几种典型的频域滤波器，实现了频域下的低通和高通滤波．它们均可在空域下来用平滑和锐化算子实现。本节将给出一个特别适合在频域中完成的滤波案例， 即利用频域带阻滤波器消除图像中的周期噪声。下面就来看着这个在空域中几乎不可能完成的任务在频域中是如何中实现的。       
+
+**频域带阻滤波器**       
+顾名思义， 所谓“ 带阻” 就是阻止频谱中某一频带范围的分量通过， 其他频率成份则不受影响。常见的。带阻滤波器有理想带阻滤波器和高斯带阻滤波器。  
+
+**理想带阻滤波器**      
+理想带阻滤波器的表达式为：       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p13.png) 
+
+**高斯带阻滤波器**      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p14.png) 
+
+matlab实现    
+
