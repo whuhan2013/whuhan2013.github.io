@@ -191,4 +191,13 @@ title('Gauss LPF,sigma=20');
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p7.png) 
 
+显然， 高斯滤波器的截止频率处不是陡峭的。高斯低通滤波器在Sigma参数取 40 的时候可以较好地处理被高斯噪声污染的图像，而且相比于理想低通滤波器而言， 处理效果上的改进是显而易见的． 高斯低通滤波器在有效抑制噪声的同时， 图像的模糊程度更低， 对边缘带来的混叠程度更小， 从而使高斯低通滤波器在通常情况下获得了比理想低通滤波器更为广泛的应用。
+
+#### 频率域高通滤波器      
+图像锐化可以通过衰减图像频谱中的低频成份来实现， 这就建立了空间域图像锐化与频域高通滤波之间对应关系。      
+
+**高斯高通滤波器及其实现**    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p8.png) 
+
+matlab实现     
 
