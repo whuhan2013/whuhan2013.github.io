@@ -255,3 +255,51 @@ end
 
 matlab实现    
 
+添加躁声     
+
+```
+O = imread('pout.tif');    
+[M,N] = size(O);
+I = O;
+for i = 1:M
+    for j = 1:N
+        I(i,j) = I(i,j)+20*sin(20*i)+20*sin(20*j);
+    end
+end
+
+subplot(1,2,1);
+imshow(O);
+title('Source');
+
+subplot(1,2,2);
+imshow(I);
+title('Added Noise');
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p15.png) 
+
+**频谱分析**    
+使用高斯带阻滤波器时，首先应对需要处理图像的频谱有一定了解．下面的命令得到了两幅图像的频谱．  
+
+```
+i_f = fft2(I);
+i_f = fftshift(i_f);
+i_f = abs(i_f);
+i_f = log(1+i_f);
+
+o_f = fft2(O);
+o_f = fftshift(o_f);
+o_f = abs(o_f);
+o_f = log(1+o_f);
+
+figure(1);
+subplot(1,2,1);
+imshow(o_f,[]);
+title('Source');
+
+subplot(1,2,2);
+imshow(i_f,[]);
+title('Added Noise');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter62/p16.png)
+
