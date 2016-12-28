@@ -198,7 +198,7 @@ c(x,y)= [R(x,y);G(x,y);B(x,y)]
 
 #### 彩色补偿及其Matlab实现
 有些图像处理任务的目标是根据颜色分离出不同类型的物体。但由于常用的彩色成像设备具有较宽且相互覆盖的光谱敏感区，加之待拍摄图像的染色是变化的，所以很难在3 个分量图中将物体分离出来，这种现象称为颜色扩散。彩色补偿的作用就是通过不同的颜色通道提取不同的目标物。   
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter7/p11.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter7/%20p11.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter7/p12.png) 
 
 matlab实现      
