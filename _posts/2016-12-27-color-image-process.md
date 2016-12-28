@@ -138,3 +138,66 @@ hsi = cat(3, H, S, I);
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter7/p9.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter7/p10.png) 
 
+matlab实现    
+
+```
+function rgb = hsi2rgb(hsi)
+% rgb = hsi2rgb(hsi)把一幅HSI图像转换为RGB图像，
+% 其中hsi(:, :, 1)是色度分量，它的范围是除以2*pi后的[0, 1]；
+% hsi(:, :, 2)是饱和度分量，范围是[0, 1]；
+% hsi(:, :, 3)是亮度分量，范围是[0, 1]。
+%
+% 输出图像分量：
+% rgb(:, :, 1)为红；
+% rgb(:, :, 2)为绿；
+% rgb(:, :, 3)为蓝。
+
+% 抽取图像分量
+hsi = im2double(hsi);
+H = hsi(:, :, 1) * 2 * pi;
+S = hsi(:, :, 2);
+I = hsi(:, :, 3);
+
+% 执行转换方程
+R = zeros(size(hsi, 1), size(hsi, 2));
+G = zeros(size(hsi, 1), size(hsi, 2));
+B = zeros(size(hsi, 1), size(hsi, 2));
+
+% RG扇形(0 <= H < 2*pi/3)
+idx = find( (0 <= H) & (H < 2*pi/3));
+B(idx) = I(idx) .* (1 - S(idx));
+R(idx) = I(idx) .* (1 + S(idx) .* cos(H(idx)) ./ ...
+cos(pi/3 - H(idx)));
+G(idx) = 3*I(idx) - (R(idx) + B(idx));
+
+% BG扇形(2*pi/3 <= H < 4*pi/3)
+idx = find( (2*pi/3 <= H) & (H < 4*pi/3) );
+R(idx) = I(idx) .* (1 - S(idx));
+G(idx) = I(idx) .* (1 + S(idx) .* cos(H(idx) - 2*pi/3) ./ ...
+cos(pi - H(idx)));
+B(idx) = 3*I(idx) - (R(idx) + G(idx));
+
+% BR扇形
+idx = find( (4*pi/3 <= H) & (H <= 2*pi));
+G(idx) = I(idx) .* (1 - S(idx));
+B(idx) = I(idx) .* (1 + S(idx) .* cos(H(idx) - 4*pi/3) ./ ...
+cos(5*pi/3 - H(idx)));
+R(idx) = 3*I(idx) - (G(idx) + B(idx));
+
+% 将3个分量联合成为一个RGB图像
+rgb = cat(3, R, G, B);
+rgb = max(min(rgb, 1), 0);
+```
+
+### 全彩色图像处理基础      
+本节主要介绍全彩色图像处理技术，以及面对不同的图像处理任务怎样处理全彩色图像．通常，全彩色图像处理技术总的可以分为以下两大类。     
+(1）对3个平面分量单独处理，然后将分别处理过的3个分量合成彩色图像。对每个分量的处理技术可以应用到对灰度图像处理的技术上。但是这种通道式的独立处理技术忽略了通道间的相互影响。        
+(2）直接对彩色像素进行处理。因为全彩色图像至少有3个分量，彩色像素实际上是一个向量。直接处理就是同时对所有分量进行无差别的处理．这时彩色图像的 3个分量用向量形式表示，即对彩色图像上任一点的像素 c(x,y)，有：       
+c(x,y)= [R(x,y);G(x,y);B(x,y)]      
+那么对像素点(x,y）处理的操作实际上是同时对 R、G、 B这3个分量操作．不过通常大多数图像处理技术都是指对每个分量的单独处理。接下来将讲述全彩色图像处理的两个常用技术：彩色补偿和彩色平衡。   
+
+#### 彩色补偿及其Matlab实现
+有些图像处理任务的目标是根据颜色分离出不同类型的物体。但由于常用的彩色成像设备具有较宽且相互覆盖的光谱敏感区，加之待拍摄图像的染色是变化的，所以很难在3 个分量图中将物体分离出来，这种现象称为颜色扩散。彩色补偿的作用就是通过不同的颜色通道提取不同的目标物。   
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter7/p11.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter7/p12.png) 
+
