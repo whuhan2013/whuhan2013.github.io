@@ -209,4 +209,11 @@ imshow(Iout);
 **理论基础**     
 问题的描述如下： 己知某－8连通边界和边界内部的某个点， 要求从该点开始填充整个边界包围的区域， 这一过程称为种子填充， 填充的开始点被称为种子. 
 如图8.20 所示， 对于4 连通的边界， 其围成的内部区域是8 连通的， 而8连通的边界围成的内部区域却是4连通的．  
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p17.png)
 
+为了填充4 连通的边界应选择图8.20 (b ）中的3 × 3 结构元素， 但如果想在8 连通边界内从种子点得到区域则需选用图8.20 (d）的十字结构元素S 对初始时仅为种子点的图像B进行膨胀，十字结构元素S能够保证只要B在边界A的内部〈不包括边界本身〉，每次膨胀都不会产生边界之外的点（新膨胀出来的点或者在边界内部， 或者落在边界上〉， 这样只需把每次膨胀的结果图像和边界的补图像$A^c$相交， 就能把膨胀限制在边界内部。随着对B的
+不断膨胀， B的区域不断生长， 但每次膨胀后与$A^c$的交又将B限制在边界d的内部， 这样一直到最终B充满整个A的内部区域，停止生长。此时的B与d的并集即为最终的区域填充结果。     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p18.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p19.png)
+
+#### 连通分量提取及其实现     
