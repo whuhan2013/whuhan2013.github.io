@@ -239,24 +239,23 @@ AppRegistry.registerComponent('example', () => example);
 **添加文字**      
 
 ```
-   
-      {this.state.datas.map((data, index) => {
-          return(
-            <View style={[ this.secondHandStyles(),
-            {transform:[{ rotate: data + 'deg' },
-            {translateY: -(this.props.secondHandOffset +
-                           this.props.secondHandLength/2+77) }]}]}
-          ><Text style={styles.lineStyle}>{index}</Text></View>
-          );
-        })}
+ {this.state.datas.map((data, index) => {
+return(
+  <View style={[ this.secondHandStyles(),
+  {transform:[{ rotate: data + 'deg' },
+  {translateY: -(this.props.secondHandOffset +
+                 this.props.secondHandLength/2+77) }]}]}
+><Text style={styles.lineStyle}>{index}</Text></View>
+);
+     })}
 
 
-    lineStyle: {
-    backgroundColor : '#ffffff',
-    width : 20,
-    height : 20,
-    marginLeft: -10,
-    fontSize:10
+ lineStyle: {
+ backgroundColor : '#ffffff',
+ width : 20,
+ height : 20,
+ marginLeft: -10,
+ fontSize:10
   }
 ```
 
