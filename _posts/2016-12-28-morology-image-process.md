@@ -48,3 +48,28 @@ strel函数可以为各种常见形态学运算生成结构元素SE， 当生成
 shape指定了结构元素的形状， 其常用合法取值如在8.1所示．        
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p3.png)  
 
+腐蚀的作用“ 顾名思义，腐蚀能够消融物体的边界，而具体的腐蚀结果与图像本身和结构元素的形状有关。如果物体整体上大于结构元素，腐蚀的结构是使物体变“ 瘦”一圈，而
+这一圈到底有多大是由结构元素决定的：如果物体本身小于结构元素， 则在腐蚀后的图像中物体将完全消失：如物体仅有部分区域小于结构元素〈如细小的连通3，则腐蚀后物体会在细
+连通处断裂，分离为两部分。      
+
+```
+I = imread('erode_dilate.bmp');    
+se = strel('square',3);
+Ib = imerode(I,se);
+se = strel([0 1 0;1 1 1;0 1 0]);    
+Ic = imerode(I,se);
+se = strel('square',5);
+Id = imerode(I,se);
+
+figure;
+subplot(2,2,1);
+imshow(I);
+subplot(2,2,2);
+imshow(Ib);
+subplot(2,2,3);
+imshow(Ic);
+subplot(2,2,4);
+imshow(Id);
+```
+
+
