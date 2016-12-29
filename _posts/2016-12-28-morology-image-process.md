@@ -179,3 +179,34 @@ imshow(Ihm);
 看起来比较明显， 但如果背景部分过大， 则会影响击中／击不中变换的计算结果．在上例中， 中间的正方形Y与右上的正方形Z之间的水平距离为6，如果在定义S时， S2的宽度超过6个像素， 则最终的计算结果将是空集．
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p13.png)  
 
+#### 边界提取与跟踪及其实现           
+轮廓是对物体形状的有力描述， 对图像分析和识别十分有用。通过边界提取算法可以得到物体的边界轮廓：而边界跟踪算法在提取边界的同时还能依次记录下边界像素的位置信息，下面分别介绍.
+
+**边界提取**                  
+要在二值图像中提取物体的边界，容易想到的一个方法是将所有物体内部的点删除（置为背景色〉。具体地说，可以逐行扫描原图像，如果发现一个黑点〈图8.17 中黑点为前景点）的8个邻域都是黑点， 则该点为内部点， 在目标图像中将它删除。实际上这相当于采用一个3*3的结构元素对原图像进行腐蚀， 使得只有那些8个邻域都有黑点的内部点被保留，再用原图像减去腐蚀后的图像， 恰好删除了这些内部点， 留下了边界像素。这一过程可参
+见图8.17 。        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p14.png)  
+
+```
+I = imread('head_portrait.bmp');
+se = strel('square',3);
+Ie = imerode(I,se);
+Iout = I - Ie;
+figure;
+subplot(1,2,1);
+imshow(I);
+subplot(1,2,2);
+imshow(Iout);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p15.png)  
+
+**边界跟踪**      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p16.png)  
+
+#### 区域填充    
+区域填充可视为边界提取的反过程， 它是在边界已知的情况下得到边界包围的整个区域的形态学技术。       
+
+**理论基础**     
+问题的描述如下： 己知某－8连通边界和边界内部的某个点， 要求从该点开始填充整个边界包围的区域， 这一过程称为种子填充， 填充的开始点被称为种子. 
+如图8.20 所示， 对于4 连通的边界， 其围成的内部区域是8 连通的， 而8连通的边界围成的内部区域却是4连通的．  
+
