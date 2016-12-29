@@ -38,3 +38,13 @@ description: 形态学图像处理
 腐蚀和膨胀是两种最基本也是最重要的形态学运算， 它们是后续要介绍的很多高级形态学处理的基础， 很多其他的形态学算法都是由这两种基本运算复合而成  
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p2.png)
 
+**matlab实现**       
+Matlab中与腐蚀相关的两个常用函数为imerode和strel。      
+imerode函数用于完成图像腐蚀．其常用调用形式如下:I2 = imrode(I,SE)     
+I为原始图像，可以是二位或灰度图像（对应于灰度腐蚀）．      
+SE是由strel函数返回的自定义或预设的结构元素对象．
+
+strel函数可以为各种常见形态学运算生成结构元素SE， 当生成供二值形态学使用的结构元素肘， 其调用形式为:SE=strl(shape,parameter)    
+shape指定了结构元素的形状， 其常用合法取值如在8.1所示．        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p3.png)  
+
