@@ -71,5 +71,40 @@ imshow(Ic);
 subplot(2,2,4);
 imshow(Id);
 ```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p4.png)  
 
+随着腐蚀结构元素的逐步增大，小于结构元素的物体相继消失。由于腐蚀运算具有上述的特点，可以用于滤波。选择适当大小和形状的结构元素，可以滤除掉所有不能 完全包含结构元素的噪声点。然而，利用腐蚀滤除噪声有一个缺点，即在去除噪声点的同时，对图像中前景物体的形状也会有影响，但当我们只关心物体的位置或者个数时，则影响不大            
+
+#### 膨胀及其实现     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p5.png)  
+
+实际上， 膨胀和腐蚀对子集合求补和反射运算是彼此对偶的.      
+这里值得注意的是定义中要求和A有公共交集的不是结构元素S本身， 而是S的反射集， 觉得熟悉吗？这在形式上似乎容易让我们回忆起卷积运算， 而腐蚀在形式上则更像相关运算。由于图8.8 中使用的是对称的结构元素， 故使用S 和$S^'$ 的膨胀结果相同：但对于图8.9中非对称结构元素的膨胀示例， 则会产生完全不同的结果， 因此在实现膨胀运算时一定要先计算$S^'$          
+
+**matlab实现**     
+imdilate函数用于完成图像膨胀， 其常用调用形式如下：      
+I2 = imdilate(I,SE);        
+I为原始图像， 可以是二位或灰度图像（对应于灰度膨胀）．       
+SE是由strel函数返回的自定义或预设的结构元素对象      
+
+膨胀的作用和腐蚀相反， 膨胀能使物体边界扩大， 具体的膨胀结果与图像本身和结构元素的形状有关。膨胀常用于将图像中原本断裂开来的同一物体桥接起来， 对图像进行二值化之后， 很容易使一个连通的物体断裂为两个部分， 而这会给后续的图像分析（如要基于连通区域的分析统计物体的个数〉造成困扰，此时就可借助膨胀桥接断裂的缝隙        
+
+```
+I = imread('starcraft.bmp');
+Ie1 = imerode(I,[1 1 1;1 1 1;1 1 1]);     
+Ie2 = imerode(Ie1,[0 1 0;1 1 1;0 1 0]); 
+Id1 = imdilate(Ie2,[1 1 1;1 1 1;1 1 1]);
+Id2 = imdilate(Id1,[0 1 0;1 1 1;0 1 0]);
+
+figure;
+subplot(2,2,1);
+imshow(Ie1);
+subplot(2,2,2);
+imshow(Ie2);
+subplot(2,2,3);
+imshow(Id1);
+subplot(2,2,4);
+imshow(Id2);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p6.png)
 
