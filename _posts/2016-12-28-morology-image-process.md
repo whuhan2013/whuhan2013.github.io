@@ -142,3 +142,40 @@ imshow(Io);
 根据定义，以相同的结构元素先后调用imdilate 和imerode 即可实现闭操作。此外，Matlab中也直接提供了闭运算函数imclose， 其用法同imopen 类似
 
 ### 二值图像中的形态学应用       
+
+#### 击中与击不中交换及其实现          
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p11.png)  
+
+```
+I = zeros(120,180);
+I(11:80,16:75)=1;
+I(56:105,86:135)=1;
+I(26:55,141:170)=1;
+
+se = zeros(58,58);
+se(5:54,5:54)=1;
+
+Ie1 = imerode(I,se);
+Ic = 1 - I;
+S2 = 1 - se;
+Ie2 = imerode(Ic,S2);
+Ihm = Ie1&Ie2;
+
+figure;
+subplot(2,2,1);
+imshow(I);
+subplot(2,2,2);
+imshow(Ie1);
+subplot(2,2,3);
+imshow(Ie2);
+subplot(2,2,4);
+imshow(Ihm);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p12.png)  
+图中给出了变换的最终结果。为便于观察在显示时每幅图像周围都环绕着一圈黑色边框， 注意该边框并不是图像本身的一部分。
+
+注意： 注意对于结构元素s，我们感兴趣的物体S1之外的背景S2不能选择得太宽，因为使得S包含背景S2的目的仅仅是定义出物体S1的外轮廓，以便在图像中能够
+找到准确的完全匹配位置． 从这个意义上说， 物体S1周围有一个像素宽的背景环绕就足够了， 例8.3中选择了4个像素宽的背景，是为了使结构元素背景部分应
+看起来比较明显， 但如果背景部分过大， 则会影响击中／击不中变换的计算结果．在上例中， 中间的正方形Y与右上的正方形Z之间的水平距离为6，如果在定义S时， S2的宽度超过6个像素， 则最终的计算结果将是空集．
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p13.png)  
+
