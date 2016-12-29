@@ -231,6 +231,7 @@ const styles = StyleSheet.create({
 AppRegistry.registerComponent('example', () => example);
 ```
 
+**SourceCode:**[gauge](https://github.com/whuhan2013/ReactNativeProject)        
 **效果如下**      
 
-
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/frontend/p8.png)
