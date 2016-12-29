@@ -133,3 +133,12 @@ imshow(Io);
 从图8.13中可以看到同腐蚀相比，开运算在过滤噪声的同时并没有对物体的形状、轮廓造成明显的影响，这是一大优势。但当我们只关心物体的位置或者个数时，物体形状的改变不会给我们带来困扰，此时用腐蚀滤波具有处理速度上的优势〈同开运算相比节省了一次膨胀运算〉。     
 
 
+#### 闭运算及其实现       
+闭运算同样可以使轮廓变得光滑， 但与开运算相反， 它通常能够弥合狭窄的间断， 填充小的孔洞。       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p9.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p10.png)  
+
+**Matlab实现**     
+根据定义，以相同的结构元素先后调用imdilate 和imerode 即可实现闭操作。此外，Matlab中也直接提供了闭运算函数imclose， 其用法同imopen 类似
+
+### 二值图像中的形态学应用       
