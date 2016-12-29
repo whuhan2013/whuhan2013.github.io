@@ -108,3 +108,28 @@ imshow(Id2);
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p6.png)
 
+#### 开运算及其实现
+开运算和闭运算都由腐蚀和膨胀复合而成， 开运算是先腐蚀后膨胀， 而闭运算是先膨胀后腐蚀。         
+
+一般来说， 开运算可以使图像的轮廓变得光滑， 还能使狭窄的连接断开和消除细毛刺。              
+如图8.11所示， 开运算断开了团中两个小区域间两个像素宽的连接〈断开了狭窄连接〉，并且去除了右侧物体上部突出的一个小于结构元素的2×2的区域〈去除细小毛刺〉： 但与腐蚀不同的是， 图像大的轮廓并没有发生整体的收缩， 物体位置也没有发生任何变化。         
+根据图8.12 的开运算示意图， 可以帮助大家更好地理解开运算的特点。为了比较， 图中也标示出了相应的腐蚀运算的结果：      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p7.png)
+
+**matlab实现**      
+根据定义，以相同的结构元素先后调用imerode和imdilate即可实现开操作。此外，Matlab 中也直接提供了开运算函数imopen， 其调用形式如下:    
+I2 = imopen(I,SE);       
+
+```
+I = imread('erode_dilate.bmp');
+Io = imopen(I,ones(6,6));
+figure;
+subplot(1,2,1);
+imshow(I);
+subplot(1,2,2);
+imshow(Io);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p8.png)
+从图8.13中可以看到同腐蚀相比，开运算在过滤噪声的同时并没有对物体的形状、轮廓造成明显的影响，这是一大优势。但当我们只关心物体的位置或者个数时，物体形状的改变不会给我们带来困扰，此时用腐蚀滤波具有处理速度上的优势〈同开运算相比节省了一次膨胀运算〉。     
+
+
