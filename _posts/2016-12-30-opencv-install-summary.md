@@ -35,3 +35,21 @@ dyld: Library not loaded: /usr/local/opt/webp/lib/libwebp.6.dylib
 
 解决:参见[http://answers.opencv.org/question/98455/mac-launch-issue/](http://answers.opencv.org/question/98455/mac-launch-issue/)
 
+
+**mac下qt配置opencv程序**      
+参见：这个应该是比较权威的配置描述了，省了许多弯路：[https://www.learnopencv.com/configuring-qt-for-opencv-on-osx/](https://www.learnopencv.com/configuring-qt-for-opencv-on-osx/)     
+```
+#include "opencv2/opencv.hpp"
+
+int main()
+{
+    cv::Mat img = cv::imread("/Users/schuser/beauty.jpg");
+    cv::imshow("Image", img);
+    cv::waitKey(0);
+
+    return 0;
+}
+```
+
+
+
