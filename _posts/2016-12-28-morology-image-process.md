@@ -217,3 +217,18 @@ imshow(Iout);
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p19.png)
 
 #### 连通分量提取及其实现     
+连通分量的概念在0.3.1小节中曾介绍过。在二值图像中提取连通分量是许多自动图像分析应用中的核心任务。提取连通分量的过程实际上也是标注连通分量的过程， 通常的做法是给原图像中的每个连通区分配一个唯一代表该区域的编号， 在输出图像中该连通区内的所有像素的像素值就赋值为该区域的编号， 我们将这样的输出图像称为标注图像。       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p20.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p21.png)
+
+**matlab实现**        
+在Matlab中， 连通分量的相关操作主要借助IPT函数bwlabel实现． 其调用语法为     
+[L num]= bwlabel(Ibw,conn);         
+Ibw为一幅输入二位图像．         
+conn为可选参数， 指明要提取的连通分量是4连边还是8连通， 默认值为8.           
+L为类似于图8.23 ( b）的标注图像．        
+num为二维图像Ibw中连通分量的个数．       
+
+提取连通分量的应用十分广泛， 利用标注图像可以方便地进行很多基于连通区的操作。例如要计算某一连通分量的大小， 只需扫描一遍标注图像， 对像素值为该区编号的像素进行计数： 又如要计算某一连通分量的质心， 只需扫描一遍标注图像， 找出所有像素值为该区编号的像素的x、y坐标， 然后计算其平均值．      
+
+
