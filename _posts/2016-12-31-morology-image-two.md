@@ -53,3 +53,59 @@ operation是一个指定操作类型的字符串， 常用的合法取位如在8
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p9.png) 
 
 **matlab实现**      
+只要以灰度图像和相应的灰度膨胀结构元素为参数调用imdilate函数即可实现灰度膨胀，平坦结构元素的创建方法与二值形态学中相同：而非平坦结构元素也可通过 strel函数以如下方式创建。            
+SE = strel(NHOOD,HEIGHT);        
+NHOOD 为指明结构元素定义域的矩阵， 只能由0和1 组成.     
+HEIGHT 是一个与NHOOD 具有相同尺寸的矩阵， 指出了对应于NHOOD 中每个元素的高度．        
+
+```
+f = [0 1 2 3 4 5 4 3 2 1 0];
+figure,h_f = plot(f);
+seFlat = strel([1 1 1]);
+
+fd1 = imdilate(f,seFlat);
+hold on,h_fd1 = plot(fd1,'-ro');
+axis([1 11 0 8]);
+setHeight = strel([1 1 1],[1 1 1]);
+fd2 = imdilate(f,setHeight);
+hold on,h_fd2= plot(fd2,'-g*');
+legend('原灰度1维函数f','使用平坦结构元素膨胀','使用高度为1有结构元素膨胀元素膨胀后');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p10.png) 
+
+#### 灰度腐蚀及其实现        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p11.png) 
+与二值形态学不同的是，f(x,y）和 S(x,y）不再是只代表形状的集合，而是二维函数，它们的定义域指明了其形状， 它们的值指出了高度信息。    
+
+```
+f = [0 1 2 3 4 5 4 3 2 1 0];
+figure,h_f = plot(f);
+seFlat = strel([1 1 1]);
+
+fe1 = imerode(f,seFlat);
+hold on,h_fe1 = plot(fe1,'ro');
+axis([1 11 0 8]);
+seHeight = strel([1 1 1],[1 1 1]);
+
+fe2 = imerode(f,seHeight);
+hold on,h_fe2=plot(fe2,'-g*');
+legend('原灰度1维函数f','使用平坦结构元素腐蚀','使用高度为1有结构元素膨胀元素腐蚀后');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p12.png) 
+
+**灰度膨胀和灰度腐蚀的效果比较**              
+
+```
+I = imread('lena.bmp');
+seHeight=strel(ones(3,3),ones(3,3));
+Idi1= imdilate(I,seHeight);
+Iero = imerode(I,seHeight);
+subplot(1,3,1),imshow(I);
+subplot(1,3,2),imshow(Idi1);
+subplot(1,3,3),imshow(Iero);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p13.png) 
+我们看到在结构元素的值均大于零的情况下， 灰度膨胀的输出图像总体上比输入图像更亮，这是局部最大值运算作用的结果。此外原图像中一些能够包含于结构元素的暗细节〈如
+一部分帽子的槽皱和尾穗）被完全消除， 其余的大部分暗部细节也都得到了一定程度上的减少。而灰度腐蚀的作用正好相反， 输出图像比输入图像更暗， 如果输入图像中的亮部细节比结构元素小， 则亮度会得到削弱。
+
+
