@@ -45,3 +45,11 @@ operation是一个指定操作类型的字符串， 常用的合法取位如在8
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p6.png)  
 
 ### 灰度图像中的基本形态学运算      
+本节就们把二值图像的形态学处理扩展到灰度图像的基本操作， 包括灰度膨胀、灰皮腐蚀、灰度开和灰皮闭。此外， 8.4.4 小节还将介绍一个灰度形态学的经典应用一一顶帽变换(top-hat）， 用以解决图像的光照不均问题．        
+
+#### 灰度膨胀及其实现     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p7.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p8.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p9.png) 
+
+**matlab实现**      
