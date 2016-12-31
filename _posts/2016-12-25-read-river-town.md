@@ -34,12 +34,13 @@ description: 读书笔记
 
 何伟在最后一次期末考试中布置的是罗伯特·弗罗斯特的《美景易逝（Nothing Gold Can Stay）》赏析，摘抄如下:      
 
-> Nothing gold can stay 岁月留金
-> Nature's first green is gold, 大自然的第一抹新绿是金，
-> Her hardest hue to hold. 也是她最无力保留的颜色。
-> Her early leaf's a flower; 她初发的叶子如同一朵花,；
-> But only so an hour. 然而只能持续若此一刹那。
-> Then leaf subsides to leaf, 随之如花新叶沦落为旧叶。
-> So Eden sank to grief. 由是伊甸园陷入忧伤悲切，
-> So dawn goes down to day, 破晓黎明延续至晃晃白昼。
-> Nothing gold can stay. 宝贵如金之物岁月难保留。
+> Nothing gold can stay 岁月留金              
+> Nature's first green is gold, 大自然的第一抹新绿是金，                 
+> Her hardest hue to hold. 也是她最无力保留的颜色。     
+> Her early leaf's a flower; 她初发的叶子如同一朵花,；          
+> But only so an hour. 然而只能持续若此一刹那。        
+> Then leaf subsides to leaf, 随之如花新叶沦落为旧叶。       
+> So Eden sank to grief. 由是伊甸园陷入忧伤悲切，          
+> So dawn goes down to day, 破晓黎明延续至晃晃白昼。        
+> Nothing gold can stay. 宝贵如金之物岁月难保留。        
+
