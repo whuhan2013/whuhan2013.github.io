@@ -32,3 +32,16 @@ description: 形态学图像处理
 有时还可以进一步引入一个低阀值lowerThres和一个高阙值highThres来指出图像中我们感兴趣的对象连通数(连通分量中的像素数目)的大致范围， 从而只像素化图像中大小介于lowerThres和upperThres之间的连通区域， 而连通数低于lowerThres或高于upperThres的对象都将被滤除， 这就相当于使用算法的同时具有了过滤噪声的能力。如图8.29 所示。
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p4.png) 
 
+#### 凸壳     
+如果连接物体A内任意两点的直线段都在淫的内部，则称d是凸的。任意物体A的凸亮H是包含A的最小凸物体。       
+我们总是希望像素化算法能够找到物体的质心来代表读物体，但在实际中，可能由于光照不均等原因导致图像在二值化后，物体本身形状发生缺损，像素化算法就无法找到物体真正的质心。此时可适当地进行凸壳处理，弥补凹损，算法会找到包含原始形状的最小凸多边形，如下图8.30所示．           
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p5.png)
+为确保在上述生长过程中凸壳不会大幅超出凸性所需的最小尺寸， 可以限制其生长以便凸壳不会超出初始时包含物体A的最小矩形．      
+
+**bwmorph函数**          
+本章的很多形态学操作都可由IPT函数bwmorph实现， 该函数的调用语法为：               
+Iout = bwmorph(I,operation,n);             
+operation是一个指定操作类型的字符串， 常用的合法取位如在8.2 所示          
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p6.png)  
+
+### 灰度图像中的基本形态学运算      
