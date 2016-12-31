@@ -121,6 +121,7 @@ subplot(1,3,3),imshow(Iero);
 #### 顶帽交换（top-hat）及其实现           
 作为灰度形态学的重要应用之一， 这里学习一种非均匀光照问题的解决方案一一顶帽变换技术（top-hat）.图像f的顶帽变换h定义为图像f与图像f的开运算之差， 可表示为:     
 h = f -(f*s)      
+
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p15.png)   
 
 ```
