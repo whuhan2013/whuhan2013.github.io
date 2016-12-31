@@ -21,4 +21,14 @@ description: 形态学图像处理
 “骨架”是指一副图像的骨髓部分，它描述物体的几何形状和拓扑结构，是重要的图像描绘子之一，计算骨架的过程一般称为“细化”或“骨架化”，在包括文字识别、工业零件形状识别以及印刷电路板自动检测在内的很多应用中，细化过程都发挥着关键作用。通常，对我们感兴趣的目标物体进行细化有助于突出目标的形状特点和拓扑结构并且减少冗余的信息量。
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p1.png)   
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p2.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p3.png) 
+
+#### 像素化算法          
+细化适用于和物体拓扑结构或形状有关的应用， 如前述的手写字符识别。 但有时我们关心的是目标对象是否存在、 它们的位置关系， 或者个数， 这时在预处理中加入像素化步骤会给后续的图像分析带来极大的方便             
+
+**理论基础**      
+像素化操作首先需找到二值图像中所有的连通区域， 然后用这些区域的质心作为这些连通区域的代表， 即将1个连通区域像素化为位于区域质心位置的1个像素。  
+有时还可以进一步引入一个低阀值lowerThres和一个高阙值highThres来指出图像中我们感兴趣的对象连通数(连通分量中的像素数目)的大致范围， 从而只像素化图像中大小介于lowerThres和upperThres之间的连通区域， 而连通数低于lowerThres或高于upperThres的对象都将被滤除， 这就相当于使用算法的同时具有了过滤噪声的能力。如图8.29 所示。
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p4.png) 
 
