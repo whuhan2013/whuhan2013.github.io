@@ -108,4 +108,42 @@ subplot(1,3,3),imshow(Iero);
 我们看到在结构元素的值均大于零的情况下， 灰度膨胀的输出图像总体上比输入图像更亮，这是局部最大值运算作用的结果。此外原图像中一些能够包含于结构元素的暗细节〈如
 一部分帽子的槽皱和尾穗）被完全消除， 其余的大部分暗部细节也都得到了一定程度上的减少。而灰度腐蚀的作用正好相反， 输出图像比输入图像更暗， 如果输入图像中的亮部细节比结构元素小， 则亮度会得到削弱。
 
+#### 灰度开、 闭运算及其实现          
+与二值形态学类似，我们可以在灰度腐蚀和膨胀的基础上定义灰度开和闭运算．灰度开运算就是先灰度腐蚀后灰度膨胀，而灰度闭运算则是先灰度膨胀后灰度腐蚀，下面分别给出定义：       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p14.png) 
+
+这一过程： （a）为图像中的一条水平像素线：（b）和（d）分别给出了球紧贴着该像素线的下侧和上侧被动的情况：而（c）和（e）则展示了滚动过程中球的最高点形成的曲线，它们分别是开、闭运算的结果。        
+
+**Matlab实现**        
+使用imopen和imdilate同样可以对灰度图像进行开、闭运算， 用法与灰度腐蚀和膨胀类似， 这里不再赘述，在实际应用中， 开操作常常用于去除那些相对于结构元素s而言较小的高灰度区域〈球体滚不上去〉，而对于较大的亮区域影响不大〈球体可以滚上去〉。虽然首先进行的灰度腐蚀
+会在去除图像细节的同时使得整体灰度下降， 但随后的灰度膨胀又会增强图像的整体亮度，因此图像的整体灰度基本保持不变：而闭操作常用于去除图像中的暗细节部分， 而相对地保留高灰度部分不受影响．
+
+#### 顶帽交换（top-hat）及其实现           
+作为灰度形态学的重要应用之一， 这里学习一种非均匀光照问题的解决方案一一顶帽变换技术（top-hat）.图像f的顶帽变换h定义为图像f与图像f的开运算之差， 可表示为:     
+h = f -(f*s)      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p15.png)   
+
+```
+I = imread('rice.png');
+subplot(2,4,1),imshow(I,[]);
+thresh = graythresh(I);
+Ibw = im2bw(I,thresh);
+subplot(2,4,2),imshow(Ibw,[]);
+subplot(2,4,3),surf(double(I(1:8:end,1:8:end))),zlim([0 255]),colormap;
+
+bg = imopen(I,strel('disk',15));
+subplot(2,4,4),surf(double(bg(1:8:end,1:8:end))),zlim([0 255]),colormap;
+
+Itophat = imsubtract(I,bg);
+subplot(2,4,5),imshow(Itophat);
+subplot(2,4,6),surf(double(Itophat(1:8:end,1:8:end))),zlim([0 255]);
+
+I2 = imadjust(Itophat);
+subplot(2,4,7),imshow(I2);
+thresh2 = graythresh(I2);
+Ibw2 = im2bw(I2,thresh2);
+subplot(2,4,8),imshow(Ibw2);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter82/p16.png)   
+
 
