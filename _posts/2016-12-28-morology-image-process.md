@@ -231,4 +231,65 @@ num为二维图像Ibw中连通分量的个数．
 
 提取连通分量的应用十分广泛， 利用标注图像可以方便地进行很多基于连通区的操作。例如要计算某一连通分量的大小， 只需扫描一遍标注图像， 对像素值为该区编号的像素进行计数： 又如要计算某一连通分量的质心， 只需扫描一遍标注图像， 找出所有像素值为该区编号的像素的x、y坐标， 然后计算其平均值．      
 
+**在人脸局部图像中定位嘴的中心**      
+我们希望在如图8.24 (a ）所示的图像中定位嘴的中心，假定已经掌握了输入图像中的某些先验知识，嘴部占据了图像的大部分区域且从灰度上易于与周围皮肤分离开来． 于是针
+对性地拟定了在二位化图像中寻找最大连通区域中心的解决方案， 具体步骤为：       
+(1）对输入图像进行二位化处理．      
+(2）标注二值图像中的连通分量．      
+(3）找出最大的连通分量．          
+(4）计算最大连通分量的中心．     
 
+```
+% locateMouth.m
+
+I = imread('mouth.bmp'); %读入图像
+Id = im2double(I);
+figure, imshow(Id) % 得到8.24(a)
+Ibw = im2bw(Id, 0.38); % 以0.38为阈值二值化
+Ibw = 1 - Ibw; %为在Matlab中进行处理，将图像反色
+figure, imshow(Ibw) % 得到8.24(b)
+hold on
+[L, num] = bwlabel(Ibw, 8); % 标注连通分量
+disp(['图中共有' num2str(num) '个连通分量'])
+ 
+% 找出最大的连通分量（嘴）
+max = 0; % 当前最大连通分量的大小
+indMax = 0; % 当前最大连通分量的索引
+for k = 1:num
+    [y x] = find(L == k); % 找出编号为k的连通区的行索引集合y和列索引集合x
+    
+    nSize = length(y); %计算该连通区中的像素数目
+    if(nSize > max)
+        max = nSize;
+        indMax = k;
+    end
+end
+ 
+if indMax == 0
+    disp('没有找到连通分量')
+    return
+end
+ 
+% 计算并显示最大连通分量（嘴）的中心
+[y x] = find(L == indMax);
+yMean = mean(y);
+xMean = mean(x);
+plot(xMean, yMean, 'Marker', 'o', 'MarkerSize', 14, 'MarkerEdgeColor', 'w', 'MarkerFaceColor', 'w');
+plot(xMean, yMean, 'Marker', '*', 'MarkerSize', 12, 'MarkerEdgeColor', 'k'); % 得到8.24(c)
+```
+
+**细菌计数**         
+
+```
+I = imread('bw_bacteria.bmp');
+[L,num]=bwlabel(I,8);
+Idil = imdilate(I,ones(3,3));
+[L,num] = bwlabel(Idil,8);
+
+figure;
+subplot(1,2,1);
+imshow(I);
+subplot(1,2,2);
+imshow(Idil);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter8/p22.png)
