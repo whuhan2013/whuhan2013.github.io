@@ -33,3 +33,18 @@ description: 图像分割
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p2.png)  
 
 **边缘检测方法的分类**       
+通常可将边缘检测的算法分为两类： 基于查找的算法和基于零穿越的算法。除此之外．还有Canny边缘检测算法、统计判别方法等。        
+- 基于查找的方法是指通过寻找图像一阶导数中的最大和最小值来检测边界，通常将边界定位在梯度最大的方向， 是基于一阶导数的边缘检测算法．
+- 基于零穿越的方法是指通过寻找图像二阶导数零穿越来寻找边界。通常是拉普拉斯过零点或者非线性差分表示的过零点，是基于二阶导数的边缘检测算法．  
+
+基于—阶导数的边缘检测算子包括Roberts算子、Sobel算子、Prewitt算子等，它们都是梯度算子；基于二阶导数的边缘检测算子主要是高斯—拉普拉斯边缘检测算子.     
+
+#### 常用的边缘检测算子       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p3.png)  
+Roberts算子利用局部差分算子寻找边缘，边缘定位精度较高，但容易丢失一部分边缘，同时由于图像没经过平滑处理，因此不具备抑制噪声的能力。该算子对具有陡峭边缘且含噪声小的图像效果较好。          
+Sobel算子和Prewitt算子都考虑了邻域信息，相当于对图像先做加权平滑处理，然后再做微分运算，所不同的是平滑部分的权值有些差异，因此对噪声具有一定的抑制能力，但不能完全排除检测结果中出现的虚假边缘。虽然这两个算子边缘定位效果不错，但检测出的边缘容易出现多像素宽度。      
+
+**高斯一拉普拉斯算子**     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p4.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p5.png) 
+
