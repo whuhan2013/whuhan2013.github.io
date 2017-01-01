@@ -33,7 +33,8 @@ description: 图像分割
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p2.png)  
 
 **边缘检测方法的分类**       
-通常可将边缘检测的算法分为两类： 基于查找的算法和基于零穿越的算法。除此之外．还有Canny边缘检测算法、统计判别方法等。        
+通常可将边缘检测的算法分为两类： 基于查找的算法和基于零穿越的算法。除此之外．还有Canny边缘检测算法、统计判别方法等。       
+
 - 基于查找的方法是指通过寻找图像一阶导数中的最大和最小值来检测边界，通常将边界定位在梯度最大的方向， 是基于一阶导数的边缘检测算法．
 - 基于零穿越的方法是指通过寻找图像二阶导数零穿越来寻找边界。通常是拉普拉斯过零点或者非线性差分表示的过零点，是基于二阶导数的边缘检测算法．  
 
@@ -47,4 +48,15 @@ Sobel算子和Prewitt算子都考虑了邻域信息，相当于对图像先做�
 **高斯一拉普拉斯算子**     
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p4.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p5.png) 
+
+**Canny边缘检测算子**         
+前面介绍的几种都是基于微分方法的边缘检测算法，他们都只有在图像不含噪声或者首先通过平滑去除噪声的前提下才能正常应用。        
+在图像边缘检测中，抑制噪声和边缘精确定位是无法同时满足的，一些边缘检测算法通过平滑滤波去除噪声的同时，也增加了边缘定位的不确定性；而提高边缘检测算子对边缘敏感性的同时，也提高了对噪声的敏感性。Canny算子力图在抗噪声干扰和精确定位之间寻求最佳折衷方案。         
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p6.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p7.png) 
+显然，只要固定了k, 就固定了极大值的个数。         
+有了这3个准则，寻找最优的滤波器的问题就转化为泛函的约束优化问题了，公式的解可以由高斯的一阶导数去逼近。            
+Canny边缘检测的基本思想就是首先对图像选择一定的Gauss滤波器进行平滑滤波，然后采用非极值抑制技术进行处理得到最后的边缘图像。其步骤为：      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p8.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p9.png) 
 
