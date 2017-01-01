@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 图像分割
-date: 2016-1-1
+date: 2017-1-1
 categories: blog
 tags: [图像处理]
 description: 图像分割
