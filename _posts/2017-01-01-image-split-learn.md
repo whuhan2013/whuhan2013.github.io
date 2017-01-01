@@ -144,9 +144,9 @@ $(x-a)^2 +(y-b)^2 =r^2$
 (2)利用hougbpeaks()函数在霍夫矩阵中寻找峰值点。      
 (3)利用houghlines()函数在之前2步结果的基础上得到原二值图像中的直线信息。       
 
-**霍夫变换一一hough**        
-hough函数用于对一幅二值图像执行Hough变换， 得到Hough矩阵。调用形式为:                
-[H,theta,rho]=
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p18.png)     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p19.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p20.png)
 
 
 
