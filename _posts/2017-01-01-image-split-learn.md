@@ -147,6 +147,44 @@ $(x-a)^2 +(y-b)^2 =r^2$
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p18.png)     
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p19.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p20.png)
+利用Hough变换对Matlab示例图片 circuit.tif进行直线检测，显示Hough矩阵 和检测到的峰值，并在原图中标出符合要求的所有直线段．
+
+```
+I = imread('circuit.tif');
+rotI = imrotate(I,33,'crop');
+BW = edge(rotI,'canny');
+
+[H,T,R]=hough(BW);
+imshow(H,[],'XData',T,'YData',R,'InitialMagnification','fit');
+xlabel('\theta'),ylabel('rho');
+axis on,axis normal,hold on;
+
+P = houghpeaks(H,5,'threshold',ceil(0.3*max(H(:))));
+x = T(P(:,2)); y = R(P(:,1));
+plot(x,y,'s','color','white');
+
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+figure,imshow(rotI),hold on;
+max_len = 0;
+for k = 1 : length(lines)
+    xy = [lines(k).point1;lines(k).point2];
+    plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+    
+    plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+    plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+    
+    len = norm(lines(k).point1-lines(k).point2);
+    if(len > max_len)
+        max_len = len;
+        xy_long = xy;
+    end
+end
+
+plot(xy_long(:,1),xy_long(:,2),'LineWidth',2,'Color','cyan');
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p21.png)
+通过此列可发现在houghpeaks函数执行后， 我们共得到了5个峰值， 然而图的结果中却出现了8条直线段， 这正是houghlines函数中'FillGap'参数的作用。 将FillGap设定为80可以合井原本共线（有相同的$\theta$和p)的各个直线段.     
 
 
 
