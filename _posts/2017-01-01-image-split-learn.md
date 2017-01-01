@@ -123,3 +123,5 @@ Sobel算子和Prewitt算子模板相对较大因而去噪能力较强， 具有�
 **注意**：使用直角坐标表示直线， 当直线为一条垂直直线或者接近垂直直线时，该直线的斜率为无限大或者接近无限大，从而无法在参数空间a-b中表示出来． 为了解决这一问题，可以采用极坐标系．      
 
 **极坐标参数空间**       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p16.png) 
+
