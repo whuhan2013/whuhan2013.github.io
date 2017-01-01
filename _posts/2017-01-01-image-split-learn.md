@@ -79,3 +79,33 @@ BW = edge(I,'canny',thresh,sigma);
 thresh是敏感度阈值参数， 其默认值是空矩阵[]. 与前面的算法不同， Canny算法的敏感度阈值是一个列向量， 因为需要为算法指定阈值的上下限． 在指定阈值矩阵时，第1个元素是阈值下限，第2个元素为阈值上限．如果只指定一个阈值元素，则这个直接指定的值会被作为阈值上限，而它与0.4的积会被作为阈值下限。如果阈值参数没有指定， 算法会自行确定敏感度阈值的上、下限。          
 sigma指定生成平滑使用的高斯滤波器的标准差．默认时，标准差值为1滤镜大小nxn, n的计算方法为n＝ceil(sigma x 3) x 2+1.
 
+```
+intensity = imread('circuit.tif');
+bw1 = edge(intensity,'sobel');
+bw2 = edge(intensity,'prewitt');
+bw3 = edge(intensity,'roberts');
+bw4 = edge(intensity,'log');
+bw5 = edge(intensity,'canny');
+
+subplot(3,2,1); imshow(intensity); title('a');
+subplot(3,2,2); imshow(bw1); title('b');
+subplot(3,2,3); imshow(bw2); title('c');
+subplot(3,2,4); imshow(bw3); title('d');
+subplot(3,2,5); imshow(bw4); title('e');
+subplot(3,2,6); imshow(bw5); title('f');
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter9/p12.png)
+从图中可以看出， 不同算法得到的结果存在很大差异， 下面进行简要的分析         
+
+- 从边缘定位的精度看       
+Roberts算子和Log算子定位精度较高。       
+Roberts算子简单直观，Log算子则利用二阶导数零交叉特性检测边缘。但Log算子只能获得边缘位置信息， 不能得到边缘的方向等信息。      
+- 从对不同方向边缘的响应看       
+从对边缘方向的敏感性而言，Sobel算子、Prewitt算子检测斜向阶跃边缘效果较好，Roberts算子检测水平和垂直边缘效果较好。Log算子则不具备边缘方向检测能力。而Sobel算子可以提供最精确的边缘方向估计。          
+- 从去噪能力看
+Roberts和Log算子定位精度虽然较高， 但受噪声影响大。      
+Sobel算子和Prewitt算子模板相对较大因而去噪能力较强， 具有平滑作用， 能滤除一些噪声， 去掉部分伪边缘， 但同时也平滑了真正的边缘， 这也正是其定位精度不高的原因。      
+从总体效果来衡量， Canny算子给出了一种边缘定位精确性和抗噪声干扰性的较好折衷办法。
+
+**注意**：以上验证结杲及分析是基于阶跃变化假设进行的，但真实的灰度变化不一定都是阶跃的，有可能发生在很宽的灰度范围上， 且存在灰度的起落． 因此，我们应当根据工程实际对各种算子做以比较后加以选用．  
+
