@@ -124,7 +124,8 @@ hold on,scatter(data(101:150,1),data(101:150,2),'go');
 特征抽取是指通过已有特征的组合（变换）建立一个新的特征子集。在众多的组合方法当中，线性组合（变换）因其计算简单且便于解析分析的特点而显得颇具吸引力。下面就介绍一种通过特征的线性组合来实现降维的方法——主成分分析(principal conponent analysis.PCA)。PCA的实质就是在尽可能好地代表原始数据的前提下， 通过线性变换将高维空间中的样本数据投影到低维空间中       
 
 **具体可参见：**[降维算法学习](http://whuhan2013.github.io/blog/2016/12/13/demension-reduction-learn/)      
-
+为得到最小平方误差，应选取散布矩阵s的最大本征值所对应的本征向量作为投影直线e的方向。
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p9.png)    
 
 
 
