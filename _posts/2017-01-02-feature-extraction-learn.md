@@ -90,4 +90,9 @@ D.Area
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p4.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p5.png)     
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p6.png)
+由于灰度共现矩阵总共含有LXL个元素，当灰度级L比较大时它将是一个庞大的方阵。如对于一般的256灰度图，凡就是一个256X256的矩阵，共$2^16$ 个元素。如此庞大的矩阵将使后续的计算量剧增。因此普通灰度图像通常要经过处理以减少灰度级数，而后再计算灰度共现矩阵。可以通过分析纹理图像的直方图，在尽量不影响纹理质量的情况下．通过适当的灰度变换来达到灰度级压缩的目的。      
+
+### 特征降维     
+
+**维度灾难**    
 
