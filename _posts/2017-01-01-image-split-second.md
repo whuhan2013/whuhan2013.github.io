@@ -64,6 +64,35 @@ $$P_1+P_2=1$$
 让T在[O,L-1]范围内依次取值， 使类间方差最大的T值便是最佳区域分割阈值。               
 该方法不需要人为设定其他参数，是一种自动选择阈值的方法，而且能得到较好的结果。它不仅适用于包含两个区域的单阈值选择，也同样适用于多区域的多阈值选择。
 
+#### Matlab实现      
+
+**最大类间方差法**     
+Matlab中和阙值变换相关的两个主要函数是im2bw和graythresh。实际上，利用graythresh函数即可实现最大类间方差法。        
+
+**迭代选择阈值法**      
+
+```
+function [Ibw, thres] = autothreshold(I)
+% 迭代法自动阈值分割
+%
+% 输入：I - 要进行自动阈值分割的灰度图像
+% 输出：Ibw - 分割后的二值图像
+%      thres - 自动分割采用的阈值
+
+thres = 0.5 * (double(min(I(:))) + double(max(I(:)))); %初始阈值
+done = false; %结束标志
+while ~done
+	g = I >= thres;
+	Tnext = 0.5 * (mean(I(g)) + mean(I(~g)));
+	done = abs(thres - Tnext) < 0.5;
+	thres = Tnext;
+end;
+
+Ibw = im2bw(I, thres/255); % 二值化
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter92/p5.png)  
+
 
 
 
