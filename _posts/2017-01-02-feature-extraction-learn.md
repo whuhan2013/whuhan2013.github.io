@@ -65,4 +65,15 @@ L是一个标记矩阵， 可通过8.3.4小节介绍的连通区标注函数bwla
 properties可以是一个用逗号分割的字符串列表， 其一些常用取值如表10.1所示    
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p1.png)    
 
+利用regionprops函数提取简单的区域特征     
+
+```
+I = imread('bw_mouth.bmp');
+I1 = bwlabel(I);
+D = regionprops(I1,'area','centroid');
+D.Area
+```
+
+#### 直方图及其统计特征     
+
 
