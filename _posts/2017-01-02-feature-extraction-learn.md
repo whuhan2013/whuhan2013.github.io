@@ -85,3 +85,9 @@ D.Area
 一个由均值、标准差、平滑度和熵组合而成的特征向量如：v = (m,a, R, e)。          
 应认识到直方图及其统计特征是一种区分能力相对较弱的特征，这主要因为直方图属于一阶统计特征，而它们的一阶统计特征是无法反映纹理结构的变化的。直方图与纹理的对应关系并不是一对一的：首先，不同的纹理可能具有相同或相似的直方图，如图10.3所示的两种截然不同的图案就具有完全相同的直方图；其次，即便是两个不同的直方m.也可能具有相同的统计特 征如均值、标准差等。因此，依靠直方图及其统计特征来作为分类特征时需要特别注意。
 
+### 灰度共现矩阵      
+我们说灰度直方图是一种描述单个像素灰度分布的一阶统计量；而灰度共现矩阵描述的则是具有某种空间位置关系的两个像素的联合分布，可以看成是两个像素灰度对的联合直方图，是种二阶统计量。      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p4.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p5.png)     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p6.png)
+
