@@ -214,3 +214,16 @@ LBP的主要思想是以某一点与其邻域像素的相对灰度作为响应�
 #### MB-LBP      
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p18.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p19.png) 
+
+#### 图像分区      
+曾提到， 作为图像的一阶统计特征，直方图无法描述图像的结构信息。而图像各个区域的局部特征往往差异较大，如果仅对整个团像的生成一个LBP直方图，这些局部的差异信息就会丢失。分区LBP特征可有效解决这一问题。           
+具体的方法是将一幅图像适当地划分为PXQ个分区(partition),然后分别计算每个图像分区的直方图特征，最后再将所有块的直方图特征连接成一个复合的特征向量(composite
+feature)作为代表整个图像的LBP直方图特征。              
+
+**分区大小的选择**
+理论上， 越小越精细的分区意味着更好的局部描述能力，但同时会产生更高维数的复合特征。然而过小的分区会造成宜方图过于稀疏从而失去统计意义。人脸识别的应用中选择了18X21的分区大小，这可以作为对于一般问题的指导性标准，因为它是一个精确描述能力与特征复杂度的良好折中。在表情识别中更小一些（如1OX15)的分区被我们证明能够获得更好的分类能力。这里分区大小的单位是.MB-LBP的像素块(block)。如对于传统LBP, 每个
+分区大小取18像素X21像素， 则对于应MB-LBP分区大小应取18像素块X21像素块= 54像素X63像素口
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p20.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p21.png) 
+
