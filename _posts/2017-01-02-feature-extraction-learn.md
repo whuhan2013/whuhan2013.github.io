@@ -193,6 +193,24 @@ save('Mat/PCA.mat', 'V', 'meanVec');
 在得到包含R的特征向量的矩阵V之后，为计算散布矩阵S的本征向量，只需计算Z*V。此外，还应注意PCA中需要的是具有单位长度的本征向量， 故最后要除以该向量的模从而将正交本征向量归一化为单位正交本征向量。     
 
 
+### 局部二进制模式      
+局部二进制模式(local binary patterns, LBP)最早是作为一种有效的纹理描述算子提出的,由于其对图像局部纹理特征的卓越描绘能力而获得了广泛的应用。LBP特征具有很强的
+分类能力(highly discriminative)、较高的计算效率， 并且对于单调的灰度变化具有不变性。           
 
+#### 基本LBP     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p15.png)
+LBP的主要思想是以某一点与其邻域像素的相对灰度作为响应， 正是这种相对机制使 LBP算子对于单调的灰度变化具有不变性。 人脸图像常常会受到光照因素的影响而产生灰度变化，但在一个局部区域内，这种变化常常可以被视为是单调的，因此LBP在光照不均的人 脸识别应用中也取得了很好的效果.      
 
+#### 圆形邻域的$LBP_{P,R}$算子         
+基本LBP算子可以被进一步推广为使用不同大小和形状的邻域。采用圆形的邻域并结合双线性插值运算使我们能够获得任意半径和任意数目的邻域像素点。图10.18给出了一个半径为2的8邻域像素的圆形邻域， 图中每个方格对应一个像素，对于正好处于方格中心的邻
+域点（左、上、右、下四个黑点），直接以该点所在方格的像素值作为它的值；对于不在像素中心位置的邻域点（斜45度方向的4个黑点）， 通过双线性插值确定其值。           
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p16.png) 
 
+#### 统一化LBP算子一一UnifomLBP     
+由于LBP直方图大多都是针对图像中的各个分区分别计算的（详见10.5.5),对于一个普通大小的分块区域，标准LBP算子得到的二进模式数目(LBP直方图收集箱数目）较多，而实际位于该分块区域中的像素数目却相对较少， 这将会得到一个过于稀疏的直方图。从而
+使直方图失去统计意义。 因此应设法减少一些冗余的LBP模式， 同时又保留足够的具有重要描绘能力的模式。        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p17.png) 
+
+#### MB-LBP      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p18.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p19.png) 
