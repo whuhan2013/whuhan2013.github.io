@@ -124,7 +124,8 @@ hold on,scatter(data(101:150,1),data(101:150,2),'go');
 特征抽取是指通过已有特征的组合（变换）建立一个新的特征子集。在众多的组合方法当中，线性组合（变换）因其计算简单且便于解析分析的特点而显得颇具吸引力。下面就介绍一种通过特征的线性组合来实现降维的方法——主成分分析(principal conponent analysis.PCA)。PCA的实质就是在尽可能好地代表原始数据的前提下， 通过线性变换将高维空间中的样本数据投影到低维空间中       
 
 **具体可参见：**[降维算法学习](http://whuhan2013.github.io/blog/2016/12/13/demension-reduction-learn/)      
-为得到最小平方误差，应选取散布矩阵s的最大本征值所对应的本征向量作为投影直线e的方向。
+为得到最小平方误差，应选取散布矩阵s的最大本征值所对应的本征向量作为投影直线e的方向。      
+也就是说， 通过将全部n个样本向 以散布矩阵最大本征值对应的本征向量为方向的直线投影， 可以得到最小平方误差意义下这 n个样本的一维表示。
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p9.png)    
 
 **PCA计算实例**       
@@ -132,3 +133,66 @@ hold on,scatter(data(101:150,1),data(101:150,2),'go');
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p11.png) 
 
 **数据表示与数据分类**     
+通过PCA降维后的数据并不一定最有利于分类，因为PCA的目的是在低维空间中尽可能好地表示原数据，确切地说是在最小均方差意义下最能代表原始数据。而这一目的有时会和数据分类的初衷相违背。图10.13说明了这种情况，PCA投影后数据样本得到了最小均方意义 下的最好保留 ， 但在降维后的一维空间中两类样本变得非常难以区分。图中还给出了一种适合于分类的投影方案，对应着另一种常用的降维方法-线性判别分析(linear discriminant analysis. LDA)。PCA寻找的是能够有效表示数据的主轴方向，而LDA则是寻找用来有效分类的投影方向。        
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p12.png) 
+
+**PCA的Matlab实现**      
+函数princomp实现了对PCA的封装， 其常见调用形式为：       
+[COEFF,SCORE,latent]= princomp(X);         
+X为原始样本组成n*d的矩阵，其每一行是一个样本特征向量，每一列表示样本特征向量的一维．如对于例10.2中的问题，X就是一个8*2的样本矩阵， 总共8个样本， 每个样本2维．             
+COEFF: 主成份分量， 即变换空间中的那些基向量, 也是样本协方差矩阵的本征向量．       
+SCORE: 主成份，X的低维表示， 即X中的数据在主成分分量上的投影（可根据需要取前面几列的).               
+latent: 一个包含着样本协方差矩阵本征值的向量．          
+
+**快速PCA及其实现**        
+PCA的计算中最主要的工作量是计算样本协方差矩阵的本征值和本征向量。设样本矩阵 X大小为n*d (n个d维样本特征向量）， 则样本散布矩阵（协方差矩阵） S将是一个dXd的方阵，故当维数d较大时计算复杂度会非常高。例如当维数d=1OOOO,S是一个10000*10000的矩阵，此时如果采用上面的princomp函数计算主成分，Matlab通常会出现内存耗尽的错误，即使有足够多的内存， 要得到S的全部本征值可能也要花费数小时的时间         
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p13.png) 
+
+**Matlab实现**          
+我们编写了fastPCA函数用来对样本矩阵A进行快速主成份分析和降维（降至k维），其输出pcaA为降维后的K维样本特征向量组成的矩阵， 每行一个样本， 列数K为降维后的样本特征维数，相当千princomp函数中的输出SCORE, 而输出V为主成份分量,好princomp函数中的COEFF    
+
+```
+function [pcaA V] = fastPCA( A, k )
+% 快速PCA
+%
+% 输入：A --- 样本矩阵，每行为一个样本
+%      k --- 降维至 k 维
+%
+% 输出：pcaA --- 降维后的 k 维样本特征向量组成的矩阵，每行一个样本，列数 k 为降维后的样本特征维数
+%      V --- 主成分向量
+
+[r c] = size(A);
+
+% 样本均值
+meanVec = mean(A);
+
+% 计算协方差矩阵的转置 covMatT
+Z = (A-repmat(meanVec, r, 1));
+covMatT = Z * Z';
+
+% 计算 covMatT 的前 k 个本征值和本征向量
+[V D] = eigs(covMatT, k);
+
+% 得到协方差矩阵 (covMatT)' 的本征向量
+V = Z' * V;
+
+% 本征向量归一化为单位本征向量
+for i=1:k
+    V(:,i)=V(:,i)/norm(V(:,i));
+end
+
+% 线性变换（投影）降维至 k 维
+pcaA = Z * V;
+
+% 保存变换矩阵 V 和变换原点 meanVec
+save('Mat/PCA.mat', 'V', 'meanVec');
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p14.png) 
+在得到包含R的特征向量的矩阵V之后，为计算散布矩阵S的本征向量，只需计算Z*V。此外，还应注意PCA中需要的是具有单位长度的本征向量， 故最后要除以该向量的模从而将正交本征向量归一化为单位正交本征向量。     
+
+
+
+
+
