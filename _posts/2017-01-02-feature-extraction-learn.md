@@ -127,5 +127,8 @@ hold on,scatter(data(101:150,1),data(101:150,2),'go');
 为得到最小平方误差，应选取散布矩阵s的最大本征值所对应的本征向量作为投影直线e的方向。
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p9.png)    
 
+**PCA计算实例**       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p10.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10/p11.png) 
 
-
+**数据表示与数据分类**     
