@@ -11,6 +11,7 @@ description: 图像处理资源总结
 - [Mastering OpenCV with Practical Computer Vision Project读书笔记](http://blog.csdn.net/jinshengtao/article/details/17883075/)  
 - [从零手撸一个车牌识别(1)](https://zhuanlan.zhihu.com/p/21736960)
 - [有趣的机器学习 第三章:图像识别【鸟or飞机】？](https://zhuanlan.zhihu.com/p/24524583)
+- 毛星云的教程：[opencv入门教程](http://blog.csdn.net/column/details/opencv-tutorial.html)
 
 **有用的书籍**    
 
