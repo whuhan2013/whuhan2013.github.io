@@ -38,8 +38,9 @@ dyld: Library not loaded: /usr/local/opt/webp/lib/libwebp.6.dylib
 
 **mac下qt配置opencv程序**      
 参见：这个应该是比较权威的配置描述了，省了许多弯路：[https://www.learnopencv.com/configuring-qt-for-opencv-on-osx/](https://www.learnopencv.com/configuring-qt-for-opencv-on-osx/)     
+
 ```
-include "opencv2/opencv.hpp"
+#include "opencv2/opencv.hpp"
 
 int main()
 {
@@ -50,6 +51,19 @@ int main()
     return 0;
 }
 ```
+
+**clion配置opencv**       
+
+在cmakelists.txt中添加     
+
+```
+find_package( OpenCV REQUIRED )
+target_link_libraries( 工程名 ${OpenCV_LIBS} )
+```
+
+配置cmake环境变量:OpenCV_DIR=/usr/local/Cellar/opencv3/3.1.0_4/share/OpenCV/                  
+修改/usr/local/Cellar/opencv3/3.1.0_4/share/OpenCV/路径下OpenCVConfig.cmake，在第一行添加set(OpenCV_FOUND 1)      
+**参见：**[CLion中配置OpenCV环境问题](http://blog.csdn.net/shenck1992/article/details/49757693)
 
 
 
