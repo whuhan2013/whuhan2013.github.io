@@ -65,5 +65,25 @@ target_link_libraries( 工程名 ${OpenCV_LIBS} )
 修改/usr/local/Cellar/opencv3/3.1.0_4/share/OpenCV/路径下OpenCVConfig.cmake，在第一行添加set(OpenCV_FOUND 1)      
 **参见：**[CLion中配置OpenCV环境问题](http://blog.csdn.net/shenck1992/article/details/49757693)
 
+实例     
 
+```
+#include <cv.hpp>
+
+int main()
+{
+    IplImage* img = cvLoadImage("/Users/schuser/beauty.jpg");
+    int x = 150, y = 80;
+    int width = 150, height = 150;
+    int add =180;
+    cvSetImageROI(img, cvRect(x, y, width, height));
+    cvAddS(img, cvScalar(add), img);
+    cvResetImageROI(img);
+    cvShowImage("Image", img);
+    cvWaitKey(0);
+    return 0;
+}
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10b/p4.png)
 
