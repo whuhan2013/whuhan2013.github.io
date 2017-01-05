@@ -121,7 +121,8 @@ strOut = ['识别率为', num2str(rate*100), '%']
 ```
 
 #### 基于相关的模板匹配      
-
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p8.png)  
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p9.png)  
 
 
 
