@@ -123,6 +123,93 @@ strOut = ['识别率为', num2str(rate*100), '%']
 #### 基于相关的模板匹配      
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p8.png)  
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p9.png)  
+改进的相关公式实际上计算的是向量a,b之间的夹角余弦值。显然，它只和图案模式 本身的形状或纹理有关，与幅值（亮度）无关。          
+
+matlab实现     
+
+```
+function Icorr = imcorr(I, w)
+% function Icorr = imcorr(I, w, )
+% 计算图像 I 与子模式 w 的相关响应，并提示最大的响应位置
+% 
+% Input：I - 原始图像
+%        w - 子图像
+%
+% Output：Icorr - 响应图像
+
+[m, n] = size(I);
+[m0, n0] = size(w);
+
+Icorr = zeros(m-m0+1, n-n0+1); %为响应图像分配空间
+
+vecW = double( w(:) ); %按列存储为向量
+normW = norm(vecW); %模式图像对应向量的模
+
+for ii = 1:m-m0+1
+    for jj = 1:n-n0+1
+        subMat = I(ii:ii+m0-1, jj:jj+n0-1);
+        vec = double( subMat(:) ); %按列存储为向量
+        Icorr(ii, jj) = vec' * vecW / (norm(vec)*normW+eps); %计算当前位置的相关
+    end
+end
+
+% 找到最大响相应位置
+[iMaxRes, jMaxRes] = find(Icorr == max( Icorr(:) ) );
+figure, imshow(I);
+hold on
+for ii = 1:length(iMaxRes)
+    plot(jMaxRes(ii), iMaxRes(ii), 'w*');
+    plot([jMaxRes(ii), jMaxRes(ii)+n0-1], [iMaxRes(ii), iMaxRes(ii)], 'w-' );
+    plot([jMaxRes(ii)+n0-1, jMaxRes(ii)+n0-1], [iMaxRes(ii), iMaxRes(ii)+m0-1], 'w-' );
+    plot([jMaxRes(ii), jMaxRes(ii)+n0-1], [iMaxRes(ii)+m0-1, iMaxRes(ii)+m0-1], 'w-' );
+    plot([jMaxRes(ii), jMaxRes(ii)], [iMaxRes(ii), iMaxRes(ii)+m0-1], 'w-' );
+end
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p10.png)  
+
+虽然我们之前通过向量模值的归一化得到了幅值（亮度）不变的相关匹配算子， 但相关计算仍然对尺寸和旋转变换非常敏感。 如果子图像w与图像f中对应的相似目标大小不同，则不能识别，因此因利用不同分辨率来识别。这在计算量上要求很大，因而很难在实际系统中使用。类似的， 如果旋转变化的性质是未知的， 则寻找最佳匹配就要求对w进行全方位的旋转。更多的时候， 我们需要利用对问题的先验知识得到有关尺寸
+和旋转变换方式的一些线索， 从而借助几何变换中的一些技术在匹配之前对这些变换进行归一化处理。
+
+**相关匹配的计算效率**     
+一般子图像模式w总是比图像f要小得多。尽管如此， 除非w非常小， 否则例11.4中采用的空间相关算法的计算量会比较大， 以至于总是要依靠硬件来实现。   
+一种提升计算效率的方法是在频域中实现相关， 回忆第6章中曾学习过的卷积定理， 它为我们建立了空间卷积和频域乘积之间的对应关系。类似的， 通过相关定理可以将空间相关与频域乘积联系起来。相关定理中指出了两个函数的空间相关可以用一个函数的傅立叶变换同另一个函数的傅立叶变换的傅共轭的乘积的傅立叶逆变换得到， 当然反过来也成立， 即：             
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p11.png)
+
+```
+function Icorr = dftcorr(I, w)
+% function Icorr = dftcorr(I, w)
+% 在频域下计算图像 I 与子模式 w 的相关响应，并提示最大的响应位置
+% 
+% Input：I - 原始图像
+%        w - 子图像
+%
+% Output：Icorr - 响应图像
+I = double(I);
+[m n] = size(I);
+[m0 n0] = size(w);
+F = fft2(I);
+w = conj(fft2(w, m, n)); %w 频谱的共轭
+Ffilt = w .* F; %频域滤波结果
+Icorr = real(ifft2(Ffilt)); %反变换回空域
+
+
+% 找到最响相应位置
+[iMaxRes, jMaxRes] = find(Icorr == max( Icorr(:) ) );
+figure, imshow(I, []);
+hold on
+for ii = 1:length(iMaxRes)
+    plot(jMaxRes(ii), iMaxRes(ii), 'w*');
+    plot([jMaxRes(ii), jMaxRes(ii)+n0-1], [iMaxRes(ii), iMaxRes(ii)], 'w-' );
+    plot([jMaxRes(ii)+n0-1, jMaxRes(ii)+n0-1], [iMaxRes(ii), iMaxRes(ii)+m0-1], 'w-' );
+    plot([jMaxRes(ii), jMaxRes(ii)+n0-1], [iMaxRes(ii)+m0-1, iMaxRes(ii)+m0-1], 'w-' );
+    plot([jMaxRes(ii), jMaxRes(ii)], [iMaxRes(ii), iMaxRes(ii)+m0-1], 'w-' );
+end
+```
+
+对千例11.4中的模板匹配问题， 和imcorr相比，dftcorr在执行效率上的优势显而易见。这是因为此例中模板图像的大小为61 X64. 虽然比原图像小得多，但已可以说是一个比较大 的模板了。 文献(Campbell 1969)曾指出，如果w中的非零元素数目小于132 (大约13X13 见方）， 则直接在空域中计算相关较为划算， 否则通过上述方法变换至频域下计算更为合适。 当然， 这个数目不是绝对的， 它还与f的大小以及运算机器本身有关， 读者可以把它作为参考， 以此决定在应用系统中实现相关的具体方式。      
+
+
 
 
 
