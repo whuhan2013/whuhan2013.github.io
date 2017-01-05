@@ -87,3 +87,13 @@ int main()
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter10b/p4.png)
 
+
+**cmakeList.txt添加静态库**        
+需要添加头文件与lib即可。       
+
+```
+include_directories(include)
+link_directories(lib)
+target_link_libraries(CarVisual easypr thirdparty ${OpenCV_LIBS} )
+```
+
