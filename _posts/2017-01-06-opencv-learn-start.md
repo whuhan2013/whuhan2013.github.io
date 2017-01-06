@@ -99,3 +99,18 @@ MLData
  
 (17)【Videostab】——Video stabilization，视频稳定相关的组件，官方文档中没有多作介绍，不管它了。
 
+### opencv图像处理快速上手      
+
+**显示图片**     
+
+```
+void quickStart(){
+    // 【1】读入一张图片
+    Mat img=imread("../img/1.jpg");
+    // 【2】在窗口中显示载入的图片
+    imshow("【载入的图片】",img);
+    // 【3】等待6000 ms后窗口自动关闭
+    waitKey(6000);
+}
+```
+
