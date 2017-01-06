@@ -114,3 +114,30 @@ void quickStart(){
 }
 ```
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/opencv/chapter1/p1.png)  
+
+**图像腐蚀**      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/opencv/chapter1/p2.png) 
+
+**图像模糊**      
+
+```
+void myblur(){
+    //【1】载入原始图
+    Mat srcImage=imread("../img/3.jpg");
+
+    //【2】显示原始图
+    imshow( "均值滤波【原图】", srcImage );
+
+    //【3】进行均值滤波操作
+    Mat dstImage;
+    blur( srcImage, dstImage, Size(7, 7));
+
+    //【4】显示效果图
+    imshow( "均值滤波【效果图】" ,dstImage );
+
+    waitKey( 0 );
+}
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/opencv/chapter1/p3.png) 
+
