@@ -3,7 +3,7 @@ layout: post
 title: Opencv安装总结
 date: 2016-12-30
 categories: blog
-tags: [图像处理]
+tags: [Opencv]
 description: Opencv安装总结
 ---
 
@@ -97,3 +97,6 @@ link_directories(lib)
 target_link_libraries(CarVisual easypr thirdparty ${OpenCV_LIBS} )
 ```
 
+**CImg库的编译**      
+1.下载XQuartz获得x11。     
+2. 进入example目录下编译:g++ -o test CImg_demo.cpp -lX11 -lpthread -L/usr/X11/lib -I/usr/X11/include
