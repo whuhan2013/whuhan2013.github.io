@@ -117,6 +117,24 @@ void quickStart(){
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/opencv/chapter1/p1.png)  
 
 **图像腐蚀**      
+
+```
+void myerode(){
+    //载入原图
+    Mat srcImage = imread("../img/2.jpg");
+    //显示原图
+    imshow("【原图】腐蚀操作", srcImage);
+    //进行腐蚀操作
+    Mat element = getStructuringElement(MORPH_RECT, Size(15, 15));
+    Mat dstImage;
+    erode(srcImage, dstImage, element);
+    //显示效果图
+    imshow("【效果图】腐蚀操作", dstImage);
+    waitKey(0);
+
+}
+```
+
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/opencv/chapter1/p2.png) 
 
 **图像模糊**      
@@ -140,4 +158,67 @@ void myblur(){
 }
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/opencv/chapter1/p3.png) 
+
+**canny算子边缘检测**     
+
+```
+void mycanny(){
+    //【0】载入原始图
+    Mat srcImage = imread("../img/4.jpg");  //工程目录下应该有一张名为1.jpg的素材图
+    imshow("【原始图】Canny边缘检测", srcImage);   //显示原始图
+    
+
+    Mat dstImage,edge,grayImage;  //参数定义
+
+    //【1】创建与src同类型和大小的矩阵(dst)
+    dstImage.create( srcImage.size(), srcImage.type() );
+
+    //【2】将原图像转换为灰度图像
+    //此句代码的OpenCV2版为：
+    //cvtColor( srcImage, grayImage, CV_BGR2GRAY );
+    //此句代码的OpenCV3版为：
+    cvtColor( srcImage, grayImage, COLOR_BGR2GRAY );
+
+    //【3】先用使用 3x3内核来降噪
+    blur( grayImage, edge, Size(3,3) );
+
+    //【4】运行Canny算子
+    Canny( edge, edge, 3, 9,3 );
+
+    //【5】显示效果图
+    imshow("【效果图】Canny边缘检测", edge);
+
+    waitKey(0);
+}
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/opencv/chapter1/p4.png) 
+
+
+**调用摄像头与canny边缘检测结合**       
+
+```
+void mycamera(){
+    //【1】从摄像头读入视频
+    VideoCapture capture(0);
+    Mat edges;
+
+    //【2】循环显示每一帧
+    while(1)
+    {
+        Mat frame;  //定义一个Mat变量，用于存储每一帧的图像
+        capture>>frame;  //读取当前帧
+        cvtColor(frame,edges,CV_BGR2GRAY);
+        blur(edges,edges,Size(7,7));
+        Canny(edges,edges,0,30,3);
+        imshow("读取视频",edges);  //显示当前帧
+        waitKey(30);  //延时30ms
+    }
+
+}
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/opencv/chapter1/p5.png) 
+
+
+
 
