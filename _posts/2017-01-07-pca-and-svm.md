@@ -37,5 +37,52 @@ vote(C)=vote(C)+ 1 , 否则vote(D)=vote(D)+ 1。
 
 那么， 如何来表示置信度呢？对于SVM而言，分割超平面的分类间隔越大，就说明两类样本越容易分开，表明了问题本身较好的可分性。因此可以用各个SVM二分器的分类间隔大小作为其置信度。     
 
+#### SVM的Matlab实现      
 
-隔大小作为其置信度。
+**训练一svmtrain**       
+函数svmtrain用来训练一个SVM分类器， 常用的调用语法为：      
+SVMStruct = svmtrain(Tranining,Group);             
+• Training是一个包含训练数据的m行n列的2维矩阵。每行表示1个训练样本（特征 向量），m表示训练样本数目； n表示样本的维数．          
+• Group是一个代表训练样本类标签的1维向量．其元素值只能为0或1.通常1表示正例，0表示反例.Group的维数必须和Traningg的行数相等，以保证训练样本同其 类别标号的一一对应．              
+SVMStruct是训练所得的代表SVM分类器的结构体，包含有关最佳分割超平面的种种信息，也可以计算出分类间隔值。      
+
+除上述的常用调用形式外，还可通过＜属性名， 属性值＞形式的可选参数设置一些训练相关的高级选项， 从而实现某些自定义功能， 具体说明如下
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p12.png)       
+
+**训练结果的可视化**      
+当训练数据是2维时可利用ShowPlot选项来获得训练结果的可视化解释， 调用形式如下：        
+svmtrain(...,"ShowPlot",true);      
+
+**设定错误代价C**      
+在13.2.2小节讨论非线性可分情况下的C-SVM时， 介绍了错误代价系数C对于训练和分类结果的影响， 下面将给出设定C值的方法。由式(13-21)可知， 引入C对于二次规划问题求解的影响仅仅体现在约束条件当中， 因此通过在调用svmtrain时设置一个优化选项'boxconstraint'即可， 调用形式为：   
+svmStruct = svmtarin(...,"boxconstraint",C);      
+其中， C 为错误代价系数，默认取值为Inf, 表示错分的代价无限大， 分割超平面将倾向于尽可能最小化训练错误。通过适当地设置一个有限的C值， 将得到一个图13.7 Cc)中所示的软超平面。      
+
+**分类-svmclassify**        
+函数svmclassify的作用是利用训练得到的SVMStruct结构对一组样本进行分类，常用调用形式为：         
+Group = svmclassify(SVMStruct,sample);      
+SVMStruct是训练得到的代表SVM分类器的结构体， 由函数svmtrain返回．          
+Sample是要进行分类的样本矩阵， 每行为1个样本特征向量，总行数等于样本数目，总列数是样本特征的维数，它必须和训练该SVM时使用的样本特征维数相同．Group是一个包含Sample中所有样本分类结果的列向量， 其维数与Sample矩阵的行数相同．    
+
+**应用实例**      
+svm训练分类鸢尾植物      
+
+```
+load fisheriris;
+data = [meas(:,1),meas(:,2)];    
+groups = ismember(species,'setosa');    
+
+[train,test] = crossvalind('holdOut',groups);
+
+svmStruct = svmtrain(data(train,:),groups(train),'showplot',true);
+
+classes = svmclassify(svmStruct,data(test,:),'showplot',true);
+
+nCorrect = sum(classes == groups(test));    
+accuracy = nCorrect/length(classes);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p13.png)   
+
+
+
+
