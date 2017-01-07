@@ -181,7 +181,9 @@ end
 
 **构建多类svm分类器**      
 
-首先进行训练    
+首先进行训练      
+在多类SVM训练阶段， 我们要做的就是用n=40类样本构建n(n - 1)/2个SVM二分器，把每个SVM二分器的训练结果(SVMStruct结构体）都保存到一个结构体的细胞数组CASVMStruct中， 具体地说CASVMStruct{ii} {jj}中保存着第ii类与第jj类两类训练得到的
+SVMStruct 。最终将多类SVM分类时需要的全部信息保存至结构体multiSVMStruct中返回，可以说multiSVMStruct中包含了我们的训练成果。
 
 ```
 function multiSVMStruct = multiSVMTrain(TrainData, nSampPerClass, nClass, C, gamma)
@@ -238,7 +240,8 @@ multiSVMStruct.CASVMStruct = CASVMStruct;
 save('Mat/params.mat', 'C', 'gamma');
 ```
 
-分类实现 
+分类实现     
+在多类 SVM 分类阶段， 让测试样本依次经过训练得到的 n(n-1)/2 个 (n = 40) 个 SVM 二分器， 通过投票决定其最终类别归属。
 
 ```
 function class = multiSVMClassify(TestFace, multiSVMStruct)
