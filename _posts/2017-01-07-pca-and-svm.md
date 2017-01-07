@@ -428,6 +428,8 @@ display(['对于测试集200个人脸样本的识别率为', num2str(accuracy*10
 
 在C=128,gamma= 0.0785的情况下，准确率大概在81.5%     
 
+**源码：**[SourceCode](https://github.com/whuhan2013/ImageProcess/tree/master/chapter12/FaceRec)
+
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p14.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/dataImage/chapter11/p15.png)
 
