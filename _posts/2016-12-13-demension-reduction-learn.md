@@ -96,3 +96,29 @@ PCA 技术的一个很大的优点是,它是完全无参数限制的。在 PCA �
 **pca的数学原理**    
 [机器学习中的数学(5)-强大的矩阵奇异值分解(SVD)及其应用](http://www.cnblogs.com/LeftNotEasy/archive/2011/01/19/svd-and-applications.html)      
 [PCA的数学原理](http://blog.codinglabs.org/articles/pca-tutorial.html)
+
+**实现**       
+
+```
+function [U, S] = pca(X)
+[m, n] = size(X);
+
+% You need to return the following variables correctly.
+U = zeros(n);
+S = zeros(n);
+
+Sigma = 1/m * X'* X;
+[U, S, V] = svd(Sigma);
+
+function Z = projectData(X, U, K)
+U_reduce = U(:, 1:K);
+Z =X * U_reduce;
+end
+
+function X_rec = recoverData(Z, U, K)
+U_reduce = U(:, 1:K);
+
+X_rec = Z * U_reduce';
+end
+```
+

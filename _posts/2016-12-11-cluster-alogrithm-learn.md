@@ -67,3 +67,35 @@ K-均值的一个问题在于,它有可能会停留在一个局部最小值处,�
 我们也可以通过商业上的考虑来决定分类数       
 例如,我们的 T-恤制造例子中,我们要将用户按照身材聚类,我们可以分成 3 个尺寸 S,M,L 也可以分成 5 个尺寸 XS,S,M,L,XL,这样的选择是建立在回答“聚类后我们制造的 T-恤 是否能较好地适合我们的客户”这个问题的基础上作出的。
 
+
+**实现**      
+
+```
+function idx = findClosestCentroids(X, centroids)
+
+% Set K
+K = size(centroids, 1);
+
+% You need to return the following variables correctly.
+idx = zeros(size(X,1), 1);
+
+
+for i=1:length(idx)
+    distanse = pdist2(centroids,X(i,:));   % compute the distance(K,1)   pdist2 is a good function  
+       [C,idx(i)]=min(distanse);           % find the minimum
+end
+end
+```
+
+计算平均值,求得新的中心点
+
+```
+function centroids = computeCentroids(X, idx, K)
+for i=1:K
+       centroids(i,:) =  mean( X( find(idx==i) , :) );   % 
+end
+end
+```
+
+
+
