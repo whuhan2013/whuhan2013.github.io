@@ -162,3 +162,4 @@ complicated.o: complicated.c
     gcc -o complicated.o -c complicated.c
 ```
 
+**参考：**[跟我一起来玩转Makefile](https://whuhan2013.github.io/shiyalou/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E6%9D%A5%E7%8E%A9%E8%BD%ACMakefile%20-%20%E5%AE%9E%E9%AA%8C%E6%A5%BC.htm)
