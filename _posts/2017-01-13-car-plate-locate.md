@@ -67,9 +67,10 @@ protected:
 ```       
 
 原图像    
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p5.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p5.png)
 
 **高斯模糊**      
+在数次的实验以后，必须承认，保留高斯模糊过程与半径值为5是最佳的实践。为应对特殊需求，在CPlateLocate类中也应该提供了方法修改高斯半径的值，调用代码如下：       
 GaussianBlur( src, out, Size( getM_GaussianBlurSize(), getM_GaussianBlurSize() ), 0, 0 );     
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p6.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p6.png)
 
