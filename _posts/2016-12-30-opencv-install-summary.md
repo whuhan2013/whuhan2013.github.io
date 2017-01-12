@@ -100,3 +100,8 @@ target_link_libraries(CarVisual easypr thirdparty ${OpenCV_LIBS} )
 **CImg库的编译**      
 1.下载XQuartz获得x11。     
 2. 进入example目录下编译:g++ -o test CImg_demo.cpp -lX11 -lpthread -L/usr/X11/lib -I/usr/X11/include
+
+**opencv3使用vector报错**     
+解决方法：添加using namespace std即可。      
+
+
