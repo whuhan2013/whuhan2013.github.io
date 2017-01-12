@@ -74,3 +74,35 @@ protected:
 GaussianBlur( src, out, Size( getM_GaussianBlurSize(), getM_GaussianBlurSize() ), 0, 0 );     
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p6.png)
 
+**灰度化处理**      
+在灰度化处理步骤中，争议最大的就是信息的损失。无疑的，原先plateLocate过程面对的图片是彩色图片，而从这一步以后，就会面对的是灰度图片。在前面，已经说过这步骤是利是弊是需要讨论的。
+
+　 　无疑，对于计算机而言，色彩图像相对于灰度图像难处理多了，很多图像处理算法仅仅只适用于灰度图像，例如后面提到的Sobel算子。在这种情况下，你除 了把图片转成灰度图像再进行处理别无它法，除非重新设计算法。但另一方面，转化成灰度图像后恰恰失去了最丰富的细节。要知道，真实世界是彩色的，人类对于 事物的辨别是基于彩色的框架。甚至可以这样说，因为我们的肉眼能够区别彩色，所以我们对于事物的区分，辨别，记忆的能力就非常的强。
+
+　　 车牌定位环节中去掉彩色的利弊也是同理。转换成灰度图像虽然利于使用各种专用的算法，但失去了真实世界中辨别的最重要工具---色彩的区分。举个简单的例 子，人怎么在一张图片中找到车牌？非常简单，一眼望去，一个合适大小的矩形，蓝色的、或者黄色的、或者其他颜色的在另一个黑色，或者白色的大的跟车形类似 的矩形中。这个过程非常直观，明显，而且可以排除模糊，色泽，不清楚等很多影响。如果使用灰度图像，就必须借助水平，垂直求导等方法。     
+灰度化实现如下，调用代码：       
+cvtColor( out, out, CV_RGB2GRAY );      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p7.png)
+
+**Sobel算子**      
+检测图像中的垂直边缘，便于区分车牌。       
+　如果要说哪个步骤是plateLocate中的核心与灵魂，毫无疑问是Sobel算子。没有Sobel算子，也就没有垂直边缘的检测，也就无法得到车牌 的可能位置，也就没有后面的一系列的车牌判断、字符识别过程。通过Sobel算子，可以很方便的得到车牌的一个相对准确的位置，为我们的后续处理打好坚实 的基础。在上面的plateLocate的执行过程中可以看到，正是通过Sobel算子，将车牌中的字符与车的背景明显区分开来，为后面的二值化与闭操作 打下了基础
+
+```
+	Mat grad_x, grad_y;
+    Mat abs_grad_x, abs_grad_y;
+    Mat dst;
+    Sobel( out, grad_x, CV_16S, 1, 0, 3, 1, 0, BORDER_DEFAULT );
+    convertScaleAbs( grad_x, abs_grad_x );
+    Sobel( out, grad_y, CV_16S, 0, 1, 3, 1, 0, BORDER_DEFAULT );
+    convertScaleAbs( grad_y, abs_grad_y );
+    addWeighted( abs_grad_x, 1, abs_grad_y, 0, 0, dst);
+```
+
+Sobel算子求图像的一阶导数，Laplace算子则是求图像的二阶导数，在通常情况下，也能检测出边缘，不过Laplace算子的检测不分水平和垂直。我们只要垂直边缘，所以放弃更加精确的边缘检测算法，在sobel算子中也将垂直算子的权重设为0.      
+有一点要说明的：Sobel算子仅能对灰度图像有效果，不能将色彩图像作为输入。因此在进行Soble算子前必须进行前面的灰度化工作。      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p8.png)     
+
+
+
+
