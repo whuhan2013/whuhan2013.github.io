@@ -89,7 +89,7 @@ cvtColor( out, out, CV_RGB2GRAY );
 　如果要说哪个步骤是plateLocate中的核心与灵魂，毫无疑问是Sobel算子。没有Sobel算子，也就没有垂直边缘的检测，也就无法得到车牌 的可能位置，也就没有后面的一系列的车牌判断、字符识别过程。通过Sobel算子，可以很方便的得到车牌的一个相对准确的位置，为我们的后续处理打好坚实 的基础。在上面的plateLocate的执行过程中可以看到，正是通过Sobel算子，将车牌中的字符与车的背景明显区分开来，为后面的二值化与闭操作 打下了基础
 
 ```
-	Mat grad_x, grad_y;
+    Mat grad_x, grad_y;
     Mat abs_grad_x, abs_grad_y;
     Mat dst;
     Sobel( out, grad_x, CV_16S, 1, 0, 3, 1, 0, BORDER_DEFAULT );
@@ -102,6 +102,28 @@ cvtColor( out, out, CV_RGB2GRAY );
 Sobel算子求图像的一阶导数，Laplace算子则是求图像的二阶导数，在通常情况下，也能检测出边缘，不过Laplace算子的检测不分水平和垂直。我们只要垂直边缘，所以放弃更加精确的边缘检测算法，在sobel算子中也将垂直算子的权重设为0.      
 有一点要说明的：Sobel算子仅能对灰度图像有效果，不能将色彩图像作为输入。因此在进行Soble算子前必须进行前面的灰度化工作。      
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p8.png)     
+
+**二值化**           
+二值化算法非常简单，就是对图像的每个像素做一个阈值处理。      
+实现如下：     
+threshold(dst, img_threshold, 0, 255, CV_THRESH_OTSU+CV_THRESH_BINARY);           
+CV_THRESH_OTSU代表自适应阈值，CV_THRESH_BINARY代表正二值化         
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p9.png)    
+
+**闭操作**       
+将车牌字母连接成为一个连通域，便于取轮廓。　      
+闭操作就是对图像先膨胀，再腐蚀。闭操作的结果一般是可以将许多靠近的图块相连称为一个无突起的连通域。在我们的图像定位中，使用了闭操作去连接所有的字符小图块，然后形成一个车牌的大致轮廓。闭操作的过程我会讲的细致一点。为了说明字符图块连接的过程。在这里选取的原图跟上面三个操作的原图不大一样，是一个由两个分开的图块组成的图。原图首先经过膨胀操作，将两个分开的图块结合起来（注意我用偏白的灰色图块表示由于膨胀操作而产生的新的白色）。接着通过腐蚀操作，将连通域的边缘和突起进行削平（注意我用偏黑的灰色图块表示由于腐蚀被侵蚀成黑色图块）。最后得到的是一个无突起的连通域（纯白的部分）。    
+
+在opencv中，调用闭操作的方法是首先建立矩形模板，矩形的大小是可以设置的，由于矩形是用来覆盖以中心像素的所有其他像素，因此矩形的宽和高最好是奇数
+
+```
+Mat element = getStructuringElement(MORPH_RECT, Size(getM_MorphSizeWidth(), getM_MorphSizeHeight()) );
+morphologyEx(img_threshold, img_threshold, MORPH_CLOSE, element);
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p10.png)   
+
+
+
 
 
 
