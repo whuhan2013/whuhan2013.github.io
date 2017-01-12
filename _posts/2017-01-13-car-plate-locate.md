@@ -22,4 +22,54 @@ plateLocate的总体识别思路是：如果我们的车牌没有大的旋转或
 8、筛选。对轮廓求最小外接矩形，然后验证，不满足条件的淘汰。       
 9、角度判断与旋转。把倾斜角度大于阈值（如正负30度）的矩形舍弃。余下的矩形进行微小的旋转，使其水平。        
 10、统一尺寸。上步得到的图块尺寸是不一样的。为了进入机器学习模型，需要统一尺寸。统一尺寸的标准宽度是136，长度是36。这个标准是对千个测试车牌平均后得出的通用值。         
+这些“车牌”有两个作用：一、积累下来作为支持向量机（SVM）模型的训练集，以此训练出一个车牌判断模型；二、在实际的车牌检测过程中，将这些候选“车牌”交由训练好的车牌判断模型进行判断。如果车牌判断模型认为这是车牌的话就进入下一步即字符识别过程，如果不是，则舍弃。        
+
+**车牌定位头文件**     
+
+```
+class CPlateLocate 
+{
+public:
+    CPlateLocate();
+
+    //! 车牌定位
+    int plateLocate(Mat, vector<Mat>& );
+
+    //! 车牌的尺寸验证
+    bool verifySizes(RotatedRect mr);
+
+    //! 结果车牌显示
+    Mat showResultMat(Mat src, Size rect_size, Point2f center);
+
+    //! 设置与读取变量
+    //...
+
+protected:
+    //! 高斯模糊所用变量
+    int m_GaussianBlurSize;
+
+    //! 连接操作所用变量
+    int m_MorphSizeWidth;
+    int m_MorphSizeHeight;
+
+    //! verifySize所用变量
+    float m_error;
+    float m_aspect;
+    int m_verifyMin;
+    int m_verifyMax;
+
+    //! 角度判断所用变量
+    int m_angle;
+
+    //! 是否开启调试模式，0关闭，非0开启
+    int m_debug;
+};
+```       
+
+原图像    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p5.jpg)
+
+**高斯模糊**      
+GaussianBlur( src, out, Size( getM_GaussianBlurSize(), getM_GaussianBlurSize() ), 0, 0 );     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p6.jpg)
 
