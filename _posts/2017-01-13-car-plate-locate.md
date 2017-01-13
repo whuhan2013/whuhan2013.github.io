@@ -137,7 +137,8 @@ morphologyEx(img_threshold, img_threshold, MORPH_CLOSE, element);
                  -1, // draw all contours
                  Scalar(0,0,255), // in blue
                  1); // with a thickness of 
-``
+```
+
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p11.png)   
 
 在图中，红色的线条就是轮廓，可以看到，有非常多的轮廓。取轮廓操作就是将图像中的所有独立的不与外界有交接的图块取出来。然后根据这些轮廓，求这些轮廓的最小外接矩形。这里面需要注意的是这里用的矩形是RotatedRect，意思是可旋转的。因此我们得到的矩形不是水平的，这样就为处理倾斜的车牌打下了基础。  
@@ -190,6 +191,7 @@ bool CPlateLocate::verifySizes(RotatedRect mr) {
     }
 }
 ```
+
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p12.png)   
 
 
