@@ -140,6 +140,58 @@ morphologyEx(img_threshold, img_threshold, MORPH_CLOSE, element);
 ``
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p11.png)   
 
+在图中，红色的线条就是轮廓，可以看到，有非常多的轮廓。取轮廓操作就是将图像中的所有独立的不与外界有交接的图块取出来。然后根据这些轮廓，求这些轮廓的最小外接矩形。这里面需要注意的是这里用的矩形是RotatedRect，意思是可旋转的。因此我们得到的矩形不是水平的，这样就为处理倾斜的车牌打下了基础。  
+
+**尺寸判断**       
+尺寸判断操作是对外接矩形进行判断，以判断它们是否是可能的候选车牌的操作。      
+排除不可能是车牌的矩形。　经过尺寸判断，会排除大量由轮廓生成的不合适尺寸的最小外接矩形.      
+
+中国车牌的一般大小是440mm*140mm，面积为440*140，宽高比为3.14。verifySizes使用如下方法判断矩形是否是车牌：
+
+1.设立一个偏差率error，根据这个偏差率计算最大和最小的宽高比rmax、rmin。判断矩形的r是否满足在rmax、rmin之间。      
+2.设定一个面积最大值max与面积最小值min。判断矩形的面积area是否满足在max与min之间。        
+
+以上两个条件必须同时满足，任何一个不满足都代表这不是车牌。
+
+偏差率和面积最大值、最小值都可以通过参数设置进行修改，且他们都有一个默认值。如果发现verifySizes方法无法发现你图中的车牌，试着修改这些参数。
+
+另外，verifySizes方法是可选的。你也可以不进行verifySizes直接处理，但是这会大大加重后面的车牌判断的压力。一般来说，合理的verifySizes能够去除90%不合适的矩形。         
+通过对图像中所有的轮廓的外接矩形进行遍历，我们调用CplateLocate的另一个成员方法verifySizes，代码如下：    
+
+```
+bool CPlateLocate::verifySizes(RotatedRect mr) {
+    float error = m_error;
+    //Spain car plate size: 52x11 aspect 4,7272
+    //China car plate size: 440mm*140mm，aspect 3.142857
+    float aspect = m_aspect;
+    //Set a min and max area. All other patchs are discarded
+    //int min= 1*aspect*1; // minimum area
+    //int max= 2000*aspect*2000; // maximum area
+    int min= 44*14*m_verifyMin; // minimum area
+    int max= 44*14*m_verifyMax; // maximum area
+    //Get only patchs that match to a respect ratio.
+    float rmin= aspect-aspect*error;
+    float rmax= aspect+aspect*error;
+
+    int area= mr.size.height * mr.size.width;
+    float r = (float)mr.size.width / (float)mr.size.height;
+    if(r < 1)
+    {
+        r= (float)mr.size.height / (float)mr.size.width;
+    }
+
+    if(( area < min || area > max ) || ( r < rmin || r > rmax ))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+```
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p12.png)   
+
 
 
 
