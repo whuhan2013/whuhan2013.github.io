@@ -194,7 +194,10 @@ bool CPlateLocate::verifySizes(RotatedRect mr) {
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p12.png)   
 
+**角度判断**      
+角度判断操作通过角度进一步排除一部分车牌。    
 
+通过verifySizes的矩形，还必须进行一个筛选，即角度判断。一般来说，在一副图片中，车牌不太会有非常大的倾斜，我们做如下规定：如果一个矩形的偏斜角度大于某个角度（例如30度），则认为不是车牌并舍弃。      
 
 
 
