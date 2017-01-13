@@ -121,7 +121,24 @@ Mat element = getStructuringElement(MORPH_RECT, Size(getM_MorphSizeWidth(), getM
 morphologyEx(img_threshold, img_threshold, MORPH_CLOSE, element);
 ```
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p10.png)   
+可以看出，使用闭操作以后，车牌字符的图块被连接成了一个较为规则的矩形，通过闭操作，将车牌中的字符连成了一个图块，同时将突出的部分进行裁剪，图块成为了一个类似于矩形的不规则图块。我们知道，车牌应该是一个规则的矩形，因此获取规则矩形的办法就是先取轮廓，再接着求最小外接矩形。
 
+**取轮廓**      
+将连通域的外围勾画出来，便于形成外接矩形。　  
+
+```
+ vector< vector< Point> > contours;
+    findContours(img_threshold, contours, // a vector of contours
+            CV_RETR_EXTERNAL, // 提取外部轮廓
+            CV_CHAIN_APPROX_NONE); // all pixels of each contours
+    Mat result;
+    src.copyTo(result);
+    drawContours(result, contours,
+                 -1, // draw all contours
+                 Scalar(0,0,255), // in blue
+                 1); // with a thickness of 
+``
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p11.png)   
 
 
 
