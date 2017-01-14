@@ -198,7 +198,107 @@ bool CPlateLocate::verifySizes(RotatedRect mr) {
 角度判断操作通过角度进一步排除一部分车牌。    
 
 通过verifySizes的矩形，还必须进行一个筛选，即角度判断。一般来说，在一副图片中，车牌不太会有非常大的倾斜，我们做如下规定：如果一个矩形的偏斜角度大于某个角度（例如30度），则认为不是车牌并舍弃。      
+可以看出，原先的6个候选矩形只剩3个。车牌两侧的车灯的矩形被成功筛选出来。角度判断会去除verifySizes筛选余下的7%矩形，使得最终进入车牌判断环节的矩形只有原先的全部矩形的3%。       
+角度判断以及接下来的旋转操作的代码如下：
+
+```
+int k = 1;
+    for(int i=0; i< rects.size(); i++)
+    {
+        RotatedRect minRect = rects[i];
+        if(verifySizes(minRect))
+        {    
+            // rotated rectangle drawing 
+            // Get rotation matrix
+            // 旋转这部分代码确实可以将某些倾斜的车牌调整正，
+            // 但是它也会误将更多正的车牌搞成倾斜！所以综合考虑，还是不使用这段代码。
+            // 2014-08-14,由于新到的一批图片中发现有很多车牌是倾斜的，因此决定再次尝试
+            // 这段代码。
+            if(m_debug)
+            { 
+                Point2f rect_points[4]; 
+                minRect.points( rect_points );
+                for( int j = 0; j < 4; j++ )
+                    line( result, rect_points[j], rect_points[(j+1)%4], Scalar(0,255,255), 1, 8 );
+            }
+
+            float r = (float)minRect.size.width / (float)minRect.size.height;
+            float angle = minRect.angle;
+            Size rect_size = minRect.size;
+            if (r < 1)
+            {
+                angle = 90 + angle;
+                swap(rect_size.width, rect_size.height);
+            }
+            //如果抓取的方块旋转超过m_angle角度，则不是车牌，放弃处理
+            if (angle - m_angle < 0 && angle + m_angle > 0)
+            {
+                //Create and rotate image
+                Mat rotmat = getRotationMatrix2D(minRect.center, angle, 1);
+                Mat img_rotated;
+                warpAffine(src, img_rotated, rotmat, src.size(), CV_INTER_CUBIC);
+
+                Mat resultMat;
+                resultMat = showResultMat(img_rotated, rect_size, minRect.center, k++);
+
+                resultVec.push_back(resultMat);
+            }
+        }
+```
 
 
+**旋转**       
+旋转操作是为后面的车牌判断与字符识别提高成功率的关键环节。          
+旋转操作将偏斜的车牌调整为水平。      
+使用旋转与不适用旋转的效果区别如下图：      
+![](http://images.cnitblog.com/blog/673793/201410/241847160581640.jpg)    
+可以看出，没有旋转操作的车牌是倾斜，加大了后续车牌判断与字符识别的难度。因此最好需要对车牌进行旋转。
+
+在角度判定阈值内的车牌矩形，我们会根据它偏转的角度进行一个旋转，保证最后得到的矩形是水平的。调用的opencv函数如下
+
+```
+ Mat rotmat = getRotationMatrix2D(minRect.center, angle, 1);
+ Mat img_rotated;
+ warpAffine(src, img_rotated, rotmat, src.size(), CV_INTER_CUBIC);
+```
+
+**大小调整**      
+结束了么？不，还没有，至少在我们把这些候选车牌导入机器学习模型之前，需要确保他们的尺寸一致。
+
+　　机器学习模型在预测的时候，是通过模型输入的特征来判断的。我们的车牌判断模型的特征是所有的像素的值组成的矩阵。因此，如果候选车牌的尺寸不一致，就无法被机器学习模型处理。因此需要用resize方法进行调整。
+
+　　我们将车牌resize为宽度136，高度36的矩形。为什么用这个值？这个值一开始也不是确定的，我试过许多值。最后我将近千张候选车牌做了一个统计，取它们的平均宽度与高度，因此就有了136和36这个值。所以，这个是一个统计值，平均来说，这个值的效果最好。
+
+　　大小调整调用了CplateLocate的最后一个成员方法showResultMat      
+
+```
+//! 显示最终生成的车牌图像，便于判断是否成功进行了旋转。
+Mat CPlateLocate::showResultMat(Mat src, Size rect_size, Point2f center, int index)
+{
+    Mat img_crop;
+    getRectSubPix(src, rect_size, center, img_crop);
+
+    if(m_debug)
+    { 
+        stringstream ss(stringstream::in | stringstream::out);
+        ss << "tmp/debug_crop_" << index << ".jpg";
+        imwrite(ss.str(), img_crop);
+    }
+
+    Mat resultResized;
+    resultResized.create(HEIGHT, WIDTH, TYPE);
+
+    resize(img_crop, resultResized, resultResized.size(), 0, 0, INTER_CUBIC);
+
+    if(m_debug)
+    { 
+        stringstream ss(stringstream::in | stringstream::out);
+        ss << "tmp/debug_resize_" << index << ".jpg";
+        imwrite(ss.str(), resultResized);
+    }
+
+    return resultResized;
+}
+```
 
 
