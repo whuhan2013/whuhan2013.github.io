@@ -38,38 +38,7 @@ description: 车牌判断
   }
 ```
 
-注意，其中使用了typedef，来提取不同的特征：       
 
-```
-typedef void (*svmCallback)(const cv::Mat& image, cv::Mat& features);
-
-//!  EasyPR的getFeatures回调函数
-//! 本函数是获取垂直和水平的直方图图值
-
-void getHistogramFeatures(const cv::Mat& image, cv::Mat& features);
-
-//! 本函数是获取SIFT特征子
-
-void getSIFTFeatures(const cv::Mat& image, cv::Mat& features);
-
-//! 本函数是获取HOG特征子
-
-void getHOGFeatures(const cv::Mat& image, cv::Mat& features);
-
-//! 本函数是获取HSV空间量化的直方图特征子
-
-void getHSVHistFeatures(const cv::Mat& image, cv::Mat& features);
-
-//! LBP feature
-void getLBPFeatures(const cv::Mat& image, cv::Mat& features);
-
-//! get character feature
-cv::Mat charFeatures(cv::Mat in, int sizeData);
-cv::Mat charFeatures2(cv::Mat in, int sizeData);
-
-//! LBP feature + Histom feature
-void getLBPplusHistFeatures(const cv::Mat& image, cv::Mat& features);
-```
 
 #### SVM训练      
 简而言之，SVM训练部分的目标就是通过一批数据，然后生成一个代表我们模型的xml文件。     
@@ -243,8 +212,113 @@ recall的公式与precision公式唯一的区别在于右下角。precision是pt
 　　下面分别对这几个子部分展开介绍。
 
 
+**1.RBF核**      
+SVM中最关键的技巧是核技巧。“核”其实是一个函数，通过一些转换规则把低维的数据映射为高维的数据。在机器学习里，数据跟向量是等同的意思。例如，一个 [174, 72]表示人的身高与体重的数据就是一个两维的向量。在这里，维度代表的是向量的长度。（务必要区分“维度”这个词在不同语境下的含义，有的时候我们会说向量是一维的，矩阵是二维的，这种说法针对的是数据展开的层次。机器学习里讲的维度代表的是向量的长度，与前者不同）
 
+　　简单来说，低维空间到高维空间映射带来的好处就是可以利用高维空间的线型切割模拟低维空间的非线性分类效果。也就是说，SVM模型其实只能做线型分类，但是在线型分类前，它可以通过核技巧把数据映射到高维，然后在高维空间进行线型切割。高维空间的线型切割完后在低维空间中最后看到的效果就是划出了一条复杂的分线型分类界限。从这点来看，SVM并没有完成真正的非线性分类，而是通过其它方式达到了类似目的，可谓“曲径通幽”。
 
+SVM模型总共可以支持多少种核呢。根据官方文档，支持的核类型有以下几种：
+
+- liner核，也就是无核。
+- rbf核，使用的是高斯函数作为核函数。
+- poly核，使用多项式函数作为核函数。
+- sigmoid核，使用sigmoid函数作为核函数。
+
+　　liner核和rbf核是所有核中应用最广泛的。
+
+　　liner核，虽然名称带核，但它其实是无核模型，也就是没有使用核函数对数据进行转换。因此，它的分类效果仅仅比逻辑回归好一点。在EasyPR1.0版中，我们的SVM模型应用的是liner核。我们用的是图像的全部像素作为特征。
+
+　　rbf核，会将输入数据的特征维数进行一个维度转换，具体会转换为多少维？这个等于你输入的训练量。假设你有500张图片，rbf核会把每张图片的数据转 换为500维的。如果你有1000张图片，rbf核会把每幅图片的特征转到1000维。这么说来，随着你输入训练数据量的增长，数据的维数越多。更方便在高维空间下的分类效果，因此最后模型效果表现较好。
+
+　　既然选择SVM作为模型，而且SVM中核心的关键技巧是核函数，那么理应使用带核的函数模型，充分利用数据高维化的好处，利用高维的线型分类带来低维空间下的非线性分类效果。但是，rbf核的使用是需要条件的。
+
+　　当你的数据量很大，但是每个数据量的维度一般时，才适合用rbf核。相反，当你的数据量不多，但是每个数据量的维数都很大时，适合用线型核。
+
+在EasyPR1.0版中，我们用的是图像的全部像素作为特征，那么根据车牌图像的136×36的大小来看的话，就是4896维的数据，再加上我们输入的 是彩色图像，也就是说有R，G，B三个通道，那么数量还要乘以3，也就是14688个维度。这是一个非常庞大的数据量，你可以把每幅图片的数据理解为长度 为14688的向量。这个时候，每个数据的维度很大，而数据的总数很少，如果用rbf核的话，相反效果反而不如无核。
+
+　　在EasyPR1.1版本时，输入训练的数据有3000张图片，每个数据的特征改用直方统计，共有172个维度。这个场景下，如果用rbf核的话，就会将每个数据的维度转化为与数据总数一样的数量，也就是3000的维度，可以充分利用数据高维化后的好处。
+
+　　因此可以看出，为了让EasyPR新版使用rbf核技巧，我们给训练数据做了增加，扩充了两倍的数据，同时，减小了每个数据的维度。以此满足了rbf核的使用条件。通过使用rbf核来训练，充分发挥了非线性模型分类的优势，因此带来了较好的分类效果。　　
+
+　　但是，使用rbf核也有一个问题，那就是参数设置的问题。在rbf训练的过程中，参数的选择会显著的影响最后rbf核训练出模型的效果。因此必须对参数进行最优选择。       
+
+**参数调优**       
+
+　　传统的参数调优方法是人手完成的。机器学习工程师观察训练出的模型与参数的对应关系，不断调整，寻找最优的参数。由于机器学习工程师大部分时间在调整模型的参数，也有了“机器学习就是调参”这个说法。
+
+　　幸好，opencv的svm方法中提供了一个自动训练的方法。也就是由opencv帮你，不断改变参数，训练模型，测试模型，最后选择模型效果最好的那些参数。整个过程是全自动的，完全不需要你参与，你只需要输入你需要调整参数的参数类型，以及每次参数调整的步长即可。
+
+```
+Trainauto 使用方法:
+    vector<float> featureVector;
+    vector<int> imageClass;
+
+    Ptr<ml::TrainData>traindata = ml::TrainData::create(featureVectorOfSample, ml::ROW_SAMPLE, classOfSample);
+    Ptr<ml::SVM> svm = ml::SVM::create();
+    svm->setType(ml::SVM::C_SVC);
+    svm->setKernel(ml::SVM::RBF);
+    svm->setTermCriteria(TermCriteria(TermCriteria::MAX_ITER, 6000, 1e-8));
+
+    svm->trainAuto(traindata, 10, svm->getDefaultGrid(svm->getC()), svm->getDefaultGrid(svm->getGamma()),
+    svm->getDefaultGrid(svm->getP()), 
+    svm->getDefaultGrid(svm->getNu()), 
+    svm->getDefaultGrid(svm->getCoef0()), 
+        svm->getDefaultGrid(svm->getDegree()), true);
+```
+
+**3.特征提取**
+
+　　在rbf核介绍时提到过，输入数据的特征的维度现在是172，那么这个数字是如何计算出来的？现在的特征用的是直方统计函数，也就是先把图像二值化，然后统计图像中一行元素中1的数目，由于输入图像有36行，因此有36个值，再统计图像中每一列中1的数目，图像有136列，因此有136个值，两者相加正好等于172。新的输入数据的特征提取函数就是下面的代码：                
+
+```
+// ! EasyPR的getFeatures回调函数
+// ！本函数是获取垂直和水平的直方图图值
+void getHistogramFeatures(const Mat& image, Mat& features)
+{
+    Mat grayImage;
+    cvtColor(image, grayImage, CV_RGB2GRAY);
+    Mat img_threshold;
+    threshold(grayImage, img_threshold, 0, 255, CV_THRESH_OTSU+CV_THRESH_BINARY);
+    features = getTheFeatures(img_threshold);
+}
+```
+
+**4.接口函数**
+
+　　由于有SIFT以及HOG等特征没有实现，而且未来有可能会有更多有效的特征函数出现。因此我把特征函数抽象为借口。使用回调函数的思路实现。所有回调函数的代码都在feature.cpp中，开发者可以实现自己的回调函数，并把它赋值给EasyPR中的某个函数指针，从而实现自定义的特征提取。也许你们会有更多更好的特征的想法与创意。
+
+注意，其中使用了typedef，来提取不同的特征：       
+
+```
+typedef void (*svmCallback)(const cv::Mat& image, cv::Mat& features);
+
+//!  EasyPR的getFeatures回调函数
+//! 本函数是获取垂直和水平的直方图图值
+
+void getHistogramFeatures(const cv::Mat& image, cv::Mat& features);
+
+//! 本函数是获取SIFT特征子
+
+void getSIFTFeatures(const cv::Mat& image, cv::Mat& features);
+
+//! 本函数是获取HOG特征子
+
+void getHOGFeatures(const cv::Mat& image, cv::Mat& features);
+
+//! 本函数是获取HSV空间量化的直方图特征子
+
+void getHSVHistFeatures(const cv::Mat& image, cv::Mat& features);
+
+//! LBP feature
+void getLBPFeatures(const cv::Mat& image, cv::Mat& features);
+
+//! get character feature
+cv::Mat charFeatures(cv::Mat in, int sizeData);
+cv::Mat charFeatures2(cv::Mat in, int sizeData);
+
+//! LBP feature + Histom feature
+void getLBPplusHistFeatures(const cv::Mat& image, cv::Mat& features);
+```
 
 
 

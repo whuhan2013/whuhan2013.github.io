@@ -220,5 +220,37 @@ void mycamera(){
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/opencv/chapter1/p5.png) 
 
 
+**opencv3中使用svm**       
 
+```
+// 使用SVM分类器训练样本~~(opencv3.1以后使用的基本上都是采用模板来完成相应的功能)
+//Train 使用方法:
+    vector<float> featureVector;
+    vector<int> imageClass;
+
+    Ptr<ml::SVM> svm = ml::SVM::create();
+    svm->setType(ml::SVM::C_SVC);
+    svm->setKernel(ml::SVM::RBF);
+    //svm->setC(10);
+    //svm->setGamma(0.1);//caffe -gamma
+    svm->setTermCriteria(TermCriteria(TermCriteria::MAX_ITER, 8000, 1e-8));
+//  svm->train(featureVectorOfSample, ml::ROW_SAMPLE, classOfSample);
+
+Trainauto 使用方法:
+    vector<float> featureVector;
+    vector<int> imageClass;
+
+    Ptr<ml::TrainData>traindata = ml::TrainData::create(featureVectorOfSample, ml::ROW_SAMPLE, classOfSample);
+    Ptr<ml::SVM> svm = ml::SVM::create();
+    svm->setType(ml::SVM::C_SVC);
+    svm->setKernel(ml::SVM::RBF);
+    svm->setTermCriteria(TermCriteria(TermCriteria::MAX_ITER, 6000, 1e-8));
+
+svm->trainAuto(traindata, 10, svm->getDefaultGrid(svm->getC()), svm->getDefaultGrid(svm->getGamma()),
+svm->getDefaultGrid(svm->getP()), 
+svm->getDefaultGrid(svm->getNu()), 
+svm->getDefaultGrid(svm->getCoef0()), 
+        svm->getDefaultGrid(svm->getDegree()), true);
+
+```
 
