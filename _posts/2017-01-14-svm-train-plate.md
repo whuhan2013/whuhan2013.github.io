@@ -100,13 +100,53 @@ void getLBPplusHistFeatures(const cv::Mat& image, cv::Mat& features);
 1) 加载待训练的车牌数据。见下面这段代码。
  
 ```
+int readFileList(char *basePath,vector<string>& files)
+{
+    DIR *dir;
+    struct dirent *ptr;
+    char base[1000];
+
+    if ((dir=opendir(basePath)) == NULL)
+    {
+        perror("Open dir error...");
+        exit(1);
+    }
+    string result;
+    char temp[100];
+    while ((ptr=readdir(dir)) != NULL)
+    {
+        if(strcmp(ptr->d_name,".")==0 || strcmp(ptr->d_name,"..")==0)    ///current dir OR parrent dir
+            continue;
+        else if(ptr->d_type == 8) {   ///file
+            //printf("d_name:%s/%s\n",basePath,ptr->d_name);
+            sprintf(temp, "%s/%s", basePath, ptr->d_name);
+            //cout<<temp<<endl;
+            result = temp;
+            files.push_back(result);
+            //cout<<result<<endl;
+        }
+        else if(ptr->d_type == 10)    ///link file
+            printf("d_name:%s/%s\n",basePath,ptr->d_name);
+        else if(ptr->d_type == 4)    ///dir
+        {
+            memset(base,'\0',sizeof(base));
+            strcpy(base,basePath);
+            strcat(base,"/");
+            strcat(base,ptr->d_name);
+            readFileList(base,files);
+        }
+    }
+    closedir(dir);
+    return 1;
+}
+
 void getPlate(Mat& trainingImages, vector<int>& trainingLabels)
 {
 
     char * filePath = "train/data/plate_detect_svm/HasPlate/HasPlate";
     vector<string> files;
 
-    getFiles(filePath, files );
+    readFileList(filePath, files );
 
     int size = files.size();
     if (0 == size)
@@ -148,27 +188,25 @@ Mat classes;//(numPlates+numNoPlates, 1, CV_32FC1);
 　4) 配置SVM模型的训练参数。SVM模型的训练需要一个CvSVMParams的对象，这个类是SVM模型中训练对象的参数的组合，如何给这里的参数赋值，是很有讲究的一个工作。注意，这里是SVM训练的核心内容，也是最能体现一个机器学习专家和新手区别的地方。机器学习最后模型的效果差异有很大因素取决与模型训练时的参数，尤其是SVM，有非常多的参数供你配置(见下面的代码)。参数众多是一个问题，更为显著的是，机器学习模型中参数的一点微调都可能带来最终结果的巨大差异。       
 
 ```
-CvSVMParams SVM_params;
-    SVM_params.svm_type = CvSVM::C_SVC;
-    SVM_params.kernel_type = CvSVM::LINEAR; //CvSVM::LINEAR;
-    SVM_params.degree = 0;
-    SVM_params.gamma = 1;
-    SVM_params.coef0 = 0;
-    SVM_params.C = 1;
-    SVM_params.nu = 0;
-    SVM_params.p = 0;
-    SVM_params.term_crit = cvTermCriteria(CV_TERMCRIT_ITER, 1000, 0.01);
+
+    Ptr<SVM> svm = SVM::create();
+    svm->setType(SVM::C_SVC);
+    svm->setKernel(SVM::LINEAR);
+    svm->setDegree(0);
+    svm->setGamma(1);
+    svm->setCoef0(0);
+    svm->setC(1);
+    svm->setNu(0);
+    svm->setP(0);
+    svm->setTermCriteria(cvTermCriteria(CV_TERMCRIT_ITER, 1000, 0.01));
 ```
 
 5) 开始训练。OK！数据载入完毕，参数配置结束，一切准备就绪，下面就是交给opencv的时间。我们只要将前面的 trainingData，classes，以及CvSVMParams的对象SVM_params交给CvSVM类的train函数就可以。另外，直接使用CvSVM的构造函数，也可以完成训练过程。        
 
 ```
-CvSVM svmClassifier(trainingData, classes, Mat(), Mat(), SVM_params);
-
+svm->train(trainingData,0,classes);
     cout << "Svm generate done!" << endl;
-
-    FileStorage fsTo("train/svm.xml", cv::FileStorage::WRITE);
-    svmClassifier.write(*fsTo, "svm");
+    svm->save("../train/svm.xml");
 ```
 
 **5. test （测试数据->评判指标）**         
