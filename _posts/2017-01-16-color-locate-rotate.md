@@ -31,7 +31,8 @@ HSV模型是根据颜色的直观特性创建的一种圆锥模型。与RGB颜�
 
 光判断H分量的值是否就足够了？
 
-　　事实上是不足的。固定了H的值以后，如果移动V和S会带来颜色的饱和度和亮度的变化。当V和S都达到最高值，也就是1时，颜色是最纯正的。降低S，颜色越发趋向于变白。降低V，颜色趋向于变黑，当V为0时，颜色变为黑色。因此，S和V的值也会影响最终颜色的效果。
+　　事实上是不足的。固定了H的值以后，如果移动V和S会带来颜色的饱和度和亮度的变化。当V和S都达到最高值，也就是1时，颜色是最纯正的。降低S，颜色越发趋向于变白。降低V，颜色趋向于变黑，当V为0时，颜色变为黑色。因此，S和V的值也会影响最终颜色的效果。      
+我们知道H分量基本能表示一个物体的颜色，但是S和V的取值也要在一定范围内，因为S代表的是H所表示的那个颜色和白色的混合程度，也就说S越小，颜色越发白，也就是越浅；V代表的是H所表示的那个颜色和黑色的混合程度，也就说V越小，颜色越发黑。
 
 　　我们可以设置一个阈值，假设S和V都大于阈值时，颜色才属于H所表达的颜色。
 
@@ -58,3 +59,150 @@ HSV模型是根据颜色的直观特性创建的一种圆锥模型。与RGB颜�
 　　三. 是模板问题。目前的做法是针对蓝色和黄色的匹配使用了两个模板，而不是统一的模板。统一模板的问题在于担心蓝色和黄色的干扰问题，例如黄色的车与蓝色的牌的干扰，或者蓝色的车和黄色牌的干扰，这里面最典型的例子就是一个带有蓝色车牌的黄色出租车，在很多城市里这已经是“标准配置”。因此需要将蓝色和黄色的匹配分别用不同的模板处理。
 
 　　了解完这三个细节以后，下面就是代码部分
+
+```
+//! 根据一幅图像与颜色模板获取对应的二值图
+    //! 输入RGB图像, 颜色模板（蓝色、黄色）
+    //! 输出灰度图（只有0和255两个值，255代表匹配，0代表不匹配）
+    Mat colorMatch(const Mat& src, Mat& match, const Color r, const bool adaptive_minsv)
+    {
+        // S和V的最小值由adaptive_minsv这个bool值判断
+        // 如果为true，则最小值取决于H值，按比例衰减
+        // 如果为false，则不再自适应，使用固定的最小值minabs_sv
+        // 默认为false
+        const float max_sv = 255;
+        const float minref_sv = 64;
+
+        const float minabs_sv = 95;
+
+        //blue的H范围
+        const int min_blue = 100;  //100
+        const int max_blue = 140;  //140
+
+        //yellow的H范围
+        const int min_yellow = 15; //15
+        const int max_yellow = 40; //40
+
+        Mat src_hsv;
+        // 转到HSV空间进行处理，颜色搜索主要使用的是H分量进行蓝色与黄色的匹配工作
+        cvtColor(src, src_hsv, CV_BGR2HSV);
+
+        vector<Mat> hsvSplit;
+        split(src_hsv, hsvSplit);
+        equalizeHist(hsvSplit[2], hsvSplit[2]);
+        merge(hsvSplit, src_hsv);
+
+        //匹配模板基色,切换以查找想要的基色
+        int min_h = 0;
+        int max_h = 0;
+        switch (r) {
+        case BLUE:
+            min_h = min_blue;
+            max_h = max_blue;
+            break;
+        case YELLOW:
+            min_h = min_yellow;
+            max_h = max_yellow;
+            break;
+        }
+
+        float diff_h = float((max_h - min_h) / 2);
+        int avg_h = min_h + diff_h;
+
+        int channels = src_hsv.channels();
+        int nRows = src_hsv.rows;
+        //图像数据列需要考虑通道数的影响；
+        int nCols = src_hsv.cols * channels;
+
+        if (src_hsv.isContinuous())//连续存储的数据，按一行处理
+        {
+            nCols *= nRows;
+            nRows = 1;
+        }
+
+        int i, j;
+        uchar* p;
+        float s_all = 0;
+        float v_all = 0;
+        float count = 0;
+        for (i = 0; i < nRows; ++i)
+        {
+            p = src_hsv.ptr<uchar>(i);
+            for (j = 0; j < nCols; j += 3)
+            {
+                int H = int(p[j]); //0-180
+                int S = int(p[j + 1]);  //0-255
+                int V = int(p[j + 2]);  //0-255
+
+                s_all += S;
+                v_all += V;
+                count++;
+
+                bool colorMatched = false;
+
+                if (H > min_h && H < max_h)
+                {
+                    int Hdiff = 0;
+                    if (H > avg_h)
+                        Hdiff = H - avg_h;
+                    else
+                        Hdiff = avg_h - H;
+
+                    float Hdiff_p = float(Hdiff) / diff_h;
+
+                    // S和V的最小值由adaptive_minsv这个bool值判断
+                    // 如果为true，则最小值取决于H值，按比例衰减
+                    // 如果为false，则不再自适应，使用固定的最小值minabs_sv
+                    float min_sv = 0;
+                    if (true == adaptive_minsv)
+                        min_sv = minref_sv - minref_sv / 2 * (1 - Hdiff_p); // inref_sv - minref_sv / 2 * (1 - Hdiff_p)
+                    else
+                        min_sv = minabs_sv; // add
+
+                    if ((S > min_sv && S < max_sv) && (V > min_sv && V < max_sv))
+                        colorMatched = true;
+                }
+
+                if (colorMatched == true) {
+                    p[j] = 0; p[j + 1] = 0; p[j + 2] = 255;
+                }
+                else {
+                    p[j] = 0; p[j + 1] = 0; p[j + 2] = 0;
+                }
+            }
+        }
+
+        //cout << "avg_s:" << s_all / count << endl;
+        //cout << "avg_v:" << v_all / count << endl;
+
+        // 获取颜色匹配后的二值灰度图
+        Mat src_grey;
+        vector<Mat> hsvSplit_done;
+        split(src_hsv, hsvSplit_done);
+        src_grey = hsvSplit_done[2];
+
+        match = src_grey;
+
+        return src_grey;
+    }
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p16.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p17.jpg)
+
+**不足**             
+　　以上说明了颜色定位的设计思想与细节。那么颜色定位是不是就是万能的？答案是否定的。在色彩充足，光照足够的情况下，颜色定位的效果很好，但是在面对光线不足的情况，或者蓝色车身的情况时，颜色定位的效果很糟糕。下图是一辆蓝色车辆，可以看出，车牌与车身内容完全重叠，无法分割.        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p18.jpg)
+碰到失效的颜色定位情况时需要使用原先的Sobel定位法。
+
+　　目前的新版本使用了颜色定位与Sobel定位结合的方式。首先进行颜色定位，然后根据条件使用Sobel进行再次定位，增加整个系统的适应能力。
+
+　　为了加强鲁棒性，Sobel定位法可以用两阶段的查找。也就是在已经被Sobel定位的图块中，再进行一次Sobel定位。这样可以增加准确率，但会降低了速度。一个折衷的方案是让用户决定一个参数m_maxPlates的值，这个值决定了你在一幅图里最多定位多少车牌。系统首先用颜色定位出候选车牌，然后通过SVM模型来判断是否是车牌，最后统计数量。如果这个数量大于你设定的参数，则认为车牌已经定位足够了，不需要后一步处理，也就不会进行两阶段的Sobel查找。相反，如果这个数量不足，则继续进行Sobel定位。
+
+　　综合定位的代码位于CPlateDectec中的的成员函数plateDetectDeep中，以下是plateDetectDeep的整体流程
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/carplate/p19.jpg)  
+有没有颜色定位与Sobel定位都失效的情况？有的。这种情况下可能需要使用第三类定位技术--字符定位技术。这是EasyPR发展的一个方向，这里不展开讨论。
+
+### 偏斜扭转       
+　　解决了颜色的定位问题以后，下面的问题是：在定位以后，我们如何把偏斜过来的车牌扭正呢？ 
+
