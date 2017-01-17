@@ -342,6 +342,259 @@ bool CPlateLocate::rotation(Mat& in, Mat& out, const Size rect_size, const Point
 　　偏斜判断的另一个重要作用就是，计算平行四边形倾斜的斜率，这个斜率值用来在下面的仿射变换中发挥作用。我们使用一个简单的公式去计算这个斜率，那就是利用上面判断过程中使用的串大小，假设二值化图像高度的1/4，2/4，3/4处对应的串的大小分别为len1，len2，len3，车牌区域的高度为Height。一个计算斜率slope的计算公式就是：(len3-len1)/Height*2。
 
 　　Slope的直观含义见下图
+![](http://images.cnitblog.com/blog2015/673793/201503/262133062869646.jpg)          
+需要说明的，这个计算结果在平行四边形是右斜时是负值，而在左斜时则是正值。于是可以根据slope的正负判断平行四边形是右斜或者左斜。在实践中，会发生一些公式不能应对的情况，比如当斜边的部分区域发生了内凹或者外凸现象。这种现象会导致len1,len2或者len3的计算有误，因此slope也会不准。      
+
+为了实现一个鲁棒性更好的计算方法，可以用(len2-len1)/Height*4与(len3-len1)/Height*2两者之间更靠近tan(angle)的值作为solpe的值（在这里，angle代表的是原来RotataedRect的角度）。
+
+　　多采取了一个slope备选的好处是可以避免单点的内凹或者外凸，但这仍然不是最好的解决方案。在最后的讨论中会介绍一个其他的实现思路。
+
+　　完成偏斜判断与斜率计算的函数是isdeflection，下面是它的代码
+
+```
+//! 是否偏斜
+//! 输入二值化图像，输出判断结果
+bool CPlateLocate::isdeflection(const Mat& in, const double angle, double& slope)
+{
+    int nRows = in.rows;
+    int nCols = in.cols;
+
+    assert(in.channels() == 1);
+
+    int comp_index[3];
+    int len[3];
+
+    comp_index[0] = nRows / 4;
+    comp_index[1] = nRows / 4 * 2;
+    comp_index[2] = nRows / 4 * 3;
+
+    const uchar* p;
+    
+    for (int i = 0; i < 3; i++)
+    {
+        int index = comp_index[i];
+        p = in.ptr<uchar>(index);
+
+        int j = 0;
+        int value = 0;
+        while (0 == value && j < nCols)
+            value = int(p[j++]);
+
+        len[i] = j;
+    }
+
+    //cout << "len[0]:" << len[0] << endl;
+    //cout << "len[1]:" << len[1] << endl;
+    //cout << "len[2]:" << len[2] << endl;
+    
+    double maxlen = max(len[2], len[0]);
+    double minlen = min(len[2], len[0]);
+    double difflen = abs(len[2] - len[0]);
+    //cout << "nCols:" << nCols << endl;
+
+    double PI = 3.14159265;
+    double g = tan(angle * PI / 180.0);
+
+    if (maxlen - len[1] > nCols/32 || len[1] - minlen > nCols/32 ) {
+        // 如果斜率为正，则底部在下，反之在上
+        double slope_can_1 = double(len[2] - len[0]) / double(comp_index[1]);
+        double slope_can_2 = double(len[1] - len[0]) / double(comp_index[0]);
+        double slope_can_3 = double(len[2] - len[1]) / double(comp_index[0]);
+
+        /*cout << "slope_can_1:" << slope_can_1 << endl;
+        cout << "slope_can_2:" << slope_can_2 << endl;
+        cout << "slope_can_3:" << slope_can_3 << endl;*/
+ 
+        slope = abs(slope_can_1 - g) <= abs(slope_can_2 - g) ? slope_can_1 : slope_can_2;
+
+        /*slope = max(  double(len[2] - len[0]) / double(comp_index[1]),
+            double(len[1] - len[0]) / double(comp_index[0]));*/
+        
+        //cout << "slope:" << slope << endl;
+        return true;
+    }
+    else {
+        slope = 0;
+    }
+
+    return false;
+}
+```
+
+
+**仿射变换**   
+
+　　俗话说：行百里者半九十。前面已经做了如此多的工作，应该可以实现偏斜扭转功能了吧？但在最后的道路中，仍然有问题等着我们。
+
+　　我们已经实现了旋转功能，并且在旋转后的区域中截取了车牌区域，然后判断车牌区域中的图形是一个平行四边形。下面要做的工作就是把平行四边形扭正成一个矩形。
+![](http://images.cnitblog.com/blog2015/673793/201503/252135286926466.jpg)       
+首先第一个问题就是解决如何从平行四边形变换成一个矩形的问题。opencv提供了一个函数warpAffine，就是仿射变换函数。       
+warpAffine方法要求输入的参数是原始图像的左上点，右上点，左下点，以及输出图像的左上点，右上点，左下点。注意，必须保证这些点的对应顺序，否则仿射的效果跟你预想的不一样。通过这个方法介绍，我们可以大概看出，opencv需要的是三个点对（共六个点）的坐标，然后建立一个映射关系，通过这个映射关系将原始图像的所有点映射到目标图像上。　
+![](http://images.cnitblog.com/blog2015/673793/201503/252128350678001.jpg)       
+再回来看一下我们的需求，我们的目标是把车牌区域中的平行四边形映射为一个矩形。让我们做个假设，如果我们选取了车牌区域中的平行四边形车牌的三个关键点，然后再确定了我们希望将车牌扭正成的矩形的三个关键点的话，我们是否就可以实现从平行四边形车牌到矩形车牌的扭正？
+
+　　让我们画一幅图像来看看这个变换的作用。有趣的是，把一个平行四边形变换为矩形会对包围平行四边形车牌的区域带来影响。
+
+　　例如下图中，蓝色的实线代表扭转前的平行四边形车牌，虚线代表扭转后的。黑色的实线代表矩形的车牌区域，虚线代表扭转后的效果。可以看到，当蓝色车牌被扭转为矩形的同时，黑色车牌区域则被扭转为平行四边形。
+
+　　注意，当车牌区域扭变为平行四边形以后，需要显示它的视框增大了。跟我们在旋转图像时碰到的情形一样。
+![](http://images.cnitblog.com/blog2015/673793/201503/271205308027690.png)     
+让我们先实际尝试一下仿射变换吧。            
+　　根据仿射函数的需要，我们计算平行四边形车牌的三个关键点坐标。其中左上点的值(xdiff,0)中的xdiff就是根据车牌区域的高度height与平行四边形的斜率slope计算得到的：
+xidff = Height * abs(slope)                
+　　为了计算目标矩形的三个关键点坐标，我们首先需要把扭转后的原点坐标调整到平行四边形车牌区域左上角位置。见下图。
+![](http://images.cnitblog.com/blog2015/673793/201503/271205440369700.png)      
+依次推算关键点的三个坐标。它们应该是     
+
+```
+plTri[0] = Point2f(0 + xiff, 0);
+plTri[1] = Point2f(width - 1, 0);
+plTri[2] = Point2f(0, height - 1);
+
+dstTri[0] = Point2f(xiff, 0);
+dstTri[1] = Point2f(width - 1, 0);
+dstTri[2] = Point2f(xiff, height - 1);
+```
+
+根据上图的坐标，我们开始进行一次仿射变换的尝试。
+
+　　opencv的warpAffine函数不会改变变换后图像的大小。而我们给它传递的目标图像的大小仅会决定视框的大小。不过这次我们不用担心视框的大小，因为根据图27看来，哪怕视框跟原始图像一样大，我们也足够显示扭正后的车牌。
+
+　　看看仿射的效果。晕，好像效果不对，视框的大小是足够了，但是图像往右偏了一些，导致最右边的字母没有显示全。
+![](http://images.cnitblog.com/blog2015/673793/201503/252238480679363.jpg)
+　这次的问题不再是目标图像的大小问题了，而是视框的偏移问题。仔细观察一下我们的视框，倘若我们想把车牌全部显示的话，视框往右偏移一段距离，是不是就可以解决这个问题呢？为保证新的视框中心能够正好与车牌的中心重合，我们可以选择偏移xidff/2长度。正如下图所显示的一样。
+![](http://images.cnitblog.com/blog2015/673793/201503/271206003645027.png)     
+　视框往右偏移的含义就是目标图像Mat的原点往右偏移。如果原点偏移的话，那么仿射后图像的三个关键点的坐标要重新计算，都需要减去xidff/2大小。
+
+　　重新计算的映射点坐标为下：
+
+```
+plTri[0] = Point2f(0 + xiff, 0);
+plTri[1] = Point2f(width - 1, 0);
+plTri[2] = Point2f(0, height - 1);
+
+dstTri[0] = Point2f(xiff/2, 0);
+dstTri[1] = Point2f(width - 1 - xiff + xiff/2, 0);
+dstTri[2] = Point2f(xiff/2, height - 1);
+```     
+
+再试一次。果然，视框被调整到我们希望的地方了，我们可以看到所有的车牌区域了。这次解决的是warpAffine函数带来的视框偏移问题。    
+![](http://images.cnitblog.com/blog2015/673793/201503/252239213339359.jpg)  
+关于坐标调整的另一个理解就是当中心点保持不变时，平行四边形扭正为矩形时恰好是左上的点往左偏移了xdiff/2的距离，左下的点往右偏移了xdiff/2的距离，形成一种对称的平移。可以使用ps或者inkspace类似的矢量制图软件看看“斜切”的效果，　
+
+　　如此一来，就完成了偏斜扭正的过程。需要注意的是，向左倾斜的车牌的视框偏移方向与向右倾斜的车牌是相反的。我们可以用slope的正负来判断车牌是左斜还是右斜。
+
+**总结**
+
+　　通过以上过程，我们成功的将一个偏斜的车牌经过旋转变换等方法扭正过来。
+
+　　让我们回顾一下偏斜扭正过程。我们需要将一个偏斜的车牌扭正，为了达成这个目的我们首先需要对图像进行旋转。因为旋转是个计算量很大的函数，所以我们需要考虑不再用全图旋转，而是区域旋转。在旋转过程中，会发生图像截断问题，所以需要使用扩大化旋转方法。旋转以后，只有偏斜视角的车牌才需要扭正，正视角的车牌不需要，因此还需要一个偏斜判断过程。如此一来，偏斜扭正的过程需要旋转，区域截取，扩大化，偏斜判断等等过程的协助，这就是整个流程中有这么多步需要处理的原因。
+
+　　下图从另一个视角回顾了偏斜扭正的过程，主要说明了偏斜扭转中的两次“截取”过程。       
+![](http://images.cnitblog.com/blog2015/673793/201503/271158413337429.jpg)
+
+- 首先我们获取RotatedRect，然后对每个RotatedRect获取外界矩形，也就是ROI区域。外接矩形的计算有可能获得不安全的坐标，因此需要使用安全的获取外界矩形的函数。
+- 获取安全外接矩形以后，在原图中截取这部分区域，并放置到一个新的Mat里，称之为ROI图像。这是本过程中第一次截取，使用Mat(Rect ...)函数。
+- 接下来对ROI图像根据RotatedRect的角度展开旋转，旋转的过程中使用了放大化旋转法，以此防止车牌区域被截断。
+- 旋转完以后，我们把已经转正的RotatedRect部分截取出来，称之为车牌区域。这是本过程中第二次截取，与第一次不同，这次截取使用getRectSubPix()方法。
+- 接下里使用偏斜判断函数来判断车牌区域里的车牌是否是倾斜的。
+- 如果是，则继续使用仿射变换函数wrapAffine来进行扭正处理，处理过程中要注意三个关键点的坐标。
+- 最后使用resize函数将车牌区域统一化为EasyPR的车牌大小。
+　　
+整个过程有一个统一的函数--deskew。下面是deskew的代码。
+
+```
+//! 抗扭斜处理
+int CPlateLocate::deskew(const Mat& src, const Mat& src_b, vector<RotatedRect>& inRects, vector<CPlate>& outPlates)
+{
+
+    for (int i = 0; i < inRects.size(); i++)
+    {
+        RotatedRect roi_rect = inRects[i];
+
+        float r = (float)roi_rect.size.width / (float)roi_rect.size.height;
+        float roi_angle = roi_rect.angle;
+
+        Size roi_rect_size = roi_rect.size;
+        if (r < 1) {
+            roi_angle = 90 + roi_angle;
+            swap(roi_rect_size.width, roi_rect_size.height);
+        }
+        
+        if (roi_angle - m_angle < 0 && roi_angle + m_angle > 0)
+        {
+            Rect_<float> safeBoundRect;
+            bool isFormRect = calcSafeRect(roi_rect, src, safeBoundRect);
+            if (!isFormRect)
+                continue;
+
+            Mat bound_mat = src(safeBoundRect);
+            Mat bound_mat_b = src_b(safeBoundRect);
+
+            Point2f roi_ref_center = roi_rect.center - safeBoundRect.tl();
+            
+            Mat deskew_mat;
+            if ((roi_angle - 5 < 0 && roi_angle + 5 > 0)  || 90.0 == roi_angle || -90.0 == roi_angle) 
+            {
+                deskew_mat = bound_mat;
+            } 
+            else
+            {
+                // 角度在5到60度之间的，首先需要旋转 rotation
+                Mat rotated_mat;
+                Mat rotated_mat_b;
+
+                if (!rotation(bound_mat, rotated_mat, roi_rect_size, roi_ref_center, roi_angle))
+                    continue;    
+
+                if (!rotation(bound_mat_b, rotated_mat_b, roi_rect_size, roi_ref_center, roi_angle))
+                    continue;
+
+                // 如果图片偏斜，还需要视角转换 affine
+                double roi_slope = 0;
+                
+                if (isdeflection(rotated_mat_b, roi_angle, roi_slope))
+                {
+                    //cout << "roi_angle:" << roi_angle << endl;
+                    //cout << "roi_slope:" << roi_slope << endl;
+                    affine(rotated_mat, deskew_mat, roi_slope);
+                }
+                else
+                    deskew_mat = rotated_mat;
+            }
+
+            Mat plate_mat;
+            plate_mat.create(HEIGHT, WIDTH, TYPE);
+
+            if (deskew_mat.cols >= WIDTH || deskew_mat.rows >= HEIGHT)
+                resize(deskew_mat, plate_mat, plate_mat.size(), 0, 0, INTER_AREA);
+            else
+                resize(deskew_mat, plate_mat, plate_mat.size(), 0, 0, INTER_CUBIC);
+            
+            /*if (1)
+            {
+                imshow("plate_mat", plate_mat);
+                waitKey(0);
+                destroyWindow("plate_mat");
+            }*/
+            
+
+            CPlate plate;
+            plate.setPlatePos(roi_rect);
+            plate.setPlateMat(plate_mat);
+            outPlates.push_back(plate);
+
+        }
+    }
+    return 0;
+}
+```
+
+最后是改善建议：      
+　　角度偏斜判断时可以用白色区域的轮廓来确定平行四边形的四个点，然后用这四个点来计算斜率。这样算出来的斜率的可能鲁棒性更好。
+
+ 
+
 
 
 
