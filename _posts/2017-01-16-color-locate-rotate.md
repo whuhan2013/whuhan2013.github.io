@@ -236,6 +236,111 @@ HSV模型是根据颜色的直观特性创建的一种圆锥模型。与RGB颜�
 　　下一步的工作中可以仅对这个ROI图像进行处理，包括对其旋转或者变换等操作。
 
 　　示例图片中的截取出来的ROI图像如下图：
+![](http://images.cnitblog.com/blog2015/673793/201503/252007004741575.jpg)
+在截取中可能会发生一个问题。如果直接使用boundingRect()函数的话，在运行过程中会经常发生这样的异常。OpenCV Error: Assertion failed (0 <= roi.x && 0 <= roi.width && roi.x + roi.width <= m.cols && 0 <= roi.y && 0 <= roi.height && roi.y + roi.height <= m.rows) incv::Mat::Mat               
+这个异常产生的原因在于，在opencv2.4.8中（不清楚opencv其他版本是否没有这个问题），boundingRect()函数计算出的Rect的四个点的坐标没有做验证。这意味着你计算一个RotataedRect的最小外接矩形Rect时，它可能会给你一个负坐标，或者是一个超过原图片外界的坐标。于是当你把Rect作为参数传递给Mat(Rect ...)的话，它会提示你所要截取的Rect中的坐标越界了！
+
+　　解决方案是实现一个安全的计算最小外接矩形Rect的函数，在boundingRect()结果之上，对角点坐标进行一次判断，如果值为负数，就置为0，如果值超过了原始Mat的rows或cols，就置为原始Mat的这些rows或cols。    
+
+**扩大化旋转**          
+　　当我们通过calcSafeRect(...)获取了一个安全的Rect，然后通过Mat(Rect ...)函数截取了这个感兴趣图像ROI以后。下面的工作就是对这个新的ROI图像进行操作。
+
+　　首先是判断这个ROI图像是否要旋转。为了降低工作量，我们不对角度在-5度到5度区间的ROI进行旋转（注意这里讲的角度针对的生成ROI的RotataedRect，ROI本身是水平的）。因为这么小的角度对于SVM判断以及字符识别来说，都是没有影响的。
+
+　　对其他的角度我们需要对ROI进行旋转。当我们对ROI进行旋转以后，接着把转正后的RotataedRect部分从ROI中截取出来。
+
+　　但很快我们就会碰到一个新问题。让我们看一下下图，为什么我们截取出来的车牌区域最左边的“川”字和右边的“2”字发生了形变？为了搞清这个原因，作者仔细地研究了旋转与截取函数，但很快发现了形变的根源在于旋转后的ROI图像。
+
+　　仔细看一下旋转后的ROI图像，是否左右两侧不再完整，像是被截去了一部分？
+![](http://images.cnitblog.com/blog2015/673793/201503/262013530679012.jpg)    
+要想理解这个问题，需要理解opencv的旋转变换函数的特性。作为旋转变换的核心函数，affinTransform会要求你输出一个旋转矩阵给它。这很简单，因为我们只需要给它一个旋转中心点以及角度，它就能计算出我们想要的旋转矩阵。旋转矩阵的获得是通过如下的函数得到的：
+
+　　Mat rot_mat = getRotationMatrix2D(new_center, angle, 1);           
+　　在获取了旋转矩阵rot_mat，那么接下来就需要调用函数warpAffine来开始旋转操作。这个函数的参数包括一个目标图像、以及目标图像的Size。目标图像容易理解，大部分opencv的函数都会需要这个参数。我们只要新建一个Mat即可。那么目标图像的Size是什么？在一般的观点中，假设我们需要旋转一个图像，我们给opencv一个原始图像，以及我需要在某个旋转点对它旋转一个角度的需求，那么opencv返回一个图像给我即可，这个图像的Size或者说大小应该是opencv返回给我的，为什么要我来告诉它呢？         
+
+　　你可以试着对一个正方形进行旋转，仔细看看，这个正方形的外接矩形的大小会如何变化？当旋转角度还小时，一切都还好，当角度变大时，明显我们看到的外接矩形的大小也在扩增。在这里，外接矩形被称为视框，也就是我需要旋转的正方形所需要的最小区域。随着旋转角度的变大，视框明显增大。    
+![](http://images.cnitblog.com/blog2015/673793/201503/261950472395667.jpg)       
+在图像旋转完以后，有三类点会获得不同的处理，一种是有原图像对应点且在视框内的，这些点被正常显示；一类是在视框内但找不到原图像与之对应的点，这些点被置0值（显示为黑色）；最后一类是有原图像与之对应的点，但不在视框内的，这些点被悲惨的抛弃。             
+![](http://images.cnitblog.com/blog2015/673793/201503/262019109586262.jpg)   
+这就是旋转后不同三类点的命运，也就是新生成的图像中一些点呈现黑色（被置0），一些点被截断（被抛弃）的原因。如果把视框调整大点的话，就可以大幅度减少被截断点的数量。所以，为了保证旋转后的图像不被截断，因此我们需要计算一个合理的目标图像的Size，让我们的感兴趣区域得到完整的显示。
+
+　　下面的代码使用了一个极为简单的策略，它将原始图像与目标图像都进行了扩大化。首先新建一个尺寸为原始图像1.5倍的新图像，接着把原始图像映射到新图像上，于是我们得到了一个显示区域(视框)扩大化后的原始图像。显示区域扩大以后，那些在原图像中没有值的像素被置了一个初值。
+
+　　接着调用warpAffine函数，使用新图像的大小作为目标图像的大小。warpAffine函数会将新图像旋转，并用目标图像尺寸的视框去显示它。于是我们得到了一个所有感兴趣区域都被完整显示的旋转后图像。
+
+　　这样，我们再使用getRectSubPix()函数就可以获得想要的车牌区域了。    
+![](http://images.cnitblog.com/blog2015/673793/201503/262016004586463.jpg)        
+
+以下就是旋转函数rotation的代码
+
+```
+//! 旋转操作
+bool CPlateLocate::rotation(Mat& in, Mat& out, const Size rect_size, const Point2f center, const double angle)
+{
+    Mat in_large;
+    in_large.create(in.rows*1.5, in.cols*1.5, in.type());
+
+    int x = in_large.cols / 2 - center.x > 0 ? in_large.cols / 2 - center.x : 0;
+    int y = in_large.rows / 2 - center.y > 0 ? in_large.rows / 2 - center.y : 0;
+
+    int width = x + in.cols < in_large.cols ? in.cols : in_large.cols - x;
+    int height = y + in.rows < in_large.rows ? in.rows : in_large.rows - y;
+
+    /*assert(width == in.cols);
+    assert(height == in.rows);*/
+
+    if (width != in.cols || height != in.rows)
+        return false;
+
+    Mat imageRoi = in_large(Rect(x, y, width, height));
+    addWeighted(imageRoi, 0, in, 1, 0, imageRoi);
+
+    Point2f center_diff(in.cols/2, in.rows/2);
+    Point2f new_center(in_large.cols / 2, in_large.rows / 2);
+
+    Mat rot_mat = getRotationMatrix2D(new_center, angle, 1);
+
+    /*imshow("in_copy", in_large);
+    waitKey(0);*/
+
+    Mat mat_rotated;
+    warpAffine(in_large, mat_rotated, rot_mat, Size(in_large.cols, in_large.rows), CV_INTER_CUBIC);
+
+    /*imshow("mat_rotated", mat_rotated);
+    waitKey(0);*/
+
+    Mat img_crop;
+    getRectSubPix(mat_rotated, Size(rect_size.width, rect_size.height), new_center, img_crop);
+
+    out = img_crop;
+
+    /*imshow("img_crop", img_crop);
+    waitKey(0);*/
+
+    return true;
+
+    
+}
+```
+
+
+**偏斜判断**     
+当我们对ROI进行旋转以后，下面一步工作就是把RotataedRect部分从ROI中截取出来，这里可以使用getRectSubPix方法，这个函数可以在被旋转后的图像中截取一个正的矩形图块出来，并赋值到一个新的Mat中，称为车牌区域。
+
+　　下步工作就是分析截取后的车牌区域。车牌区域里的车牌分为正角度和偏斜角度两种。对于正的角度而言，可以看出车牌区域就是车牌，因此直接输出即可。而对于偏斜角度而言，车牌是平行四边形，与矩形的车牌区域不重合。
+
+　　如何判断一个图像中的图形是否是平行四边形？
+
+　　一种简单的思路就是对图像二值化，然后根据二值化图像进行判断。图像二值化的方法有很多种，假设我们这里使用一开始在车牌定位功能中使用的大津阈值二值化法的话，效果不会太好。因为大津阈值是自适应阈值，在完整的图像中二值出来的平行四边形可能在小的局部图像中就不再是。最好的办法是使用在前面定位模块生成后的原图的二值图像，我们通过同样的操作就可以在原图中截取一个跟车牌区域对应的二值化图像。
+
+　　下图就是一个二值化车牌区域获得的过程。      
+![](http://images.cnitblog.com/blog2015/673793/201503/262017013496465.jpg)    
+
+
+
+
+
+
 
 
 
