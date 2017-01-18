@@ -31,3 +31,13 @@ description: machine learning
 - 非常非常棒的一系列　python 机器学习（Machine Learning）实践入门教程:[python Machine Learning](http://www.johnwittenauer.net/machine-learning-exercises-in-python-part-1/)
 - 很多实例，包括人脸识别，opencv，语音识别,文本分类等：[http://blog.csdn.net/abcjennifer/article/category/1173803/4](http://blog.csdn.net/abcjennifer/article/category/1173803/4)
 
+
+另外，答主学校的机器学习程序猿们一般学习路线是这样：先学python或R基础，然后开始看《集体智慧编程》、《机器学习实战》来了解这些算法的模型和基本实现，顺便可以去kaggle 101区试试水。然后还没放弃的就去啃《统计学习方法》、PRML、ESL和顶级会议的paper了。当然，大神随意...
+
+机器学习入门可以说说，大数据就不知道了                                  
+看书：机器学习算法原理与编程实践（偏向代码工程实现）／周志华的西瓜书（偏向基础原理解说）／蓝本的统计学习方法（偏向统计分析的挖掘算法）／数据挖掘技术（十分详细的讲解数据挖掘的知识，包括数据预处理之类的）          
+上面后面三本选一本好好看透，对机器学习和数据挖掘应该都能够有基本的了解，实践那本可以边做比赛项目，当工作书使用           
+视频：推荐林轩田的机器学习基石／技法                        
+比赛：kaggle，很多的小的项目比赛练手                                 
+建议题主先确定自己的具体方向，然后结合项目和比赛边做边学，而且这个问题知乎上有很多比较好的建议，需要掌握的技能图       
+
