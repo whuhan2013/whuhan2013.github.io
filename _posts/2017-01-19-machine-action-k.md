@@ -96,5 +96,8 @@ ax.scatter(datingDataMat[:,1],datingDataMat[:2])
 plot.show()
 ```
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter2/p1.png)     
+由于没有使用样本分类特征值，我们很难从图中看到有用的数据模式信息。        
+
 
 
