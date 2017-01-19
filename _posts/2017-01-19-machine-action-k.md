@@ -83,5 +83,18 @@ def file2matrix(filename):
     return returnMat, classLabelVector
 ```  
 
+**分析数据：使用matplotlib创建散点图**         
+
+在python命令环境下，输入下列命令     
+
+```
+import matplotlib
+import matplotlib.pyplot as plt
+fig = plt.figure()
+ax = fig.addsubplot(111)
+ax.scatter(datingDataMat[:,1],datingDataMat[:2])
+plot.show()
+```
+
 
 
