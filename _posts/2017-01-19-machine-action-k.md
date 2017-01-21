@@ -158,6 +158,54 @@ def datingClassTest():
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter2/p3.png)  
 为了使用前面两个例子的分类器,我们必须将图像格式化处理为一个向量。我们将把一个32*32的二进制图像矩阵转换为1x1024的向量,这样前两节使用的分类器就可以处理数字图像信息了。       
-我们首先编写一段函数11^2乂6沈0『,将图像转换为向量:该函数创建1><1024的施0^ 数 组 ,然后打开给定的文件,循环读出文件的前32行 ,并将每行的头32个字符值存储在& 0 ^ 数 组 中,最后返回数组。
+我们首先编写一段函数img2vector将图像转换为向量:该函数创建1*1024的numpy数组,然后打开给定的文件,循环读出文件的前32行,并将每行的头32个字符值存储在numpy数 组 中,最后返回数组。
 
+```
+def img2vector(filename):
+    returnVect = zeros((1, 1024))
+    fr = open(filename)
+    for i in range(32):
+        lineStr = fr.readline()
+        for j in range(32):
+            returnVect[0, 32 * i + j] = int(lineStr[j])
+    return returnVect
+```
+
+**测试算法**      
+
+```
+def handwritingClassTest():
+    hwLabels = []
+    trainingFileList = listdir('trainingDigits')  # load the training set
+    m = len(trainingFileList)
+    trainingMat = zeros((m, 1024))
+    for i in range(m):
+        fileNameStr = trainingFileList[i]
+        fileStr = fileNameStr.split('.')[0]  # take off .txt
+        classNumStr = int(fileStr.split('_')[0])
+        hwLabels.append(classNumStr)
+        trainingMat[i, :] = img2vector('trainingDigits/%s' % fileNameStr)
+    testFileList = listdir('testDigits')  # iterate through the test set
+    errorCount = 0.0
+    mTest = len(testFileList)
+    for i in range(mTest):
+        fileNameStr = testFileList[i]
+        fileStr = fileNameStr.split('.')[0]  # take off .txt
+        classNumStr = int(fileStr.split('_')[0])
+        vectorUnderTest = img2vector('testDigits/%s' % fileNameStr)
+        classifierResult = classify0(vectorUnderTest, trainingMat, hwLabels, 3)
+        print "the classifier came back with: %d, the real answer is: %d" % (classifierResult, classNumStr)
+        if (classifierResult != classNumStr): errorCount += 1.0
+    print "\nthe total number of errors is: %d" % errorCount
+    print "\nthe total error rate is: %f" % (errorCount / float(mTest))
+```
+
+K-近邻算法识别手写数字数据集,错误率为1.2%       
+实际使用这个算法时,算法的执行效率并不高。因为算法需要为每个测试向量做2000次距离计算,每个距离计算包括了1024个维度浮点运算,总计要执行900次,此外,我们还需要为测试向量准备2MB的存储空间。是否存在一种算法减少存储空间和计算时间的开销呢?k决策树就是K-近邻算法的优化版,可以节省大量的计算开销。
+
+**总结**      
+K-近邻算法是分类数据最简单最有效的算法,本章通过两个例子讲述了如何使用K-近邻算法构造分类器。K-近邻算法是基于实例的学习,使用算法时我们必须有接近实际数据的训练样本数 据。K-近邻算法必须保存全部数据集,如果训练数据集的很大,必须使用大量的存储空间。此外,由于必须对数据集中的每个数据计算距离值,实际使用时可能非常耗时。            
+
+
+                                                          
 
