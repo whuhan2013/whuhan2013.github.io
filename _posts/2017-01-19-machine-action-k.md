@@ -91,13 +91,16 @@ def file2matrix(filename):
 import matplotlib
 import matplotlib.pyplot as plt
 fig = plt.figure()
-ax = fig.addsubplot(111)
+ax = fig.add_subplot(111)
 ax.scatter(datingDataMat[:,1],datingDataMat[:2])
-plot.show()
+plt.show()
 ```
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter2/p1.png)     
 由于没有使用样本分类特征值，我们很难从图中看到有用的数据模式信息。        
 
+重新输入上面的代码，调用scatter函数时使用如下代码：        
+ax.scatter(datingDataMat[:,1],datingDataMat[:,2],15.0*array(datingLabels),15.0*array(datingLabels))
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter2/p2.png)     
 
 
