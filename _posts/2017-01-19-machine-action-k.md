@@ -103,4 +103,61 @@ plt.show()
 ax.scatter(datingDataMat[:,1],datingDataMat[:,2],15.0*array(datingLabels),15.0*array(datingLabels))
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter2/p2.png)     
 
+**数据归一化**     
+我们很容易发现,上面方程中数字差值最大的属性对计算结果的影响最大,也就是说,每年获取的飞行常客里程数对于计算结果的影响将远远大于表2-3中其他两个特征— 玩视频游戏的 和每周消费冰洪淋公升数— 的影响。而产生这种现象的唯一原因,仅仅是因为飞行常客里程数 远大于其他特征值。但海伦认为这三种特征是同等重要的,因此作为三个等权重的特征之一,飞 行常客里程数并不应该如此严重地影响到计算结果。
+
+
+在处理这种不同取值范围的特征值时,我们通常采用的方法是将数值归一化,如将取值范围处理为0到1或者-1到1之间。下面的公式可以将任意取值范围的特征值转化为0到1区间内的值:         
+newValue=(oldValue-min)/(max-min)     
+其中min和max分别是数据集中的最小特征值和最大特征值。虽然改变数值取值范围增加了 分类器的复杂度,但为了得到准确结果,我们必须这样做    
+
+```
+def autoNorm(dataSet):
+    minVals = dataSet.min(0)
+    maxVals = dataSet.max(0)
+    ranges = maxVals - minVals
+    normDataSet = zeros(shape(dataSet))
+    m = dataSet.shape[0]
+    normDataSet = dataSet - tile(minVals, (m, 1))
+    normDataSet = normDataSet / tile(ranges, (m, 1))  # element wise divide
+    return normDataSet, ranges, minVals
+```
+
+**测试算法**       
+前面我们巳经提到可以使用错误率来检测分类器的性能。对于分类器来说,错误率就是分类器给出错误结果的次数除以测试数据的总数,完美分类器的错误率为0,而错误率为1.0的分类器 不会给出任何正确的分类结果。代码里我们定义一个计数器变量,每次分类器错误地分类数据,计数器就加1,程序执行完成之后计数器的结果除以数据点总数即是错误率。       
+
+```
+def datingClassTest():
+    hoRatio = 0.50  # hold out 10%
+    datingDataMat, datingLabels = file2matrix('datingTestSet2.txt')  # load data setfrom file
+    normMat, ranges, minVals = autoNorm(datingDataMat)
+    m = normMat.shape[0]
+    numTestVecs = int(m * hoRatio)
+    errorCount = 0.0
+    for i in range(numTestVecs):
+        classifierResult = classify0(normMat[i, :], normMat[numTestVecs:m, :], datingLabels[numTestVecs:m], 3)
+        print "the classifier came back with: %d, the real answer is: %d" % (classifierResult, datingLabels[i])
+        if (classifierResult != datingLabels[i]): errorCount += 1.0
+    print "the total error rate is: %f" % (errorCount / float(numTestVecs))
+    print errorCount
+```
+
+分类器处理约会数据集的错误率是2.4%,这是一个相当不错的结果。依赖于分类算法、数据集和程序设置,分类器的输出结果可能有很大的不同。   
+这个例子表明我们可以正确地预测分类,错误率仅仅是2.4%。海伦完全可以输人未知对象的属性信息’由分类软件来帮助她判定某一对象的可交往程度:讨厌、一般喜欢、非常喜欢。          
+
+#### 手写识别系统       
+本节我们一步步地构造使用K-近邻分类器的手写识别系统。为了简单起见,这里构造的系统只能识别数字0到9,参见图2.6。需要识别的数字已经使用图形处理软件,处理成具有相同的色彩和大小®:宽髙是32像素*32像素的黑白图像。尽管采用文本格式存储图像不能有效地利用内存空间,但是为了方便理解,我们还是将图像转换为文本格式。      
+
+(1)收集数据:提供文本文件。            
+(2)准备数据:编写函数classify0(),将图像格式转换为分类器使用的list格式。          
+(3)分析数据:在python命令提示符中检查数据,确保它符合要求。       
+(4)训 练 算 法 :此步驟不适用于各近邻算法。         
+(5)测试算法:编写函数使用提供的部分数据集作为测试样本,测试样本与非测试样本的区别在于测试样本是已经完成分类的数据,如果预测分类与实际类别不同,则标记
+为一个错误。         
+(6)使用算法:本例没有完成此步驟,若你感兴趣可以构建完整的应用程序,从图像中提取数字,并完成数字识别,美国的邮件分拣系统就是一个实际运行的类似系统
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter2/p3.png)  
+为了使用前面两个例子的分类器,我们必须将图像格式化处理为一个向量。我们将把一个32*32的二进制图像矩阵转换为1x1024的向量,这样前两节使用的分类器就可以处理数字图像信息了。       
+我们首先编写一段函数11^2乂6沈0『,将图像转换为向量:该函数创建1><1024的施0^ 数 组 ,然后打开给定的文件,循环读出文件的前32行 ,并将每行的头32个字符值存储在& 0 ^ 数 组 中,最后返回数组。
+
 
