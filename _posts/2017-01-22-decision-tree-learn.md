@@ -72,7 +72,9 @@ def splitDataSet(dataSet, axis, value):
     return retDataSet
 ```
 
-接下来我们遍历整个数据集，循环计算香农熵和splitDataSet()函数，找到最好的特征划分方式。熵计算会告诉我们如何划分数据集是最好的数据组织方式。     
+接下来我们遍历整个数据集，循环计算香农熵和splitDataSet()函数，找到最好的特征划分方式。熵计算会告诉我们如何划分数据集是最好的数据组织方式。
+
+
 ```
 def chooseBestFeatureToSplit(dataSet):
     numFeatures = len(dataSet[0]) - 1  # the last column is used for the labels
@@ -236,7 +238,72 @@ def createPlot(inTree):
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter3/p6.png)
 
+#### 测试与存储分类器      
 
+**测试算法，使用决策树执行分类**        
+依靠训练数据构造了决策树之后,我们可以将它用于实际数据的分类。在执行数据分类时, 需要决策树以及用于构造树的标签向量。然 后 ,程序比较测试数据与决策树上的数值,递归执行 该过程直到进人叶子节点;最后将测试数据定义为叶子节点所属的类型。
+
+
+```
+def classify(inputTree, featLabels, testVec):
+    firstStr = inputTree.keys()[0]
+    secondDict = inputTree[firstStr]
+    featIndex = featLabels.index(firstStr)
+    key = testVec[featIndex]
+    valueOfFeat = secondDict[key]
+    if isinstance(valueOfFeat, dict):
+        classLabel = classify(valueOfFeat, featLabels, testVec)
+    else:
+        classLabel = valueOfFeat
+    return classLabel
+```
+
+定义的函数也是一个递归函数,在存储带有特征的数据会面临一个问题:程序无法确定特征在数据集中的位置,例如前面例子的第一个用于划分数据集的特征是nosurfacing属 性 ,但是在实际数据集中该属性存储在哪个位置?是第一个属性还是第二个属性? 特征标签列表将帮助程序处理这个问题     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter3/p7.png)
+
+现在我们已经创建了使用决策树的分类器,但是每次使用分类器时,必须重新构造决策树,下一节我们将介绍如何在硬盘上存储决策树分类器。
+
+**决策树的存储**       
+构建决策树是一项很费时的操作，即使处理很小的数据量，如果数据量很大，将会耗费许多时间，如果用创建好的决策树，则可以解决这个问题。为了解决这个问题，需要用到python的pickle序列化对象。      
+
+```
+def storeTree(inputTree, filename):
+    import pickle
+    fw = open(filename, 'w')
+    pickle.dump(inputTree, fw)
+    fw.close()
+
+
+def grabTree(filename):
+    import pickle
+    fr = open(filename)
+    return pickle.load(fr)
+```
+
+通过上述代码，可以将决策树存储在硬盘上，这也是决策树的优点之一。     
+
+**使用决策树预测隐形眼镜类型**              
+决策树预测患者需要佩戴的眼镜类型。           
+隐形眼镜数据集是很著名的数据集，它包含许多患者的眼部观察情况与医生推荐的隐形眼镜类型。隐形眼镜类型包括硬材质，软材质，不适合佩戴隐形眼镜3种。
+
+```
+def glassTest():
+    fr = open('lenses.txt')
+    lenses = [inst.strip().split('\t') for inst in fr.readlines()]
+    lensesLabels = ['age','prescript','astigmatic','tearRate']
+    lensesTree = createTree(lenses,lensesLabels)
+    treePlot.createPlot(lensesTree)
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter3/p8.png)  
+图3-8所示的决策树非常好地匹配了实验数据,然而这些匹配选项可能太多了。我们将这种问题称之为过度匹配。为了减少过度匹配问题,我们可以裁剪决策树,去掉一些不 必要的叶子节点。如果叶子节点只能增加少许信息,则可以删除该节点,将它并人到其他叶子节 点中.         
+
+本章的算法称为ID3算法，无法直接处理数值型数值，还有一个流行的决策树构造算法CART
+
+**小结**             
+决策树分类器就像带有终止块的流程图,终止块表示分类结果。开始处理数据集时,我们首先需要测量集合中数据的不一致性,也就是熵,然后寻找最优方案划分数据集,直到数据集中的 所有数据属于同一分类。ID3算法可以用于划分标称型数据集。构建决策树时,我们通常采用递归的方法将数据集转化为决策树。一般我们并不构造新的数据结构,而是使用python语言内嵌的 数据结构字典存储树节点信息。           
+
+使用matplotlib的注解功能,我们可以将存储的树结构转化为容易理解的图形。python语言的pickle模块可用于存储决策树的结构。隐形眼镜的例子表明决策树可能会产生过多的数据集划分, 从而产生过度匹配数据集的问题。我们可以通过裁剪决策树,合并相邻的无法产生大量信息增益的叶节点,消除过度匹配问题。
 
 
 
