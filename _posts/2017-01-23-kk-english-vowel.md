@@ -12,9 +12,8 @@ description: 语言学习
 我们学习的是国际音标，与kk音标不同，主要针对英式英语，有20个元音，28个辅音。
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p6.png)
 
-
-
-
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p9.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p10.png)
 
 
 
