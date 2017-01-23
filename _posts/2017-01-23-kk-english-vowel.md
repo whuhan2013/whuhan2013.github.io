@@ -10,4 +10,6 @@ description: 语言学习
 二十四元音--元音又称母音，所有元音的发音都需要张嘴振动声带。         
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p1.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p2.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p3.png)
+
 
