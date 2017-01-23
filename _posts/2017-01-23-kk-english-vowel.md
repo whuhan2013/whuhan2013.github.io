@@ -7,9 +7,11 @@ tags: [语言学习]
 description: 语言学习
 ---
 
-二十四元音--元音又称母音，所有元音的发音都需要张嘴振动声带。         
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p1.png)
+[48个国际音标发音表](http://en-yinbiao.xiao84.com/biao/924.html)
+
+我们学习的是国际音标，与kk音标不同，主要针对英式英语，有20个元音，28个辅音。
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p6.png)
+
 
 
 
