@@ -21,4 +21,6 @@ description: 语言学习
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p14.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p15.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p16.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p17.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p1/p18.png)
 
