@@ -77,3 +77,62 @@ def setOfWords2Vec(vocabList, inputSet):
 将该词条的数目除以总词条数目得到条件概率           
 返回每个类别的条件概率          
 
+```
+def trainNB0(trainMatrix,trainCategory):
+    numTrainDocs = len(trainMatrix)
+    numWords = len(trainMatrix[0])
+    pAbusive = sum(trainCategory)/float(numTrainDocs)
+    p0Num = ones(numWords); p1Num = ones(numWords)      #change to ones() 
+    p0Denom = 2.0; p1Denom = 2.0                        #change to 2.0
+    for i in range(numTrainDocs):
+        if trainCategory[i] == 1:
+            p1Num += trainMatrix[i]
+            p1Denom += sum(trainMatrix[i])
+        else:
+            p0Num += trainMatrix[i]
+            p0Denom += sum(trainMatrix[i])
+    p1Vect = log(p1Num/p1Denom)          #change to log()
+    p0Vect = log(p0Num/p0Denom)          #change to log()
+    return p0Vect,p1Vect,pAbusive
+```
+
+最后,函数 会返回两个向量和一个概率。        
+
+**测试算法**          
+
+```
+def classifyNB(vec2Classify, p0Vec, p1Vec, pClass1):
+    p1 = sum(vec2Classify * p1Vec) + log(pClass1)    #element-wise mult
+    p0 = sum(vec2Classify * p0Vec) + log(1.0 - pClass1)
+    if p1 > p0:
+        return 1
+    else: 
+        return 0
+
+def testingNB():
+    listOPosts,listClasses = loadDataSet()
+    myVocabList = createVocabList(listOPosts)
+    trainMat=[]
+    for postinDoc in listOPosts:
+        trainMat.append(setOfWords2Vec(myVocabList, postinDoc))
+    p0V,p1V,pAb = trainNB0(array(trainMat),array(listClasses))
+    testEntry = ['love', 'my', 'dalmation']
+    thisDoc = array(setOfWords2Vec(myVocabList, testEntry))
+    print testEntry,'classified as: ',classifyNB(thisDoc,p0V,p1V,pAb)
+    testEntry = ['stupid', 'garbage']
+    thisDoc = array(setOfWords2Vec(myVocabList, testEntry))
+    print testEntry,'classified as: ',classifyNB(thisDoc,p0V,p1V,pAb)
+```
+
+**准备数据：文档词袋模型**      
+目前为止,我们将每个词的出现与否作为一个特征,这可以被描述为词集模型，如果一个词在文档中出现不止一次,这可能意味着包含该词是否出现在文档中所不能表 达的某种信息,这种方法被称为词袋模型，在词袋中,每个单词可以出现 多次,而在词集中,每个词只能出现一次。为适应词袋模型,需要对函数setOfWord2Vec()
+
+```
+def bagOfWords2VecMN(vocabList, inputSet):
+    returnVec = [0]*len(vocabList)
+    for word in inputSet:
+        if word in vocabList:
+            returnVec[vocabList.index(word)] += 1
+    return returnVec
+```
+
