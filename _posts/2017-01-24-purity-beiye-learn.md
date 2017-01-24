@@ -136,3 +136,62 @@ def bagOfWords2VecMN(vocabList, inputSet):
     return returnVec
 ```
 
+#### 使用朴素贝叶斯过滤邮件        
+(1)收集数据:提供文本文件。         
+(2)准备数据:将文本文件解析成词条向量。         
+(3)分析数据:检查词条确保解析的正确性。       
+(4)训练算法:使用我们之前建立的trainNBO()函数。         
+(5)测试算法:使用clasSifyNB(),并且构建一个新的测试函数来计算文档集的错误率。          
+(6)使用算法:构建一个完整的程序对一组文档进行分类,将错分的文档输出到屏幕上。         
+
+```
+def textParse(bigString):    #input is big string, #output is word list
+    import re
+    listOfTokens = re.split(r'\W*', bigString)
+    return [tok.lower() for tok in listOfTokens if len(tok) > 2] 
+    
+def spamTest():
+    docList=[]; classList = []; fullText =[]
+    for i in range(1,26):
+        wordList = textParse(open('email/spam/%d.txt' % i).read())
+        docList.append(wordList)
+        fullText.extend(wordList)
+        classList.append(1)
+        wordList = textParse(open('email/ham/%d.txt' % i).read())
+        docList.append(wordList)
+        fullText.extend(wordList)
+        classList.append(0)
+    vocabList = createVocabList(docList)#create vocabulary
+    trainingSet = range(50); testSet=[]           #create test set
+    for i in range(10):
+        randIndex = int(random.uniform(0,len(trainingSet)))
+        testSet.append(trainingSet[randIndex])
+        del(trainingSet[randIndex])  
+    trainMat=[]; trainClasses = []
+    for docIndex in trainingSet:#train the classifier (get probs) trainNB0
+        trainMat.append(bagOfWords2VecMN(vocabList, docList[docIndex]))
+        trainClasses.append(classList[docIndex])
+    p0V,p1V,pSpam = trainNB0(array(trainMat),array(trainClasses))
+    errorCount = 0
+    for docIndex in testSet:        #classify the remaining items
+        wordVector = bagOfWords2VecMN(vocabList, docList[docIndex])
+        if classifyNB(array(wordVector),p0V,p1V,pSpam) != classList[docIndex]:
+            errorCount += 1
+            print "classification error",docList[docIndex]
+    print 'the error rate is: ',float(errorCount)/len(testSet)
+    #return vocabList,fullText
+```
+
+ 函数会输出在10封随机选择的电子邮件上的分类错误率。既然这些电子邮件是随机选择的,所以每次的输出结果可能有些差别。如果发现错误的话,函数会输出错分文 档的词表,这样就可以了解到底是哪篇文档发生了错误。如果想要更好地估计错误率,那么 就应该将上述过程重复多次,比如说10次 ,然后求平均值。我这么做了一下,获得的平均错 误率为6%。   
+
+
+
+                                                            
+                                                                                                                           
+                                                                                                                                                                                   
+                                                                                                                           
+
+
+
+
+
