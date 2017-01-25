@@ -111,6 +111,71 @@ def stocGradAscent1(dataMatrix, classLabels, numIter=150):
 
 这里我们的alpha在每次迭代时都会调整，这会缓解数据波动或高频波动。同时，我们也随机选取样本来更新回归系数，这种方法也可以缓解周期性的波动。  
 
-       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter5/p3.png)
+这次我们仅仅对数据集做了150次遍历,而之前的方法是500次。而达到了效果差不多的作用。       
+
+
+#### 从疝气病预测马的死亡率       
+本节将使用logistic回归来预测患有疝病的马的存活问题。这里的数据包含368个样本和28 个特征         
+
+**准备数据：处理数据缺失项**        
+数据中的缺失值是个非常棘手的问题,有很多文献都致力于解决这个问题。那么,数据缺失 究竟带来了什么问题?假设有100个样本和20个特征,这些数据都是机器收集回来的。若机器上 的某个传感器损坏导致一个特征无效时该怎么办?此时是否要扔掉整个数据?这种情况下,另外 19个特征怎么办?它们是否还可用?答案是肯定的。因为有时候数据相当昂贵,扔掉和重新获取 都是不可取的,所以必须采用一些方法来解决这个问题。
+下面给出了一些可选的做法:     
+
+- 使用可用特征的均值来填补缺失值;   
+- 使 用 特 殊 值 来 ±真 补 缺 失 值 , 如 - 1 ;  
+- 忽略有缺失值的样本;  
+- 使用相似样本的均值添补缺失值;  
+- 使用另外的机器学习算法预测缺失值
+
+在我们的案例中，使用0来填补缺失值         
+此外，如果类别标签已经丢失了，那么我们丢弃这个数据        
+
+**使用logistic进行分类**           
+
+```
+def classifyVector(inX, weights):
+    prob = sigmoid(sum(inX*weights))
+    if prob > 0.5: return 1.0
+    else: return 0.0
+
+def colicTest():
+    frTrain = open('horseColicTraining.txt'); frTest = open('horseColicTest.txt')
+    trainingSet = []; trainingLabels = []
+    for line in frTrain.readlines():
+        currLine = line.strip().split('\t')
+        lineArr =[]
+        for i in range(21):
+            lineArr.append(float(currLine[i]))
+        trainingSet.append(lineArr)
+        trainingLabels.append(float(currLine[21]))
+    trainWeights = stocGradAscent1(array(trainingSet), trainingLabels, 1000)
+    errorCount = 0; numTestVec = 0.0
+    for line in frTest.readlines():
+        numTestVec += 1.0
+        currLine = line.strip().split('\t')
+        lineArr =[]
+        for i in range(21):
+            lineArr.append(float(currLine[i]))
+        if int(classifyVector(array(lineArr), trainWeights))!= int(currLine[21]):
+            errorCount += 1
+    errorRate = (float(errorCount)/numTestVec)
+    print "the error rate of this test is: %f" % errorRate
+    return errorRate
+
+def multiTest():
+    numTests = 10; errorSum=0.0
+    for k in range(numTests):
+        errorSum += colicTest()
+    print "after %d iterations the average error rate is: %f" % (numTests, errorSum/float(numTests))
+```
+
+
+利用logistic回归分类，计算10次的平均错误率为33%，事实上,这个结果并不差,因 为有30%的数据缺失。当然，如果调整迭代次数，或者步长，可以进一步
+降低错误率。        
+
+
+
+
 
 
