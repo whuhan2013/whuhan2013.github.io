@@ -73,3 +73,44 @@ def plotBestFit(weights):
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter5/p1.png)
 
+**随机梯度上升**      
+梯度上升算法在每次更新回归系数时都需要遍历整个数据集,该方法在处理100个左右的数据集时尚可,但如果有数十亿样本和成千上万的特征,那么该方法的计算复杂度就太高了。   改进方法是一次仅用一个样本点来更新回归系数,该方法称为随机梯度上升算法，由于可以在新样本到来时对分类器进行增量式更新,因而随机梯度上升算法是一个在线学习算法。与 “在线学 习”相对应,一次处理所有数据被称作是“批处理” 。         
+
+```
+def stocGradAscent0(dataMatrix, classLabels):
+    m,n = shape(dataMatrix)
+    alpha = 0.01
+    weights = ones(n)   #initialize to all ones
+    for i in range(m):
+        h = sigmoid(sum(dataMatrix[i]*weights))
+        error = classLabels[i] - h
+        weights = weights + alpha * error * dataMatrix[i]
+    return weights
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter5/p2.png)
+
+
+执行完毕后将得到图5-5所示的最佳拟合直线图,该图与图5-4有一些相似之处。可以看到,拟合出来的直线效果还不错,但并不像图5-4那样完美。这里的分类器错分了三分之一的样本。直接比较程序清单5-3和程序清单5-1的代码结果是不公平的,后者的结果是在整个数据集上迭代了500次才得到的。一个判断优化算法优劣的可靠方法是看它是否收敛,也就是说参数是否达到了稳定值,是否还会不断地变化?对此,我们在程序清单5-3中随机梯度上升算法上做了些修改,使其在整个数据集上运行200次。          
+
+```
+def stocGradAscent1(dataMatrix, classLabels, numIter=150):
+    m,n = shape(dataMatrix)
+    weights = ones(n)   #initialize to all ones
+    for j in range(numIter):
+        dataIndex = range(m)
+        for i in range(m):
+            alpha = 4/(1.0+j+i)+0.0001    #apha decreases with iteration, does not 
+            randIndex = int(random.uniform(0,len(dataIndex)))#go to 0 because of the constant
+            h = sigmoid(sum(dataMatrix[randIndex]*weights))
+            error = classLabels[randIndex] - h
+            weights = weights + alpha * error * dataMatrix[randIndex]
+            del(dataIndex[randIndex])
+    return weights
+```
+
+这里我们的alpha在每次迭代时都会调整，这会缓解数据波动或高频波动。同时，我们也随机选取样本来更新回归系数，这种方法也可以缓解周期性的波动。  
+
+       
+
+
