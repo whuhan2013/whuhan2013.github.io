@@ -76,4 +76,10 @@ def smoSimple(dataMatIn, classLabels, C, toler, maxIter):
     return b,alphas
 ```
 
-                                                   
+详细解释可参见：       
+
+- [机器学习算法与Python实践之（二）支持向量机（SVM）初级](http://blog.csdn.net/zouxy09/article/details/17291543)
+- [机器学习算法与Python实践之（三）支持向量机（SVM）进阶](http://blog.csdn.net/zouxy09/article/details/17291805)
+- [机器学习算法与Python实践之（四）支持向量机（SVM）实现](http://blog.csdn.net/zouxy09/article/details/17292011)  
+
+                                                          
