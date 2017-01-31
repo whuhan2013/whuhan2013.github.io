@@ -15,6 +15,7 @@ description: 机器学习
 3、把上步骤中的分错的数据的权重提高，分对的权重降低，以此凸显了分错的数据。         
 
 算法流程如下：      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p5.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p1.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p2.png)
 
@@ -63,5 +64,55 @@ def buildStump(dataArr,classLabels,D):
 #### 完整adaboost算法的实现        
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p4.png)
+
+```
+def adaBoostTrainDS(dataArr,classLabels,numIt=40):
+    weakClassArr = []
+    m = shape(dataArr)[0]
+    D = mat(ones((m,1))/m)   #init D to all equal
+    aggClassEst = mat(zeros((m,1)))
+    for i in range(numIt):
+        bestStump,error,classEst = buildStump(dataArr,classLabels,D)#build Stump
+        #print "D:",D.T
+        alpha = float(0.5*log((1.0-error)/max(error,1e-16)))#calc alpha, throw in max(error,eps) to account for error=0
+        bestStump['alpha'] = alpha  
+        weakClassArr.append(bestStump)                  #store Stump Params in Array
+        #print "classEst: ",classEst.T
+        expon = multiply(-1*alpha*mat(classLabels).T,classEst) #exponent for D calc, getting messy
+        D = multiply(D,exp(expon))                              #Calc New D for next iteration
+        D = D/D.sum()
+        #calc training error of all classifiers, if this is 0 quit for loop early (use break)
+        aggClassEst += alpha*classEst
+        #print "aggClassEst: ",aggClassEst.T
+        aggErrors = multiply(sign(aggClassEst) != mat(classLabels).T,ones((m,1)))
+        errorRate = aggErrors.sum()/m
+        print "total error: ",errorRate
+        if errorRate == 0.0: break
+    return weakClassArr,aggClassEst
+```
+
+向量D非常重要，包含每个数据点的权重，一开始这些权重都被赋予相同的值，接着增加错分数据的权重，降低正确分类数据的权重，d是一个概率分布向量，
+因此所有元素之和为1,为满足要求，需要初始化。同时用aggClassEst，记录每个数据点的类别估计累计值。       
+
+**测试算法**         
+一旦拥有了多个弱分类器以及其对应的alpha值，进行测试就变得相对容易了，我们所要做的就是将弱分类器的训练过程从程序中抽出来，然后应用到某个具体实例上去。          
+
+```
+def adaClassify(datToClass,classifierArr):
+    dataMatrix = mat(datToClass)#do stuff similar to last aggClassEst in adaBoostTrainDS
+    m = shape(dataMatrix)[0]
+    aggClassEst = mat(zeros((m,1)))
+    for i in range(len(classifierArr)):
+        classEst = stumpClassify(dataMatrix,classifierArr[i]['dim'],\
+                                 classifierArr[i]['thresh'],\
+                                 classifierArr[i]['ineq'])#call stump classify
+        aggClassEst += classifierArr[i]['alpha']*classEst
+        print aggClassEst
+    return sign(aggClassEst)
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p6.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p7.png)
+
 
 
