@@ -114,5 +114,12 @@ def adaClassify(datToClass,classifierArr):
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p6.png)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p7.png)
 
+### 非均衡分类问题       
+其他分类性能指标：正确率，召回率及roc曲线        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p8.png)
+我们可以用roc曲线解决这个问题       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p9.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machingLearingAction/chapter7/p10.png)
+
 
 
