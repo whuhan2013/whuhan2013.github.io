@@ -49,7 +49,8 @@ Artificial Intelligence，也就是人工智能，就像长生不老和星际漫
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/machineLearning/class13/p8.jpg)   
 在上面这个例子里，池化层对每一个2X2的区域求最大值，然后把最大值赋给生成的feature map的对应位置。如果输入图像是100×100的话，那输出图像就会变成50×50，feature map变成了一半。同时保留的信息是原来2X2区域里面最大的信息。
 
-
+**参考文献**        
+[Deep Learning（深度学习）学习笔记整理系列之（一）](http://blog.csdn.net/zouxy09/article/details/8775360)
 
 
 
