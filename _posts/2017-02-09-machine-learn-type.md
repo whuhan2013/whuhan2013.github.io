@@ -54,7 +54,7 @@ learning by asking：开始只有少量label, 通过有策略地”问问题“ 
 
 #### 通过输入空间来分类。
 
-1， 离散特征 - concrete features           
+1， 具体特征 - concrete features           
 特征中通常包含了人类的智慧。例如对硬币分类需要的特征是（大小，重量）；对信用分级需要的特征是客户的基本信息。这些特征中已经蕴含了人的思考。
 
 2， 原始特征 - raw features                              
@@ -65,7 +65,7 @@ learning by asking：开始只有少量label, 通过有策略地”问问题“ 
 抽象特征通常没有任何真实意义，更需要认为地进行特征转化、抽取和再组织。                  
 例如，预测某用户对电影的评分，原始数据是(userid, itemid, rating)， rating 是训练数据的标签，相当于y。这里的(userid, itemid)本身对学习任务是没有任何帮助的，我们必须对数据所进一步处理、提炼、再组织。
 
-总结：离散特征具有丰富的自然含义；原始特征有简单的自然含义；抽象特征没有自然含义。                      
+总结：具体特征具有丰富的自然含义；原始特征有简单的自然含义；抽象特征没有自然含义。                      
 原始特征、抽象特征都需要再处理，此过程成为特征工程(feature engineering)，是机器学习、数据挖掘中及其重要的一步。离散特征一般只需要简单选取就够了。
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter3/p1.jpg)
