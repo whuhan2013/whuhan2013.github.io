@@ -28,5 +28,20 @@ description: 机器学习基石与技法
 对于一个固定的假设h， 我们需要验证它的错误率；然后根据验证的结果选择最好的h。
 ![](https://img3.doubanio.com/view/note/large/public/p10435094.jpg)     
 
+#### Real Learning       
+面对多个h 做选择时，容易出现问题。比如，某个不好的h 刚好最初的”准确“ 的假象。        
+随着h 的增加，出现这种假象的概率会增加。                
+发生这种现象的原因是训练数据质量太差。           
+![](https://img3.doubanio.com/view/note/large/public/p10435213.jpg)        
+
+对于某个假设h， 当训练数据对于h 是BAD sample 时， 就可能出现问题。                    
+因此，我们希望对于我们面对的假设空间，训练数据对于其中的任何假设h 都不是BAD sample。            
+![](https://img1.doubanio.com/view/note/large/public/p10435328.jpg)        
+
+所以，当假设空间有限时（大小为M）时， 当N 足够大，发生BAD sample 的概率非常小。
+此时学习是有效的。
+
+当假设空间无穷大时（例如感知机空间），我们下一次继续讨论。（提示：不同假设遇到BAD sample 的情况会有重叠）
+
 
 
