@@ -15,5 +15,18 @@ description: 机器学习基石与技法
 ![](https://img3.doubanio.com/view/note/large/public/p10434643.jpg)            
 下面这题也是如此：        
 ![](https://img3.doubanio.com/view/note/large/public/p10434664.jpg)        
+如何解决上述存在的问题？ 答：做出合理的假设。        
+
+#### 关于罐子里选小球的推论       
+霍夫丁不等式(Hoeffding’s Inequality)         
+![](https://img5.doubanio.com/view/note/large/public/p10435006.jpg)
+这里v 是样本概率；u 是总体概率        
+
+#### 罐子理论与学习问题的联系      
+
+![](https://img1.doubanio.com/view/note/large/public/p10435037.jpg)      
+对于一个固定的假设h， 我们需要验证它的错误率；然后根据验证的结果选择最好的h。
+![](https://img3.doubanio.com/view/note/large/public/p10435094.jpg)     
+
 
 
