@@ -56,7 +56,8 @@ h4(x1)=-1, h4(x2)=-1.
 它的生长函数：m(N) = 2^N                
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter5/p3.png)        
 
-我们引入一个重要概念：突破点(break point)：对于某种假设空间H，如果m(k)<2^k， 则k 是它的突破点。           
+我们引入一个重要概念：突破点(break point)：        
+对于某种假设空间H，如果m(k)<2^k， 则k 是它的突破点。           
 对于上面提到的三个例子，（1）的突破点是2,3,4... （2）的图破点是3,4,... （3）没有突破点。            
 注意：如果k 是突破点，那么k+1, k+2, ... 都是突破点。               
 
