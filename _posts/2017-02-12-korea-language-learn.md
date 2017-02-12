@@ -14,4 +14,11 @@ description: 语言学习
 #### 元音       
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p3/p2.png)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p3/p3.png)
+
+单元音       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/language/p3/p4.png)
+
+[韩语字母发音表](http://kr.hujiang.com/fayinbiao/#pindu)   
+[韩语发音表](http://kr.hujiang.com/new/p121319/)   
 
