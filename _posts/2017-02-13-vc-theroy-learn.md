@@ -51,4 +51,14 @@ VC维可以反映假设H 的强大程度(powerfulness)，VC 维越大，H也越�
 例如，对于2维感知机，w = (w0, w1, w2)，有三个自由变量，dvc = 3          
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter7/p7.png)       
 
+**4，VC 维的解释**       
+VC 维反映了假设H 的强大程度，然而VC 维并不是越大越好。       
+通过一些列数学推导，我们得到：      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter7/p8.jpg)
+上面的”模型复杂度“ 的惩罚(penalty)，基本表达了模型越复杂（VC维大），Eout 可能距离Ein 越远。       
+下面的曲线可以更直观地表示这一点：         
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter7/p9.jpg)       
+模型较复杂时(dvc 较大)，需要更多的训练数据。 理论上，数据规模N 约等于 10000*dvc（称为采样复杂性，sample complexity）；然而，实际经验是，只需要 N = 10*dvc.                 
+造成理论值与实际值之差如此之大的最大原因是，VC Bound 过于宽松了，我们得到的是一个比实际大得多的上界。       
 
+即便如此，VC Dimension & VC bound 依然是分析机器学习模型的最重要的理论工具。
