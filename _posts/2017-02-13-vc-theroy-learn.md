@@ -44,3 +44,11 @@ VC Demension: 对于假设空间H，满足生长函数m(N) = 2^N 的最大的N�
 所以d 维感知机无法打散 d+2 个点，也就是说VC 维最大只能是 d+1.
 
 综合（1）（2），证得 dvc = d+1.
+
+**3，VC 维的物理意义**       
+VC维可以反映假设H 的强大程度(powerfulness)，VC 维越大，H也越强，因为它可以打散更多的点。           
+通过对常见几种假设的VC 维的分析，我们可以得到规律：VC 维与假设参数w 的自由变量数目大约相等。            
+例如，对于2维感知机，w = (w0, w1, w2)，有三个自由变量，dvc = 3          
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter7/p7.png)       
+
+
