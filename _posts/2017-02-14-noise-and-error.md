@@ -39,3 +39,18 @@ description: 机器学习基石与技法
 Just remember: error is application/user-dependent         
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter8/p6.png)
 
+**4，带权重的分类**          
+依然是借助CIA 身份验证的例子来说明什么是weighted classification：
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter8/p7.jpg)
+通过感知机模型解决CIA 分类问题。如果数据时线性可分的，那么带权重与否对结果没有影响，我们总能得到理想结果。
+
+如果输入数据有噪音（线性不可分），像前面学习感知机时一样，采用Pocket 方法，然而计算错误时对待两种错误(false reject/false accept) 不再一视同仁，false acceot 比false reject 严重1000倍。通过下面方法解决：
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter8/p8.jpg)
+
+即，在训练开始前，我们将{(x,y) | y=-1} 的数据复制1000倍之后再开始学习，后面的步骤与传统的pocket 方法一模一样。
+
+然而，从效率、计算资源的角度考虑，通常不会真的将y=-1 的数据拷贝1000倍，实际中一般采用"virtual copying"。只要保证：
+randomly check -1 example mistakes with 1000 times more probability.           
+（这句大家还是看英文比较好，以免理解有歧义）
+
+总之，我们选择好适合特定应用的error measure:                err，然后在训练时力求最小化err，即，我们要让最后的预测发生错误的可能性最小（错误测量值最小），这样的学习是有效的。
