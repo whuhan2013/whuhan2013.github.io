@@ -24,3 +24,5 @@ description: 机器学习基石与技法
 squared error 的矩阵表示：        
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter9/p3.jpg)
 Ein 是连续可微的凸函数，可以通过偏微分求极值的方法来求参数向量w。        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter9/p4.jpg)
+求得Ein(w) 的偏微分：      
