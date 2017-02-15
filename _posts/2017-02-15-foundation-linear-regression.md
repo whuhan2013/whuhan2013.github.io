@@ -15,4 +15,12 @@ description: 机器学习基石与技法
 
 线性回归假设
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter9/p1.jpg)
+线性回归假设的思想是：寻找这样的直线/平面/超平面，使得输入数据的残差最小。           
+通常采用的error measure 是squared error:         
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter9/p2.jpg)
 
+
+**2，线性回归算法**        
+squared error 的矩阵表示：        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter9/p3.jpg)
+Ein 是连续可微的凸函数，可以通过偏微分求极值的方法来求参数向量w。        
