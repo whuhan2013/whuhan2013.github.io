@@ -48,6 +48,7 @@ Ein 是连续可微的凸函数，可以通过偏微分求极值的方法来求�
 经过简单的分析证明可以得到Ein,Eout 的平均范围（过程见林轩田视频），画出学习曲线        
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter9/p8.jpg)
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter9/p11.png)
 **4， 线性回归与线性分类器**      
 比较一下线性分类与线性回归：         
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter9/p9.jpg)
