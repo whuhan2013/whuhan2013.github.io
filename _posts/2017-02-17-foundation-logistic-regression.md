@@ -47,3 +47,22 @@ Ein(w) 的微分结果是：
 否则，需要迭代优化。直观的优化方法：       
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p7.jpg)
 
+**4， 梯度下降法**        
+梯度下降法是最经典、最常见的优化方法之一。
+
+要寻找目标函数曲线的波谷，采用贪心法：想象一个小人站在半山腰，他朝哪个方向跨一步，可以使他距离谷底更近（位置更低），就朝这个方向前进。这个方向可以通过微分得到。         
+选择足够小的一段曲线，可以将这段看做直线段，那么有：         
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p8.jpg)
+梯度下降的精髓：
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p9.jpg)
+之所以说最优的v 是与梯度相反的方向，想象一下：如果一条直线的斜率k>0，说明向右是上升的方向，应该向左走；反之，斜率k<0，向右走。
+
+解决的方向问题，步幅也很重要。步子太小的话，速度太慢；过大的话，容易发生抖动，可能到不了谷底。       
+
+显然，距离谷底较远（位置较高）时，步幅大些比较好；接近谷底时，步幅小些比较好（以免跨过界）。距离谷底的远近可以通过梯度（斜率）的数值大小间接反映，接近谷底时，坡度会减小。            
+因此，我们希望步幅与梯度数值大小正相关。           
+原式子可以改写为：         
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p10.jpg)
+最后，完整的Logistic Regression Algorithm:      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p11.jpg)
+
