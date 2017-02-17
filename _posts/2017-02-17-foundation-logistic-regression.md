@@ -36,3 +36,14 @@ logistic regression 的目标是 f(x) = P(+1|x)：
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p4.jpg)
 注意上图中"cross-entropy error" 的定义。         
 
+**3，LR Error 的梯度**       
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p5.jpg)
+
+Ein(w) 的微分结果是：
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p6.jpg)
+
+想要上式等于零，或者sigmoid 项恒为0，这时要求数据时线性可分的（不能有噪音）。             
+否则，需要迭代优化。直观的优化方法：       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p7.jpg)
+
