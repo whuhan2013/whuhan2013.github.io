@@ -21,3 +21,18 @@ description: 机器学习基石与技法
 于是，我们有：   
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p1.jpg)    
 
+**2，逻辑斯蒂回归的优化方法**       
+对于上面的公式，如何定义Ein(w) 呢？                  
+ 
+logistic regression 的目标是 f(x) = P(+1|x)：           
+当y = +1 时， P(y|x) = f(x);         
+当y = -1 时， P(y|x) = 1 - f(x).       
+
+在机器学习假设中，数据集D 是由f 产生的，我们可以按照这个思路，考虑f 和假设 h 生成训练数据D的概率：             
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p2.jpg)  
+训练数据的客观存在的，显然越有可能生成该数据集的假设越好。          
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p3.jpg) 
+通过一些列简单转换，我们得到最终的优化目标函数：
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter10/p4.jpg)
+注意上图中"cross-entropy error" 的定义。         
+
