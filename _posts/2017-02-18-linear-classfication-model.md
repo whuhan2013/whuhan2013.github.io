@@ -27,3 +27,28 @@ description: 机器学习基石与技法
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter11/p4.jpg)
 这样，我们就理解了通过逻辑斯蒂回归或线性回归进行分类的意义。
 
+1.2 优缺点比较         
+线性分类(PLA)、线性回归、逻辑斯蒂回归的优缺点比较：       
+（1）PLA                       
+优点：在数据线性可分时高效且准确。             
+缺点：只有在数据线性可分时才可行，否则需要借助POCKET 算法（没有理论保证）。        
+（2）线性回归                        
+优点：最简单的优化（直接利用矩阵运算工具）                 
+缺点：y*s 的值较大时，与0/1 error 相差较大(loose bound)。           
+（3）逻辑斯蒂回归               
+优点：比较容易优化（梯度下降）                       
+缺点：y*s 是非常小的负数时，与0/1 error 相差较大。               
+
+实际中，逻辑斯蒂回归用于分类的效果优于线性回归的方法和POCKET 算法。线性回归得到的结果w 有时作为其他几种算法的初值。
+
+**2，随机梯度下降 (Stochastic Gradient Descent)**                   
+传统的随机梯度下降更新方法：            
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter11/p5.jpg)
+每次更新都需要遍历所有data，当数据量太大或者一次无法获取全部数据时，这种方法并不可行。
+
+我们希望用更高效的方法解决这个问题，基本思路是：只通过一个随机选取的数据(xn,yn) 来获取“梯度”，以此对w 进行更新。这种优化方法叫做随机梯度下降
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter11/p6.jpg)
+这种方法在统计上的意义是：进行足够多的更新后，平均的随机梯度与平均的真实梯度近似相等。                       
+注意：在这种优化方法中，一般设定一个足够大的迭代次数，算法执行这么多的次数时我们就认为已经收敛。（防止不收敛的情况）   
+
+
