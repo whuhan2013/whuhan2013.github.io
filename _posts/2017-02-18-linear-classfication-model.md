@@ -20,4 +20,10 @@ description: 机器学习基石与技法
 
 为了更方便地比较三个model，对其error function 做一定处理：          
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter11/p2.jpg)
+这样，三个error function 都变成只有y*s 这一项“变量”。            
+通过曲线来比较三个error function （注意：cross-entropy 变为以2为底的scaled cross-entropy）
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter11/p3.jpg)
+很容易通过比较三个error function 来得到分类的0/1 error 的上界：       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter11/p4.jpg)
+这样，我们就理解了通过逻辑斯蒂回归或线性回归进行分类的意义。
 
