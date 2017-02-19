@@ -29,4 +29,28 @@ description: 机器学习基石与技法
 
 **3，随机噪音与确定性噪音 (Deterministic Noise)**        
 之前说的噪音一般指随机噪音(stochastic noise)，服从高斯分布；还有另一种“噪音”，就是前面提到的由未知的复杂函数f(X) 产生的数据，对于我们的假设也是噪音，这种是确定性噪音。       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p3.jpg)    
+上图是关于2次曲线和10次曲线对数据的拟合情况，我们将overfit measure 表示为Eout(g10) - Eout(g2)。
+
+下图左右两边分别表示了随机噪音和确定性噪音对于Overfitting 的影响。
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p4.jpg) 
+
+可见，数据规模一定时，随机噪音越大，或者确定性噪音越大（即目标函数越复杂），越容易发生overfitting。总之，容易导致overfitting 的因素是：数据过少；随机噪音过多；确定性噪音过多；假设过于复杂(excessive power)。
+
+如果我们的假设空间不包含真正的目标函数f(X)（未知的），那么无论如何H 无法描述f(X) 的全部特征。这时就会发生确定性噪音。它与随机噪音是不同的。
+我们可以类比的理解它：在计算机中随机数实际上是“伪随机数”，是通过某个复杂的伪随机数算法产生的，因为它对于一般的程序都是杂乱无章的，我们可以把伪随机数当做随机数来使用。确定性噪音的哲学思想与之类似。:-)
+
+
+**4，解决过拟合问题**            
+对应导致过拟合发生的几种条件，我们可以想办法来避免过拟合。              
+(1) 假设过于复杂(excessive dvc) => start from simple model           
+(2) 随机噪音  => 数据清洗                                 
+(3) 数据规模太小 => 收集更多数据，或根据某种规律“伪造”更多数据               
+正规化(regularization) 也是限制模型复杂度的，在下一讲介绍。                
+
+4.1 数据清洗(data ckeaning/Pruning)               
+将错误的label 纠正或者删除错误的数据。                    
+
+4.2 Data Hinting: “伪造”更多数据, add "virtual examples"           
+例如，在数字识别的学习中，将已有的数字通过平移、旋转等，变换出更多的数据         
 
