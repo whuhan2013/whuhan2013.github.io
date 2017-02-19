@@ -34,3 +34,25 @@ description: 机器学习基石与技法
 这里的非线性转换其实也是特征转换(feature transform)，在特征工程里很常见。      
 
 **3，非线性转换的代价**          
+所谓”有得必有失“，将特征转换到高次空间，我们需要付出学习代价（更高的模型复杂度）。        
+x-空间的数据转换到z-空间之后，新的假设中的参数数量也比传统线性假设多了许多：       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p7.jpg)
+
+根据之前分析过的，vc 维约等于自由变量（参数）的数量，所以新假设的dvc 急速变大，也就是模型复杂大大大增加。
+
+回顾机器学习前几讲的内容，我们可以有效学习的条件是：（1）Ein(g) 约等于 Eout(g)；（2）Ein(g)  足够小。
+
+当模型很简单时（dvc 很小），我们更容易满足（1）而不容易满足（2）；反之，模型很复杂时（dvc很大），更容易满足（2）而不容易满足（1）。  
+看来选择合适复杂度的model 非常trick  :-)   
+
+**4，假设集**      
+前面我们分析的非线性转换都是多项式转换(polynomial transform)。            
+我们将二次假设记为H2，k次假设记为Hk。显然，高次假设的模型复杂度更高。           
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p8.jpg)
+
+也就是说，高次假设对数据拟合得更充分，Ein 更小；然而，由于付出的模型复杂度代价逐渐增加，Eout 并不是一直随着Ein 减小。
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p9.jpg)
+
+上图我们在前面也见过。实际工作中，通常采用的方法是：先通过最简单的模型（线性模型）去学习数据，如果Ein 很小了，那么我们就认为得到了很有效的模型；否则，转而进行更高次的假设，一旦获得满意的Ein 就停止学习（不再进行更高次的学习）。
+总结为一句话：linear/simpler model first !
+
