@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 机器学习基石之非线性转换
+title: 机器学习基石之非线性变换
 date: 2017-2-18
 categories: blog
 tags: [机器学习基石与技法]
