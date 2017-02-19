@@ -28,3 +28,8 @@ description: 机器学习基石与技法
 **2，非线性转换**
 
 进行非线性转换的学习步骤
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p5.png)      
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p6.jpg)
+这里的非线性转换其实也是特征转换(feature transform)，在特征工程里很常见。      
+
