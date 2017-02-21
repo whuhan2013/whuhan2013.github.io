@@ -33,7 +33,7 @@ description: machine learning
 - 非常非常棒的一系列　python 机器学习（Machine Learning）实践入门教程:[python Machine Learning](http://www.johnwittenauer.net/machine-learning-exercises-in-python-part-1/)
 - 很多实例，包括人脸识别，opencv，语音识别,文本分类等：[http://blog.csdn.net/abcjennifer/article/category/1173803/4](http://blog.csdn.net/abcjennifer/article/category/1173803/4)
 - 白马负金羁的推荐，作者出版了好几本书，还经常在群里吹水，真是神奇：[机器学习与数据挖掘网上资源搜罗——良心推荐](http://blog.csdn.net/baimafujinji/article/details/50467970)
-
+- [cs231n,kaggle,ufldf,cs229](http://blog.csdn.net/Dinosoft/article/category/2360179)
 
 另外，答主学校的机器学习程序猿们一般学习路线是这样：先学python或R基础，然后开始看《集体智慧编程》、《机器学习实战》来了解这些算法的模型和基本实现，顺便可以去kaggle 101区试试水。然后还没放弃的就去啃《统计学习方法》、PRML、ESL和顶级会议的paper了。当然，大神随意...
 
