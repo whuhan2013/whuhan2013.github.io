@@ -30,3 +30,19 @@ lambda 的大小对于拟合的影响，一个直观例子：
 总之，lambda 越大，对应的常数C 越小，模型越倾向于选择更小的w 向量。
 这种正规化成为 weight-decay regularization，它对于线性模型以及进行了非线性转换的线性假设都是有效的
 
+**3，正规化与VC 理论**        
+
+根据VC Bound 理论，Ein 与 Eout 的差距是模型的复杂度。也就是说，假设越复杂（dvc 越大），Eout 与 Ein 相差就越大，违背了我们学习的意愿。
+对于某个复杂的假设空间H，dvc 可能很大；通过正规化，原假设空间变为正规化的假设空间H(C)。与H 相比，H(C) 是受正规化的“约束”的，因此实际上H(C) 没有H 那么大，也就是说H(C) 的VC维比原H 的VC维要小。因此，Eout 与 Ein 的差距变小。:-)
+
+
+**4，泛化的正规项 (General Regularizers)**      
+
+指导我们更好地设计正规项的原则：target-dependent, plausible, friendly.
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p6.jpg) 
+L2 and L1 Regularizer:        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p7.jpg) 
+
+lambda 当然不是越大越好！选择合适的lambda 也很重要，它收到随机噪音和确定性噪音的影响。        
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/foundation/chapter12/p8.jpg) 
+
