@@ -20,3 +20,8 @@ CS231n是斯坦福大学深度学习与计算机视觉公开课，课程主页�
 
 Viola Jones Face Detector:Real Time Face Detection    
 
+ImageNet:深度学习的复兴。        
+计算机视觉的终极目标：可以实现看图讲故事。         
+
+
+

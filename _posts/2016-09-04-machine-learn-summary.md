@@ -19,6 +19,7 @@ description: machine learning
 - 都在youtube上，需要vpn与英语：[2016年不可错过的21个深度学习视频、教程和课程](https://zhuanlan.zhihu.com/p/24362823)
 - EasyPR的作者，内容很不错：[普通程序员如何转向AI方向](http://www.cnblogs.com/subconscious/p/6240151.html)
 - 机器学习数学知识资源贴，全都有：[机器学习的数学](http://blog.csdn.net/baimafujinji/article/details/55826409)
+- [机器学习资料与攻略超强整理吐血推荐（二）](http://blog.csdn.net/baimafujinji/article/details/56287420)
 
 **资源**
 
