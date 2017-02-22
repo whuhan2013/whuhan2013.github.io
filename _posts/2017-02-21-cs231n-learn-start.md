@@ -13,3 +13,10 @@ CS231n是斯坦福大学深度学习与计算机视觉公开课，课程主页�
 其他参考：[龙心尘的笔记](http://blog.csdn.net/longxinchen_ml/article/category/5969883)            
 中文字幕视频地址：[斯坦福CS231n—深度学习与计算机视觉](http://study.163.com/course/courseMain.htm?courseId=1003223001)   
 
+计算机视觉/computer vision是一个火了N年的topic。持续化升温的原因也非常简单：在搜索/影像内容理解/医学应用/地图识别等等领域应用太多，大家都有一个愿景『让计算机能够像人一样去”看”一张图片，甚至”读懂”一张图片』。
+
+- 视觉从边缘与简单形状开始，而不是整体         
+- 视觉是分层的
+
+Viola Jones Face Detector:Real Time Face Detection    
+
