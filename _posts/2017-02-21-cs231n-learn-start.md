@@ -23,5 +23,7 @@ Viola Jones Face Detector:Real Time Face Detection
 ImageNet:深度学习的复兴。        
 计算机视觉的终极目标：可以实现看图讲故事。         
 
+本书的程序主要使用python编写，需要用到Numpy，SciPy，Matplotlib。详情参见：[http://cs231n.github.io/python-numpy-tutorial/](http://cs231n.github.io/python-numpy-tutorial/)
+
 
 
