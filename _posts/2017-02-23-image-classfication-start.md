@@ -36,7 +36,7 @@ description: 计算机视觉
 - 评价：让分类器来预测它未曾见过的图像的分类标签，并以此来评价分类器的质量。我们会把分类器预测的标签和图像真正的分类标签对比。毫无疑问，分类器预测的分类标签和图像真正的分类标签如果一致，那就是好事，这样的情况越多越好。
 
 
-#### K近邻算法          
+#### Nearest Neighbor分类器          
 图像分类数据集：CIFAR-10。一个非常流行的图像分类数据集是CIFAR-10。这个数据集包含了60000张32X32的小图像。每张图像都有10种分类标签中的一种。这60000张图像被分为包含50000张图像的训练集和包含10000张图像的测试集。在下图中你可以看见10个类的10张随机图片。
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/p2.jpg)        
@@ -45,4 +45,71 @@ description: 计算机视觉
 
 那么具体如何比较两张图片呢？在本例中，就是比较32x32x3的像素块。最简单的方法就是逐个像素比较，最后将差异值全部加起来。换句话说，就是将两张图片先转化为两个向量和，然后计算他们的L1距离：         
 $$d_1(I_1,I_2)=\sum(I_1^p-I_2^p)$$
+
+下面，让我们看看如何用代码来实现这个分类器。首先，我们将CIFAR-10的数据加载到内存中，并分成4个数组：训练数据和标签，测试数据和标签。在下面的代码中，Xtr（大小是50000x32x32x3）存有训练集中所有的图像，Ytr是对应的长度为50000的1维数组，存有图像对应的分类标签（从0到9）：
+
+```
+Xtr, Ytr, Xte, Yte = load_CIFAR10('data/cifar10/') # a magic function we provide
+# flatten out all images to be one-dimensional
+Xtr_rows = Xtr.reshape(Xtr.shape[0], 32 * 32 * 3) # Xtr_rows becomes 50000 x 3072
+Xte_rows = Xte.reshape(Xte.shape[0], 32 * 32 * 3) # Xte_rows becomes 10000 
+```
+
+现在我们得到所有的图像数据，并且把他们拉长成为行向量了。接下来展示如何训练并评价一个分类器：
+
+```
+nn = NearestNeighbor() # create a Nearest Neighbor classifier class
+nn.train(Xtr_rows, Ytr) # train the classifier on the training images and labels
+Yte_predict = nn.predict(Xte_rows) # predict labels on the test images
+# and now print the classification accuracy, which is the average number
+# of examples that are correctly predicted (i.e. label matches)
+print 'accuracy: %f' % ( np.mean(Yte_predict == Yte) )
+```
+
+作为评价标准，我们常常使用准确率，它描述了我们预测正确的得分。请注意以后我们实现的所有分类器都需要有这个API：train(X, y)函数。该函数使用训练集的数据和标签来进行训练。从其内部来看，类应该实现一些关于标签和标签如何被预测的模型。这里还有个predict(X)函数，它的作用是预测输入的新数据的分类标签。现在还没介绍分类器的实现，下面就是使用L1距离的Nearest Neighbor分类器的实现套路：
+
+
+```
+import numpy as np
+
+class NearestNeighbor(object):
+  def __init__(self):
+    pass
+
+  def train(self, X, y):
+    """ X is N x D where each row is an example. Y is 1-dimension of size N """
+    # the nearest neighbor classifier simply remembers all the training data
+    self.Xtr = X
+    self.ytr = y
+
+  def predict(self, X):
+    """ X is N x D where each row is an example we wish to predict label for """
+    num_test = X.shape[0]
+    # lets make sure that the output type matches the input type
+    Ypred = np.zeros(num_test, dtype = self.ytr.dtype)
+
+    # loop over all test rows
+    for i in xrange(num_test):
+      # find the nearest training image to the i'th test image
+      # using the L1 distance (sum of absolute value differences)
+      distances = np.sum(np.abs(self.Xtr - X[i,:]), axis = 1)
+      min_index = np.argmin(distances) # get the index with smallest distance
+      Ypred[i] = self.ytr[min_index] # predict the label of the nearest example
+
+    return Ypred
+```
+
+
+距离选择：计算向量间的距离有很多种方法，另一个常用的方法是L2距离，从几何学的角度，可以理解为它在计算两个向量间的欧式距离。
+
+换句话说，我们依旧是在计算像素间的差值，只是先求其平方，然后把这些平方全部加起来，最后对这个和开方。在Numpy中，我们只需要替换上面代码中的1行代码就行：
+
+```
+distances = np.sqrt(np.sum(np.square(self.Xtr - X[i,:]), axis = 1))
+```
+
+注意在这里使用了np.sqrt，但是在实际中可能不用。因为求平方根函数是一个单调函数，它对不同距离的绝对值求平方根虽然改变了数值大小，但依然保持了不同距离大小的顺序。所以用不用它，都能够对像素差异的大小进行正确比较。如果你在CIFAR-10上面跑这个模型，正确率是35.4%，比刚才低了一点。
+
+L1和L2比较。比较这两个度量方式是挺有意思的。在面对两个向量之间的差异时，L2比L1更加不能容忍这些差异。也就是说，相对于1个巨大的差异，L2距离更倾向于接受多个中等程度的差异。L1和L2都是在p-norm常用的特殊形式。
+
 
