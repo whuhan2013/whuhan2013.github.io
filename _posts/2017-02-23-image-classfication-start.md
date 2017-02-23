@@ -23,3 +23,5 @@ description: 计算机视觉
 - 类内差异（Intra-class variation）：一类物体的个体之间的外形差异很大，比如椅子。这一类物体有许多不同的对象，每个都有自己的外形。
 - 面对以上所有变化及其组合，好的图像分类模型能够在维持分类结论稳定的同时，保持对类间差异足够敏感。
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/p1.jpg)        
+
