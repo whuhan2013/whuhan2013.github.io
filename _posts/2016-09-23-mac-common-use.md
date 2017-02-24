@@ -104,3 +104,15 @@ div.row>div.col-md-12*10  使用ctr+e快捷键之后，会生成十个div
 
 **spotlight查找文件并打开文件夹**     
 [Spotlight搜索文件并打开所在文件夹](http://jingyan.baidu.com/article/ab0b563084f8a9c15afa7d8a.html)
+
+**7z文件快速解压**       
+
+```
+brew install p7zip
+例如打包根目录下www目录的文件
+7za a vps12.7z /www
+解压
+7za x vps12.7z -o/home/www”
+-o表示输出目录，其与目录路径之间没有空格哦注意
+```
+
