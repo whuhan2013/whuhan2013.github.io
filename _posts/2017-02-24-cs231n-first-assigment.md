@@ -21,3 +21,5 @@ description: 计算机视觉
 
 推荐安装[Anaconda](http://link.zhihu.com/?target=https%3A//www.continuum.io/downloads),下载sh版本后，bash安装，source .bash_profile即可，会将系统默认的python修改成我们的，Anaconda是Python的一个发布版，包含了最流行的科研、数学、工程和数据分析Python包。
 
+IPython notebook的使用，参见教程：[http://cs231n.github.io/ipython-tutorial/](http://cs231n.github.io/ipython-tutorial/)
+
