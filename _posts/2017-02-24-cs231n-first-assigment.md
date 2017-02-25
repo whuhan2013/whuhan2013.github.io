@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CS231n第一次作业
+title: K近邻分类器python实现
 date: 2017-2-24
 categories: blog
 tags: [计算机视觉]
@@ -91,4 +91,120 @@ plt.show();
 ```
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/p6.jpg)
+
+**计算图像间距离的三种方法**        
+
+```
+for i in xrange(num_test):
+      for j in xrange(num_train):
+        #print self.X_train[i].shape,X[j].shape
+        distances = np.sqrt(np.sum(np.square(self.X_train[j] - X[i])))
+        #print distances
+        dists[i,j]=distances
+
+for i in xrange(num_test):
+      dists[i]=np.sqrt(np.sum(np.square(self.X_train - X[i,:]), axis = 1))
+
+dists = np.sqrt(((np.sum(self.X_train*self.X_train,axis=1)-np.dot(X,self.X_train.T)*2).T+np.sum(X*X,axis=1)).T)
+```
+
+分别为用两个循环，一个循环，不用循环实现。        
+从效率上看           
+Two loop version took 65.320027 seconds         
+One loop version took 65.133510 seconds          
+No loop version took 0.526674 seconds       
+
+
+**预测**        
+
+```
+closest_x=[]
+      closest_y = []
+      min_index = dists[i].argsort()[0]
+      closest_x.append(dists[i].argsort()[0:k])
+    
+      closest_y=self.y_train[closest_x[:]]
+      #print type(closest_y)
+      closest_y=list(closest_y)
+      #print closest_y
+      myset = set(closest_y)  
+      max=0
+      for item in myset:
+            if closest_y.count(item)>max:
+                max=closest_y.count(item)
+                y_pred[i]=item
+
+    return y_pred
+```
+
+
+**交叉验证**       
+
+```
+num_folds = 5
+k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
+
+X_train_folds = []
+y_train_folds = []
+
+X_train_folds = np.array_split(X_train, num_folds)
+y_train_folds = np.array_split(y_train, num_folds)
+
+
+# A dictionary holding the accuracies for different values of k that we find
+# when running cross-validation. After running cross-validation,
+# k_to_accuracies[k] should be a list of length num_folds giving the different
+# accuracy values that we found when using that value of k.
+k_to_accuracies = {}
+def getTrainFold(train_folds,k):
+    result = []
+    for i in range(num_folds):
+        if i != k:
+            result.append(train_folds[i])
+    return np.concatenate(result)
+
+for k in k_choices:
+    temp = range(num_folds)
+    accuracies_length = []
+    for i in range(num_folds):
+        print i
+        mX_train = getTrainFold(X_train_folds,i)
+        
+        mX_train = np.reshape(mX_train, (mX_train.shape[0], -1))
+        mX_test = np.reshape(X_train_folds[i], (X_train_folds[i].shape[0], -1))
+        classifier.train(mX_train, getTrainFold(y_train_folds,i))
+        
+        #print X_train_folds[i].shape             
+        m=classifier.compute_distances_no_loops(mX_test)
+        my_test_pred = classifier.predict_labels(m, k)
+        mnum_correct = np.sum(my_test_pred == y_train_folds[i])
+        maccuracy = float(mnum_correct) / mX_test[i].shape[0]
+        accuracies_length.append(maccuracy)    
+    k_to_accuracies[k]=accuracies_length 
+    
+    
+
+
+# Print out the computed accuracies
+for k in sorted(k_to_accuracies):
+    for accuracy in k_to_accuracies[k]:
+        print 'k = %d, accuracy = %f' % (k, accuracy)
+```
+
+
+**最后选择最佳的k，求得最高的准确率**       
+
+```
+best_k = 1
+
+classifier = KNearestNeighbor()
+classifier.train(X_train, y_train)
+y_test_pred = classifier.predict(X_test, k=best_k)
+
+# Compute and display the accuracy
+num_correct = np.sum(y_test_pred == y_test)
+accuracy = float(num_correct) / num_test
+print 'Got %d / %d correct => accuracy: %f' % (num_correct, num_test, accuracy)
+```
+
 
