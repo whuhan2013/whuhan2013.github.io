@@ -23,3 +23,51 @@ description: 计算机视觉
 
 IPython notebook的使用，参见教程：[http://cs231n.github.io/ipython-tutorial/](http://cs231n.github.io/ipython-tutorial/)
 
+#### KNN分类器实现         
+
+首先读取数据      
+
+```
+import cPickle as pickle
+import numpy as np
+import os
+from scipy.misc import imread
+
+def load_CIFAR_batch(filename):
+  """ load single batch of cifar """
+  with open(filename, 'rb') as f:
+    datadict = pickle.load(f)
+    X = datadict['data']
+    Y = datadict['labels']
+    X = X.reshape(10000, 3, 32, 32).transpose(0,2,3,1).astype("float")
+    Y = np.array(Y)
+    return X, Y
+
+def load_CIFAR10(ROOT):
+  """ load all of cifar """
+  xs = []
+  ys = []
+  for b in range(1,6):
+    f = os.path.join(ROOT, 'data_batch_%d' % (b, ))
+    X, Y = load_CIFAR_batch(f)
+    xs.append(X)
+    ys.append(Y)    
+  Xtr = np.concatenate(xs)
+  Ytr = np.concatenate(ys)
+  del X, Y
+  Xte, Yte = load_CIFAR_batch(os.path.join(ROOT, 'test_batch'))
+  return Xtr, Ytr, Xte, Yte
+```
+
+transpose函数解释：arr1.shape 应该是(2, 2, 4) 意为 2维，2*4矩阵
+
+arr1.transpose(*args) 里面的参数，可以这么理解，他是调换arr1.shape的顺序，咱来给arr1.shape标一下角标哈，（2[0], 2[1], 4[2]）  [ ] 里是shape的索引，对吧， 
+transpose((1, 0, 2)) 的意思是 按照这个顺序 重新设置shape 也就是 （2[1], 2[0], 4[2]）
+
+虽然看起来 变换前后的shape都是 2,2,4  ， 但是问题来了，transpose是转置
+shape按照(1,0,2)的顺序重新设置了， array里的所有元素 也要按照这个规则重新组成新矩阵
+
+比如 8 在arr1中的索引是 (1, 0, 0)  那么按照刚才的变换规则，就是 (0, 1, 0) 看看跟你结果arr2的位置一样了吧，依此类推...
+
+concatenate函数解释：用于合并数组，在这里用于将一个list里的array合并成一个array。        
+
