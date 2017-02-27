@@ -110,6 +110,43 @@ SVM是最常用的两个分类器之一，而另一个就是Softmax分类器，�
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p6.png) 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p7.png) 
 
+可以解释为是给定图像数据$x_i$，以W为参数，分配给正确分类标签的归一化概率。为了理解这点，请回忆一下Softmax分类器将输出向量中的评分值解释为没有归一化的对数概率。那么以这些数值做指数函数的幂就得到了没有归一化的概率，而除法操作则对数据进行了归一化处理，使得这些概率的和为1。从概率论的角度来理解，我们就是在最小化正确分类的负对数概率，这可以看做是在进行最大似然估计（MLE）。该解释的另一个好处是，损失函数中的正则化部分R(W)可以被看做是权重矩阵的高斯先验，这里进行的是最大后验估计（MAP）而不是最大似然估计。提及这些解释只是为了让读者形成直观的印象，具体细节就超过本课程范围了。
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p8.png) 
+
+其实可以看做给定图片数据xi和类别yi以及参数W之后的归一化概率。在概率的角度理解，我们在做的事情，就是最小化错误类别的负log似然概率，也可以理解为进行最大似然估计/Maximum Likelihood Estimation (MLE)。这个理解角度还有一个好处，这个时候我们的正则化项R(W)有很好的解释性，可以理解为整个损失函数在权重矩阵W上的一个高斯先验，所以其实这时候是在做一个最大后验估计/Maximum a posteriori (MAP)。
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p9.png) 
+
+```
+f = np.array([123, 456, 789]) # 例子中有3个分类，每个评分的数值都很大
+p = np.exp(f) / np.sum(np.exp(f)) # 不妙：数值问题，可能导致数值爆炸
+
+# 那么将f中的值平移到最大值为0：
+f -= np.max(f) # f becomes [-666, -333, 0]
+p = np.exp(f) / np.sum(np.exp(f)) # 现在OK了，将给出正确结果
+```
+
+**关于softmax这个名字的一点说明**
+
+精确地说，SVM分类器使用的是折叶损失（hinge loss），有时候又被称为最大边界损失（max-margin loss）。Softmax分类器使用的是交叉熵损失（corss-entropy loss）。Softmax分类器的命名是从softmax函数那里得来的，softmax函数将原始分类评分变成正的归一化数值，所有数值和为1，这样处理后交叉熵损失才能应用。注意从技术上说“softmax损失（softmax loss）”是没有意义的，因为softmax只是一个压缩数值的函数。但是在这个说法常常被用来做简称。
+
+#### SVM和Softmax的比较
+
+下图有助于区分这 Softmax和SVM这两种分类器：      
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p10.jpg)     
+
+针对一个数据点，SVM和Softmax分类器的不同处理方式的例子。两个分类器都计算了同样的分值向量f（本节中是通过矩阵乘来实现）。不同之处在于对f中分值的解释：SVM分类器将它们看做是分类评分，它的损失函数鼓励正确的分类（本例中是蓝色的类别2）的分值比其他分类的分值高出至少一个边界值。Softmax分类器将这些数值看做是每个分类没有归一化的对数概率，鼓励正确分类的归一化的对数概率变高，其余的变低。SVM的最终的损失值是1.58，Softmax的最终的损失值是0.452，但要注意这两个数值没有可比性。只在给定同样数据，在同样的分类器的损失值计算中，它们才有意义。
+
+- SVM下，我们能完成类别的判定，但是实际上我们得到的类别得分，大小顺序表示着所属类别的排序，但是得分的绝对值大小并没有特别明显的物理含义。
+- Softmax分类器中，结果的绝对值大小表征属于该类别的概率。
+
+举个例子说，SVM可能拿到对应 猫/狗/船 的得分[12.5, 0.6, -23.0]，同一个问题，Softmax分类器拿到[0.9, 0.09, 0.01]。这样在SVM结果下我们只知道『猫』是正确答案，而在Softmax分类器的结果中，我们可以知道属于每个类别的概率。
+
+但是，Softmax中拿到的概率，其实和正则化参数λ有很大的关系，因为λ实际上在控制着W的伸缩程度，所以也控制着最后得分的scale，这会直接影响最后概率向量中概率的『分散度』，比如说某个λ下，我们得到的得分和概率可能如下：  
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p11.png)   
+
+    
 
 
