@@ -36,6 +36,76 @@ description: 计算机视觉
 
 $$R(W)=\sum_k\sum_l{W_{k,l}^2}$$
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p4.png) 
+
+其中，N是训练集的数据量。现在正则化惩罚添加到了损失函数里面，并用超参数$\lambda$来计算其权重。该超参数无法简单确定，需要通过交叉验证来获取。
+
+
+除了上述理由外，引入正则化惩罚还带来很多良好的性质，这些性质大多会在后续章节介绍。比如引入了L2惩罚后，SVM们就有了最大边界（max margin）这一良好性质。
+
+其中最好的性质就是对大数值权重进行惩罚，可以提升其泛化能力，因为这就意味着没有哪个维度能够独自对于整体分值有过大的影响。
+
+需要注意的是，和权重不同，偏差没有这样的效果，因为它们并不控制输入维度上的影响强度。因此通常只对权重正则化，而不正则化偏差。在实际操作中，可发现这一操作的影响可忽略不计。最后，因为正则化惩罚的存在，不可能在所有的例子中得到0的损失值，这是因为只有当的特殊情况下，才能得到损失值为0。
+
+代码：下面是一个无正则化部分的损失函数的Python实现，有非向量化和半向量化两个形式：
+
+```
+
+def L_i(x, y, W):
+  """
+  unvectorized version. Compute the multiclass svm loss for a single example (x,y)
+  - x is a column vector representing an image (e.g. 3073 x 1 in CIFAR-10)
+    with an appended bias dimension in the 3073-rd position (i.e. bias trick)
+  - y is an integer giving index of correct class (e.g. between 0 and 9 in CIFAR-10)
+  - W is the weight matrix (e.g. 10 x 3073 in CIFAR-10)
+  """
+  delta = 1.0 # see notes about delta later in this section
+  scores = W.dot(x) # scores becomes of size 10 x 1, the scores for each class
+  correct_class_score = scores[y]
+  D = W.shape[0] # number of classes, e.g. 10
+  loss_i = 0.0
+  for j in xrange(D): # iterate over all wrong classes
+    if j == y:
+      # skip for the true class to only loop over incorrect classes
+      continue
+    # accumulate loss for the i-th example
+    loss_i += max(0, scores[j] - correct_class_score + delta)
+  return loss_i
+
+def L_i_vectorized(x, y, W):
+  """
+  A faster half-vectorized implementation. half-vectorized
+  refers to the fact that for a single example the implementation contains
+  no for loops, but there is still one loop over the examples (outside this function)
+  """
+  delta = 1.0
+  scores = W.dot(x)
+  # compute the margins for all classes in one vector operation
+  margins = np.maximum(0, scores - scores[y] + delta)
+  # on y-th position scores[y] - scores[y] canceled and gave delta. We want
+  # to ignore the y-th position and only consider margin on max wrong class
+  margins[y] = 0
+  loss_i = np.sum(margins)
+  return loss_i
+
+def L(X, y, W):
+  """
+  fully-vectorized implementation :
+  - X holds all the training examples as columns (e.g. 3073 x 50,000 in CIFAR-10)
+  - y is array of integers specifying correct class (e.g. 50,000-D array)
+  - W are weights (e.g. 10 x 3073)
+  """
+  # evaluate loss over all examples in X without using any for loops
+  # left as exercise to reader in the assignment
+```
+
+**实际考虑**          
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p5.png) 
+
+
+#### Softmax分类器          
+
 
 
 
