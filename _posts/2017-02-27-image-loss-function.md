@@ -105,6 +105,10 @@ def L(X, y, W):
 
 
 #### Softmax分类器          
+SVM是最常用的两个分类器之一，而另一个就是Softmax分类器，它的损失函数与SVM的损失函数不同。对于学习过二元逻辑回归分类器的读者来说，Softmax分类器就可以理解为逻辑回归分类器面对多个分类的一般化归纳。SVM将输出$f(x_i,W)$作为每个分类的评分（因为无定标，所以难以直接解释）。与SVM不同，Softmax的输出（归一化的分类概率）更加直观，并且从概率上可以解释，这一点后文会讨论。在Softmax分类器中，函数$f(x_i;W)=Wx_i$映射保持不变，但将这些评分值视为每个分类的未归一化的对数概率，并且将折叶损失（hinge loss）替换为交叉熵损失（cross-entropy loss）。公式如下：
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p6.png) 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p7.png) 
 
 
 
