@@ -43,4 +43,46 @@ description: 计算机视觉
 
 在我们现在这个问题中，所谓的『最优化』其实指的就是找到能让损失函数最小的参数W。如果大家看过或者了解凸优化的话，我们下面介绍的方法，对你而言可能太简单了，有点原始，但是大家别忘了，我们后期要处理的是神经网络的损失函数，那可不是一个凸函数哦，所以我们还是一步步来一起看看，如果去实现最优化问题。
 
+**策略1：随机搜寻(不太实用)**            
+以一个笨方法开始，我们知道，当我们手头上有参数W后，我们是可以计算损失函数，评估参数合适程度的。所以最直接粗暴的方法就是，我们尽量多地去试参数，然后从里面选那个让损失函数最小的，作为最后的W。代码当然很简单，如下：
+
+```
+# 假设 X_train 是训练集 (例如. 3073 x 50,000)
+# 假设 Y_train 是类别结果 (例如. 1D array of 50,000)
+
+bestloss = float("inf") # 初始化一个最大的float值
+for num in xrange(1000):
+  W = np.random.randn(10, 3073) * 0.0001 # 随机生成一组参数
+  loss = L(X_train, Y_train, W) # 计算损失函数
+  if loss < bestloss: # 比对已搜寻中最好的结果
+    bestloss = loss
+    bestW = W
+  print 'in attempt %d the loss was %f, best %f' % (num, loss, bestloss)
+
+# prints:
+# in attempt 0 the loss was 9.401632, best 9.401632
+# in attempt 1 the loss was 8.959668, best 8.959668
+# in attempt 2 the loss was 9.044034, best 8.959668
+# in attempt 3 the loss was 9.278948, best 8.959668
+# in attempt 4 the loss was 8.857370, best 8.857370
+# in attempt 5 the loss was 8.943151, best 8.857370
+# in attempt 6 the loss was 8.605604, best 8.605604
+# ... (trunctated: continues for 1000 lines)
+```
+
+一通随机试验和搜寻之后，我们会拿到试验结果中最好的参数W，然后在测试集上看看效果：
+
+```
+# 假定 X_test 为 [3073 x 10000], Y_test 为 [10000 x 1]
+scores = Wbest.dot(Xte_cols) # 10 x 10000, 计算类别得分
+# 找到最高得分作为结果
+Yte_predict = np.argmax(scores, axis = 0)
+# 计算准确度
+np.mean(Yte_predict == Yte)
+# 返回 0.1555
+```
+
+随机搜寻得到的参数W，在测试集上的准确率为15.5%，总共10各类别，我们不做任何预测只是随机猜的结果应该是10%，好像稍高一点，但是…大家也看到了…这个准确率…实在是没办法在实际应用中使用。
+
+
 
