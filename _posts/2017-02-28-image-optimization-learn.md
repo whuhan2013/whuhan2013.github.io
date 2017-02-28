@@ -30,7 +30,7 @@ description: 计算机视觉
 
 根据上面的方法，我们画出了下面3个图。最上面的图是调整a的不同取值，绘出的损失函数变化曲线(越高值越大)；中间和最后一个图是调整a与b的取值，绘出的损失函数变化图(蓝色表示损失小，红色表示损失大)，中间是在一个图片样本上计算的损失结果，最下图为100张图片上计算的损失结果的一个平均。显然沿着直线方向得到的曲线底端为最小的损失值点，而曲面呈现的碗状图形碗底为损失函数取值最小处。 
 
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter3/p2.jpg)       
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter3/p2.png)       
 
 我们从数学的角度，来尝试解释一下，上面的凹曲线是怎么出来的。对于第i个样本，我们知道它的损失函数值为： 
 
