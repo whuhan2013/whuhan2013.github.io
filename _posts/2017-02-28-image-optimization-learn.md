@@ -124,6 +124,111 @@ $$\frac{df(x)}{dx}=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}$$
 我们用几张图来说明这个过程： 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter3/p4.jpg)    
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter3/p5.gif)  
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter3/p6.gif)  
+ 
 
+#### 计算梯度
+
+有两种计算梯度的方法：
+
+- 慢一些但是简单一些的数值梯度/numerical gradient
+- 速度快但是更容易出错的解析梯度/analytic gradient
+
+**数值梯度**
+
+根据上面提到的导数求解公式，我们可以得到数值梯度计算法。下面是一段简单的代码，对于一个给定的函数f和一个向量x，求解这个点上的梯度：
+
+```
+def eval_numerical_gradient(f, x):
+  """ 
+  一个最基本的计算x点上f的梯度的算法 
+  - f 为参数为x的函数
+  - x 是一个numpy的vector
+  """ 
+
+  fx = f(x) # 计算原始点上函数值
+  grad = np.zeros(x.shape)
+  h = 0.00001
+
+  # 对x的每个维度都计算一遍
+  it = np.nditer(x, flags=['multi_index'], op_flags=['readwrite'])
+  while not it.finished:
+
+    # 计算x+h处的函数值
+    ix = it.multi_index
+    old_value = x[ix]
+    x[ix] = old_value + h # 加h
+    fxh = f(x) # 计算f(x + h)
+    x[ix] = old_value # 存储之前的函数值
+
+    # 计算偏导数
+    grad[ix] = (fxh - fx) / h # 斜率
+    it.iternext() # 开始下一个维度上的偏导计算
+
+  return grad
+```
+
+代码的方法很简单，对每个维度，都在原始值上加上一个很小的h，然后计算这个维度/方向上的偏导，最后组在一起得到梯度grad。
+
+
+**实际计算中的提示**
+
+我们仔细看看导数求解的公式，会发现数学定义上h是要趋于0的，但实际我们计算的时候我们只要取一个足够小的数(比如1e-5)作为h就行了，所以我们要精准计算偏导的话，要尽量取到不会带来数值计算问题，同时又能很小的h。另外，其实实际计算中，我们用另外一个公式用得更多[f(x+h)−f(x−h)]/2h
+下面我们用上面的公式在CIFAR-10数据集上，试一试吧：
+
+
+```
+def CIFAR10_loss_fun(W):
+  return L(X_train, Y_train, W)
+
+W = np.random.rand(10, 3073) * 0.001 # 随机权重向量
+df = eval_numerical_gradient(CIFAR10_loss_fun, W) # 计算梯度
+```
+
+计算到的梯度(准确地说，梯度的方向是函数增大方向，负梯度才是下降方向告诉我们，我们应该『下山』的方向是啥，接着我们就沿着它小步迈进：
+
+```
+loss_original = CIFAR10_loss_fun(W) # 原始点上的损失
+print 'original loss: %f' % (loss_original, )
+
+# 多大步伐迈进好呢？我们选一些步长试试
+for step_size_log in [-10, -9, -8, -7, -6, -5,-4,-3,-2,-1]:
+  step_size = 10 ** step_size_log
+  W_new = W - step_size * df # 新的权重
+  loss_new = CIFAR10_loss_fun(W_new)
+  print 'for step size %f new loss: %f' % (step_size, loss_new)
+
+# 输出:
+# original loss: 2.200718
+# for step size 1.000000e-10 new loss: 2.200652
+# for step size 1.000000e-09 new loss: 2.200057
+# for step size 1.000000e-08 new loss: 2.194116
+# for step size 1.000000e-07 new loss: 2.135493
+# for step size 1.000000e-06 new loss: 1.647802
+# for step size 1.000000e-05 new loss: 2.844355
+# for step size 1.000000e-04 new loss: 25.558142
+# for step size 1.000000e-03 new loss: 254.086573
+# for step size 1.000000e-02 new loss: 2539.370888
+# for step size 1.000000e-01 new loss: 25392.214036
+```
+
+**关于迭代的细节**               
+如果大家仔细看上述代码的话，会发现我们step_size设的都是负的，确实我们每次update权重W的时候，是用原来的W减掉梯度方向的一个较小的值，这样损失函数才能减小。
+
+**关于迭代的步长**                  
+
+我们计算得到梯度之后，就确定了幅度变化最快(负梯度是下降方向)的方向，但是它并没有告诉我们，我朝着这个方向，应该迈进多远啊。之后的章节会提到，选择正确的迭代步长(有时候我们也把它叫做学习速率)是训练过程中最重要(也是最让人头疼)的一个待设定参数。就像我想以最快的速度下山，我们能感知到最陡的方向，却不知道应该迈多大的步子。如果我们小步迈进，那确实每一步都能比上一步下降一些，但是速度太慢了亲！！但是如果我们以非常非常大的步伐迈进(假如腿巨长)，那你猜怎么着，你一不小心可能就迈过山脚迈到另一座山山腰上了…
+
+下图是对以上情况的一个描述和解释：              
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter3/p7.jpg)      
+
+图上红色的值很大，蓝色的值很小，我们想逐步下降至蓝色中心。如果迈进的步伐太小，收敛和行进的速度就会很慢，如果迈进的步伐太大，可能直接越过去了。
+
+**效率问题**               
+
+如果你再回过头去看看上面计算数值梯度的程序，你会发现，这个计算方法的复杂度，基本是和我们的参数个数成线性关系的。这意味着什么呢？在我们的CIFAR-10例子中，我们总共有30730个参数，因此我们单次迭代总共就需要计算30731次损失函数。这个问题在之后会提到的神经网络中更为严重，很可能两层神经元之间就有百万级别的参数权重，所以，计算机算起来都很耗时…人也要等结果等到哭瞎…  
+
+
+**解析法计算梯度**
+
+数值梯度发非常容易实现，但是从公式里面我们就看得出来，梯度实际上是一个近似(毕竟你没办法把h取到非常小)，同时这也是一个计算非常耗时的算法。第二种计算梯度的方法是解析法，它可以让我们直接得到梯度的一个公式(代入就可以计算，非常快)，但是呢，不像数值梯度法，这种方法更容易出现错误。so，聪明的同学们，就想了一个办法，我们可以先计算解析梯度和数值梯度，然后比对结果和校正，在确定我们解析梯度实现正确之后，我们就可以大胆地进行解析法计算了(这个过程叫做梯度检查/检测)
 
