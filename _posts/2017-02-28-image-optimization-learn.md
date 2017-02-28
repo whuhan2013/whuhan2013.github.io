@@ -120,4 +120,10 @@ for i in xrange(1000):
 
 $$\frac{df(x)}{dx}=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}$$      
 
+对于多元的情况，这个时候我们需要求的东西扩展成每个方向的『偏导数』，然后把它们合在一块组成我们的梯度向量。
+我们用几张图来说明这个过程： 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter3/p4.jpg)    
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter3/p5.gif)  
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter3/p6.gif)  
+
 
