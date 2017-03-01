@@ -62,3 +62,26 @@ dfdy = 1.0 * dfdq # dq/dy = 1
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter4/p4.png)
 
+你看，它的导数可以用自己很简单的重新表示出来。所以在计算导数的时候非常方便，比如sigmoid函数接收到的输入是1.0，输出结果是-0.73。那么我们可以非常方便地计算得到它的偏导为(1-0.73)*0.73~=0.2。我们看看在这个sigmoid函数部分反向传播的计算代码：
+
+```
+w = [2,-3,-3] # 我们随机给定一组权重
+x = [-1, -2]
+
+# 前向传播
+dot = w[0]*x[0] + w[1]*x[1] + w[2]
+f = 1.0 / (1 + math.exp(-dot)) # sigmoid函数
+
+# 反向传播经过该sigmoid神经元
+ddot = (1 - f) * f # sigmoid函数偏导
+dx = [w[0] * ddot, w[1] * ddot] # 在x这条路径上的反向传播
+dw = [x[0] * ddot, x[1] * ddot, 1.0 * ddot] # 在w这条路径上的反向传播
+# yes！就酱紫算完了！是不是很简单？
+```
+
+**反向传播实战：复杂函数**       
+
+我们看一个稍复杂一些的函数：        
+
+$$f(x,y)=\frac{x+\sigma(y)}{\sigma(x)+(x+y)^2}$$
+
