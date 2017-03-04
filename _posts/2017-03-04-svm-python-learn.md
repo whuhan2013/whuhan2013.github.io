@@ -180,3 +180,5 @@ plt.ylabel('Loss value')
 plt.show()
 ```
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p3.png)  
+
