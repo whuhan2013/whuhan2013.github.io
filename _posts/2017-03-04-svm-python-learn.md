@@ -106,4 +106,77 @@ grad_numerical = grad_check_sparse(f, W, grad)
 ```
 
 
+**使用向量化方法计算损失函数与梯度**        
+
+```
+def svm_loss_vectorized(W, X, y, reg):
+
+  loss = 0.0
+  dW = np.zeros(W.shape) # initialize the gradient as zero
+
+  
+  scores = X.dot(W)  # N by C
+  num_train = X.shape[0]
+  num_classes = W.shape[1]
+  scores_correct = scores[np.arange(num_train), y] #1 by N
+  scores_correct = np.reshape(scores_correct, (num_train, 1)) # N by 1
+  margins = scores - scores_correct + 1.0 # N by C
+  margins[np.arange(num_train), y] = 0.0 
+  margins[margins <= 0] = 0.0
+  loss += np.sum(margins) / num_train
+  loss += 0.5 * reg * np.sum(W * W)
+ 
+  margins[margins > 0] = 1.0                         # 
+  row_sum = np.sum(margins, axis=1)                  # 1 by N
+  margins[np.arange(num_train), y] = -row_sum        
+  dW += np.dot(X.T, margins)/num_train + reg * W     # D by C
+
+  return loss, dW
+```
+
+
+**随机梯度下降**         
+
+```
+ def train(self, X, y, learning_rate=1e-3, reg=1e-5, num_iters=100, 
+                          batch_size=200, verbose=True):
+        num_train, dim = X.shape
+        # assume y takes values 0...K-1 where K is number of classes
+        num_classes = np.max(y) + 1  
+        if self.W is None:
+            # lazily initialize W
+            self.W = 0.001 * np.random.randn(dim, num_classes)   # D by C
+
+        # Run stochastic gradient descent(Mini-Batch) to optimize W
+        loss_history = []
+        for it in xrange(num_iters): 
+            X_batch = None
+            y_batch = None
+            # Sampling with replacement is faster than sampling without replacement.
+            sample_index = np.random.choice(num_train, batch_size, replace=False)
+            X_batch = X[sample_index, :]   # batch_size by D
+            y_batch = y[sample_index]      # 1 by batch_size
+            # evaluate loss and gradient
+            loss, grad = self.loss(X_batch, y_batch, reg)
+            loss_history.append(loss)
+
+            # perform parameter update
+            self.W += -learning_rate * grad
+            if verbose and it % 100 == 0:
+                print 'Iteration %d / %d: loss %f' % (it, num_iters, loss)
+
+        return loss_history
+```
+
+
+随着梯度下降过程中，损失函数的变化           
+
+```
+# A useful debugging strategy is to plot the loss as a function of
+# iteration number:
+plt.plot(loss_hist)
+plt.xlabel('Iteration number')
+plt.ylabel('Loss value')
+plt.show()
+```
 
