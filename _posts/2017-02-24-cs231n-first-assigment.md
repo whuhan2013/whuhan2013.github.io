@@ -90,7 +90,7 @@ for y, cls in enumerate(classes):
 plt.show();
 ```
 
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/p6.jpg)
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/p6.png)
 
 **计算图像间距离的三种方法**        
 
