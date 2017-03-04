@@ -182,3 +182,81 @@ plt.show()
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p3.png)  
 
+**预测**       
+
+```
+def predict(self, X):
+ 
+    #print X.shape,self.W.shape
+    
+    scores = X.dot(self.W)
+    y_pred = np.argmax(scores, axis = 1)
+    return y_pred
+```
+
+
+**validation验证集**
+
+```
+learning_rates = [1.4e-7, 1.5e-7, 1.6e-7]
+regularization_strengths = [(1+i*0.1)*1e4 for i in range(-3,3)] + [(2+0.1*i)*1e4 for i in range(-3,3)]
+
+results = {}
+best_val = -1   # The highest validation accuracy that we have seen so far.
+best_svm = None # The LinearSVM object that achieved the highest validation rate.
+
+
+for rs in regularization_strengths:
+    for lr in learning_rates:
+        svm = LinearSVM()
+        loss_hist = svm.train(X_train, y_train, lr, rs, num_iters=3000)
+        y_train_pred = svm.predict(X_train)
+        train_accuracy = np.mean(y_train == y_train_pred)
+        y_val_pred = svm.predict(X_val)
+        val_accuracy = np.mean(y_val == y_val_pred)
+        if val_accuracy > best_val:
+            best_val = val_accuracy
+            best_svm = svm           
+        results[(lr,rs)] = train_accuracy, val_accuracy
+
+    
+# Print out results.
+for lr, reg in sorted(results):
+    train_accuracy, val_accuracy = results[(lr, reg)]
+    print 'lr %e reg %e train accuracy: %f val accuracy: %f' % (
+                lr, reg, train_accuracy, val_accuracy)
+    
+print 'best validation accuracy achieved during cross-validation: %f' % best_val
+```
+
+
+**可视化cross-validation结果**        
+
+```
+import math
+x_scatter = [math.log10(x[0]) for x in results]
+y_scatter = [math.log10(x[1]) for x in results]
+
+# plot training accuracy
+marker_size = 100
+colors = [results[x][0] for x in results]
+plt.subplot(2, 1, 1)
+plt.scatter(x_scatter, y_scatter, marker_size, c=colors)
+plt.colorbar()
+plt.xlabel('log learning rate')
+plt.ylabel('log regularization strength')
+plt.title('CIFAR-10 training accuracy')
+
+# plot validation accuracy
+colors = [results[x][1] for x in results] # default size of markers is 20
+plt.subplot(2, 1, 2)
+plt.scatter(x_scatter, y_scatter, marker_size, c=colors)
+plt.colorbar()
+plt.xlabel('log learning rate')
+plt.ylabel('log regularization strength')
+plt.title('CIFAR-10 validation accuracy')
+plt.show()
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p4.png)  
+
