@@ -68,3 +68,42 @@ def svm_loss_naive(W, X, y, reg):
 关于梯度的计算：详情可参见[SVM损失函数及梯度矩阵的计算](https://zhuanlan.zhihu.com/p/21478575?refer=baina)
 
 
+**梯度检验**            
+
+
+```
+def grad_check_sparse(f, x, analytic_grad, num_checks=10, h=1e-5):
+  """
+  sample a few random elements and only return numerical
+  in this dimensions.
+  """
+
+  for i in xrange(num_checks):
+    ix = tuple([randrange(m) for m in x.shape])
+
+    oldval = x[ix]
+    x[ix] = oldval + h # increment by h
+    fxph = f(x) # evaluate f(x + h)
+    x[ix] = oldval - h # increment by h
+    fxmh = f(x) # evaluate f(x - h)
+    x[ix] = oldval # reset
+
+    grad_numerical = (fxph - fxmh) / (2 * h)
+    grad_analytic = analytic_grad[ix]
+    rel_error = abs(grad_numerical - grad_analytic) / (abs(grad_numerical) + abs(grad_analytic))
+    print 'numerical: %f analytic: %f, relative error: %e' % (grad_numerical, grad_analytic, rel_error)
+
+
+from cs231n.gradient_check import grad_check_sparse
+f = lambda w: svm_loss_naive(w, X_dev, y_dev, 0.0)[0]
+grad_numerical = grad_check_sparse(f, W, grad)
+
+# do the gradient check once again with regularization turned on
+# you didn't forget the regularization gradient did you?
+loss, grad = svm_loss_naive(W, X_dev, y_dev, 1e2)
+f = lambda w: svm_loss_naive(w, X_dev, y_dev, 1e2)[0]
+grad_numerical = grad_check_sparse(f, W, grad)
+```
+
+
+
