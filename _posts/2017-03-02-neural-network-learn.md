@@ -38,6 +38,16 @@ sigmoid函数提到的次数太多，相信大家都知道了。数学形式很�
 
 **Tanh**           
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p6.jpeg)
+Tanh函数的图像如上图所示。它会将输入值压缩至-1到1之间，当然，它同样也有sigmoid函数里说到的第一个缺点，在很大或者很小的输入值下，神经元很容易饱和。但是它缓解了第二个缺点，它的输出是0中心化的。所以在实际应用中，tanh激励函数还是比sigmoid要用的多一些的。
+$tanh=2\sigma(2x)-1$
+
+**ReLU**           
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p7.jpeg)
+ReLU是修正线性单元(The Rectified Linear Unit)的简称，近些年使用的非常多，图像如上图所示。它对于输入x计算f(x)=max(0,x)。换言之，以0为分界线，左侧都为0，右侧是y=x这条直线。        
+它有它对应的优势，也有缺点：                   
+
+优点1：实验表明，它的使用，相对于sigmoid和tanh，可以非常大程度地提升随机梯度下降的收敛速度。不过有意思的是，很多人说，这个结果的原因是它是线性的，而不像sigmoid和tanh一样是非线性的。具体的收敛速度结果对比如下图，收敛速度大概能快上6倍：            
+<center><img src="https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p8.jpeg"></center>
 
 
 
