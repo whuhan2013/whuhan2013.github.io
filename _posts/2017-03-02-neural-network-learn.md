@@ -28,7 +28,7 @@ description: 计算机视觉
 每一次输入和权重w线性组合之后，都会通过一个激励函数(也可以叫做非线性激励函数)，经非线性变换后输出。实际的神经网络中有一些可选的激励函数，我们一一说明一下最常见的几种：
 
 **sigmoid**          
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p2.jpeg)
+<center><img src="https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p2.jpeg"></center>
 
 sigmoid函数提到的次数太多，相信大家都知道了。数学形式很简单，是$σ(x)=1/(1+e^{−x})$，图像如上图所示，功能是把一个实数压缩至0到1之间。输入的数字非常大的时候，结果会接近1，而非常大的负数作为输入，则会得到接近0的结果。不得不说，早期的神经网络中，sigmoid函数作为激励函数使用非常之多，因为大家觉得它很好地解释了神经元受到刺激后是否被激活和向后传递的场景(从几乎没有被激活，也就是0，到完全被激活，也就是1)。不过似乎近几年的实际应用场景中，比较少见到它的身影，它主要的缺点有2个：
 
@@ -37,12 +37,12 @@ sigmoid函数提到的次数太多，相信大家都知道了。数学形式很�
 
 
 **Tanh**           
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p6.jpeg)
+<center><img src="https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p6.jpeg"></center>
 Tanh函数的图像如上图所示。它会将输入值压缩至-1到1之间，当然，它同样也有sigmoid函数里说到的第一个缺点，在很大或者很小的输入值下，神经元很容易饱和。但是它缓解了第二个缺点，它的输出是0中心化的。所以在实际应用中，tanh激励函数还是比sigmoid要用的多一些的。
 $tanh=2\sigma(2x)-1$
 
 **ReLU**           
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p7.jpeg)
+<center><img src="https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p7.jpeg"></center>
 ReLU是修正线性单元(The Rectified Linear Unit)的简称，近些年使用的非常多，图像如上图所示。它对于输入x计算f(x)=max(0,x)。换言之，以0为分界线，左侧都为0，右侧是y=x这条直线。        
 它有它对应的优势，也有缺点：                   
 
