@@ -65,3 +65,12 @@ ReLU是修正线性单元(The Rectified Linear Unit)的简称，近些年使用�
 
 那我们咋选用神经元/激励函数呢？一般说来，用的最多的依旧是ReLU，但是我们确实得小心设定学习率，同时在训练过程中，还得时不时看看神经元此时的状态(是否还『活着』)。当然，如果你非常担心神经元训练过程中挂掉，你可以试试Leaky ReLU和Maxout。额，少用sigmoid老古董吧，有兴趣倒是可以试试tanh，不过话说回来，通常状况下，它的效果不如ReLU/Maxout
 
+
+#### 神经网络结构          
+
+**层级连接结构**          
+
+神经网络的结构其实之前也提过，是一种单向的层级连接结构，每一层可能有多个神经元。再形象一点说，就是每一层的输出将会作为下一层的输入数据，当然，这个图一定是没有循环的，不然数据流就有点混乱了。一般情况下，单层内的这些神经元之间是没有连接的。最常见的一种神经网络结构就是全连接层级神经网络，也就是相邻两层之间，每个神经元和每个神经元都是相连的，单层内的神经元之间是没有关联的。下面是两个全连接层级神经网的示意图： 
+<center><img src="https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p9.jpeg"></center>
+<center><img src="https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter5/p10.jpeg"></center>
+
