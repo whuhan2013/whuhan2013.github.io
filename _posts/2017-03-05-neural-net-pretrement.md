@@ -121,9 +121,75 @@ Xwhite = Xrot / np.sqrt(S + 1e-5)
 
 - 最大范数约束，另外一种正则化叫做最大范数约束，它直接限制了一个上行的权重边界，然后约束每个神经元上的权重都要满足这个约束。实际应用中是这样实现的，我们不添加任何的惩罚项，就按照正常的损失函数计算，只不过在得到每个神经元的权重向量$w⃗$之后约束它满足$∥w⃗ ∥_2<c$。有些人提到这种正则化方式帮助他们提高最后的模型效果。另外，这种正则化方式倒是有一点很吸引人：在神经网络训练学习率设定很高的时候，它也能很好地约束住权重更新变化，不至于直接挂掉。                   
 
-- Dropout，亲，这个是我们实际神经网络训练中，用的非常多的一种正则化手段，同时也相当有效。Srivastava等人的论文Dropout: A Simple Way to Prevent Neural Networks from Overfitting最早提到用dropout这种方式作为正则化手段。一句话概括它，就是：在训练过程中，我们对每个神经元，都以概率p保持它是激活状态，1-p的概率直接关闭它。        
+- Dropout，亲，这个是我们实际神经网络训练中，用的非常多的一种正则化手段，同时也相当有效。Srivastava等人的论文Dropout: A Simple Way to Prevent Neural Networks from Overfitting最早提到用dropout这种方式作为正则化手段。一句话概括它，就是：在训练过程中，我们对每个神经元，都以概率p保持它是激活状态，1-p的概率直接关闭它。在训练的时候，随机失活的实现方法是让神经元以超参数p的概率被激活或者被设置为0。        
 
 下图是一个3层的神经网络的dropout示意图：               
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter6/p6.jpeg)
+
+可以这么理解，在训练过程中呢，我们对全体神经元，以概率p做了一个采样，只有选出的神经元要进行参数更新。所以最后就从左图的全连接到右图的Dropout过后神经元连接图了。需要多说一句的是，在测试阶段，我们不用dropout，而是直接从概率的角度，对权重配以一个概率值。
+
+简单的Dropout代码如下(这是简易实现版本，但是不建议使用，我们会分析为啥，并在之后给出优化版)：
+
+```
+""" 普通版随机失活: 不推荐实现 (看下面笔记) """
+
+p = 0.5 # 激活神经元的概率. p值更高 = 随机失活更弱
+
+def train_step(X):
+  """ X中是输入数据 """
+  
+  # 3层neural network的前向传播
+  H1 = np.maximum(0, np.dot(W1, X) + b1)
+  U1 = np.random.rand(*H1.shape) < p # 第一个随机失活遮罩
+  H1 *= U1 # drop!
+  H2 = np.maximum(0, np.dot(W2, H1) + b2)
+  U2 = np.random.rand(*H2.shape) < p # 第二个随机失活遮罩
+  H2 *= U2 # drop!
+  out = np.dot(W3, H2) + b3
+  
+  # 反向传播:计算梯度... (略)
+  # 进行参数更新... (略)
+  
+def predict(X):
+  # 前向传播时模型集成
+  H1 = np.maximum(0, np.dot(W1, X) + b1) * p # 注意：激活数据要乘以p
+  H2 = np.maximum(0, np.dot(W2, H1) + b2) * p # 注意：激活数据要乘以p
+  out = np.dot(W3, H2) + b3
+```
+
+上述代码中，在train_step函数中，我们做了2次Dropout。我们甚至可以在输入层做一次dropout。反向传播过程保持不变，除了我们要考虑一下U1,U2
+
+很重要的一点是，大家仔细看predict函数部分，我们不再dropout了，而是对于每个隐层的输出，都用概率p做了一个幅度变换。可以从数学期望的角度去理解这个做法，我们考虑一个神经元的输出为x(没有dropout的情况下)，它的输出的数学期望为px+(1−p)0，那我们在测试阶段，如果直接把每个输出x都做变换x→px，其实是可以保持一样的数学期望的。
+
+上述代码的写法有一些缺陷，我们必须在测试阶段对每个神经的输出都以p的概率输出。考虑到实际应用中，测试阶段对于时间的要求非常高，我们可以考虑反着来，代码实现的时候用inverted dropout，即在训练阶段就做相反的幅度变换/scaling(除以p)，这样在测试阶段，我们可以直接把权重拿来使用，而不用附加很多步用p做scaling的过程。inverted dropout的示例代码如下：
+
+
+```
+""" 
+Inverted Dropout的版本，把本该花在测试阶段的时间，转移到训练阶段，从而提高testing部分的速度
+"""
+
+p = 0.5 # dropout的概率，也就是保持一个神经元激活状态的概率
+
+def train_step(X):
+  # f3层神经网络前向计算
+  H1 = np.maximum(0, np.dot(W1, X) + b1)
+  U1 = (np.random.rand(*H1.shape) < p) / p # 注意到这个dropout中我们除以p，做了一个inverted dropout
+  H1 *= U1 # drop!
+  H2 = np.maximum(0, np.dot(W2, H1) + b2)
+  U2 = (np.random.rand(*H2.shape) < p) / p # 这个dropout中我们除以p，做了一个inverted dropout
+  H2 *= U2 # drop!
+  out = np.dot(W3, H2) + b3
+
+  # 反向传播: 计算梯度... (这里省略)
+  # 参数更新... (这里省略)
+
+def predict(X):
+  # 直接前向计算，无需再乘以p
+  H1 = np.maximum(0, np.dot(W1, X) + b1) 
+  H2 = np.maximum(0, np.dot(W2, H1) + b2)
+  out = np.dot(W3, H2) + b3
+```
+
 
 
