@@ -99,5 +99,8 @@ Xwhite = Xrot / np.sqrt(S + 1e-5)
 上面提到的建议有一个小问题，对于随机初始化的神经元参数下的输出，其分布的方差随着输入的数量，会增长。我们实际上可以通过除以总输入数目的平方根，归一化每个神经元的输出方差到1。也就是说，我们倾向于初始化神经元的权重向量为w = np.random.randn(n) / sqrt(n)，其中n为输入数。
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter6/p5.png)         
 
-对于初始化权重还有一些类似的研究和建议，比如说Glorot在论文Understanding the difficulty of training deep feedforward neural networks就推荐使用能满足$Var(w)=2/(nin+nout)$的权重初始化。其中nin,nout是前一层和后一层的神经元个数。而另外一篇比较新的论文Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification，则指出尤其对于ReLU神经元，我们初始化方差应该为2.0/n，也就是w = np.random.randn(n) * sqrt(2.0/n)，目前的神经网络中使用了很多ReLU单元，因此这个设定其实在实际应用中使用最多。
+对于初始化权重还有一些类似的研究和建议，比如说Glorot在论文Understanding the difficulty of training deep feedforward neural networks就推荐使用能满足$Var(w)=2/(n_{in}+n_{out})$的权重初始化。其中$n_{in},n_{out}$是前一层和后一层的神经元个数。而另外一篇比较新的论文Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification，则指出尤其对于ReLU神经元，我们初始化方差应该为2.0/n，也就是w = np.random.randn(n) * sqrt(2.0/n)，目前的神经网络中使用了很多ReLU单元，因此这个设定其实在实际应用中使用最多。
+
+
+**偏移量/bias初始化**          相对而言，bias项初始化就简单一些。我们很多时候简单起见，直接就把它们都设为0.在ReLU单元中，有些同学会使用很小的数字(比如0.01)来代替0作为所有bias项的初始值，他们解释说这样也能保证ReLU单元一开始就是被激活的，因此反向传播过程中不会终止掉回传的梯度。不过似乎实际的实验过程中，这个优化并不是每次都能起到作用的，因此很多时候我们还是直接把bias项都初始化为0。    
 
