@@ -206,3 +206,5 @@ def predict(X):
 **分类问题**         
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter6/p7.png)  
 
+问题：类别数目巨大。当标签集非常庞大（例如字典中的所有英语单词，或者ImageNet中的22000种分类），就需要使用分层Softmax（Hierarchical Softmax）了（参考文献）。分层softmax将标签分解成一个树。每个标签都表示成这个树上的一个路径，这个树的每个节点处都训练一个Softmax分类器来在左和右分枝之间做决策。树的结构对于算法的最终结果影响很大，而且一般需要具体问题具体分析。
+
