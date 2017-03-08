@@ -246,6 +246,14 @@ x += - learning_rate * m / (np.sqrt(v) + eps)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter7/p7.gif)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter7/p8.gif)
 
+#### 超参数调优
+我们已经看到，训练一个神经网络会遇到很多超参数设置。神经网络最常用的设置有：
+
+- 初始学习率。
+- 学习率衰减方式（例如一个衰减常量）。
+- 正则化强度（L2惩罚，随机失活强度）。
+
+但是也可以看到，还有很多相对不那么敏感的超参数。比如在逐参数适应学习方法中，对于动量及其时间表的设置等。在本节中将介绍一些额外的调参要点和技巧：
 
 
 
