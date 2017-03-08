@@ -87,6 +87,14 @@ h肯定不能特别大，这个大家都知道对吧。但我并不是说h要设
 **损失/loss随每轮完整迭代后的变化**                
 下面这幅图表明了不同的学习率下，我们每轮完整迭代(这里的一轮完整迭代指的是所有的样本都被过了一遍，因为随机梯度下降中batch size的大小设定可能不同，因此我们不选每次mini-batch迭代为周期)过后的loss应该呈现的变化状况： 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter7/p2.jpeg)   
+合适的学习率可以保证每轮完整训练之后，loss都减小，且能在一段时间后降到一个较小的程度。太小的学习率下loss减小的速度很慢，如果太激进，设置太高的学习率，开始的loss减小速度非常可观，可是到了某个程度之后就不再下降了，在离最低点一段距离的地方反复，无法下降了。下图是实际训练CIFAR-10的时候，loss的变化情况： 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter7/p3.jpeg)   
+大家可能会注意到上图的曲线有一些上下跳动，不稳定，这和随机梯度下降时候设定的batch size有关系。batch size非常小的情况下，会出现很大程度的不稳定，如果batch size设定大一些，会相对稳定一点。
+
+**训练集/验证集上的准确度**           
+然后我们需要跟踪一下训练集和验证集上的准确度状况，以判断分类器所处的状态(过拟合程度如何)：            
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter7/p4.jpeg)
+
 
 
 
