@@ -206,7 +206,9 @@ x += -mu * v_prev + (1 + mu) * v # 位置更新变了形式
 
 
 **二阶方法**          
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter7/p6.png)
 
+**逐参数适应学习率方法**       
 
 
 
