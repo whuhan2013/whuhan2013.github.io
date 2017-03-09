@@ -32,6 +32,13 @@ plt.ylim([-1,1])
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter8/p1.png)       
 
+紫色，红色和黄色分布代表不同的3种类别。          
+一般来说，拿到数据都要做预处理，包括之前提到的去均值和方差归一化。不过我们构造的数据幅度已经在-1到1之间了，所以这里不用做这个操作。
 
+#### 使用Softmax线性分类器         
+
+**初始化参数**
+
+我们先在训练集上用softmax线性分类器试试。如我们在之前的章节提到的，我们这里用的softmax分类器，使用的是一个线性的得分函数/score function，使用的损失函数是互熵损失/cross-entropy loss。包含的参数包括得分函数里面用到的权重矩阵W和偏移量b，我们先随机初始化这些参数。
 
 
