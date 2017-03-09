@@ -255,3 +255,95 @@ db2 = np.sum(dscores, axis=0, keepdims=True)
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter8/p6.png)  
 
+来，来，来。组一组，我们把整个神经网络的过程串起来：
+
+```
+# 随机初始化参数
+h = 100 # 隐层大小
+W = 0.01 * np.random.randn(D,h)
+b = np.zeros((1,h))
+W2 = 0.01 * np.random.randn(h,K)
+b2 = np.zeros((1,K))
+
+# 手动敲定的几个参数
+step_size = 1e-0
+reg = 1e-3 # 正则化参数
+
+# 梯度迭代与循环
+num_examples = X.shape[0]
+for i in xrange(10000):
+
+  hidden_layer = np.maximum(0, np.dot(X, W) + b) #使用的ReLU神经元
+  scores = np.dot(hidden_layer, W2) + b2
+
+  # 计算类别概率
+  exp_scores = np.exp(scores)
+  probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True) # [N x K]
+
+  # 计算互熵损失与正则化项
+  corect_logprobs = -np.log(probs[range(num_examples),y])
+  data_loss = np.sum(corect_logprobs)/num_examples
+  reg_loss = 0.5*reg*np.sum(W*W) + 0.5*reg*np.sum(W2*W2)
+  loss = data_loss + reg_loss
+  if i % 1000 == 0:
+    print "iteration %d: loss %f" % (i, loss)
+
+  # 计算梯度
+  dscores = probs
+  dscores[range(num_examples),y] -= 1
+  dscores /= num_examples
+
+  # 梯度回传
+  dW2 = np.dot(hidden_layer.T, dscores)
+  db2 = np.sum(dscores, axis=0, keepdims=True)
+
+  dhidden = np.dot(dscores, W2.T)
+
+  dhidden[hidden_layer <= 0] = 0
+  # 拿到最后W,b上的梯度
+  dW = np.dot(X.T, dhidden)
+  db = np.sum(dhidden, axis=0, keepdims=True)
+
+  # 加上正则化梯度部分
+  dW2 += reg * W2
+  dW += reg * W
+
+  # 参数迭代与更新
+  W += -step_size * dW
+  b += -step_size * db
+  W2 += -step_size * dW2
+  b2 += -step_size * db2
+```
+
+输出结果：
+
+```
+iteration 0: loss 1.098744
+iteration 1000: loss 0.294946
+iteration 2000: loss 0.259301
+iteration 3000: loss 0.248310
+iteration 4000: loss 0.246170
+iteration 5000: loss 0.245649
+iteration 6000: loss 0.245491
+iteration 7000: loss 0.245400
+iteration 8000: loss 0.245335
+iteration 9000: loss 0.245292
+```
+
+现在的训练准确度为：
+
+```
+#计算分类准确度
+hidden_layer = np.maximum(0, np.dot(X, W) + b)
+scores = np.dot(hidden_layer, W2) + b2
+predicted_class = np.argmax(scores, axis=1)
+print 'training accuracy: %.2f' % (np.mean(predicted_class == y))
+```
+
+准确度为98%，我们可视化一下数据和现在的决策边界： 
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter8/p7.png)  
+
+看起来效果比之前好多了，这充分地印证了神经网络对于空间强大的分割能力，对于非线性的不规则图形，能有很强的划分区域和区分类别能力。
+
+
