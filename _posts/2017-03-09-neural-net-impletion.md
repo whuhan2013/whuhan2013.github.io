@@ -253,4 +253,5 @@ dW2 = np.dot(hidden_layer.T, dscores)
 db2 = np.sum(dscores, axis=0, keepdims=True)
 ```
 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter8/p6.png)  
 
