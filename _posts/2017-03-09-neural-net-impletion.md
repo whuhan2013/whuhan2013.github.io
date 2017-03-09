@@ -119,5 +119,138 @@ b += -step_size * db
 
 **大杂合：训练SoftMax分类器**       
 
+```
+#代码部分组一起，训练线性分类器
+
+#随机初始化参数
+W = 0.01 * np.random.randn(D,K)
+b = np.zeros((1,K))
+
+#需要自己敲定的步长和正则化系数
+step_size = 1e-0
+reg = 1e-3 #正则化系数
+
+#梯度下降迭代循环
+num_examples = X.shape[0]
+for i in xrange(200):
+
+  # 计算类别得分, 结果矩阵为[N x K]
+  scores = np.dot(X, W) + b 
+
+  # 计算类别概率
+  exp_scores = np.exp(scores)
+  probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True) # [N x K]
+
+  # 计算损失loss(包括互熵损失和正则化部分)
+  corect_logprobs = -np.log(probs[range(num_examples),y])
+  data_loss = np.sum(corect_logprobs)/num_examples
+  reg_loss = 0.5*reg*np.sum(W*W)
+  loss = data_loss + reg_loss
+  if i % 10 == 0:
+    print "iteration %d: loss %f" % (i, loss)
+
+  # 计算得分上的梯度
+  dscores = probs
+  dscores[range(num_examples),y] -= 1
+  dscores /= num_examples
+
+  # 计算和回传梯度
+  dW = np.dot(X.T, dscores)
+  db = np.sum(dscores, axis=0, keepdims=True)
+
+  dW += reg*W # 正则化梯度
+
+  #参数更新
+  W += -step_size * dW
+  b += -step_size * db
+```
+
+得到结果：
+
+```
+iteration 0: loss 1.096956
+iteration 10: loss 0.917265
+iteration 20: loss 0.851503
+iteration 30: loss 0.822336
+iteration 40: loss 0.807586
+iteration 50: loss 0.799448
+iteration 60: loss 0.794681
+iteration 70: loss 0.791764
+iteration 80: loss 0.789920
+iteration 90: loss 0.788726
+iteration 100: loss 0.787938
+iteration 110: loss 0.787409
+iteration 120: loss 0.787049
+iteration 130: loss 0.786803
+iteration 140: loss 0.786633
+iteration 150: loss 0.786514
+iteration 160: loss 0.786431
+iteration 170: loss 0.786373
+iteration 180: loss 0.786331
+iteration 190: loss 0.786302
+```
+
+190次循环之后，结果大致收敛了。我们评估一下准确度：
+
+```
+#评估准确度
+scores = np.dot(X, W) + b
+predicted_class = np.argmax(scores, axis=1)
+print 'training accuracy: %.2f' % (np.mean(predicted_class == y))
+```
+
+输出结果为49%。不太好，对吧？实际上也是可理解的，你想想，一份螺旋形的数据，你偏执地要用一个线性分类器去分割，不管怎么调整这个线性分类器，都非常非常困难。我们可视化一下数据看看决策边界(decision boundaries)： 
+
+```
+# plot the resulting classifier
+h = 0.02
+x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+                     np.arange(y_min, y_max, h))
+Z = np.dot(np.c_[xx.ravel(), yy.ravel()], W) + b
+Z = np.argmax(Z, axis=1)
+Z = Z.reshape(xx.shape)
+fig = plt.figure()
+plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral, alpha=0.8)
+plt.scatter(X[:, 0], X[:, 1], c=y, s=40, cmap=plt.cm.Spectral)
+plt.xlim(xx.min(), xx.max())
+plt.ylim(yy.min(), yy.max())
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter8/p5.png)  
+
+
+#### 使用神经网络分类
+从刚才的例子里可以看出，一个线性分类器，在现在的数据集上效果并不好。我们知道神经网络可以做非线性的分割，那我们就试试神经网络，看看会不会有更好的效果。对于这样一个简单问题，我们用单隐藏层的神经网络就可以了，这样一个神经网络我们需要2层的权重和偏移量：
+
+```
+# 初始化参数
+h = 100 # 隐层大小(神经元个数)
+W = 0.01 * np.random.randn(D,h)
+b = np.zeros((1,h))
+W2 = 0.01 * np.random.randn(h,K)
+b2 = np.zeros((1,K))
+```
+
+然后前向计算的过程也稍有一些变化：
+
+```
+#2层神经网络的前向计算
+hidden_layer = np.maximum(0, np.dot(X, W) + b) # 用的 ReLU单元
+scores = np.dot(hidden_layer, W2) + b2
+```
+
+注意到这里，和之前线性分类器中的得分计算相比，多了一行代码计算，我们首先计算第一层神经网络结果，然后作为第二层的输入，计算最后的结果。哦，对了，代码里大家也看的出来，我们这里使用的是ReLU神经单元。
+
+其他的东西都没太大变化。我们依旧按照之前的方式去计算loss，然后计算梯度dscores。不过反向回传梯度的过程形式上也有一些小小的变化。我们看下面的代码，可能觉得和Softmax分类器里面看到的基本一样，但注意到我们用hidden_layer替换掉了之前的X:
+
+
+```
+# 梯度回传与反向传播
+# 对W2和b2的第一次计算
+dW2 = np.dot(hidden_layer.T, dscores)
+db2 = np.sum(dscores, axis=0, keepdims=True)
+```
 
 
