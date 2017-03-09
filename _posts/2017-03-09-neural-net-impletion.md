@@ -65,4 +65,10 @@ scores = np.dot(X, W) + b
 好，我们实现以下，根据上面计算得到的得分scores，我们计算以下各个类别上的概率：
 
 ```
+# 用指数函数还原
+exp_scores = np.exp(scores)
+# 归一化
+probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True)
+```
+
 
