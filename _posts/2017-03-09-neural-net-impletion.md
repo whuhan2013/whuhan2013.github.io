@@ -71,4 +71,21 @@ exp_scores = np.exp(scores)
 probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True)
 ```
 
+在我们的例子中，我们最后得到了一个[300*3]的概率矩阵prob，其中每一行都包含属于3个类别的概率。然后我们就可以计算完整的互熵损失了：
+
+```
+#计算log概率和互熵损失
+corect_logprobs = -np.log(probs[range(num_examples),y])
+data_loss = np.sum(corect_logprobs)/num_examples
+#加上正则化项
+reg_loss = 0.5*reg*np.sum(W*W)
+loss = data_loss + reg_loss
+```
+
+正则化强度λ在上述代码中是reg，最开始的时候我们可能会得到loss=1.1，是通过np.log(1.0/3)得到的(假定初始的时候属于3个类别的概率一样)，我们现在想最小化损失loss
+
+**计算梯度与梯度回传**         
+我们能够用损失函数评估预测值与真实值之间的差距，下一步要做的事情自然是最小化这个值。我们用传统的梯度下降来解决这个问题。多解释一句，梯度下降的过程是：我们先选取一组随机参数作为初始值，然后计算损失函数在这组参数上的梯度(负梯度的方向表明了损失函数减小的方向)，接着我们朝着负梯度的方向迭代和更新参数，不断重复这个过程直至损失函数最小化。为了清楚一点说明这个问题，我们引入一个中间变量p，它是归一化后的概率向量，如下：
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter8/p3.png)  
+
 
