@@ -88,4 +88,36 @@ loss = data_loss + reg_loss
 我们能够用损失函数评估预测值与真实值之间的差距，下一步要做的事情自然是最小化这个值。我们用传统的梯度下降来解决这个问题。多解释一句，梯度下降的过程是：我们先选取一组随机参数作为初始值，然后计算损失函数在这组参数上的梯度(负梯度的方向表明了损失函数减小的方向)，接着我们朝着负梯度的方向迭代和更新参数，不断重复这个过程直至损失函数最小化。为了清楚一点说明这个问题，我们引入一个中间变量p，它是归一化后的概率向量，如下：
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter8/p3.png)  
 
+我们依旧记probs为所有样本属于各个类别的概率，记dscores为得分上的梯度，我们可以有以下的代码：
+
+```
+dscores = probs
+dscores[range(num_examples),y] -= 1
+dscores /= num_examples
+```
+
+我们计算的得分scores = np.dot(X, W)+b，因为上面已经算好了scores的梯度dscores，我们现在可以回传梯度计算W和b了：
+
+```
+dW = np.dot(X.T, dscores)
+db = np.sum(dscores, axis=0, keepdims=True)
+#得记着正则化梯度哈
+dW += reg*W
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter8/p4.png)  
+
+
+**参数迭代与更新**       
+在得到所需的所有部分之后，我们就可以进行参数更新了：      
+
+```
+#参数迭代更新
+W += -step_size * dW
+b += -step_size * db
+```
+
+**大杂合：训练SoftMax分类器**       
+
+
 
