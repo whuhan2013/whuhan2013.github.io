@@ -347,3 +347,5 @@ print 'training accuracy: %.2f' % (np.mean(predicted_class == y))
 看起来效果比之前好多了，这充分地印证了神经网络对于空间强大的分割能力，对于非线性的不规则图形，能有很强的划分区域和区分类别能力。
 
 
+
+
