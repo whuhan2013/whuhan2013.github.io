@@ -42,5 +42,26 @@ def softmax_loss_naive(W, X, y, reg):
 **计算梯度**         
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p2.png)
 
+加上梯度后的softmax_loss_naive版本：
+
+```
+  num_train = X.shape[0]
+  num_classes = W.shape[1]  
+  f = X.dot(W)  #N by C
+  f_max = np.reshape(np.max(f, axis = 1), (num_train, 1))
+  prob = np.exp(f - f_max)/np.sum(np.exp(f-f_max), axis = 1, keepdims = True)
+  
+  for i in xrange(num_train):
+    for j in xrange(num_classes):
+        if (j == y[i]):
+            loss += -np.log(prob[i,j])
+            dW[:,j] += (1 - prob[i,j]) * X[i]
+        else:
+            dW[:,j] -= prob[i,j] * X[i]
+            
+  loss /= num_train
+  loss += 0.5 * reg * np.sum(W*W)
+  dW = -dW / num_train + reg * W
+```
 
 
