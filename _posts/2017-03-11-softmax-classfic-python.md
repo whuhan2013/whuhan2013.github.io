@@ -16,3 +16,8 @@ description: 计算机视觉
 - optimize the loss function with SGD
 - visualize the final learned weights
 
+**计算损失函数**           
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p1.png)
+详细可参见：[Softmax损失函数及梯度的计算](https://zhuanlan.zhihu.com/p/21485970)       
+
+
