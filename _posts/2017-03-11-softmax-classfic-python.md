@@ -64,4 +64,83 @@ def softmax_loss_naive(W, X, y, reg):
   dW = -dW / num_train + reg * W
 ```
 
+**梯度校验**         
+
+```
+loss, grad = softmax_loss_naive(W, X_dev, y_dev, 0.0)
+
+# As we did for the SVM, use numeric gradient checking as a debugging tool.
+# The numeric gradient should be close to the analytic gradient.
+from cs231n.gradient_check import grad_check_sparse
+f = lambda w: softmax_loss_naive(w, X_dev, y_dev, 0.0)[0]
+grad_numerical = grad_check_sparse(f, W, grad, 10)
+
+# similar to SVM case, do another gradient check with regularization
+loss, grad = softmax_loss_naive(W, X_dev, y_dev, 1e2)
+f = lambda w: softmax_loss_naive(w, X_dev, y_dev, 1e2)[0]
+grad_numerical = grad_check_sparse(f, W, grad, 10)
+```
+
+**向量版实现**         
+
+```
+num_train = X.shape[0]
+  num_classes = W.shape[1]
+  f = X.dot(W)  #N by C
+  f_max = np.reshape(np.max(f, axis = 1), (num_train, 1))
+  prob = np.exp(f - f_max)/np.sum(np.exp(f-f_max), axis = 1, keepdims = True)
+
+  keepProb = np.zeros_like(prob)
+  keepProb[np.arange(num_train), y] = 1.0
+  loss += -np.sum(keepProb * np.log(prob)) / num_train + 0.5 * reg * np.sum(W*W)
+  dW += -np.dot(X.T, keepProb - prob)/num_train + reg * W
+```
+
+**通过交叉验证以获得超参数**          
+
+```
+for lr in learning_rates:
+    for rs in regularization_strengths:
+        print 'Trying learning rate as %f, regularization strength as %f' % (lr, rs)  #01
+        softmax = Softmax()
+        softmax.train(X_train, y_train, learning_rate=lr, reg=rs,
+                      num_iters=1500, verbose=True)
+        
+        y_train_pred = softmax.predict(X_train)
+        training_accuracy = np.mean(y_train == y_train_pred)
+        
+        y_val_pred = softmax.predict(X_val)
+        val_accuracy = np.mean(y_val == y_val_pred)
+        
+        results[(lr, rs)] = (training_accuracy, val_accuracy)
+
+        if val_accuracy > best_val:
+            best_val = val_accuracy
+            best_softmax = softmax
+```
+
+最后产生的正确率在35%左右,在测试集上的正确率为0.337000
+
+
+**可视化权重**           
+
+```
+w = best_softmax.W[:-1,:] # strip out the bias
+w = w.reshape(32, 32, 3, 10)
+
+w_min, w_max = np.min(w), np.max(w)
+
+classes = ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+for i in xrange(10):
+  plt.subplot(2, 5, i + 1)
+  
+  # Rescale the weights to be between 0 and 255
+  wimg = 255.0 * (w[:, :, :, i].squeeze() - w_min) / (w_max - w_min)
+  plt.imshow(wimg.astype('uint8'))
+  plt.axis('off')
+  plt.title(classes[i])
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p3.png)
+
 
