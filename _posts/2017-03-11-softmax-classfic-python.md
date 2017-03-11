@@ -141,6 +141,8 @@ for i in xrange(10):
   plt.title(classes[i])
 ```
 
+W中的每一个分类对应的数值（维度为D的数组，D = 32 * 32 * 3），本质是就是这个分类中所有图像的像素值的综合，因而将它还原成图像后，你会发现它就是它所代表的分类的图像。
+
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p3.png)
 
 
