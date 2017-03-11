@@ -37,5 +37,10 @@ def softmax_loss_naive(W, X, y, reg):
   return loss, dW
 ```
 
+在未经训练时，由于权重是随机生成的，因此应该每个分类的概率就是10%，因此 loss应该接近 -log (0.1) 
+
+**计算梯度**         
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p2.png)
+
 
 

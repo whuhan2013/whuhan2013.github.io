@@ -134,7 +134,7 @@ p = np.exp(f) / np.sum(np.exp(f)) # 现在OK了，将给出正确结果
 #### SVM和Softmax的比较
 
 下图有助于区分这 Softmax和SVM这两种分类器：      
-![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p10.jpg)     
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter2/p10.png)     
 
 针对一个数据点，SVM和Softmax分类器的不同处理方式的例子。两个分类器都计算了同样的分值向量f（本节中是通过矩阵乘来实现）。不同之处在于对f中分值的解释：SVM分类器将它们看做是分类评分，它的损失函数鼓励正确的分类（本例中是蓝色的类别2）的分值比其他分类的分值高出至少一个边界值。Softmax分类器将这些数值看做是每个分类没有归一化的对数概率，鼓励正确分类的归一化的对数概率变高，其余的变低。SVM的最终的损失值是1.58，Softmax的最终的损失值是0.452，但要注意这两个数值没有可比性。只在给定同样数据，在同样的分类器的损失值计算中，它们才有意义。
 
