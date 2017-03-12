@@ -184,6 +184,60 @@ plt.show()
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p4.png)
 
 
+**导入CIFAR-10数据集**
 
+```
+Train data shape:  (49000, 3072)
+Train labels shape:  (49000,)
+Validation data shape:  (1000, 3072)
+Validation labels shape:  (1000,)
+Test data shape:  (1000, 3072)
+Test labels shape:  (1000,)
+```
 
+**训练神经网络**           
+这里我们将用SGD with momentum，学习率将会随着时间递减        
+
+```
+input_size = 32 * 32 * 3
+hidden_size = 50
+num_classes = 10
+net = TwoLayerNet(input_size, hidden_size, num_classes)
+
+# Train the network
+stats = net.train(X_train, y_train, X_val, y_val,
+            num_iters=1000, batch_size=200,
+            learning_rate=1e-4, learning_rate_decay=0.95,
+            reg=0.5, verbose=True)
+
+# Predict on the validation set
+val_acc = (net.predict(X_val) == y_val).mean()
+print 'Validation accuracy: ', val_acc
+````
+
+最后准确率可以达到28%左右      
+
+#### Debug the training         
+通过默认的参数，效果并不很好，只有28%左右，不是很好。           
+One strategy for getting insight into what's wrong is to plot the loss function and the accuracies on the training and validation sets during optimization.              
+Another strategy is to visualize the weights that were learned in the first layer of the network. In most neural networks trained on visual data, the first layer weights typically show some visible structure when visualized.
+
+```
+# Plot the loss function and train / validation accuracies
+plt.subplot(2, 1, 1)
+plt.plot(stats['loss_history'])
+plt.title('Loss history')
+plt.xlabel('Iteration')
+plt.ylabel('Loss')
+
+plt.subplot(2, 1, 2)
+plt.plot(stats['train_acc_history'], label='train')
+plt.plot(stats['val_acc_history'], label='val')
+plt.title('Classification accuracy history')
+plt.xlabel('Epoch')
+plt.ylabel('Clasification accuracy')
+plt.show()
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p5.png)
 
