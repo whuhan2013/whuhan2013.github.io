@@ -241,3 +241,75 @@ plt.show()
 
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p5.png)
 
+**把权重可视化**          
+
+```
+def show_net_weights(net):
+  W1 = net.params['W1']
+  W1 = W1.reshape(32, 32, 3, -1).transpose(3, 0, 1, 2)
+  plt.imshow(visualize_grid(W1, padding=3).astype('uint8'))
+  plt.gca().axis('off')
+  plt.show()
+
+show_net_weights(net)
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p6.png)
+
+
+**调整超参数**           
+What's wrong?. Looking at the visualizations above, we see that the loss is decreasing more or less linearly, which seems to suggest that the learning rate may be too low. Moreover, there is no gap between the training and validation accuracy, suggesting that the model we used has low capacity, and that we should increase its size. On the other hand, with a very large model we would expect to see more overfitting, which would manifest itself as a very large gap between the training and validation accuracy.
+
+Tuning. Tuning the hyperparameters and developing intuition for how they affect the final performance is a large part of using Neural Networks, so we want you to get a lot of practice. Below, you should experiment with different values of the various hyperparameters, including hidden layer size, learning rate, numer of training epochs, and regularization strength. You might also consider tuning the learning rate decay, but you should be able to get good performance using the default value.
+
+```
+hidden_size = [75, 100, 125]
+
+results = {}
+best_val_acc = 0
+best_net = None
+
+learning_rates = np.array([0.7, 0.8, 0.9, 1, 1.1])*1e-3
+regularization_strengths = [0.75, 1, 1.25]
+
+print 'running',
+for hs in hidden_size:
+    for lr in learning_rates:
+        for reg in regularization_strengths:
+            print '.',
+            net = TwoLayerNet(input_size, hs, num_classes)
+            # Train the network
+            stats = net.train(X_train, y_train, X_val, y_val,
+            num_iters=1500, batch_size=200,
+            learning_rate=lr, learning_rate_decay=0.95,
+            reg= reg, verbose=False)
+            val_acc = (net.predict(X_val) == y_val).mean()
+            if val_acc > best_val_acc:
+                best_val_acc = val_acc
+                best_net = net         
+            results[(hs,lr,reg)] = val_acc
+print 
+print "finshed"
+# Print out results.
+for hs,lr, reg in sorted(results):
+    val_acc = results[(hs, lr, reg)]
+    print 'hs %d lr %e reg %e val accuracy: %f' % (hs, lr, reg,  val_acc)
+    
+print 'best validation accuracy achieved during cross-validation: %f' % best_val_acc
+```
+
+best validation accuracy achieved during cross-validation: 0.502000.        
+产生了50.2%的最好成绩      
+
+再可视化现在的weight 
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter9/p7.png)
+
+**开始预测**       
+
+```
+test_acc = (best_net.predict(X_test) == y_test).mean()
+print 'Test accuracy: ', test_acc
+```
+
+成功率超过50%
+
