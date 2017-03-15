@@ -80,4 +80,12 @@ description: 计算机视觉
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter10/p3.jpeg)
 局部关联细节。我们刚才说到卷积层的局部关联问题，这个地方有一个receptive field，也就是我们直观理解上的『滑动数据窗口』。从输入的数据到输出数据，有三个超参数会决定输出数据的维度，分别是深度/depth，步长/stride 和 填充值/zero-padding：
 
+- 所谓深度/depth，简单说来指的就是卷积层中和上一层同一个输入区域连接的神经元个数。这部分神经元会在遇到输入中的不同feature时呈现activate状态，举个例子，如果这是第一个卷积层，那输入到它的数据实际上是像素值，不同的神经元可能对图像的边缘。轮廓或者颜色会敏感。
+- 所谓步长/stride，是指的窗口从当前位置到下一个位置，『跳过』的中间数据个数。比如从图像数据层输入到卷积层的情况下，也许窗口初始位置在第1个像素，第二个位置在第5个像素，那么stride=5-1=4.
+- 所谓zero-padding是在原始数据的周边补上0值的圈数。(下面第2张图中的样子)       
+
+这么解释可能理解起来还是会有困难，我们找两张图来对应一下这三个量：         
+![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter10/p4.jpeg)
+这是解决ImageNet分类问题用到的卷积神经网络的一部分，我们看到卷积层直接和最前面的图像层连接。图像层的维度为[227*227*3]，而receptive field设为11*11，图上未标明，但是滑动窗口的步长stride设为4，深度depth为48+48=96(这是双GPU并行设置)，边缘没有补0，因此zero-padding为0，因此窗口滑完一行，总共停留次数为(data_len-receptive_field_len+2*zero-padding)/stride+1=(227-11+2*0)/4+1=55，因为图像的长宽相等，因此纵向窗口数也是55，最后得到的输出数据维度为55*55*96维。
+
 
