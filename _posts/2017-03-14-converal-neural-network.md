@@ -141,8 +141,15 @@ V[2,3,1] = np.sum(X[4:9,6:11,:] * W1) + b1 （或两个方向上同时）
 简单说来，在卷积神经网络中，Pooling层是夹在连续的卷积层中间的层。它的作用也非常简单，就是**逐步地压缩/减少数据和参数的量，也在一定程度上减小过拟合的现象。**Pooling层做的操作也非常简单，就是将原数据上的区域压缩成一个值(区域最大值/MAX或者平均值/AVERAGE)，最常见的Pooling设定是，将原数据切成2*2的小块，每块里面取最大值作为输出，这样我们就自然而然减少了75%的数据量。需要提到的是，除掉MAX和AVERAGE的Pooling方式，其实我们也可以设定别的pooling方式，比如L2范数pooling。说起来，历史上average pooling用的非常多，但是近些年热度降了不少，工程师们在实践中发现max pooling的效果相对好一些。
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter10/p7.jpeg)
 ![](https://raw.githubusercontent.com/whuhan2013/myImage/master/cs231n/chapter10/p8.jpeg)
+上图为Pooling层的一个直观示例，相当于对厚度为64的data，每一个切片做了一个下采样。下图为Pooling操作的实际max操作。
 
+Pooling层(假定是MAX-Pooling)在反向传播中的计算也是很简单的，大家都知道如何去求max(x,y)函数的偏导。
 
+#### 归一化层(Normalization Layer)       
+卷积神经网络里面有时候会用到各种各样的归一化层，尤其是早期的研究，经常能见到它们的身影，不过近些年来的研究表明，似乎这个层级对最后结果的帮助非常小，所以后来大多数时候就干脆拿掉了。
+
+#### 全连接层
+这是我们在介绍神经网络的时候，最标准的形式，任何神经元和上一层的任何神经元之间都有关联，然后矩阵运算也非常简单和直接。现在的很多卷积神经网络结构，末层会采用全连接去学习更多的信息。
 
 
 
