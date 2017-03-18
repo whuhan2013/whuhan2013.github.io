@@ -86,6 +86,6 @@ Eric是一款python,ruby的IDE，其代码功能强大，与QT完美结合，使
            点面下面的Add from installed APIs按钮，选择需要的.api文件，最后点击Compile APIs。
 ```
 
-**参考 ：**
+**参考 ：**          
 [Python PyQt5在Windows平台安装](http://blog.csdn.net/youngwhz1/article/details/51178104)    
 [ windows安装PyQt5](http://blog.csdn.net/chaofanchang/article/details/50595446?locationNum=10)
