@@ -279,3 +279,125 @@ class MainWindow(QMainWindow):
 
 ![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p8.png)
 
+
+#### 窗口部件           
+Qt 还有一个强大的部件类 QWidgets ，基于这个类派生出很多其它小部件，比如 Dial，Slider，CheckBox 等等
+,详情可参见官方文档:[http://doc.qt.io/qt-5/qwidget.html](http://doc.qt.io/qt-5/qwidget.html)
+
+
+```
+...
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 设置窗口标题
+        self.setWindowTitle('My First App')
+
+        # 定义布局
+        layout = QVBoxLayout()
+
+        # 展示的部件列表
+        widgets = [QCheckBox,
+                QComboBox,
+                QDateEdit,
+                QDateTimeEdit,
+                QDial,
+                QDoubleSpinBox,
+                QFontComboBox,
+                QLCDNumber,
+                QLineEdit,
+                QProgressBar,
+                QPushButton,
+                QRadioButton,
+                QSlider,
+                QSpinBox,
+                QTimeEdit]
+
+        # 将部件添加到列表中
+        for item in widgets:
+            layout.addWidget(item())
+
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setCentralWidget(widget)
+...
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p9.png)
+
+#### 布局
+
+Qt 支持多种控件布局方式，主要有：
+
+- 垂直布局
+- 水平布局
+- 网格布局
+
+当然这些布局方式之间也都支持混合嵌套使用。
+
+**垂直布局**        
+为了更加直观的看到布局效果，我们这里定义了一个新类 Color 继承自 QWidget 用于显示色块。
+
+```
+# 用于显示色块
+class Color(QWidget):
+    def __init__(self, color, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setAutoFillBackground(True)
+
+        palette = self.palette()
+        palette.setColor(QPalette.Window, QColor(color))
+        self.setPalette(palette)
+
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 设置窗口标题
+        self.setWindowTitle('My First App')
+
+        colors = ['red', 'green', 'blue', 'yellow']
+        # 水平布局
+        layout = QVBoxLayout()
+
+        for color in colors:
+            layout.addWidget(Color(color))
+
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setFixedSize(400,300)
+        self.setCentralWidget(widget)
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p10.png)
+
+**水平布局**       
+知道了垂直布局之后，水平布局也相当简单，就是将 QVBoxLayout 修改为 QHBoxLayout 。      
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p11.png)
+
+**网格布局**     
+
+```
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 设置窗口标题
+        self.setWindowTitle('My First App')
+
+        colors = ['red', 'green', 'blue', 'yellow']
+        # 网格布局
+        layout = QGridLayout()
+
+        for i, color in enumerate(colors):
+            for j in range(len(colors)):
+                layout.addWidget(Color(color), i, j)
+
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setFixedSize(400,300)
+        self.setCentralWidget(widget)
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p12.png)
+
+#### 对话框
+             
