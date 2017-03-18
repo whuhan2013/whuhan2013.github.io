@@ -221,3 +221,61 @@ class MainWindow(QMainWindow):
 
 ![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p6.png)
 
+接下来为应用添加菜单栏。
+
+```
+...
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        ...
+
+        # 添加菜单栏
+        mb = self.menuBar()
+        # 禁用原生的菜单栏
+        mb.setNativeMenuBar(False)
+        # 添加“文件”菜单
+        file_menu = mb.addMenu('&File')
+        # 为文件菜单添加动作
+        file_menu.addAction(button_action)
+...
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p7.png)
+
+当然我们还可以实现二级菜单。
+
+```
+...
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        ...
+
+        # 添加新的菜单选项
+        button_action2 = QAction('C++', self)
+        button_action3 = QAction('Python', self)
+        button_action2.setCheckable(True)
+        button_action3.setCheckable(True)
+        button_action2.triggered.connect(self.onButtonClick)
+        button_action3.triggered.connect(self.onButtonClick)
+
+        # 添加菜单栏
+        mb = self.menuBar()
+        # 禁用原生的菜单栏
+        mb.setNativeMenuBar(False)
+        # 添加“文件”菜单
+        file_menu = mb.addMenu('&File')
+        # 为文件菜单添加动作
+        file_menu.addAction(button_action)
+        # 为菜单选项添加分隔符
+        file_menu.addSeparator()
+
+        # 添加二级菜单
+        build_system_menu = file_menu.addMenu('&Build System')
+        build_system_menu.addAction(button_action2)
+        build_system_menu.addSeparator()
+        build_system_menu.addAction(button_action3)
+...
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p8.png)
+
