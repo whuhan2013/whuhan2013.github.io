@@ -400,4 +400,58 @@ class MainWindow(QMainWindow):
 ![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p12.png)
 
 #### 对话框
-             
+
+```
+class CustomDialog(QDialog):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setWindowTitle('New Dialog')
+        # 添加按钮选项
+        QBtn = QDialogButtonBox.Ok | QDialogButtonBox.Cancel
+        buttonBox = QDialogButtonBox(QBtn)
+        buttonBox.accepted.connect(self.accept)
+        buttonBox.rejected.connect(self.reject)
+
+        layout = QVBoxLayout()
+        layout.addWidget(buttonBox)
+        self.setLayout(layout)
+
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # 设置窗口标题
+        self.setWindowTitle('My First App')
+
+        # 设置标签
+        label = QLabel('Welcome to Shiyanlou!')
+        # 设置标签显示在中央
+        label.setAlignment(Qt.AlignCenter)
+        # 添加标签到主窗口
+        self.setCentralWidget(label)
+
+        # 添加按钮动作，并加载图标图像
+        button_action = QAction('New dialog', self)
+        button_action.triggered.connect(self.onButtonClick)
+
+        # 添加菜单栏
+        mb = self.menuBar()
+        # 禁用原生的菜单栏
+        mb.setNativeMenuBar(False)
+        # 添加“文件”菜单
+        file_menu = mb.addMenu('&File')
+        # 为文件菜单添加动作
+        file_menu.addAction(button_action)
+        self.setFixedSize(400,300)
+
+
+    def onButtonClick(self, s):
+        # 创建对话框
+        dlg = CustomDialog(self)
+        # 运行对话框，这一步非常重要！！！
+        dlg.exec_()
+```
+
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p13.png)
+
