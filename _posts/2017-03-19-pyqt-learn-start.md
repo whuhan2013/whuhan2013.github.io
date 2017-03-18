@@ -112,3 +112,112 @@ class MainWindow(QMainWindow):
 
 
 ![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p3.png)
+
+另外 Qt 还支持自定义信号，可以通过创建 pyqtSignal 对象实例来定义信号对象。
+
+```
+class MainWindow(QMainWindow):
+    # 自定义信号
+    my_signal = pyqtSignal(str)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # 设置窗口标题
+        self.setWindowTitle('My First App')
+
+        button = QPushButton('Click me!')
+        button.pressed.connect(self._click_button)
+        # 将自定义信号与相应的槽函数连接
+        self.my_signal.connect(self._my_func)
+        # 将部件添加到主窗口上
+        self.setCentralWidget(button)
+
+    # 自定义的信号处理函数
+    def _click_button(self):
+        # 当按钮被点击的时候将发出信号 my_signal
+        self.my_signal.emit('shiyanlou')
+
+    def _my_func(self, s):
+        print(s)
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p4.png)
+
+以上过程实际上就是将按钮按压信号与 _click_button 槽关联，而一旦调用了 _click_button 函数之后又会触发 my_signal 信号，继而调用 my_signal 信号的槽进行处理。
+
+上述调用过程实际上没有任何意义，仅仅只是为了展示 Qt 具备有自定义信号的功能。
+
+
+#### 工具栏与菜单
+通常我们使用的软件窗口顶部还会有一条工具栏或者菜单栏。
+
+可以使用 Qt 提供的 QToolBar 创建工具栏。
+
+```
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # 设置窗口标题
+        self.setWindowTitle('My First App')
+
+        # 设置标签
+        label = QLabel('Welcome to Shiyanlou!')
+        # 设置标签显示在中央
+        label.setAlignment(Qt.AlignCenter)
+        # 添加标签到主窗口
+        self.setFixedSize(400,300)
+        self.setCentralWidget(label)
+
+        # 创建工具栏
+        tb = QToolBar('Tool Bar')
+        # 添加工具栏到主窗口
+        self.addToolBar(tb)
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p5.png)
+
+由于我们尚未给工具栏添加任何实际功能，所以工具栏只能看到一条空白的横线。
+
+接下来我们为工具栏添加实体按钮，并在窗口底部显示提示信息
+
+```
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # 设置窗口标题
+        self.setWindowTitle('My First App')
+
+        # 设置标签
+        label = QLabel('Welcome to Shiyanlou!')
+        # 设置标签显示在中央
+        label.setAlignment(Qt.AlignCenter)
+        # 添加标签到主窗口
+        self.setCentralWidget(label)
+        self.setFixedSize(400,300)
+        # 创建工具栏
+        tb = QToolBar('Tool Bar')
+        # 设置工具栏中按钮的大小
+        tb.setIconSize(QSize(16, 16))
+        # 添加工具栏到主窗口
+        self.addToolBar(tb)
+
+        # 添加按钮动作，并加载图标图像
+        button_action = QAction(QIcon('icons/penguin.png'), 'Menu button', self)
+        # 设置状态栏提示
+        button_action.setStatusTip('This is menu button')
+        button_action.triggered.connect(self.onButtonClick)
+        button_action.setCheckable(True)
+        # 添加到工具栏
+        tb.addAction(button_action)
+        # 为主窗口设置状态栏
+        self.setStatusBar(QStatusBar(self))
+
+    def onButtonClick(self, s):
+        print(s)
+```
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/p6.png)
+
