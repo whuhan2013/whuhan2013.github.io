@@ -49,6 +49,14 @@ git pull - -rebase origin master
 
 ### github常用操作 
 
+- windows下记住用户名与密码        
+打开个人文件夹，一般为C:\Documents and Settings\用户名，其中有一个.gitconfig的文件，使用记事本打开。如果之前配置了名字和email的话，在这里面会看到。
+我们追加如下配置即可              
+[credential]            
+helper=store            
+下次我们再次输入用户名之后，git就会记住用户名密码，以后就不需再输入了。
+
+这时在上述那个目录底下，可发现生成另外一个文件.git-credentials，里面记录的就是用户名密码了。 　　
 
 - 设置全局用户名和email，作为每次提交的记录    
 git config --global user.name “name"      
