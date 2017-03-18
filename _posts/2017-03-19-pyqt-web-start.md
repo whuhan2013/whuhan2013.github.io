@@ -57,3 +57,43 @@ app.exec_()
 
 ![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/chapter1/p1.png)
 
+**添加导航栏**             
+在这里我们要为浏览器添加导航栏，我们需要使用到 QToolBar 来创建，然后再往上边添加 QAction 创建按钮实例。      
+
+```
+...
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        ...
+        # 添加导航栏
+        navigation_bar = QToolBar('Navigation')
+        # 设定图标的大小
+        navigation_bar.setIconSize(QSize(16, 16))
+        self.addToolBar(navigation_bar)
+
+        # 添加前进、后退、停止加载和刷新的按钮
+        back_button = QAction(QIcon('icons/back.png'), 'Back', self)
+        next_button = QAction(QIcon('icons/next.png'), 'Forward', self)
+        stop_button = QAction(QIcon('icons/cross.png'), 'stop', self)
+        reload_button = QAction(QIcon('icons/renew.png'), 'reload', self)
+
+        back_button.triggered.connect(self.browser.back)
+        next_button.triggered.connect(self.browser.forward)
+        stop_button.triggered.connect(self.browser.stop)
+        reload_button.triggered.connect(self.browser.reload)
+
+        # 将按钮添加到导航栏上
+        navigation_bar.addAction(back_button)
+        navigation_bar.addAction(next_button)
+        navigation_bar.addAction(stop_button)
+        navigation_bar.addAction(reload_button)
+...
+```
+
+现在我们不仅为浏览器添加了前进、后退、停止加载和刷新的按钮，同时还利用 QWebView 封装的槽实现了这些按钮的实际功能。
+
+![](https://raw.githubusercontent.com/whuhan2013/newImage/master/python/chapter1/p2.png)
+
+接下来我们再给浏览器添加地址栏。
+
+
