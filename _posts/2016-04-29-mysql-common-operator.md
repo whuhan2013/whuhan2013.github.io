@@ -366,3 +366,43 @@ ps varchar(255)
 );
 ```
 
+
+**mysql设置定时任务**      
+
+1.首先检查是否开启了定时任务       
+
+```
+查看event是否开启 : SHOW VARIABLES LIKE '%event_sche%';
+将事件计划开启 : SET GLOBAL event_scheduler = 1;
+将事件计划关闭 : SET GLOBAL event_scheduler = 0;
+关闭事件任务 : ALTER EVENT eventName ON COMPLETION PRESERVE DISABLE;
+开启事件任务 : ALTER EVENT eventName ON COMPLETION PRESERVE ENABLE;
+查看事件任务 : SHOW EVENTS ;
+```
+
+2.创建一个存储过程
+
+```
+DELIMITER //
+DROP PROCEDURE IF EXISTS p_test//
+CREATE PROCEDURE p_test() 
+BEGIN
+INSERT INTO test(name, create_time) values('testName', now());
+END//
+```
+
+3.设置定时任务调用这个存储过程（从2015.8.8 1点每十秒执行一次）
+
+```
+DROP EVENT IF EXISTS e_test//
+CREATE EVENT e_test
+ON SCHEDULE EVERY 10 second STARTS TIMESTAMP '2015-08-08 01:00:00'
+ON COMPLETION PRESERVE
+DO
+BEGIN
+CALL p_test();
+END//
+```
+
+**参见：**[mysql设置定时任务](http://www.cnblogs.com/laowu-blog/p/5073665.html)  
+
