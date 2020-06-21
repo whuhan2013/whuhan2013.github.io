@@ -240,7 +240,7 @@ delete []p;
 * <p>Title: doPost</p>
 * <p>Description: </p>
 * <p>Company: whu</p> 
-* @author 江军祥
+* @author Ricardo
 * @date 2016-3-25上午9:09:01
  */
       CCHttpClient* client = CCHttpClient::getInstance();
