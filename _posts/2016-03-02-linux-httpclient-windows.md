@@ -169,7 +169,6 @@ int main()
 * <p>Title: 客户端发送数据</p>
 * <p>Description: </p>
 * <p>Company: whu</p> 
-* @author 江军祥
 * @date 2016-3-25上午9:09:01
  */
 	//send http request ,send total score and score to server
